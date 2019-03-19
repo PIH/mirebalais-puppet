@@ -4,7 +4,8 @@ class tomcat (
     $java_memory_parameters = hiera('java_memory_parameters'),
     $java_profiler = hiera('java_profiler'),
     $java_debug_parameters = hiera('java_debug_parameters'),
-    $restart_nightly = hiera('tomcat_restart_nightly')
+    $restart_nightly = hiera('tomcat_restart_nightly'),
+    $enable_http_8080 = hiera('tomcat_enable_http_8080')
   ){
 
   # TODO--remove these three purges after tomcat7 apt-get update has been installed on all servers
@@ -79,7 +80,7 @@ class tomcat (
     ensure  => present,
     owner   => $tomcat,
     group   => $tomcat,
-    source  => "puppet:///modules/tomcat/server.xml",
+    content => epp('tomcat/server.xml.epp', {'enable_http_8080' => $enable_http_8080}),
     require => [ Package[$tomcat], User[$tomcat] ],
     notify  => Service[$tomcat]
   }
