@@ -80,7 +80,7 @@ class tomcat (
     ensure  => present,
     owner   => $tomcat,
     group   => $tomcat,
-    content => template('tomcat/server.xml.erb'),
+    content => epp('tomcat/server.xml.epp', {'enable_http_8080' => $enable_http_8080}),
     require => [ Package[$tomcat], User[$tomcat] ],
     notify  => Service[$tomcat]
   }
