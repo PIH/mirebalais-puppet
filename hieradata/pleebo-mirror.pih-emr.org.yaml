@@ -1,11 +1,11 @@
----
+  ---
 site_domain: pleebo-mirror.pih-emr.org
 pih_config: liberia,liberia-pleebo
 package_release: 'stable/'
 server_timezone: Africa/Monrovia
 
-mysql_root_password: ENC[ZTE1OWUyMmE5YTYxNDMxMDJjMTcyNTgwMTRmNjcyMjgK]
-openmrs_db_password: ENC[ZGJiYTQwMTEwMDQwMDI0MDFjNWUyZTUxOTUxYWI0NGQK]
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
 
 backup_file_prefix: pleebo-mirror
 backup_hour: 10

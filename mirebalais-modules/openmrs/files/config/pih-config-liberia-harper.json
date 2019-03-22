@@ -35,7 +35,9 @@
     "chwApp",
     "conditionList",
     "primaryCare",
-    "socioEconomics"
+    "socioEconomics",
+    "edTriage",
+    "edTriageQueue"
   ],
 
   "primaryIdentifierPrefix": "HP",
