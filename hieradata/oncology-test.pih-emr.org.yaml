@@ -4,7 +4,6 @@ site_domain: oncology-test.pih-emr.org
 pih_config: mirebalais,mirebalais-humci
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
