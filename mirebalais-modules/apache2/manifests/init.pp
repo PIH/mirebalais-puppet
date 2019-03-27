@@ -85,7 +85,7 @@ class apache2 (
   }
 
   exec { 'enable and disable apache mods':
-    command     => 'a2enmod jk && a2enmod deflate && a2enmod ssl && a2ensite default-ssl && a2enmod rewrite & a2dismod php5',
+    command     => 'a2enmod jk && a2enmod deflate && a2enmod ssl && a2ensite default-ssl && a2enmod rewrite',
     user        => 'root',
     subscribe   => [ Package['apache2'], Package['libapache2-mod-jk'] ],
     refreshonly => true,

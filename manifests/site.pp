@@ -130,7 +130,7 @@ node 'reporting.hum.ht' {
   include mirebalais_reporting::reporting_setup
 }
 
-node 'pleebo.pih-emr.org', 'thomonde.pih-emr.org', 'lacolline.pih-emr.org' {
+node 'pleebo.pih-emr.org', 'lacolline.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
@@ -157,7 +157,7 @@ node 'pleebo.pih-emr.org', 'thomonde.pih-emr.org', 'lacolline.pih-emr.org' {
   include crashplan
 }
 
-node 'hinche-server.pih-emr.org', 'cercalasource.pih-emr.org', 'belladere.pih-emr.org' {
+node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr.org', 'belladere.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,

@@ -29,7 +29,7 @@ mkdir -p ${DIR}/current
 mkdir -p ${DIR}/sequences
 
 # Dump database, encrypt and compress
-mysqldump -u${USER} -p${PASS} --opt --flush-logs --single-transaction --master-data=2 openmrs 2>/dev/null | 7za a -p${PASS} -siy -t7z ${DIR}/sequences/${FILENAME} -mx9 2>&1 >/dev/null
+mysqldump -u${USER} -p${PASS} --opt --flush-logs --single-transaction openmrs 2>/dev/null | 7za a -p${PASS} -siy -t7z ${DIR}/sequences/${FILENAME} -mx9 2>&1 >/dev/null
 
 if ! [ -s "${DIR}/sequences/${FILENAME}" ]
 then
