@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -x
+
+reportingDumps="/home/reporting/percona/dumps"
+backupDir="/home/reporting/percona/backups"
+perconaLogs="/home/reporting/percona/logs"
+
+createDir () {
+        mkdir -p /home/reporting/percona
+        mkdir -p ${backupDir}
+        mkdir -p ${perconaLogs}
+}
+
+remove_db_if_exist () {
+                        for i in ${reportingDumps}; do rm -rf "$i"; done
+}
+
+createDumpDir () {
+                        mkdir -p ${reportingDumps}
+}
+dump_reporting_table () {
+                          mysqldump -uroot openmrs reporting_report_design reporting_report_design_resource reporting_report_processor reporting_report_request scheduler_task_config scheduler_task_config_property serialized_object global_property > ${reportingDumps}/reporing_tables.sql
+}
+#pacsintegration_inbound_queue pacsintegration_outbound_queue reporting_idset reporting_report_design reporting_report_design_resource reporting_report_processor reporting_report_request scheduler_task_config scheduler_task_config_property serialized_object
+
+dump_mysql_db () {
+                          mysqldump -uroot mysql > ${reportingDumps}/mysql.sql
+}
+
+dump_performance_schema_db () {
+                          mysqldump -uroot performance_schema > ${reportingDumps}/performance_schema.sql
+}
+
+dump_information_schema () {
+                          mysqldump -uroot information_schema > ${reportingDumps}/information_schema.sql
+}
+
+createDir
+remove_db_if_exist
+createDumpDir
+dump_reporting_table
+dump_mysql_db
+#dump_performance_schema_db
+#dump_information_schema
