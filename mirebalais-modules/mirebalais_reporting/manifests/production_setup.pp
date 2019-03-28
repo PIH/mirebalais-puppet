@@ -46,5 +46,39 @@ class mirebalais_reporting::production_setup (
   environment => 'MAILTO=${sysadmin_email}',
 	require => [ File['mirebalaisreportscleanup.sh'] ]
   }
+   file { 'mirebalais-production-percona-compress-db-and-scp.sh':
+            ensure  => present,
+            path    => '/usr/local/sbin/mirebalais-production-percona-compress-db-and-scp.sh',
+            mode    => '0700',
+            owner   => 'root',
+            group   => 'root',
+            content => template('openmrs/mirebalais-production-percona-compress-db-and-scp.sh.erb'),
+          }
 
+          cron { 'mirebalais-production-percona-compress-db-and-scp':
+            ensure  => present,
+            command => '/usr/local/sbin/mirebalais-backup-reporting-db-n-tables-tables.sh >/dev/null 2>&1',
+            user    => 'root',
+            hour    => 20,
+            minute  => 30,
+            environment => 'MAILTO=${sysadmin_email}',
+            require => [ File['mirebalais-production-percona-compress-db-and-scp.sh'] ]
+          }
+          file { 'mirebalais-production-percona-backup.sh':
+            ensure  => present,
+            path    => '/usr/local/sbin/mirebalaisreportingdbsource.sh',
+            mode    => '0700',
+            owner   => 'root',
+            group   => 'root',
+            content => template('openmrs/mirebalais-production-percona-backup.sh.erb'),
+          }
+          cron { 'mirebalais-production-percona-backup':
+            ensure  => present,
+            command => '/usr/local/sbin/mirebalais-production-percona-backup.sh >/dev/null 2>&1',
+            user    => 'root',
+            hour    => 19,
+            minute  => 00,
+            environment => 'MAILTO=${sysadmin_email}',
+            require => [ File['mirebalais-production-percona-backup.sh'] ]
+          }
 }
