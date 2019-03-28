@@ -52,7 +52,7 @@ class mirebalais_reporting::reporting_setup (
 	  }
           file { 'mirebalais-backup-reporting-db-n-tables-tables.sh':
             ensure  => present,
-            path    => '/usr/local/sbin/mirebalaisreportingdbsource.sh',
+            path    => '/usr/local/sbin/mirebalais-backup-reporting-db-n-tables-tables.sh',
             mode    => '0700',
             owner   => 'root',
             group   => 'root',
@@ -70,7 +70,7 @@ class mirebalais_reporting::reporting_setup (
           }
           file { 'mirebalais-percona-restore.sh':
             ensure  => present,
-            path    => '/usr/local/sbin/mirebalaisreportingdbsource.sh',
+            path    => '/usr/local/sbin/mirebalais-percona-restore.sh',
             mode    => '0700',
             owner   => 'root',
             group   => 'root',
