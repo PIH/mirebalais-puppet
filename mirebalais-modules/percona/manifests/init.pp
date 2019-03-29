@@ -1,5 +1,5 @@
 class percona(
-  $root_db_password = hiera('root_db_password'),
+  $mysql_root_password = hiera('mysql_root_password'),
 ) {
 
   wget::fetch { 'percona-release':
@@ -29,7 +29,7 @@ class percona(
 
   mysql_user { "percona@localhost":
     ensure        => present,
-    password_hash => mysql_password($root_db_password),
+    password_hash => mysql_password($mysql_root_password),
     require => [ Service['mysqld'] ],
   }
 
