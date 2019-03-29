@@ -1,5 +1,5 @@
 class percona(
-  $mysql_root_password = hiera('mysql_root_password'),
+  $mysql_root_password = decrypt(hiera('mysql_root_password')),
 ) {
 
   wget::fetch { 'percona-release':
