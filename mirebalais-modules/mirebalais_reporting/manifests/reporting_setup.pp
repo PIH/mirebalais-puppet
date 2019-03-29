@@ -8,20 +8,21 @@ class mirebalais_reporting::reporting_setup (
 ) {
 	
 	# note that public/private key sharing needs to be set up manually between production and reporting
-	user { backups:
+	user {
+		backups:
     		ensure => 'present',
     		home   => "/home/backups",
     		shell  => '/bin/sh',
   	}
 
 	file { 'mirebalaisreportingdbsource.sh':
-	    ensure  => present,
-	    path    => '/usr/local/sbin/mirebalaisreportingdbsource.sh',
-	    mode    => '0700',
-	    owner   => 'root',
-	    group   => 'root',
-	    content => template('mirebalais_reporting/mirebalaisreportingdbsource.sh.erb'),
-	  }
+		ensure  => absent,
+		path    => '/usr/local/sbin/mirebalaisreportingdbsource.sh',
+		mode    => '0700',
+		owner   => 'root',
+		group   => 'root',
+		content => template('mirebalais_reporting/mirebalaisreportingdbsource.sh.erb'),
+	}
 
 	file { 'mirebalaiswarehousedbdump.sh':
 		ensure  => absent,
@@ -37,52 +38,53 @@ class mirebalais_reporting::reporting_setup (
 		content => template('mirebalais_reporting/mirebalaiswarehousedbdump.sh.erb'),
 	}*/
 
-	package { 'p7zip-full':
-	  	  ensure => 'installed'
-	  }
 
-	  cron { 'mirebalais-reporting-db-source':
-	    ensure  => present,
-	    command => '/usr/local/sbin/mirebalaisreportingdbsource.sh >/dev/null 2>&1',
-	    user    => 'root',
-	    hour    => 18,
-	    minute  => 00,
-	    environment => 'MAILTO=${sysadmin_email}',
-	    require => [ File['mirebalaisreportingdbsource.sh'], Package['p7zip-full'] ]
-	  }
-          file { 'mirebalais-backup-reporting-db-n-tables-tables.sh':
-            ensure  => present,
-            path    => '/usr/local/sbin/mirebalais-backup-reporting-db-n-tables-tables.sh',
-            mode    => '0700',
-            owner   => 'root',
-            group   => 'root',
-            content => template('mirebalais_reporting/mirebalais-backup-reporting-db-n-tables-tables.sh.erb'),
-          }
+	cron { 'mirebalais-reporting-db-source':
+		ensure  => absent,
+		command => '/usr/local/sbin/mirebalaisreportingdbsource.sh >/dev/null 2>&1',
+		user    => 'root',
+		hour    => 18,
+		minute  => 00,
+		environment => 'MAILTO=${sysadmin_email}',
+		require => [ File['mirebalaisreportingdbsource.sh'], Package['p7zip-full'] ]
+	}
 
-          cron { 'mirebalais-backup-reporting-db-n-tables-tables':
-            ensure  => present,
-            command => '/usr/local/sbin/mirebalais-backup-reporting-db-n-tables-tables.sh >/dev/null 2>&1',
-            user    => 'root',
-            hour    => 20,
-            minute  => 30,
-            environment => 'MAILTO=${sysadmin_email}',
-            require => [ File['mirebalais-backup-reporting-db-n-tables-tables.sh'] ]
-          }
-          file { 'mirebalais-percona-restore.sh':
-            ensure  => present,
-            path    => '/usr/local/sbin/mirebalais-percona-restore.sh',
-            mode    => '0700',
-            owner   => 'root',
-            group   => 'root',
-            content => template('mirebalais_reporting/mirebalais-percona-restore.sh.erb'),
-          }
-	  cron { 'mirebalais-percona-restore':
-            ensure  => present,
-            command => '/usr/local/sbin/mirebalais-percona-restore.sh >/dev/null 2>&1',
-            user    => 'root',
-            hour    => 02,
-            minute  => 30, 
-            environment => 'MAILTO=${sysadmin_email}',
-            require => [ File['mirebalais-percona-restore.sh'] ]
-          }
+
+	file { 'mirebalais-backup-reporting-db-n-tables-tables.sh':
+		ensure  => present,
+		path    => '/usr/local/sbin/mirebalais-backup-reporting-db-n-tables-tables.sh',
+		mode    => '0700',
+		owner   => 'root',
+		group   => 'root',
+		content => template('mirebalais_reporting/mirebalais-backup-reporting-db-n-tables-tables.sh.erb'),
+	}
+
+	cron { 'mirebalais-backup-reporting-db-n-tables-tables':
+		ensure  => present,
+		command => '/usr/local/sbin/mirebalais-backup-reporting-db-n-tables-tables.sh >/dev/null 2>&1',
+		user    => 'root',
+		hour    => 20,
+		minute  => 30,
+		environment => 'MAILTO=${sysadmin_email}',
+		require => [ File['mirebalais-backup-reporting-db-n-tables-tables.sh'] ]
+	}
+
+	file { 'mirebalais-percona-restore.sh':
+		ensure  => present,
+		path    => '/usr/local/sbin/mirebalais-percona-restore.sh',
+		mode    => '0700',
+		owner   => 'root',
+		group   => 'root',
+		content => template('mirebalais_reporting/mirebalais-percona-restore.sh.erb'),
+	}
+
+	cron { 'mirebalais-percona-restore':
+		ensure  => present,
+		command => '/usr/local/sbin/mirebalais-percona-restore.sh >/dev/null 2>&1',
+		user    => 'root',
+		hour    => 02,
+		minute  => 30,
+		environment => 'MAILTO=${sysadmin_email}',
+		require => [ File['mirebalais-percona-restore.sh'] ]
+	}
 }
