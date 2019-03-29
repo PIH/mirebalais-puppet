@@ -18,7 +18,7 @@ class percona() {
   exec { 'percona-apt-get-update':
     refreshonly => true,
     command     => "apt-get update",
-    before => Exec['percona-xtrabackup']
+    before => Package['percona-xtrabackup']
   }
 
   package { 'percona-xtrabackup':
