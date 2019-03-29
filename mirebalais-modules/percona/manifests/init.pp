@@ -5,8 +5,7 @@ class percona() {
     destination => '/tmp',
     timeout     => 0,
     verbose     => false,
-    refreshonly => true,
-    before => Exec['install-percona-debian'],
+    before => Exec['install-percona-debian']
   }
 
   exec { 'install-percona-debian':
