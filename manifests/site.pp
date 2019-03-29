@@ -42,6 +42,8 @@ node 'emr.hum.ht' {
   include openmrs
   include openmrs::initial_setup
 
+  include percona
+
   include mirth
   include mirth::channel_setup
 
@@ -70,10 +72,10 @@ node 'humci.pih-emr.org' {
   include tomcat
   include apache2
 
-  include percona
-
   include openmrs
   include openmrs::initial_setup
+
+  include percona
 
   #include mirth
   #include mirth::channel_setup
@@ -125,6 +127,8 @@ node 'reporting.hum.ht' {
 
   include openmrs
   include openmrs::initial_setup
+
+  include percona
 
   #include monitoring
   include logging
