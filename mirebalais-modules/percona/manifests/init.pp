@@ -1,4 +1,6 @@
-class percona() {
+class percona(
+  $root_db_password = hiera('root_db_password'),
+) {
 
   wget::fetch { 'percona-release':
     source      => 'https://repo.percona.com/apt/percona-release_0.1-4.xenial_all.deb',
@@ -25,7 +27,27 @@ class percona() {
     ensure  => installed
   }
 
+  mysql_user { "percona@localhost":
+    ensure        => present,
+    password_hash => mysql_password($root_db_password),
+    require => [ Service['mysqld'] ],
+  }
+
+  mysql_grant { "percona@localhost/openmrs":
+    options    => ['GRANT'],
+    privileges => ['RELOAD', 'LOCK TABLES', 'REPLICATION CLIENT'],
+    table => '*.*',
+    user => "percona@localhost",
+    require => [ mysql_user['percona@localhost']],
+  }
+
+  mysql_grant { "percona@localhost/mysql":
+    options    => ['GRANT'],
+    privileges => ['RELOAD', 'LOCK TABLES', 'REPLICATION CLIENT'],
+    table => '*.*',
+    user => "percona@localhost",
+    require => [ mysql_user['percona@localhost']],
+  }
+
 }
-
-
 
