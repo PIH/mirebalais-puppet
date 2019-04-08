@@ -21,6 +21,6 @@ Puppet project for PIH EMR. Can install PIH EMR and its dependencies on configur
 
 http://bundler.io/v1.7/rationale.html#checking-your-code-into-version-control
 
-### How to enable debugging
+### How to enable Java debugging
 
 Edit `/mirebalais-modules/tomcat/templates/default.erb`. There is a line that reads `# To enable remote debugging uncomment the following line.` Uncomment the following line.
