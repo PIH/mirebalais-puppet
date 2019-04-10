@@ -1,11 +1,12 @@
-sePuppet project for automatically create required infrastructure for Mirebalais OpenMRS-based app.
+# mirebalais-puppet
 
-More info:
+Puppet project for PIH EMR. Can install PIH EMR and its dependencies on configured machines.
+
+### More info
 - https://github.com/PIH/openmrs-module-mirebalais
 - http://mirebalaisemr.blogspot.com.br/
 
-
-Using Vagrant:
+### Using Vagrant
 
 * vagrant up
 * vagrant ssh
@@ -16,8 +17,10 @@ Using Vagrant:
 * cd /etc/puppet
 * sudo ./install.sh local
 
-
-Notes on using bundler:
+### Using bundler
 
 http://bundler.io/v1.7/rationale.html#checking-your-code-into-version-control
 
+### How to enable Java debugging
+
+Edit `/mirebalais-modules/tomcat/templates/default.erb`. There is a line that reads `# To enable remote debugging uncomment the following line.` Uncomment the following line.
