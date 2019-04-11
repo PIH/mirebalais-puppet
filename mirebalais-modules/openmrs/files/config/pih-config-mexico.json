@@ -5,11 +5,12 @@
   "site": "CHIAPAS",
   "components": [
     "allergies",
+    "asthmaProgram",
     "clinicianDashboard",
     "diabetesProgram",
     "dataExports",
-    "managePrinters",
     "hypertensionProgram",
+    "managePrinters",
     "mentalHealthProgram",
     "mexicoClinic",
     "myAccount",
