@@ -23,4 +23,5 @@ http://bundler.io/v1.7/rationale.html#checking-your-code-into-version-control
 
 ### How to enable Java debugging
 
-Edit `/mirebalais-modules/tomcat/templates/default.erb`. There is a line that reads `# To enable remote debugging uncomment the following line.` Uncomment the following line.
+On the server you wish to enable debugging on, edit `/etc/default/tomcat7.`. There is a line that reads `# To enable remote debugging uncomment the following line.` Uncomment the following line.
+Note that one each redeploy this will be reset.
