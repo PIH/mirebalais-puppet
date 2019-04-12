@@ -24,7 +24,6 @@
     "systemAdministration",
     "todaysVisits",
     "visitManagement",
-    "visitNote",
     "vitals"
   ],
   "scheduleBackupReports": "false",
