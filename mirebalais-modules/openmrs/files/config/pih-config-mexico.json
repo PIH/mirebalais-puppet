@@ -41,6 +41,7 @@
     "afterCreatedUrl": "mirebalais/patientRegistration/afterRegistration.page?patientId={{patientId}}&encounterId={{encounterId}}",
     "similarPatientsSearch": {
       "addressFields": {
+        "countyDistrict": "1",
         "cityVillage": "1",
         "address2": "1"
       },
