@@ -1,0 +1,12 @@
+---
+package_release: 'stable/'
+pih_config: mexico,mexico-office
+
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+mysql_bind_address: 0.0.0.0
+openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
+mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
+tomcat_enable_http_8080: true
+
+java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8081'
+

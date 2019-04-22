@@ -286,7 +286,7 @@ node 'ces.pih-emr.org' {
   #include monitoring
 }
 
-node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano', 'ces-monterrey',
+node 'ces-oficina', 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano', 'ces-monterrey',
     'ces-plan', 'ces-reforma', 'ces-salvador', 'ces-soledad' {
 
   class { 'apt':
