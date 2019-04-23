@@ -1,6 +1,7 @@
 ---
 package_release: 'stable/'
 pih_config: mexico,mexico-letrero
+config_dir: mexico
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0

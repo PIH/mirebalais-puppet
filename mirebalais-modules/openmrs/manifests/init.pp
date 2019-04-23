@@ -10,6 +10,7 @@ class openmrs (
     $junit_password = decrypt(hiera('junit_password')),
     $pih_config = hiera('pih_config'),
     $pih_config_array = split(hiera('pih_config'), ','),
+    $config_dir = hiera('config_dir', undef),
 
     #Feature_toggles
     $reportingui_ad_hoc_analysis = hiera('reportingui_ad_hoc_analysis'),
@@ -151,6 +152,20 @@ class openmrs (
       group   => $tomcat,
       mode    => '0644',
       require => File["/home/${tomcat}/.OpenMRS"]
+    }
+  }
+
+  /* Add the configuration/ directory to the application data directory,
+     according to the parameter `config_dir` */
+  if ($config_dir != undef) {
+    file { "/home/${tomcat}/.OpenMRS/configuration":
+      ensure  => directory,
+      recurse => 'remote',
+      source  => "puppet:///modules/openmrs/app-data-config/${config_dir}/configuration",
+      owner   => $tomcat,
+      group   => $tomcat,
+      mode    => '0644',
+      require => [ File["/home/${tomcat}/.OpenMRS"] ]
     }
   }
 
