@@ -6,5 +6,32 @@
     "matchUrl": "http://humci.pih-emr.org:9000/match",
     "scanUrl": "https://localhost:9443/fingerprint/scan",
     "devicesUrl": "https://localhost:9443/fingerprint/devices"
-  }
+  },
+
+  "components": [
+    "clinicianDashboard",
+    "visitNote",
+    "allergies",
+    "patientRegistration",
+    "visitManagement",
+    "checkIn",
+    "checkInHomepageApp",
+    "systemAdministration",
+    "myAccount",
+    "waitingForConsult",
+    "primaryCare",
+    "overviewReports",
+    "dataExports",
+    "monitoringReports",
+    "todaysVisits",
+    "relationships",
+    "programs",
+    "exportPatients",
+    "importPatients",
+    "biometricsFingerPrints",
+    "vitals",
+    "mentalHealth",
+    "ncd",
+    "socioEconomics"
+	]
 }

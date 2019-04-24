@@ -3,6 +3,36 @@
   "site": "LACOLLINE",
   "dossierIdentifierPrefix": "LC",
 
+
+  "components": [
+      "clinicianDashboard",
+      "visitNote",
+      "allergies",
+      "patientRegistration",
+      "visitManagement",
+      "checkIn",
+      "checkInHomepageApp",
+      "systemAdministration",
+      "myAccount",
+      "waitingForConsult",
+      "overviewReports",
+      "dataExports",
+      "monitoringReports",
+      "todaysVisits",
+      "relationships",
+      "programs",
+      "exportPatients",
+      "importPatients",
+      "biometricsFingerPrints",
+      "vitals",
+      "primaryCare",
+      "mentalHealth",
+      "socioEconomics",
+      "vct",
+      "edTriage",
+      "edTriageQueue"
+  ],
+
   "globalProperties": {
     "coreapps.defaultPatientIdentifierLocation": "23e7bb0d-51f9-4d5f-b34b-2fbbfeea1960"
   },
