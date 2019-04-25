@@ -88,7 +88,7 @@ input {
  }
 
  file {
-  path => ["/usr/local/<%= tomcat %>/logs/catalina.out"]
+  path => ["/usr/local/<%= @tomcat %>/logs/catalina.out"]
   type => "tomcat"
  }
 
