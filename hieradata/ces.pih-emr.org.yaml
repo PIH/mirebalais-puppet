@@ -2,6 +2,7 @@
 package_release: 'unstable/'
 site_domain: ces.pih-emr.org
 pih_config: mexico,mexico-demo
+config_dir: mexico
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
