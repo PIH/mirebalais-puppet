@@ -10,3 +10,6 @@ tomcat_enable_http_8080: true
 
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8081'
 
+atomfeed_version: 1.0.12
+fhir_version: 1.18.0
+sync2_version: 1.6.0

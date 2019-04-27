@@ -305,6 +305,7 @@ node 'ces-oficina', 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 
 
   include openmrs
   include openmrs::initial_setup
+  include openmrs::sync2
 
   #include monitoring
 }
