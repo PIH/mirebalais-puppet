@@ -1,0 +1,24 @@
+{
+
+  "welcomeMessage": "JJ Dossen Health Center EMR",
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "site": "JJ_DOSSEN",
+
+  "components": [
+    "clinicianDashboard",
+    "patientRegistration",
+    "checkIn",
+    "consult",
+    "visitNote",
+    "visitManagement",
+    "systemAdministration",
+    "myAccount",
+    "overviewReports",
+    "dataExports"
+  ],
+
+  "primaryIdentifierPrefix": "JJD",
+  "providerIdentifierPrefix": "JJD"
+
+}
