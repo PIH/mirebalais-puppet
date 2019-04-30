@@ -1,0 +1,19 @@
+{
+
+  "components": [
+    "clinicianDashboard",
+    "patientRegistration",
+    "checkIn",
+    "consult",
+    "visitNote",
+    "visitManagement",
+    "systemAdministration",
+    "myAccount",
+    "overviewReports",
+    "dataExports"
+  ],
+
+  "primaryIdentifierPrefix": "JJD",
+  "providerIdentifierPrefix": "JJD"
+
+}
