@@ -1,6 +1,6 @@
 ---
 site_domain: jjdossen.pih-emr.org
-pih_config: liberia,liberia-jjdossen
+pih_config: liberia,liberia-harper,liberia-harper-jjdossen
 package_release: 'stable/'
 server_timezone: Africa/Monrovia
 

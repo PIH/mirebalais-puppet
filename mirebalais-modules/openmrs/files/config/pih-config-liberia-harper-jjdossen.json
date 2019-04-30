@@ -1,10 +1,5 @@
 {
 
-  "welcomeMessage": "JJ Dossen Health Center EMR",
-  "browserWarning": "Please use the <b>Google Chrome</b> browser",
-
-  "site": "JJ_DOSSEN",
-
   "components": [
     "clinicianDashboard",
     "patientRegistration",
