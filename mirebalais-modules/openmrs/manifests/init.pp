@@ -32,6 +32,10 @@ class openmrs (
   include openmrs::owa
   include openmrs::pwa
 
+  package { 'p7zip-full' :
+    ensure => 'installed'
+  }
+
   file { '/etc/apt/apt.conf.d/99auth':
     ensure  => present,
     owner   => root,

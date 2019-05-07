@@ -15,7 +15,7 @@ class mirebalais_reporting::production_setup (
     content => template('mirebalais_reporting/mirebalaisreportingdbdump.sh.erb'),
   }
 
-  # note that we don't install p7zip-full here because it is already installed as part of the mysql_setup::backup package
+  # note that we don't install p7zip-full here because it is already installed as part of the openmrs main package
 
   cron { 'mysql-reporting-db-dump':
     ensure  => absent,    # disabling the old reporting dump solution in favor of the new one
