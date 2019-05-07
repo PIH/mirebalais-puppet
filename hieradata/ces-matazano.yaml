@@ -3,6 +3,7 @@ package_release: 'stable/'
 pih_config: mexico,mexico-matazano
 config_dir: mexico
 
+server_timezone: America/Mexico_City
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
