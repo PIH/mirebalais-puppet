@@ -24,10 +24,6 @@ class openmrs::backup (
     require    => Database_user["${backup_user}@localhost"],
   }
 
-  package { 'p7zip-full' :
-  	  ensure => 'installed'
-  }
-
   cron { 'mysql-backup':
     ensure  => present,
     command => '/usr/local/sbin/mysqlbackup.sh > /dev/null',
