@@ -51,7 +51,7 @@ class mirebalais_reporting::reporting_setup (
 
 
 	file { 'mirebalais-backup-reporting-db-n-tables-tables.sh':
-		ensure  => present,
+		ensure  => absent,
 		path    => '/usr/local/sbin/mirebalais-backup-reporting-db-n-tables-tables.sh',
 		mode    => '0700',
 		owner   => 'root',
@@ -60,7 +60,7 @@ class mirebalais_reporting::reporting_setup (
 	}
 
 	cron { 'mirebalais-backup-reporting-db-n-tables-tables':
-		ensure  => present,
+		ensure  => absent,
 		command => '/usr/local/sbin/mirebalais-backup-reporting-db-n-tables-tables.sh >/dev/null 2>&1',
 		user    => 'root',
 		hour    => 20,
@@ -71,7 +71,7 @@ class mirebalais_reporting::reporting_setup (
 
 	file { 'mirebalais-percona-restore.sh':
 		ensure  => present,
-		path    => '/usr/local/sbin/mirebalais-percona-restore.sh',
+		path    => '/home/reporting/percona/scripts/mirebalais-percona-restore.sh',
 		mode    => '0700',
 		owner   => 'root',
 		group   => 'root',
@@ -80,9 +80,9 @@ class mirebalais_reporting::reporting_setup (
 
 	cron { 'mirebalais-percona-restore':
 		ensure  => present,
-		command => '/usr/local/sbin/mirebalais-percona-restore.sh >/dev/null 2>&1',
+		command => '/home/reporting/percona/scripts/mirebalais-percona-restore.sh >/dev/null 2>&1',
 		user    => 'root',
-		hour    => 02,
+		hour    => 03,
 		minute  => 30,
 		environment => 'MAILTO=${sysadmin_email}',
 		require => [ File['mirebalais-percona-restore.sh'] ]
