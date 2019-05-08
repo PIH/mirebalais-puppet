@@ -61,9 +61,20 @@ class mirebalais_reporting::production_setup (
     ensure  => present,
     command => '/home/percona/scripts/mirebalais-percona-backup.sh >/dev/null 2>&1',
     user    => 'root',
-    hour    => 01,
-    minute  => 30,
+    hour    => 23,
+    minute  => 00,
     environment => 'MAILTO=${sysadmin_email}',
     require => [ File['mirebalais-percona-backup.sh'] ]
   }
+
+  cron { 'Copy percona backup over to reporting':
+    ensure  => present,
+    command => 'scp -r /home/percona/backups/openmrs reporting@192.168.1.217:/home/reporting/percona/backups > /tmp/scp.log',
+    user    => 'root',
+    hour    => 00,
+    minute  => 00,
+    environment => 'MAILTO=${sysadmin_email}',
+    require => [ File['mirebalais-percona-backup.sh'] ]
+  }
+
 }
