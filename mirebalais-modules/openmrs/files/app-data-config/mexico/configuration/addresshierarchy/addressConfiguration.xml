@@ -4,22 +4,19 @@
     <addressComponent>
       <field>STATE_PROVINCE</field>
       <nameMapping>Entidad</nameMapping>
-      <sizeMapping>40</sizeMapping>
-      <elementDefault>Chiapas</elementDefault>
+      <sizeMapping>40</sizeMapping>      
       <requiredInHierarchy>true</requiredInHierarchy>
     </addressComponent>
     <addressComponent>
       <field>COUNTY_DISTRICT</field>
       <nameMapping>Municipio</nameMapping>
-      <sizeMapping>40</sizeMapping>
-      <elementDefault>Angel Albino Corzo</elementDefault>
+      <sizeMapping>40</sizeMapping>      
       <requiredInHierarchy>true</requiredInHierarchy>
     </addressComponent>
     <addressComponent>
       <field>CITY_VILLAGE</field>
       <nameMapping>Localidad</nameMapping>
-      <sizeMapping>40</sizeMapping>
-      <elementDefault>Reforma</elementDefault>
+      <sizeMapping>40</sizeMapping>      
       <requiredInHierarchy>false</requiredInHierarchy>
     </addressComponent>
     <addressComponent>
