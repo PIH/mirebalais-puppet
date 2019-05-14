@@ -1,4 +1,9 @@
 {
+  "welcomeMessage": "Salvador  Health Center EMR",
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "site": "SALVADOR",
+
   "primaryIdentifierPrefix": "SAL",
   "providerIdentifierPrefix": "SAL"
 }

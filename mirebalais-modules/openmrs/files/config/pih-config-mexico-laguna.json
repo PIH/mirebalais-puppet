@@ -1,4 +1,9 @@
 {
+  "welcomeMessage": "Laguna del Cofre EMR",
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "site": "LAGUNA_DEL_COFRE",
+
   "primaryIdentifierPrefix": "LAG",
   "providerIdentifierPrefix": "LAG"
 }

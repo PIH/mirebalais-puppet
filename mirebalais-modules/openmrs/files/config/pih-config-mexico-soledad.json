@@ -1,4 +1,9 @@
 {
+  "welcomeMessage": "Soledad  Health Center EMR",
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "site": "SOLEDAD",
+
   "primaryIdentifierPrefix": "SOL",
   "providerIdentifierPrefix": "SOL"
 }

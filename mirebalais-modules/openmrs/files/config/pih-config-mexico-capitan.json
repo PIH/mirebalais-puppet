@@ -1,4 +1,9 @@
 {
+  "welcomeMessage": "Capitan  Health Center EMR",
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "site": "CAPITAN",
+
   "primaryIdentifierPrefix": "CAP",
   "providerIdentifierPrefix": "CAP"
 }

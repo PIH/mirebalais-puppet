@@ -1,4 +1,9 @@
 {
+  "welcomeMessage": "Honduras  Health Center EMR",
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "site": "HONDURAS",
+
   "primaryIdentifierPrefix": "HON",
   "providerIdentifierPrefix": "HON"
 }

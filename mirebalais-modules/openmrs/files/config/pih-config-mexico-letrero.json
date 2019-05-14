@@ -1,4 +1,9 @@
 {
+  "welcomeMessage": "Letrero  Health Center EMR",
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "site": "LETRERO",
+
   "primaryIdentifierPrefix": "LET",
   "providerIdentifierPrefix": "LET"
 }

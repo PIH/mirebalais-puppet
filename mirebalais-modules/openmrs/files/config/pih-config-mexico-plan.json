@@ -1,4 +1,9 @@
 {
+  "welcomeMessage": "Plan de la Libertad EMR",
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "site": "PLAN_DE_LA_LIBERTAD",
+
   "primaryIdentifierPrefix": "PLA",
   "providerIdentifierPrefix": "PLA"
 }

@@ -1,4 +1,9 @@
 {
+  "welcomeMessage": "Monterrey  Health Center EMR",
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "site": "MONTERREY",
+
   "primaryIdentifierPrefix": "MON",
   "providerIdentifierPrefix": "MON"
 }

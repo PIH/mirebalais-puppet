@@ -1,4 +1,9 @@
 {
+  "welcomeMessage": "Matazano  Health Center EMR",
+  "browserWarning": "Please use the <b>Google Chrome</b> browser",
+
+  "site": "MATAZANO",
+
   "primaryIdentifierPrefix": "MAT",
   "providerIdentifierPrefix": "MAT"
 }
