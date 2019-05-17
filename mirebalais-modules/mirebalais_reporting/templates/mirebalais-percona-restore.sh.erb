@@ -22,7 +22,7 @@ createDir () {
 }
 
 removeTableDumps () {
-                        for i in ${reportingDumps}; do rm -rf "$i"; done
+                        for i in ${reportingDumps}/*; do rm -rf "$i"; done
 }
 
 dumpReportingTable () {
