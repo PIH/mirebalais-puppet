@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+#set -x
 
 backupDir="/home/reporting/percona/backups"
 compressedDir="/home/reporting/percona/backups/openmrs.tar"
@@ -10,6 +10,28 @@ perconaRestoreDir="/home/reporting/percona/backups/openmrs"
 dataDir="/var/lib/mysql"
 reportingTables="/home/reporting/percona/dumps/reporing_tables.sql"
 mysqlDb="/home/reporting/percona/dumps/mysql.sql"
+reportingDumps="/home/reporting/percona/dumps"
+backupDir="/home/reporting/percona/backups"
+perconaLogs="/home/reporting/percona/logs"
+
+createDir () {
+        mkdir -p /home/reporting/percona
+        mkdir -p ${backupDir}
+        mkdir -p ${perconaLogs}
+	mkdir -p ${reportingDumps}
+}
+
+removeTableDumps () {
+                        for i in ${reportingDumps}; do rm -rf "$i"; done
+}
+
+dumpReportingTable () {
+                          mysqldump -uroot openmrs reporting_report_design reporting_report_design_resource reporting_report_processor reporting_report_request scheduler_task_config scheduler_task_config_property serialized_object global_property > ${reportingDumps}/reporing_tables.sql
+}
+
+dumpMysqlDb () {
+		mysqldump -uroot mysql > ${reportingDumps}/mysql.sql
+}
 
 uncompressDb () {
                         tar -xvf ${compressedDir} -C ${backupDir} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_uncompress.log
@@ -21,14 +43,15 @@ perconaPrepare () {
 
 perconaRestore () {
                 # We should be stopping mysql first
+                service mysql stop
                 rm -rf ${dataDir}/*
                 innobackupex --copy-back ${perconaRestoreDir} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconarestore.log
                 chown -R mysql: ${dataDir}
 }
 
 restoreReportingTablesAndDb () {
-                        sudo mysqld_safe --skip-grant-tables & mysql -uroot -e "CREATE DATABASE mysql;"
-                        mysql -uroot -D mysql -e "SOURCE $mysqlDb;"
+                        sudo mysqld_safe --skip-grant-tables & mysql -uroot -e "CREATE DATABASE IF NOT EXISTS mysql;"
+                        mysql -uroot -D mysql -e "SOURCE ${mysqlDb};"
                         mysql -uroot -D openmrs -e "SOURCE ${reportingTables};"
 
 }
@@ -41,7 +64,11 @@ reboot () {
                 sudo reboot
 }
 
-uncompressDb
+createDir
+removeTableDumps
+dumpMysqlDb
+dumpReportingTable
+#uncompressDb
 perconaPrepare
 perconaRestore
 sleep 180
