@@ -32,6 +32,9 @@
     "vitals",
     "mentalHealth",
     "ncd",
-    "socioEconomics"
+    "socioEconomics",
+	"vct",
+    "edTriage",
+    "edTriageQueue"
 	]
 }
