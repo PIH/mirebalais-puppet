@@ -16,7 +16,8 @@
     "myAccount",
     "overviewReports",
     "managePrinters",
-    "dataExports"
+    "dataExports",
+    "vitals"
   ],
 
     "globalProperties": {
