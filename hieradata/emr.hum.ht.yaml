@@ -53,7 +53,7 @@ lab_tracking: true
 # SSL certificates for HUM
 ssl_cert_dir: '/etc/ssl/certs'
 ssl_key_dir: '/etc/ssl/private'
-ssl_cert_file: 'a221e4b02e3ae93d.crt'
+ssl_cert_file: 'e51acc674ff05659.crt'
 ssl_chain_file: 'gd_bundle-g2-g1.crt'
 ssl_key_file: 'hum.key'
 ssl_use_letsencrypt: false
