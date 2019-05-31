@@ -38,7 +38,7 @@ class percona(
     privileges => ['RELOAD', 'LOCK TABLES', 'REPLICATION CLIENT'],
     table => '*.*',
     user => "percona@localhost",
-    require => [ mysql_user['percona@localhost']],
+    require => [ Service['mysqld'] ],
   }
 
   mysql_grant { "percona@localhost/mysql":
@@ -46,8 +46,7 @@ class percona(
     privileges => ['RELOAD', 'LOCK TABLES', 'REPLICATION CLIENT'],
     table => '*.*',
     user => "percona@localhost",
-    require => [ mysql_user['percona@localhost']],
+    require => [ Service['mysqld'] ],
   }
 
 }
-
