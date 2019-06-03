@@ -115,3 +115,6 @@ java_memory_parameters: '-Xmx2048m -Xms1024m'
 
 java_debug_parameters: ''
 java_profiler: ''
+
+# Request logging for performance and usage tracking
+activitylog_enabled: false

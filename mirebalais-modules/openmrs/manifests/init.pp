@@ -11,6 +11,7 @@ class openmrs (
     $pih_config = hiera('pih_config'),
     $pih_config_array = split(hiera('pih_config'), ','),
     $config_dir = hiera('config_dir', undef),
+    $activitylog_enabled = hiera('activitylog_enabled'),
 
     #Feature_toggles
     $reportingui_ad_hoc_analysis = hiera('reportingui_ad_hoc_analysis'),
