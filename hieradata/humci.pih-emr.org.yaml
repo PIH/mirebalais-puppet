@@ -24,3 +24,5 @@ appointmentscheduling_confidential: true
 additional_haiti_identifiers: true
 
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
+
+activitylog_enabled: true
