@@ -27,6 +27,23 @@ class percona(
     ensure  => installed
   }
 
+  file { "/home/percona":
+    ensure  => directory,
+    owner   => root,
+    group   => root,
+    mode    => '0755',
+    require =>  Package['percona-xtrabackup']
+  }
+
+  file { "/home/percona/scripts":
+    ensure  => directory,
+    owner   => root,
+    group   => root,
+    mode    => '0755',
+    require =>  File["/home/percona"]
+  }
+
+
   mysql_user { "percona@localhost":
     ensure        => present,
     password_hash => mysql_password($mysql_root_password),
