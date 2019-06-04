@@ -5,6 +5,7 @@
   "site": "CHIAPAS",
   "components": [
     "allergies",
+    "ancProgram",
     "asthmaProgram",
     "clinicianDashboard",
     "diabetesProgram",
@@ -12,7 +13,6 @@
     "epilepsyProgram",
     "hypertensionProgram",
     "malnutritionProgram",
-    "mchProgram",
     "mentalHealthProgram",
     "mexicoClinic",
     "myAccount",
