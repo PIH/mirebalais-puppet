@@ -15,6 +15,22 @@ class mirebalais_reporting::reporting_setup (
     		shell  => '/bin/sh',
   	}
 
+  	file { "/home/reporting/percona":
+        ensure  => directory,
+        owner   => root,
+        group   => root,
+        mode    => '0755',
+        require =>  Package['percona-xtrabackup']
+      }
+
+      file { "/home/reporting/percona/scripts":
+        ensure  => directory,
+        owner   => root,
+        group   => root,
+        mode    => '0755',
+        require =>  File["/home/reporting/percona"]
+      }
+
 	file { 'mirebalaisreportingdbsource.sh':
 		ensure  => absent,
 		path    => '/usr/local/sbin/mirebalaisreportingdbsource.sh',
