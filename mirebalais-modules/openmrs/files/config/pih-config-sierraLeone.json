@@ -7,24 +7,11 @@
   "country": "SIERRA_LEONE",
   "site": "OTHER",
 
-  "components": [
-    "patientRegistration",
-    "checkIn",
-    "visitManagement",
-    "systemAdministration",
-    "visitNote",
-    "myAccount",
-    "overviewReports",
-    "managePrinters",
-    "dataExports",
-    "vitals"
-  ],
-
-    "globalProperties": {
-        "mirebalais.checkIn.paymentAmounts": "10.000,0",
-        "mirebalais.checkIn.paymentAmountLabels": "10.000,Free",
-        "mirebalais.checkIn.paymentAmountDefault": "10.000",
-        "haiti.checkIn.reasonsForVisit":"PIH:CLINICAL,PIH:ID card only,PIH:Lab only,PIH:Pharmacy only,PIH:Procedure only,PIH:Request scheduled appointment,PIH:Social assistance and psychosocial support,PIH:OTHER"
+  "globalProperties": {
+    "mirebalais.checkIn.paymentAmounts": "10.000,0",
+    "mirebalais.checkIn.paymentAmountLabels": "10.000,Free",
+    "mirebalais.checkIn.paymentAmountDefault": "10.000",
+    "haiti.checkIn.reasonsForVisit":"PIH:CLINICAL,PIH:ID card only,PIH:Lab only,PIH:Pharmacy only,PIH:Procedure only,PIH:Request scheduled appointment,PIH:Social assistance and psychosocial support,PIH:OTHER"
   },
 
   "scheduleBackupReports": "false",

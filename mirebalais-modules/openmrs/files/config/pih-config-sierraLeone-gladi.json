@@ -1,0 +1,16 @@
+{
+  "components": [
+    "patientRegistration",
+    "checkIn",
+    "visitManagement",
+    "systemAdministration",
+    "visitNote",
+    "myAccount",
+    "overviewReports",
+    "managePrinters",
+    "dataExports",
+    "vitals",
+    "labs",
+    "labResults"
+  ]
+}
