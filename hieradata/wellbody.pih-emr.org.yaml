@@ -1,6 +1,6 @@
 ---
 site_domain: wellbody.pih-emr.org
-pih_config: sierraLeone
+pih_config: sierraLeone,sierraLeone-wellbody
 server_timezone: Africa/Freetown
 package_release: 'stable/'
 
