@@ -22,7 +22,7 @@
 
   "dispositionConfig": "pih-dispositions-sierraLeone.json",
   "addressConfig": {
-    "manualFields": ["address1", "address2"],
+    "manualFields": ["cityVillage", "address2"],
     "shortcutField": "stateProvince"
   },
   "registrationConfig": {
