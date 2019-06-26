@@ -10,6 +10,7 @@
     "overviewReports",
     "managePrinters",
     "dataExports",
-    "vitals"
+    "vitals",
+    "activeVisits"
   ]
 }
