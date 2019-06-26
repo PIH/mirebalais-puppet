@@ -1,3 +1,4 @@
+
 {
   "components": [
     "patientRegistration",
@@ -10,6 +11,7 @@
     "managePrinters",
     "dataExports",
     "vitals",
+    "activeVisits",
     "labs",
     "labResults"
   ]
