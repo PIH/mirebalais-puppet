@@ -1,6 +1,7 @@
 
 {
   "components": [
+    "clinicianDashboard",
     "patientRegistration",
     "checkIn",
     "visitManagement",
