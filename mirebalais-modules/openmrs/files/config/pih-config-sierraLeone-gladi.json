@@ -1,19 +1,20 @@
 
 {
   "components": [
-    "clinicianDashboard",
-    "patientRegistration",
+    "activeVisits",
     "checkIn",
-    "visitManagement",
-    "systemAdministration",
-    "visitNote",
+    "clinicianDashboard",
+    "dataExports",
+    "labResults",
+    "labs",
+    "managePrinters",
     "myAccount",
     "overviewReports",
-    "managePrinters",
-    "dataExports",
-    "vitals",
-    "activeVisits",
-    "labs",
-    "labResults"
+    "patientRegistration",
+    "primaryCare",
+    "systemAdministration",
+    "visitManagement",
+    "visitNote",
+    "vitals"
   ]
 }
