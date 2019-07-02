@@ -14,5 +14,8 @@
     "vitals",
     "activeVisits",
     "idcardPrinting"
-  ]
+  ],
+
+  "idCardLabel": "Wellbody Clinic Dorma",
+  "idCardLocale": "en"
 }
