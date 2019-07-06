@@ -19,6 +19,11 @@ then
     mv pih-emr.org.key /etc/ssl/private/
   fi
 
+  if [ ! -d ~/.ssh ]
+  then
+    mkdir ~/.ssh
+  fi
+
   if [ ! -f ~/.ssh/id_dsa ]
   then
     ssh-keygen -q -t dsa -f ~/.ssh/id_dsa -P ''
