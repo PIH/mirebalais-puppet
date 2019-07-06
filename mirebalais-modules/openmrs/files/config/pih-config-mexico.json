@@ -36,7 +36,7 @@
   "visitsPageWithSpecificUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview",
   "providerIdentifierPrefix": "C",
   "addressConfig": {
-    "manualFields": ["address1", "address2"],
+    "manualFields": ["address1", "address2", "address3"],
     "shortcutField": "cityVillage"
   },
   "registrationConfig": {
