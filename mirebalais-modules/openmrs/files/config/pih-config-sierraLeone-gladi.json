@@ -2,6 +2,7 @@
 {
   "components": [
     "activeVisits",
+    "allergies",
     "checkIn",
     "clinicianDashboard",
     "dataExports",
