@@ -1,4 +1,5 @@
 ---
+webapp_name: openmrs
 package_release: 'stable/'
 pih_config: mexico,mexico-capitan
 config_dir: mexico

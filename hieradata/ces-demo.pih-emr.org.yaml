@@ -1,4 +1,5 @@
 ---
+webapp_name: openmrs
 package_release: 'unstable/'
 site_domain: ces-demo.pih-emr.org
 pih_config: mexico,mexico-demo

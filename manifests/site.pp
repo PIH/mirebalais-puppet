@@ -260,10 +260,12 @@ node 'kouka.pih-emr.org', 'padi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.org
   include openmrs
   include openmrs::initial_setup
 
+  include openmrs::backup
+
   #include monitoring
 }
 
-node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org', 'ces-honduras.pih-emr.org' {
+node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org', 'ces-laguna', 'ces-honduras', 'ces-letrero', 'ces-matazano', 'ces-monterrey', 'ces-plan', 'ces-reforma', 'ces-salvador', 'ces-soledad'    {
 
   class { 'apt':
     always_apt_update => true,

@@ -41,3 +41,10 @@ http://bundler.io/v1.7/rationale.html#checking-your-code-into-version-control
 
 On the server you wish to enable debugging on, edit `/etc/default/tomcat7.`. There is a line that reads `# To enable remote debugging uncomment the following line.` Uncomment the following line.
 Note that one each redeploy this will be reset.
+
+Note 
+
+Sometimes apache or tomcat may be listening on ipv6. To disable ipv6
+
+edit /etc/sysctl.conf and add net.ipv6.conf.all.disable_ipv6 = 1
+save and exit the file sysctl.conf then run the command sysctl -p on the terminal
