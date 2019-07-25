@@ -240,6 +240,33 @@ node 'wellbody.pih-emr.org' {
   include crashplan
 }
 
+node 'ces.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mailx
+  include ntpdate
+  include apt_upgrades
+  include wget
+
+  include java
+  include mysql_setup
+  include apache2
+  include tomcat
+
+  include openmrs
+  include openmrs::initial_setup
+
+  #include monitoring
+  include logging
+
+  include openmrs::backup
+  include crashplan
+}
+
 node 'kouka.pih-emr.org', 'padi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.org', 'lespwa.pih-emr.org' {
 
   class { 'apt':
