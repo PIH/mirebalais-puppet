@@ -98,7 +98,7 @@ class mirebalais_reporting::reporting_setup (
 		ensure  => present,
 		command => '/home/reporting/percona/scripts/mirebalais-percona-restore.sh >/dev/null 2>&1',
 		user    => 'root',
-		hour    => 03,
+		hour    => 00,
 		minute  => 30,
 		environment => 'MAILTO=${sysadmin_email}',
 		require => [ File['mirebalais-percona-restore.sh'] ]
