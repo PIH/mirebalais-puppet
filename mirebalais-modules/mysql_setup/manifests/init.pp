@@ -9,6 +9,7 @@ class mysql_setup (
     $mysql_net_write_timeout = hiera('mysql_net_write_timeout'),
     $mysql_wait_timeout = hiera('mysql_wait_timeout'),
     $mysql_interactive_timeout = hiera('mysql_interactive_timeout')
+    $mysql_connect_timeout = hiera('mysql_connect_timeout')
 ){
 
 
