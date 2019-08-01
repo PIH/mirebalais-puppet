@@ -1,3 +1,3 @@
 set :user, 'root'
 
-server 'ces.pih-emr.org', :test
+server 'ces-ci.pih-emr.org', :test
