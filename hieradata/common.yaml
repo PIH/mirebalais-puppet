@@ -25,6 +25,7 @@ mysql_net_read_timeout: 30
 mysql_net_write_timeout: 30
 mysql_wait_timeout: 28800
 mysql_interactive_timeout: 28800
+mysql_connect_timeout: 28800
 openmrs_db: openmrs
 openmrs_db_user: openmrs
 openmrs_db_password: foo
