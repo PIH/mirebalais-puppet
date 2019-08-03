@@ -1,5 +1,5 @@
 ---
-package_release: 'stable/'
+package_release: 'unstable/'
 pih_config: mexico,mexico-plan
 config_dir: mexico
 
