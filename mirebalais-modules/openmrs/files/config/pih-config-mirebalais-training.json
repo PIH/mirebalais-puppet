@@ -33,6 +33,7 @@
     "mentalHealth",
     "edTriage",
     "edTriageQueue",
+    "labs",
     "pathologyTracking",
     "primaryCare",
     "relationships",
