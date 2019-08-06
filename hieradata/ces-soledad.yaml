@@ -1,5 +1,5 @@
 ---
-package_release: 'unstable/'
+package_release: 'stable/'
 pih_config: mexico,mexico-soledad
 config_dir: mexico
 
