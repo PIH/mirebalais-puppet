@@ -3,7 +3,7 @@ site_domain: ami.pih-emr.org
 pih_config: haiti-mentalhealth
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-mysql_bind_address: 127.0.0.1
+mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 # feature toggles
