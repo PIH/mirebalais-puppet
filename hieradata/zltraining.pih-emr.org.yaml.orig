@@ -5,8 +5,8 @@ site_domain: zltraining.pih-emr.org
 pih_config: haiti,haiti-training
 server_timezone: America/New_York
 
-mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
+mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 openmrs_auto_update_database: true
 

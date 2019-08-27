@@ -4,8 +4,8 @@ site_domain: lacolline.pih-emr.org
 pih_config: haiti,haiti-lacolline
 server_timezone: America/New_York
 
-mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
+mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 remote_db_user: backups
 remote_db_server: amigo.pih-emr.org

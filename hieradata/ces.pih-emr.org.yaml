@@ -4,9 +4,9 @@ site_domain: ces.pih-emr.org
 pih_config: mexico,mexico-production
 config_dir: mexico
 
-mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-mysql_bind_address: 0.0.0.0
-openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
+mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+mysql_bind_address: 127.0.0.1
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
