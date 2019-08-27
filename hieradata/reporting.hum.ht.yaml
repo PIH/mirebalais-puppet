@@ -23,7 +23,7 @@ mysql_net_write_timeout: 1800
 mysql_innodb_buffer_pool_size: 8G
 mysql_innodb_buffer_pool_instances: 8
 
-openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 replication_db_password: ENC[92IfbImaUmA3wqYSG5kWWwexEU8HqCrqQzSXAMKRPz0=]
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 
