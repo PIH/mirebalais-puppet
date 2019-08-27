@@ -11,7 +11,7 @@ ntp_server_3: 192.168.1.151
 ntp_server_4: 192.168.1.174
 
 package_release: 'stable/'
-mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
 lacolline_server_url: 'http://boston.pih-emr.org:8080/openmrs'

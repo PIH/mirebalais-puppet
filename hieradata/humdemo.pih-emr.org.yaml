@@ -7,7 +7,7 @@ pih_config: mirebalais,mirebalais-humdemo
 openmrs_auto_update_database: true
 site_domain: humdemo.pih-emr.org
 
-mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 lacolline_server_url: 'http://boston.pih-emr.org:8080/openmrs'
 lacolline_username: wsuser
 lacolline_password: ENC[OV3IH5U9urv6gEb76vnyYA==]

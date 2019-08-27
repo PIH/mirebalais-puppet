@@ -2,5 +2,5 @@
 site_domain: gladi.pih-emr.org
 pih_config: sierraLeone,sierraLeone-gladi
 
-mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]

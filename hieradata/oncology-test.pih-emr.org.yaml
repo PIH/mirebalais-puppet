@@ -3,7 +3,7 @@ webapp_name: mirebalais
 site_domain: oncology-test.pih-emr.org
 pih_config: mirebalais,mirebalais-humci
 
-mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
