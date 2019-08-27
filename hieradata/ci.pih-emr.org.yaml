@@ -2,7 +2,7 @@
 site_domain: ci.pih-emr.org
 pih_config: haiti,haiti-thomonde,haiti-thomonde-ci
 
-mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 127.0.0.1
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 

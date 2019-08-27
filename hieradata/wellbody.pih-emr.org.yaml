@@ -4,7 +4,7 @@ pih_config: sierraLeone,sierraLeone-wellbody
 server_timezone: Africa/Freetown
 package_release: 'stable/'
 
-mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 backup_db_user: backup

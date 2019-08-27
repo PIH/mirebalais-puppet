@@ -4,7 +4,7 @@ site_domain: belladere.pih-emr.org
 pih_config: haiti,haiti-belladere
 server_timezone: America/New_York
 
-mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 remote_db_user: backups

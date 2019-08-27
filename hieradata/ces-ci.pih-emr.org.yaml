@@ -4,7 +4,7 @@ site_domain: ces-ci.pih-emr.org
 pih_config: mexico,mexico-demo
 config_dir: mexico
 
-mysql_root_password: ENC[ys7rbY+d8LnggKKkxElv3A==]
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
