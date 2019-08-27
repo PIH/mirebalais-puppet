@@ -5,7 +5,7 @@ pih_config: haiti,haiti-belladere
 server_timezone: America/New_York
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 remote_db_user: backups
 remote_db_server: amigo.pih-emr.org

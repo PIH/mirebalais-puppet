@@ -5,7 +5,7 @@ server_timezone: Africa/Freetown
 package_release: 'stable/'
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 backup_db_user: backup
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
