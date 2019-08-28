@@ -3,7 +3,7 @@ site_domain: lespwa.pih-emr.org
 pih_config: haiti-hiv
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 # feature toggles
 additional_haiti_identifiers: true

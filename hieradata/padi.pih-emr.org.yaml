@@ -3,7 +3,7 @@ site_domain: padi.pih-emr.org
 pih_config: sierraLeone
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 
 #java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'

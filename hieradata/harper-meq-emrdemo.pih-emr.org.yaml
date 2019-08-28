@@ -3,7 +3,7 @@ site_domain: harper-meq-emrdemo.pih-emr.org
 pih_config: liberia,liberia-harper,liberia-harper-demo
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-openmrs_db_password: ENC[QbRhyVSLijlWr2ciFk8bKg==]
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 # Use our old godaddy cert until we've tested the letsencrypt one for a few months
 ssl_cert_dir: '/etc/ssl/certs'
