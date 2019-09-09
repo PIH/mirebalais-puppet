@@ -151,4 +151,12 @@ class apache2 (
     enable   => $services_enable,
     require  => [ Package['apache2'], Package['libapache2-mod-jk'] ],
   }
+
+  # allows other modules to trigger an apache restart
+  exec { 'apache-restart':
+    command     => "service apache2 restart",
+    user        => 'root',
+    refreshonly => true
+  }
+
 }
