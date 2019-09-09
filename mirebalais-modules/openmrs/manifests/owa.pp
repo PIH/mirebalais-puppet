@@ -33,6 +33,7 @@ class openmrs::owa (
   }*/
 
   # remove old order entry filename & directory
+  # TODO can this now be removed
   file { "/home/${tomcat}/.OpenMRS/owa/openmrs-owa-orderentry.zip":
     ensure   => absent,
     notify  => Exec['tomcat-restart']
@@ -57,10 +58,11 @@ class openmrs::owa (
     group   => $tomcat,
     mode    => '0644',
     require => Exec['retrieve_order_entry_owa'],
-    notify  => Exec['tomcat-restart']
+    notify  => [ Exec['tomcat-restart'], Exec['apache-restart'] ]
   }
 
   # remove old lab workflow filename and directory
+  # TODO can this now be removed
   file { "/home/${tomcat}/.OpenMRS/owa/openmrs-owa-labworkflow.zip":
     ensure   => absent,
     notify  => Exec['tomcat-restart']
@@ -85,7 +87,7 @@ class openmrs::owa (
     group   => $tomcat,
     mode    => '0644',
     require => Exec['retrieve_lab_workflow_owa'],
-    notify  => Exec['tomcat-restart']
+    notify  => [ Exec['tomcat-restart'], Exec['apache-restart'] ]
   }
 
   # install oncology owa from bamboo
