@@ -28,6 +28,7 @@
       "mentalHealth",
       "socioEconomics",
       "vct",
+      "ncd",
       "edTriage",
       "edTriageQueue"
   ],
