@@ -94,7 +94,9 @@ class apache2 (
 
   if ($ssl_use_letsencrypt == true) {
 
-    apt::ppa { 'ppa:certbot/certbot': }
+    apt::ppa { 'ppa:certbot/certbot':
+      options => '-y -k pool.sks-keyservers.net'
+    }
 
     package { 'software-properties-common':
       ensure => present
