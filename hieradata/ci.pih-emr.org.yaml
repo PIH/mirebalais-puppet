@@ -1,6 +1,6 @@
 ---
 site_domain: ci.pih-emr.org
-pih_config: haiti,haiti-thomonde,haiti-thomonde-ci
+pih_config: haiti,haiti-lacolline
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
