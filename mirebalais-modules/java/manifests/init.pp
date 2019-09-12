@@ -6,8 +6,12 @@ class java (
     source => 'puppet:///modules/java/etc/environment'
   }
 
-  apt::ppa { 'ppa:webupd8team/java': }
-  apt::ppa { 'ppa:openjdk-r/ppa': }
+  apt::ppa { 'ppa:webupd8team/java':
+    options => '-y -k pool.sks-keyservers.net'
+  }
+  apt::ppa { 'ppa:openjdk-r/ppa':
+    options => '-y -k pool.sks-keyservers.net'
+  }
 
   # uninstall Oracle java 7
   package { 'oracle-java7-installer':
