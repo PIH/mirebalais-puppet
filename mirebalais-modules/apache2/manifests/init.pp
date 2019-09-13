@@ -15,6 +15,7 @@ class apache2 (
   $biometrics_port = hiera('biometrics_port'),
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
+  $keyserver = hiera('keyserver')
 ){
 
   # really ugly way to do string concat, ignoring empties
@@ -95,7 +96,7 @@ class apache2 (
   if ($ssl_use_letsencrypt == true) {
 
     apt::ppa { 'ppa:certbot/certbot':
-      options => '-y -k pool.sks-keyservers.net'
+      options => "-y -k ${keyserver}"
     }
 
     package { 'software-properties-common':
