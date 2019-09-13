@@ -1,5 +1,6 @@
 class java (
   $tomcat = hiera('tomcat')
+  $keyserver = hiera('keyserver')
 ){
 
   file { '/etc/environment':
@@ -7,10 +8,10 @@ class java (
   }
 
   apt::ppa { 'ppa:webupd8team/java':
-    options => '-y -k pool.sks-keyservers.net'
+    options => "-y -k ${keyserver}"
   }
   apt::ppa { 'ppa:openjdk-r/ppa':
-    options => '-y -k pool.sks-keyservers.net'
+    options => "-y -k ${keyserver}"
   }
 
   # uninstall Oracle java 7

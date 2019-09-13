@@ -5,6 +5,7 @@ ntp_server_1: 0.ubuntu.pool.ntp.org
 ntp_server_2: 1.ubuntu.pool.ntp.org
 ntp_server_3: 2.ubuntu.pool.ntp.org
 ntp_server_4: 3.ubuntu.pool.ntp.org
+keyserver: keyserver.ubuntu.com
 
 pih_config: haiti,haiti-training
 site_domain: foo.org
@@ -64,7 +65,7 @@ dicom_grid_haiti_ip_address: pacstest.pih.org
 dicom_grid_haiti_inbound_port: 9999
 mirth_inbound_from_pacs_mirebalais_port: 9999
 mirth_inbound_from_pacs_boston_port: 9999
-openmrs_mirebalais_inbound_port: 6663 
+openmrs_mirebalais_inbound_port: 6663
 
 remote_zlidentifier_url: 'https://humci.pih-emr.org:8080/mirebalais/module/idgen/exportIdentifiers.form?source=5&comment=MirebalaisDemo'
 remote_zlidentifier_username: testidgen
