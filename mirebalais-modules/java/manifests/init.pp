@@ -1,5 +1,5 @@
 class java (
-  $tomcat = hiera('tomcat')
+  $tomcat = hiera('tomcat'),
   $keyserver = hiera('keyserver')
 ){
 
