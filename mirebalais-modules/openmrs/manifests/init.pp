@@ -30,13 +30,6 @@ class openmrs (
     $lacolline_username = decrypt(hiera('lacolline_username')),
     $lacolline_password = decrypt(hiera('lacolline_password')),
 
-    # if we are using unstable repo (ie for ci servers) always use latest, otherwise use version specified by package release
-    /*$pihemr_version = $package_release ? {
-      /unstable/ => 'latest',
-      default    =>  $package_version,
-   }*/
-
-
 ){
 
   include openmrs::owa
@@ -62,8 +55,14 @@ class openmrs (
     include_src => false,
   }
 
+  # if we are using unstable repo (ie for ci servers) always use latest, otherwise use version specified by package release
+  $pihemr_version = $package_release ? {
+    /unstable/ => 'latest',
+    default    =>  $package_version,
+  }
+
   package { 'pihemr':
-    ensure  => $package_version,
+    ensure  => $pihemr_version,
     require => [ Package[$tomcat], Service[$tomcat], Service['mysqld'], Apt::Source['pihemr'],
       File["/home/${tomcat}/.OpenMRS/${webapp_name}-runtime.properties"], File['/etc/apt/apt.conf.d/99auth'] ],
   }
