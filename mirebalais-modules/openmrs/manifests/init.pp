@@ -4,6 +4,7 @@ class openmrs (
     $openmrs_db_password = decrypt(hiera('openmrs_db_password')),
     $openmrs_auto_update_database = hiera('openmrs_auto_update_database'),
     $package_release = hiera('package_release'),
+    $package_version = hiera('package_version'),
     $webapp_name = hiera('webapp_name'),
     $tomcat = hiera('tomcat'),
     $junit_username = hiera('junit_username'),
@@ -27,8 +28,16 @@ class openmrs (
     $remote_zlidentifier_password = decrypt(hiera('remote_zlidentifier_password')),
     $lacolline_server_url = hiera('lacolline_server_url'),
     $lacolline_username = decrypt(hiera('lacolline_username')),
-    $lacolline_password = decrypt(hiera('lacolline_password'))
-  ){
+    $lacolline_password = decrypt(hiera('lacolline_password')),
+
+    # if we are using unstable repo (ie for ci servers) always use latest, otherwise use version specified by package release
+    $pihemr_version = $package_release ? {
+      /unstable/ => 'latest',
+      default    =>  $package_version,
+   }
+
+
+){
 
   include openmrs::owa
   include openmrs::pwa
@@ -53,16 +62,8 @@ class openmrs (
     include_src => false,
   }
 
-  apt::source { 'mirebalais':
-    ensure      => absent,
-    location    => 'http://bamboo.pih-emr.org/mirebalais-repo',
-    release     => $package_release,
-    repos       => '',
-    include_src => false,
-  }
-
   package { 'pihemr':
-    ensure  => latest,
+    ensure  => $pihemr_version,
     require => [ Package[$tomcat], Service[$tomcat], Service['mysqld'], Apt::Source['pihemr'],
       File["/home/${tomcat}/.OpenMRS/${webapp_name}-runtime.properties"], File['/etc/apt/apt.conf.d/99auth'] ],
   }

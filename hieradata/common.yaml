@@ -15,6 +15,8 @@ owa_cohort_builder_version: 1.0.0
 owa_order_entry_version: 1.0.0
 
 package_release: 'unstable/'
+package_version: 'latest'
+
 mysql_server_id: 1
 mysql_root_password: foo
 mysql_bind_address: 127.0.0.1
