@@ -17,6 +17,7 @@
     "systemAdministration",
     "visitManagement",
     "visitNote",
-    "vitals"
+    "vitals",
+    "dispensing"
   ]
 }
