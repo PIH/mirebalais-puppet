@@ -5,7 +5,7 @@ ntp_server_1: 0.ubuntu.pool.ntp.org
 ntp_server_2: 1.ubuntu.pool.ntp.org
 ntp_server_3: 2.ubuntu.pool.ntp.org
 ntp_server_4: 3.ubuntu.pool.ntp.org
-keyserver: keyserver.ubuntu.com
+keyserver: pool.sks-keyservers.net
 
 pih_config: haiti,haiti-training
 site_domain: foo.org
