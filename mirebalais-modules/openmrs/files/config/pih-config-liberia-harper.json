@@ -41,6 +41,30 @@
   ],
 
   "primaryIdentifierPrefix": "HP",
-  "providerIdentifierPrefix": "HP"
-
+  "providerIdentifierPrefix": "HP",
+  "registrationConfig": {
+    "allowUnknownPatients": false,
+    "allowManualEntryOfPrimaryIdentifier": true,
+    "afterCreatedUrl": "mirebalais/patientRegistration/afterRegistration.page?patientId={{patientId}}&encounterId={{encounterId}}",
+    "similarPatientsSearch": {
+      "addressFields": {
+        "cityVillage": "1",
+        "address1": "1"
+      },
+      "personAttributeTypes" : {
+        "First Name of Mother": "3",
+        "Telephone Number": "20"
+      }
+    },
+    "demographics": {
+      "mothersName": {
+        "required": true
+      }
+    },
+    "contactInfo": {
+      "phoneNumber": {
+        "regex": "^((\\+?231|0)(55|77|88)([0-9]{7}))?$"
+      }
+    }
+  }
 }
