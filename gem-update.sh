@@ -31,7 +31,7 @@ librarian-puppet install
 
 fi
 
-echo "modulepath = /etc/puppet/mirebalais-puppet/modules:/etc/puppet/mirebalais-puppet/mirebalais-modules" > puppet.conf
+echo "modulepath = /etc/puppet/modules:/etc/puppet/mirebalais-modules" > puppet.conf
 echo "environment = $1" >> puppet.conf
 
 #replace /etc/puppet/hieradata with $(pwd)/hieradata in hiera.yaml

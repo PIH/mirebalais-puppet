@@ -2,7 +2,7 @@
 :backends:
   - yaml
 :yaml:
-  :datadir: /etc/puppet/mirebalais-puppet/hieradata
+  :datadir: /etc/puppet/hieradata
 :hierarchy:
   - '%{::fqdn}'
   - '%{::hostname}'
