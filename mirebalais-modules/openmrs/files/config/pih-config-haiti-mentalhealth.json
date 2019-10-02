@@ -16,7 +16,8 @@
     "dataExports",
     "exportPatients",
     "importPatients",
-    "programs"
+    "programs",
+    "chwApp"
   ],
 
   "globalProperties": {
