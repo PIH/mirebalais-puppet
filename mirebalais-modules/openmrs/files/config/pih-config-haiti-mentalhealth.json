@@ -21,6 +21,7 @@
   ],
 
   "globalProperties": {
+          "providermanagement.restrictedRoles": "68624C4C-9E10-473B-A849-204820D16C45,11C1A56D-82F7-4269-95E8-2B67B9A3D837,9a4b44b2-8a9f-11e8-9a94-a6cf71072f73,2fa6f8da-aa58-11e8-98d0-529269fb1459,,4f88dd49-0c64-4ecd-af0f-4dff272a4971"
   },
 
   "dispositionConfig": "pih-dispositions-haiti.json",
