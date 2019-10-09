@@ -18,7 +18,7 @@ createDir () {
         mkdir -p /home/reporting/percona
         mkdir -p ${backupDir}
         mkdir -p ${perconaLogs}
-	mkdir -p ${reportingDumps}
+        mkdir -p ${reportingDumps}
 }
 
 removeTableDumps () {
@@ -30,7 +30,7 @@ dumpReportingTable () {
 }
 
 dumpMysqlDb () {
-		mysqldump -uroot mysql > ${reportingDumps}/mysql.sql
+                mysqldump -uroot mysql > ${reportingDumps}/mysql.sql
 }
 
 uncompressDb () {
@@ -45,15 +45,9 @@ perconaRestore () {
                 # We should be stopping mysql first
                 service mysql stop
                 rm -rf ${dataDir}/*
-                innobackupex --copy-back ${perconaRestoreDir} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconarestore.log
-                chown -R mysql: ${dataDir}
-}
-
-restoreReportingTablesAndDb () {
-                        sudo mysqld_safe --skip-grant-tables & mysql -uroot -e "CREATE DATABASE IF NOT EXISTS mysql;"
-                        mysql -uroot -D mysql -e "SOURCE ${mysqlDb};"
-                        mysql -uroot -D openmrs -e "SOURCE ${reportingTables};"
-
+                innobackupex  --defaults-file="/etc/mysql/my.cnf"  --copy-back ${perconaRestoreDir} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconarestore.log
+                sleep 30
+                chown -R mysql:mysql ${dataDir}
 }
 
 deletePerconaDb () {
@@ -66,12 +60,8 @@ reboot () {
 
 createDir
 removeTableDumps
-dumpMysqlDb
 dumpReportingTable
-#uncompressDb
-perconaPrepare
 perconaRestore
 sleep 180
-restoreReportingTablesAndDb
 deletePerconaDb
 reboot

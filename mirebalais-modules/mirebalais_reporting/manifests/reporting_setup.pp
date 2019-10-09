@@ -15,6 +15,14 @@ class mirebalais_reporting::reporting_setup (
     		shell  => '/bin/sh',
   	}
 
+	file { "/home/reporting":
+		ensure  => directory,
+		owner   => root,
+		group   => root,
+		mode    => '0755',
+		require =>  Package['percona-xtrabackup']
+	}
+
   	file { "/home/reporting/percona":
         ensure  => directory,
         owner   => root,
@@ -66,23 +74,13 @@ class mirebalais_reporting::reporting_setup (
 	}
 
 
-	file { 'mirebalais-backup-reporting-db-n-tables-tables.sh':
-		ensure  => absent,
-		path    => '/usr/local/sbin/mirebalais-backup-reporting-db-n-tables-tables.sh',
+	file { 'mirebalais-warehouse-n-reporting-tables.sh':
+		ensure  => present,
+		path    => '/home/reporting/percona/scripts/mirebalais-warehouse-n-reporting-tables.sh',
 		mode    => '0700',
 		owner   => 'root',
 		group   => 'root',
-		content => template('mirebalais_reporting/mirebalais-backup-reporting-db-n-tables-tables.sh.erb'),
-	}
-
-	cron { 'mirebalais-backup-reporting-db-n-tables-tables':
-		ensure  => absent,
-		command => '/usr/local/sbin/mirebalais-backup-reporting-db-n-tables-tables.sh >/dev/null 2>&1',
-		user    => 'root',
-		hour    => 20,
-		minute  => 30,
-		environment => 'MAILTO=${sysadmin_email}',
-		require => [ File['mirebalais-backup-reporting-db-n-tables-tables.sh'] ]
+		content => template('mirebalais_reporting/mirebalais-warehouse-n-reporting-tables.sh.erb'),
 	}
 
 	file { 'mirebalais-percona-restore.sh':
@@ -98,9 +96,19 @@ class mirebalais_reporting::reporting_setup (
 		ensure  => present,
 		command => '/home/reporting/percona/scripts/mirebalais-percona-restore.sh >/dev/null 2>&1',
 		user    => 'root',
-		hour    => 00,
+		hour    => 02,
 		minute  => 30,
 		environment => 'MAILTO=${sysadmin_email}',
 		require => [ File['mirebalais-percona-restore.sh'] ]
+	}
+
+	cron { 'mirebalais-warehouse-n-reporting-tables.sh':
+		ensure  => present,
+		command => '/home/reporting/percona/scripts/mirebalais-warehouse-n-reporting-tables.sh >/dev/null 2>&1',
+		user    => 'root',
+		hour    => 03,
+		minute  => 50,
+		environment => 'MAILTO=${sysadmin_email}',
+		require => [ File['mirebalais-warehouse-n-reporting-tables.sh'] ]
 	}
 }

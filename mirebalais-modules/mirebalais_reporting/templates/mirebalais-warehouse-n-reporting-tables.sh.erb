@@ -1,0 +1,16 @@
+#/bin/sh
+
+reportingTables="/home/reporting/percona/dumps/reporing_tables.sql"
+
+restoreReportingTablesAndDb () {
+                        mysql -D openmrs -e "SOURCE ${reportingTables};"
+
+}
+
+createWarehouseDB () {
+                        mysql -e "drop database if exists openmrs_warehouse;"
+                        mysql -e "create database openmrs_warehouse default charset utf8;"
+}
+
+restoreReportingTablesAndDb
+createWarehouseDB
