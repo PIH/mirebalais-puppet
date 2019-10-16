@@ -7,6 +7,8 @@ package_release: 'stable/'
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
+openmrs_auto_update_database: true
+
 backup_db_user: backup
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 backup_file_prefix: wellbody
