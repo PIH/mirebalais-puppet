@@ -9,4 +9,5 @@ mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 tomcat_enable_http_8080: true
+openmrs_auto_update_database: true
 
