@@ -10,3 +10,4 @@ openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
+openmrs_auto_update_database: true
