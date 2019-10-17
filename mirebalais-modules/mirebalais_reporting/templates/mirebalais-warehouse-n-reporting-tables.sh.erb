@@ -10,7 +10,10 @@ restoreReportingTablesAndDb () {
 createWarehouseDB () {
                         mysql -e "drop database if exists openmrs_warehouse;"
                         mysql -e "create database openmrs_warehouse default charset utf8;"
-}
+			mysql -e "GRANT ALL PRIVILEGES ON openmrs_warehouse.* TO 'meq'@'localhost';"
+		        mysql -e "Flush privileges;"
+			mysql -e "commit;"
+		}
 
 restoreReportingTablesAndDb
 createWarehouseDB
