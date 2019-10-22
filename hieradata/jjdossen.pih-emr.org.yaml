@@ -12,6 +12,8 @@ backup_file_prefix: jjdossen
 backup_hour: 10
 archive_hour: 11
 
+openmrs_auto_update_database: true
+
 # Use our old godaddy cert until we've tested the letsencrypt one for a few months
 ssl_cert_dir: '/etc/ssl/certs'
 ssl_key_dir: '/etc/ssl/private'
