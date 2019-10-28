@@ -41,7 +41,6 @@ tomcat: tomcat7
 tomcat_restart_nightly: false
 tomcat_webapp_dir: /var/lib/tomcat7/webapps
 tomcat_enable_http_8080: false
-session_timeout: 30
 
 backup_file_prefix: foo
 backup_hour: 1
