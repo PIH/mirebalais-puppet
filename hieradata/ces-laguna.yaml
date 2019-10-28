@@ -11,4 +11,5 @@ mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 tomcat_enable_http_8080: true
 openmrs_auto_update_database: true
 
+session_timeout: 120
 
