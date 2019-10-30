@@ -17,7 +17,11 @@
     "exportPatients",
     "importPatients",
     "programs",
-    "chwApp"
+    "chwApp",
+    "relationships",
+    "whodasOnClinicianDashboard",
+    "zldsiOnClinicianDashboard",
+    "seizureFrequencyOnClinicianDashboard"
   ],
 
   "globalProperties": {

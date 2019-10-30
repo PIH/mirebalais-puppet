@@ -32,7 +32,11 @@
         "socioEconomics",
         "vct",
         "edTriage",
-        "edTriageQueue"
+        "edTriageQueue",
+        "whodasOnClinicianDashboard",
+        "zldsiOnClinicianDashboard",
+        "seizureFrequencyOnClinicianDashboard"
+
     ],
 
     "globalProperties": {
