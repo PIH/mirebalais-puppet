@@ -42,7 +42,7 @@ class openmrs::owa (
 
   # install order entry from bamboo or bintray
   exec{'retrieve_order_entry_owa':
-    command => "/usr/bin/wget -q {$order_entry_url} -O /home/${tomcat}/.OpenMRS/owa/orderentry.zip",
+    command => "/usr/bin/wget -q ${order_entry_url} -O /home/${tomcat}/.OpenMRS/owa/orderentry.zip",
     require => File["/home/${tomcat}/.OpenMRS/owa"]
   }
 
