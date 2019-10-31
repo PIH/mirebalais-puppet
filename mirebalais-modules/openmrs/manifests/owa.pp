@@ -1,6 +1,8 @@
 class openmrs::owa (
   $tomcat = hiera('tomcat'),
   $owa_cohort_builder_version = hiera('owa_cohort_builder_version'),
+  $owa_lab_workflow_version = hiera('owa_lab_workflow_version'),
+  $owa_order_entry_version = hiera('owa_order_entry_version'),
   $package_release = hiera('package_release')
 ) {
 
@@ -32,24 +34,15 @@ class openmrs::owa (
     notify  => Exec['tomcat-restart']
   }*/
 
-  # remove old order entry filename & directory
-  # TODO can this now be removed
-  file { "/home/${tomcat}/.OpenMRS/owa/openmrs-owa-orderentry.zip":
-    ensure   => absent,
-    notify  => Exec['tomcat-restart']
+  # if CI environment (unstable) then install latest from unstable, otherwise
+  $order_entry_url = $package_release ? {
+    /unstable/ =>   "http://bamboo.pih-emr.org/owa-repo/unstable/orderentry.zip",
+    default    =>   "https://dl.bintray.com/openmrs/owa/orderentry-${owa_order_entry_version}.zip",
   }
 
-  file { "/home/${tomcat}/.OpenMRS/owa/openmrs-owa-orderentry":
-    ensure   => absent,
-    recurse => true,
-    purge   => true,
-    force   => true,
-    notify  => Exec['tomcat-restart']
-  }
-
-  # install order entry from bamboo
+  # install order entry from bamboo or bintray
   exec{'retrieve_order_entry_owa':
-    command => "/usr/bin/wget -q http://bamboo.pih-emr.org/owa-repo/${package_release}orderentry.zip -O /home/${tomcat}/.OpenMRS/owa/orderentry.zip",
+    command => "/usr/bin/wget -q {$order_entry_url} -O /home/${tomcat}/.OpenMRS/owa/orderentry.zip",
     require => File["/home/${tomcat}/.OpenMRS/owa"]
   }
 
@@ -61,24 +54,15 @@ class openmrs::owa (
     notify  => [ Exec['tomcat-restart'], Exec['apache-restart'] ]
   }
 
-  # remove old lab workflow filename and directory
-  # TODO can this now be removed
-  file { "/home/${tomcat}/.OpenMRS/owa/openmrs-owa-labworkflow.zip":
-    ensure   => absent,
-    notify  => Exec['tomcat-restart']
+  # if CI environment (unstable) then install latest from unstable, otherwise
+  $lab_workflow_url = $package_release ? {
+    /unstable/ =>   "http://bamboo.pih-emr.org/owa-repo/unstable/labworkflow.zip",
+    default    =>   "https://dl.bintray.com/openmrs/owa/labworkflow-${owa_lab_workflow_version}.zip",
   }
 
-  file { "/home/${tomcat}/.OpenMRS/owa/openmrs-owa-labworkflow":
-    ensure  => absent,
-    recurse => true,
-    purge   => true,
-    force   => true,
-    notify  => Exec['tomcat-restart']
-  }
-
-  # install lab workflow from bamboo
+  # install lab workflow from bamboo or bintray
   exec{'retrieve_lab_workflow_owa':
-    command => "/usr/bin/wget -q http://bamboo.pih-emr.org/owa-repo/${package_release}labworkflow.zip -O /home/${tomcat}/.OpenMRS/owa/labworkflow.zip",
+    command => "/usr/bin/wget -q ${lab_workflow_url} -O /home/${tomcat}/.OpenMRS/owa/labworkflow.zip",
     require => File["/home/${tomcat}/.OpenMRS/owa"]
   }
 
@@ -104,6 +88,37 @@ class openmrs::owa (
     notify  => Exec['tomcat-restart']
   }*/
 
+  # Clean up of legacy version
+
+  # remove old order entry filename & directory
+  # TODO can this now be removed
+  file { "/home/${tomcat}/.OpenMRS/owa/openmrs-owa-orderentry.zip":
+    ensure   => absent,
+    notify  => Exec['tomcat-restart']
+  }
+
+  file { "/home/${tomcat}/.OpenMRS/owa/openmrs-owa-orderentry":
+    ensure   => absent,
+    recurse => true,
+    purge   => true,
+    force   => true,
+    notify  => Exec['tomcat-restart']
+  }
+
+  # remove old lab workflow filename and directory
+  # TODO can this now be removed
+  file { "/home/${tomcat}/.OpenMRS/owa/openmrs-owa-labworkflow.zip":
+    ensure   => absent,
+    notify  => Exec['tomcat-restart']
+  }
+
+  file { "/home/${tomcat}/.OpenMRS/owa/openmrs-owa-labworkflow":
+    ensure  => absent,
+    recurse => true,
+    purge   => true,
+    force   => true,
+    notify  => Exec['tomcat-restart']
+  }
 
 
 }
