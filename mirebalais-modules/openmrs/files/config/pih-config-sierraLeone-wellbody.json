@@ -7,15 +7,20 @@
     "clinicianDashboard",
     "dataExports",
     "idcardPrinting",
+    "labResults",
+    "labs",
     "managePrinters",
+    "mchForms",
     "myAccount",
     "overviewReports",
     "patientRegistration",
     "primaryCare",
+    "relationships",
     "systemAdministration",
     "visitManagement",
     "visitNote",
-    "vitals"
+    "vitals",
+    "dispensing"
   ],
 
   "idCardLabel": "Wellbody Clinic Dorma",
