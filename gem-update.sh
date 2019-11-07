@@ -31,7 +31,8 @@ librarian-puppet install
 
 fi
 
-puppet module upgrade puppetlabs-stdlib --version 6.1.0 --modulepath=/etc/puppet/modules
+#this is include in Puppetfile.lock
+#puppet module upgrade puppetlabs-stdlib --version 6.1.0 --modulepath=/etc/puppet/modules
 
 echo "modulepath = /etc/puppet/modules:/etc/puppet/mirebalais-modules" > puppet.conf
 echo "environment = $1" >> puppet.conf
