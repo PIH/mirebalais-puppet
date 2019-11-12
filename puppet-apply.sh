@@ -2,6 +2,8 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
+librarian-puppet install
+
 if [ -z "$1" ]
 then
   echo "You need to provide the name of the manifest to install"
