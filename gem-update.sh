@@ -12,7 +12,6 @@ gem install bundler --no-ri --no-rdoc
 
 bundle
 
-librarian-puppet install
 fi
 
 if [ $(lsb_release -rs) == "16.04" ]
@@ -27,7 +26,6 @@ gem install bundler --no-ri --no-rdoc
 
 bundle
 bundle update
-librarian-puppet install
 
 fi
 
