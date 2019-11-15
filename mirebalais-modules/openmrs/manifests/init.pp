@@ -7,12 +7,14 @@ class openmrs (
     $package_version = hiera('package_version'),
     $webapp_name = hiera('webapp_name'),
     $tomcat = hiera('tomcat'),
+    $tomcat_webapp_dir = hiera('tomcat_webapp_dir'),
     $junit_username = hiera('junit_username'),
     $junit_password = decrypt(hiera('junit_password')),
     $pih_config = hiera('pih_config'),
     $pih_config_array = split(hiera('pih_config'), ','),
     $config_dir = hiera('config_dir', undef),
     $activitylog_enabled = hiera('activitylog_enabled'),
+    $session_timeout = hiera('session_timeout'),
 
     #Feature_toggles
     $reportingui_ad_hoc_analysis = hiera('reportingui_ad_hoc_analysis'),
@@ -21,7 +23,6 @@ class openmrs (
     $insurance_collection = hiera('insurance_collection'),
     $additional_haiti_identifiers = hiera('additional_haiti_identifiers'),
     $htmlformentryui_simpleform_navbuttons = hiera('htmlformentryui_simpleform_navbuttons'),
-
     # Mirebalais only
     $remote_zlidentifier_url = hiera('remote_zlidentifier_url'),
     $remote_zlidentifier_username = decrypt(hiera('remote_zlidentifier_username')),
@@ -101,6 +102,12 @@ class openmrs (
     require => File["/home/${tomcat}/.OpenMRS"]
   }
 
+  # Adds session-timeout in the session-config block. If there's no existing session-config block, we're in trouble.
+  exec { "web_xml_session_timeout_sed":
+    require =>  Package['pihemr'],
+    command => "sed -i 's/<session-config>.*$/<session-config><session-timeout>${session_timeout}<\/session-timeout>/' ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml",
+    onlyif => "test -f ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml"
+  }
 
   # bit of hack to install up to 5 config files; we should switch to using a loop once we upgrade to version of puppet that supports that
   if ($pih_config_array[0] != undef) {
