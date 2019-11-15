@@ -4,7 +4,6 @@ pih_config: haiti-hiv
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
-openmrs_auto_update_database: true
 
 # feature toggles
 additional_haiti_identifiers: true
