@@ -45,7 +45,7 @@ perconaRestore () {
                 # We should be stopping mysql first
                 service mysql stop
                 rm -rf ${dataDir}/*
-                innobackupex  --defaults-file="/etc/mysql/my.cnf"  --copy-back ${perconaRestoreDir} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconarestore.log
+                innobackupex --copy-back ${perconaRestoreDir} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconarestore.log
                 sleep 30
                 chown -R mysql:mysql ${dataDir}
 }
