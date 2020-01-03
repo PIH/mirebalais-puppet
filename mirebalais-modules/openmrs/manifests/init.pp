@@ -62,11 +62,11 @@ class openmrs (
     default    =>  $package_version,
   }
 
-  # remove any hold on pihemr package (if it exists)
+  # remove any hold on pihemr package (if it exists) (grep -c returns line count, so mimics true/false)
   exec { 'pihemr_unhold':
     command => 'apt-mark unhold pihemr',
     user => 'root',
-    onlyif => 'apt-mark showhold | grep -c blahblahblah',
+    onlyif => 'apt-mark showhold | grep -c pihemr',
     require => Apt::Source['pihemr'],
   }
 
