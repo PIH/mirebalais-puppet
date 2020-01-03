@@ -46,12 +46,13 @@ class openmrs::owa (
     require => File["/home/${tomcat}/.OpenMRS/owa"]
   }
 
-  file { "/home/${tomcat}/.OpenMRS/owa/orderentry.zip":
+  file { "orderentry.zip":
+    path => "/home/${tomcat}/.OpenMRS/owa/orderentry.zip",
     owner   => $tomcat,
     group   => $tomcat,
     mode    => '0644',
     require => Exec['retrieve_order_entry_owa'],
-    notify  => [ Exec['tomcat-restart'], Exec['apache-restart'] ]
+    notify  => [ Exec['tomcat-restart'] ]
   }
 
   # if CI environment (unstable) then install latest from unstable, otherwise
@@ -66,12 +67,13 @@ class openmrs::owa (
     require => File["/home/${tomcat}/.OpenMRS/owa"]
   }
 
-  file { "/home/${tomcat}/.OpenMRS/owa/labworkflow.zip":
+  file { "labworkflow.zip":
+    path => "/home/${tomcat}/.OpenMRS/owa/labworkflow.zip",
     owner   => $tomcat,
     group   => $tomcat,
     mode    => '0644',
     require => Exec['retrieve_lab_workflow_owa'],
-    notify  => [ Exec['tomcat-restart'], Exec['apache-restart'] ]
+    notify  => [ Exec['tomcat-restart'] ]
   }
 
   # install oncology owa from bamboo
