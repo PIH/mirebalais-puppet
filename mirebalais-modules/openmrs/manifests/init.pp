@@ -64,6 +64,7 @@ class openmrs (
 
   package { 'pihemr':
     ensure  => $pihemr_version,
+    install_options => [ '--allow-change-held-packages' ],
     require => [ Package[$tomcat], Service[$tomcat], Service['mysqld'], Apt::Source['pihemr'],
       File["/home/${tomcat}/.OpenMRS/${webapp_name}-runtime.properties"], File['/etc/apt/apt.conf.d/99auth'] ],
   }
