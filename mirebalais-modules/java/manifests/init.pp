@@ -7,17 +7,8 @@ class java (
     source => 'puppet:///modules/java/etc/environment'
   }
 
-  apt::ppa { 'ppa:webupd8team/java':
-    options => "-y -k ${keyserver}"
-  }
   apt::ppa { 'ppa:openjdk-r/ppa':
     options => "-y -k ${keyserver}"
-  }
-
-  # uninstall Oracle java 7
-  package { 'oracle-java7-installer':
-    ensure  => purged,
-    require => [Apt::Ppa['ppa:webupd8team/java']]
   }
 
   # install OpenJDK 8
