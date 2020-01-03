@@ -161,7 +161,7 @@ class apache2 (
     command     => "service apache2 restart",
     user        => 'root',
     refreshonly => true,
-    subscribe => [ File["orderentry.zip", File["labworkflow.zip"] ]
+    subscribe => [ File["orderentry.zip"], File["labworkflow.zip"] ]
   }
 
 }
