@@ -50,7 +50,7 @@ class openmrs (
 
   apt::source { 'pihemr':
     ensure      => present,
-    location    => '',
+    location    => 'http://bamboo.pih-emr.org/pihemr-repo',
     release     => $package_release,
     repos       => '',
     include_src => false,
