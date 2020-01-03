@@ -1,5 +1,6 @@
 ---
 package_release: 'stable/'
+package_version: '1.0.4604-1'
 pih_config: mexico,mexico-letrero
 config_dir: mexico
 

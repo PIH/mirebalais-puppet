@@ -49,7 +49,8 @@
     "hiv",
     "vct",
     "mch",
-    "vaccination"
+    "vaccination",
+    "growthChart"
   ],
 
   "scheduleMonthlyDataExports": true,
