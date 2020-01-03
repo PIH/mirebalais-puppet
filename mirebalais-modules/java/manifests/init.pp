@@ -15,7 +15,7 @@ class java (
   package { 'openjdk-8-jdk':
     ensure  => present,
     notify => Service[$tomcat],
-    require => [Package['oracle-java7-installer'], File['/etc/environment'], Apt::Ppa['ppa:openjdk-r/ppa']]
+    require => [File['/etc/environment'], Apt::Ppa['ppa:openjdk-r/ppa']]
   }
 
   # uninstall OpenJDK 7
@@ -43,15 +43,5 @@ class java (
     subscribe => Exec["rm -f /usr/lib/jvm/default-java"],
     refreshonly => true
   }
-
-  /*exec { 'set-licence-selected':
-      command => '/bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections',
-			user => root
-  }
-
-  exec { 'set-licence-seen':
-      command => '/bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections',
-      user => root
-  }*/
 
 }
