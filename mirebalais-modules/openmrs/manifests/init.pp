@@ -68,9 +68,10 @@ class openmrs (
       File["/home/${tomcat}/.OpenMRS/${webapp_name}-runtime.properties"], File['/etc/apt/apt.conf.d/99auth'] ],
   }
 
-  # prevent inadvertent upgrade when manually running "apt-get upgrade"
-  apt::hold { 'pihemr':
-    version => $pihemr_version,
+  # prevent inadvertent upgrade when manually running "apt-get upgrade" (without specifying pihemr)
+  exec { 'pihemr_hold':
+    command => 'apt-mark hold pihemr',
+    user => 'root',
     require => Package['pihemr']
   }
 
