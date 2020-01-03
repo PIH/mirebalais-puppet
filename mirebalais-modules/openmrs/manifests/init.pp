@@ -50,7 +50,7 @@ class openmrs (
 
   apt::source { 'pihemr':
     ensure      => present,
-    location    => 'http://bamboo.pih-emr.org/pihemr-repo',
+    location    => '',
     release     => $package_release,
     repos       => '',
     include_src => false,
@@ -62,10 +62,18 @@ class openmrs (
     default    =>  $package_version,
   }
 
+  # remove any hold on pihemr package (if it exists)
+  exec { 'pihemr_unhold':
+    command => 'apt-mark unhold pihemr',
+    user => 'root',
+    onlyif => 'apt-mark showhold | grep -c blahblahblah',
+    require => Apt::Source['pihemr'],
+  }
+
   package { 'pihemr':
     ensure  => $pihemr_version,
     install_options => [ '--allow-change-held-packages' ],
-    require => [ Package[$tomcat], Service[$tomcat], Service['mysqld'], Apt::Source['pihemr'],
+    require => [ Package[$tomcat], Service[$tomcat], Service['mysqld'], Exec['pihemr_unhold'],
       File["/home/${tomcat}/.OpenMRS/${webapp_name}-runtime.properties"], File['/etc/apt/apt.conf.d/99auth'] ],
   }
 
