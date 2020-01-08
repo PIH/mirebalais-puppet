@@ -41,7 +41,7 @@
   "registrationConfig": {
     "allowUnknownPatients": false,
     "allowManualEntryOfPrimaryIdentifier": false,
-    "afterCreatedUrl": "mirebalais/patientRegistration/afterRegistration.page?patientId={{patientId}}&encounterId={{encounterId}}",
+    "afterCreatedUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}",
     "similarPatientsSearch": {
       "addressFields": {
         "countyDistrict": "1",
