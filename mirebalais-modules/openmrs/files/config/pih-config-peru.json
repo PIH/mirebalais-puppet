@@ -5,20 +5,10 @@
   "site": "PERU",
   "components": [
     "allergies",
-    "bmiOnClinicianDashboard",
-    "chwApp",
     "clinicianDashboard",
-    "dataExports",
     "myAccount",
-    "overviewReports",
-    "patientDocuments",
     "patientRegistration",
-    "primaryCare",
-    "programs",
-    "providerRelationships",
-    "relationships",
     "systemAdministration",
-    "todaysVisits",
     "visitManagement",
     "vitals"
   ],
@@ -27,6 +17,7 @@
   "visitsPageUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
   "visitsPageWithSpecificUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview",
   "providerIdentifierPrefix": "P",
+  "primaryIdentifierPrefix": "SES",
   "addressConfig": {
     "manualFields": ["address1", "address2", "address3"],
     "shortcutField": "cityVillage"
@@ -64,5 +55,5 @@
       }
     }
   },
-  "dispositionConfig": "pih-dispositions-mexico.json"
+  "dispositionConfig": "pih-dispositions-haiti.json"
 }
