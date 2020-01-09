@@ -1,0 +1,20 @@
+<config>
+    <globalProperties>
+        <globalProperty>
+            <property>addresshierarchy.i18nSupport</property>
+            <value>true</value>
+        </globalProperty>
+        <globalProperty>
+            <property>locale.allowed.list</property>
+            <value>en, es</value>
+        </globalProperty>
+        <globalProperty>
+            <property>default_locale</property>
+            <value>es</value>
+        </globalProperty>
+        <globalProperty>
+            <property>coreapps.defaultPatientIdentifierLocation</property>
+            <value>Peru</value>
+        </globalProperty>
+    </globalProperties>
+</config>
