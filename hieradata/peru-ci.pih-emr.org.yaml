@@ -1,0 +1,11 @@
+---
+package_release: 'unstable/'
+site_domain: peru-ci.pih-emr.org
+pih_config: peru
+config_dir: peru
+
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
+
+java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
