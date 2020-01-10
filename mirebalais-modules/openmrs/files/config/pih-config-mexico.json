@@ -71,5 +71,5 @@
       }
     }
   },
-  "dispositionConfig": "pih-dispositions-mexico.json"
+  "dispositionConfig": "pih-dispositions-default.json"
 }
