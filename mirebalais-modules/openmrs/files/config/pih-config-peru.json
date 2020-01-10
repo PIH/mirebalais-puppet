@@ -55,5 +55,5 @@
       }
     }
   },
-  "dispositionConfig": "pih-dispositions-haiti.json"
+  "dispositionConfig": "pih-dispositions-default.json"
 }
