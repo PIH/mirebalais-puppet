@@ -20,5 +20,10 @@
             <property>log.level</property>
             <value>org.openmrs.api:warn</value>
         </globalProperty>
+        <globalProperty>
+            <property>emr.concept.diagnosisSetOfSets</property>
+            <!-- Mexico diagnosis set of sets -->
+            <value>7fd1dd5a-ab2d-43cd-aedb-e0d6bb81f8bf</value>
+        </globalProperty>
     </globalProperties>
 </config>
