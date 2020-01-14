@@ -5,25 +5,25 @@
             <value>true</value>
         </globalProperty>
         <globalProperty>
-            <property>locale.allowed.list</property>
-            <value>en, es</value>
+            <property>coreapps.defaultPatientIdentifierLocation</property>
+            <value>Chiapas</value>
         </globalProperty>
         <globalProperty>
             <property>default_locale</property>
             <value>es</value>
         </globalProperty>
         <globalProperty>
-            <property>coreapps.defaultPatientIdentifierLocation</property>
-            <value>Chiapas</value>
+            <property>emr.concept.diagnosisSetOfSets</property>
+            <!-- Mexico diagnosis set of sets -->
+            <value>7fd1dd5a-ab2d-43cd-aedb-e0d6bb81f8bf</value>
+        </globalProperty>
+        <globalProperty>
+            <property>locale.allowed.list</property>
+            <value>en, es</value>
         </globalProperty>
         <globalProperty>
             <property>log.level</property>
             <value>org.openmrs.api:warn</value>
-        </globalProperty>
-        <globalProperty>
-            <property>emr.concept.diagnosisSetOfSets</property>
-            <!-- Mexico diagnosis set of sets -->
-            <value>7fd1dd5a-ab2d-43cd-aedb-e0d6bb81f8bf</value>
         </globalProperty>
     </globalProperties>
 </config>
