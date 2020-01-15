@@ -35,6 +35,7 @@ class openmrs (
 
   include openmrs::owa
   include openmrs::pwa
+  include openmrs::spa
 
   package { 'p7zip-full' :
     ensure => 'installed'
