@@ -1,31 +1,14 @@
 {
-  "welcomeMessage": "Bienvenido al EMR de CES",
+  "welcomeMessage": "Bienvenido al EMR de SES",
   "browserWarning": "Por favor utiliza <b>Google Chrome</b> como navagador",
-  "country": "MEXICO",
-  "site": "CHIAPAS",
+  "country": "PERU",
+  "site": "PERU",
   "components": [
     "allergies",
-    "ancProgram",
-    "asthmaProgram",
-    "bmiOnClinicianDashboard",
-    "chwApp",
     "clinicianDashboard",
-    "dataExports",
-    "diabetesProgram",
-    "epilepsyProgram",
-    "hypertensionProgram",
-    "malnutritionProgram",
-    "mentalHealthProgram",
     "myAccount",
-    "overviewReports",
-    "patientDocuments",
     "patientRegistration",
-    "primaryCare",
-    "programs",
-    "providerRelationships",
-    "relationships",
     "systemAdministration",
-    "todaysVisits",
     "visitManagement",
     "vitals"
   ],
@@ -33,7 +16,8 @@
   "dashboardUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}&app=pih.app.clinicianDashboard",
   "visitsPageUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
   "visitsPageWithSpecificUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview",
-  "providerIdentifierPrefix": "C",
+  "providerIdentifierPrefix": "P",
+  "primaryIdentifierPrefix": "SES",
   "addressConfig": {
     "manualFields": ["address1", "address2", "address3"],
     "shortcutField": "cityVillage"
@@ -41,7 +25,7 @@
   "registrationConfig": {
     "allowUnknownPatients": false,
     "allowManualEntryOfPrimaryIdentifier": false,
-    "afterCreatedUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}",
+    "afterCreatedUrl": "mirebalais/patientRegistration/afterRegistration.page?patientId={{patientId}}&encounterId={{encounterId}}",
     "similarPatientsSearch": {
       "addressFields": {
         "countyDistrict": "1",
