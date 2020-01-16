@@ -2,24 +2,13 @@ class openmrs::spa (
   $tomcat = hiera('tomcat')
 ) {
 
-  include nodejs
-
-  package { 'git':
+  package { 'unzip':
     ensure => installed,
   }
 
-  vcsrepo { "/home/${tomcat}/.OpenMRS/frontend-build":
-    ensure   => latest,
-    provider => git,
-    source   => 'https://github.com/pih/spa-frontend.git',
-    revision => 'master',
-    require => [Service[$tomcat],Package['git']]
-  }
+  $package_url = "http://bamboo.pih-emr.org/spa-repo/unstable/pih-spa-frontend.zip"
 
-  exec{'build_and_link_spa':
-    command => "npm install && npm run build && ln -sf $(realpath openmrs/frontend /home/${tomcat}/.OpenMRS/frontend)",
-    cwd => "/home/${tomcat}/.OpenMRS/frontend-build",
-    require => Vcsrepo["/home/${tomcat}/.OpenMRS/frontend-build"]
+  exec{'download_and_install_spa_frontend':
+    command => "/usr/bin/wget -q ${package_url} -O /tmp/pih-spa-frontend.zip && unzip -o /tmp/pih-spa-frontend.zip && rm -rf /home/${tomcat}/.OpenMRS/frontend && mv openmrs/frontend/ /home/${tomcat}/.OpenMRS/",
   }
-
 }
