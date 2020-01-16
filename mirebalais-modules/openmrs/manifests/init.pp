@@ -35,7 +35,10 @@ class openmrs (
 
   include openmrs::owa
   include openmrs::pwa
-  include openmrs::spa
+
+  if ('mexico-demo' in $pih_config_array) {
+      include openmrs::spa
+  }
 
   package { 'p7zip-full' :
     ensure => 'installed'
