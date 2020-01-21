@@ -54,7 +54,7 @@ class mirebalais_reporting::production_setup (
     mode    => '0700',
     owner   => 'root',
     group   => 'root',
-    content => template('openmrs/mirebalais-percona-backup.sh.erb'),
+    content => template('mirebalais_reporting/mirebalais-percona-backup.sh.erb'),
   }
 
   cron { 'mirebalais-percona-backup':
