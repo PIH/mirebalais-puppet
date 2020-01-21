@@ -1,0 +1,57 @@
+#!/bin/bash
+
+#set -x 
+
+backupDir="/home/percona/backups"
+openmrsDB="openmrs"
+mysqlDB="mysql"
+perconaUser="percona"
+perconaPassword="<%= @mysql_root_password %>"
+newPerconaBackupDirForOpenMRS="openmrs"
+perconaLogs="/home/percona/logs"
+remoteUser="reporting"
+remoteHost="192.168.1.217"
+remoteBackupDir="/home/reporting/percona/backups"
+
+#Create the necessary directories
+createdDir () {
+	mkdir -p /home/percona
+        mkdir -p ${backupDir}
+        mkdir -p ${perconaLogs}
+}
+
+#Full Backup
+createFullBackup () {
+			innobackupex --user=${perconaUser}  --password=${perconaPassword} --no-timestamp --databases="${openmrsDB} ${mysqlDB}" ${backupDir}/${newPerconaBackupDirForOpenMRS} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconafullbackup.log
+}
+
+##### Not used in our case ########
+createIncrementalBackup () {
+			innobackupex --incremental /home/percona/backups --incremental-basedir=openmrs --user=${perconaUser} --password=${perconaPassword} --no-timestamp --databases=${openmrsDB} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconaincrementalbackup.log
+}
+##################################
+
+#Preparing the backup will make its data consistent, and usable for a restore
+prepareBackup() {
+		innobackupex --apply-log ${backupDir}/${newPerconaBackupDirForOpenMRS} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconapreparebackup.log
+}
+
+########## Not used in our case #######
+zip () {
+        cd /home/percona/backups
+        zip -r openmrs.zip openmrs &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconacompress.log
+        #cd ${backupDir}
+        #scp openmrs.zip ${remoteUser}@${remoteHost}:${remoteBackupDir} 
+	#scp -r /home/percona/backups/* reporting@192.168.1.271:/home/reporting/percona/backups
+
+}
+#######################################
+
+delete_files () {
+		rm -rf ${backupDir}/*
+}
+
+delete_files
+createdDir
+createFullBackup
+prepareBackup
