@@ -123,3 +123,8 @@ java_profiler: ''
 
 # Request logging for performance and usage tracking
 activitylog_enabled: false
+
+# atomfeed
+openmrs_modules_dir: /home/tomcat7/.OpenMRS/modules
+atomfeed_version: 1.0.12
+atomfeed_repo_url: https://dl.bintray.com/openmrs/omod

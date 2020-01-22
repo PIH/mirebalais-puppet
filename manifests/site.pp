@@ -77,6 +77,8 @@ node 'humci.pih-emr.org' {
 
   include percona
 
+  include openmrs::atomfeed
+
   #include mirth
   #include mirth::channel_setup
 
