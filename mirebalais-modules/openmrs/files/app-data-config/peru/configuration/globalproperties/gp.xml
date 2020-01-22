@@ -16,5 +16,9 @@
             <property>coreapps.defaultPatientIdentifierLocation</property>
             <value>Peru</value>
         </globalProperty>
+        <globalProperty>
+            <property>log.level</property>
+            <value>org.openmrs.api:warn</value>
+        </globalProperty>
     </globalProperties>
 </config>
