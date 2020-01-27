@@ -16,6 +16,10 @@ class openmrs (
     $activitylog_enabled = hiera('activitylog_enabled'),
     $session_timeout = hiera('session_timeout'),
 
+    # PIH EMR config
+    $config_name = hiera('config_name'),
+    $config_version = hiera('config_version'),
+
     #Feature_toggles
     $reportingui_ad_hoc_analysis = hiera('reportingui_ad_hoc_analysis'),
     $radiology_contrast_studies = hiera('radiology_contrast_studies'),
@@ -187,6 +191,7 @@ class openmrs (
     }
   }
 
+  /* TODO: remove after we migrate Peru */
   /* Add the configuration/ directory to the application data directory,
      according to the parameter `config_dir` */
   if ($config_dir != undef) {
@@ -198,6 +203,32 @@ class openmrs (
       group   => $tomcat,
       mode    => '0644',
       require => [ File["/home/${tomcat}/.OpenMRS"] ]
+    }
+  }
+
+  if ($config_name != undef) {
+
+    package { 'unzip for PIH EMR config':
+      name => 'unzip',
+      ensure => installed,
+    }
+
+    $config_repo = ""
+
+    if ($config_version.match('SNAPSHOT')) {
+      $config_repo = "snapshots"
+    }
+    else {
+      $config_repo = "releases"
+    }
+
+    $config_url = "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}"
+
+    /* TODO make this more robust so it doesn't copy over if config zip hasn't changed? */
+    exec{'download_and_install_PIH_EMR_configuration':
+      command => "/usr/bin/wget -q ${config_url} -O /tmp/${config_name}.zip && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/configuration && mkdir /home/${tomcat}/.OpenMRS/configuration && mv /tmp/configuration/* /home/${tomcat}/.OpenMRS/configuration",
+      require => [ Package['unzip for PIH EMR config'], File["/home/${tomcat}/.OpenMRS"] ],
+      notify => [ Exec['tomcat-restart'] ]
     }
   }
 
@@ -213,3 +244,4 @@ class openmrs (
    }
 
 }
+
