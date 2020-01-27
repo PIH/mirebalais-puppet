@@ -208,11 +208,6 @@ class openmrs (
 
   if ($config_name != undef) {
 
-    package { 'unzip for PIH EMR config':
-      name => 'unzip',
-      ensure => installed,
-    }
-
     $config_repo = ""
 
     if ($config_version.match('SNAPSHOT')) {
@@ -224,12 +219,20 @@ class openmrs (
 
     $config_url = "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}"
 
-    /* TODO make this more robust so it doesn't copy over if config zip hasn't changed? */
-    exec{'download_and_install_PIH_EMR_configuration':
-      command => "/usr/bin/wget -q ${config_url} -O /tmp/${config_name}.zip && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/configuration && mkdir /home/${tomcat}/.OpenMRS/configuration && mv /tmp/configuration/* /home/${tomcat}/.OpenMRS/configuration",
-      require => [ Package['unzip for PIH EMR config'], File["/home/${tomcat}/.OpenMRS"] ],
+    /* TODO make this more robust so it doesn't copy over if config zip hasn't changed?  */
+    wget::fetch { 'download-openmrs-configuration':
+      source      => "${config_url}",
+      destination => "/tmp/${config_name}.zip",
+      timeout     => 0,
+      verbose     => false,
+    }
+
+    exec{'install-openmrs-configuration':
+      command => "unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/configuration && mkdir /home/${tomcat}/.OpenMRS/configuration && mv /tmp/configuration/* /home/${tomcat}/.OpenMRS/configuration",
+      require => [ Wget::Fetch['download-openmrs-configuration'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ],
       notify => [ Exec['tomcat-restart'] ]
     }
+
   }
 
   exec { 'tomcat-restart':

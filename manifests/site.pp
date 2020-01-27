@@ -97,6 +97,7 @@ node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -121,6 +122,7 @@ node 'reporting.hum.ht' {
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -149,6 +151,7 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -176,6 +179,7 @@ node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -205,6 +209,7 @@ node 'zltraining.pih-emr.org.orig' {
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -226,6 +231,7 @@ node 'wellbody.pih-emr.org' {
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -253,6 +259,7 @@ node 'kouka.pih-emr.org', 'padi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.org
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -276,6 +283,7 @@ node 'ces.pih-emr.org' {
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -300,6 +308,7 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano',
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -324,6 +333,7 @@ node 'pleebo-mirror.pih-emr.org' {
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
