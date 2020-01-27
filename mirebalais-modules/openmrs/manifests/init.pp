@@ -208,7 +208,7 @@ class openmrs (
 
   if ($config_name != undef) {
 
-    $config_repo = ""
+    $config_repo = undef
 
     if ($config_version.match('SNAPSHOT')) {
       $config_repo = "snapshots"
