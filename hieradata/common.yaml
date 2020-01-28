@@ -128,3 +128,6 @@ activitylog_enabled: false
 openmrs_modules_dir: /home/tomcat7/.OpenMRS/modules
 atomfeed_version: 1.0.13-SNAPSHOT
 atomfeed_repo_url: https://openmrs.jfrog.io/artifactory/snapshots
+
+config_name: ""
+config_version: ""
