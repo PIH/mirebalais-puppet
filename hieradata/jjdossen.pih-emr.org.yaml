@@ -9,8 +9,13 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 
 backup_file_prefix: jjdossen
-backup_hour: 10
-archive_hour: 11
+backup_hour: 01
+archive_hour: 02
+backup_delete_older_than_x_days: 60
+
+remote_db_user: backups
+remote_db_server: 172.16.10.10
+remote_backup_dir: liberia/jjdossen/db
 
 openmrs_auto_update_database: true
 

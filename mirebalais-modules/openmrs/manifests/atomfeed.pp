@@ -7,9 +7,8 @@ class openmrs::atomfeed (
 ) {
 
 exec {'download_atomfeed_omod':
-   command => "/usr/bin/wget -q ${atomfeed_repo_url}/atomfeed-${atomfeed_version}.omod -O  ${openmrs_modules_dir}/atomfeed-${atomfeed_version}.omod",
+   command => "/usr/bin/wget -q ${atomfeed_repo_url}/org/openmrs/module/atomfeed-omod/${atomfeed_version}/atomfeed-omod-${atomfeed_version}.jar -O  ${openmrs_modules_dir}/atomfeed-${atomfeed_version}.omod",
    require => Package['pihemr']
-
 }
 
 file { "atomfeed":

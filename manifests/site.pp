@@ -77,7 +77,7 @@ node 'humci.pih-emr.org' {
 
   include percona
 
-  #include openmrs::atomfeed
+  include openmrs::atomfeed
 
   #include mirth
   #include mirth::channel_setup
@@ -195,7 +195,6 @@ node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr
   include openmrs::backup
 
   # Crashplan removed (May 2018)
-  #include crashplan
 }
 
 node 'zltraining.pih-emr.org.orig' {
