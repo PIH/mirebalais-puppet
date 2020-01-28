@@ -12,3 +12,6 @@ mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 openmrs_auto_update_database: true
 session_timeout: 120
+
+config_name: openmrs-config-ces
+config_version: 1.0.0-SNAPSHOT
