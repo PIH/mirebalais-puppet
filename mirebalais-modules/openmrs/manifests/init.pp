@@ -217,7 +217,6 @@ class openmrs (
 
     $config_url = "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}"
 
-    /* TODO make this more robust so it doesn't copy over if config zip hasn't changed?  */
     wget::fetch { 'download-openmrs-configuration':
       source      => "${config_url}",
       destination => "/tmp/${config_name}.zip",
