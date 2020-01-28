@@ -14,3 +14,6 @@ openmrs_auto_update_database: true
 
 session_timeout: 120
 
+config_name: openmrs-config-ces
+config_version: 1.0.0-SNAPSHOT
+
