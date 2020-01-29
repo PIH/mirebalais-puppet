@@ -171,21 +171,6 @@ class openmrs (
     }
   }
 
-  /* TODO: remove after we migrate Peru */
-  /* Add the configuration/ directory to the application data directory,
-     according to the parameter `config_dir` */
-  if ($config_dir != undef) {
-    file { "/home/${tomcat}/.OpenMRS/configuration":
-      ensure  => directory,
-      recurse => 'remote',
-      source  => "puppet:///modules/openmrs/app-data-config/${config_dir}/configuration",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
-      require => [ File["/home/${tomcat}/.OpenMRS"] ]
-    }
-  }
-
   if ($config_name != "") {
 
     if ('SNAPSHOT' in $config_version) {

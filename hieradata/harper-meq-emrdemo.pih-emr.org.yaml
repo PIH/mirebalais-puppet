@@ -1,6 +1,8 @@
 ---
 site_domain: harper-meq-emrdemo.pih-emr.org
 pih_config: liberia,liberia-harper,liberia-harper-demo
+config_name: openmrs-config-pihliberia
+config_version: 1.0.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
@@ -14,6 +16,8 @@ ssl_key_file: 'pih-emr.org.key'
 ssl_use_letsencrypt: false
 
 openmrs_auto_update_database: true
+
+
 
 # feature toggles
 
