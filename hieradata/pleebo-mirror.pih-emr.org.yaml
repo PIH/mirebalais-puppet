@@ -1,6 +1,9 @@
   ---
 site_domain: pleebo-mirror.pih-emr.org
 pih_config: liberia,liberia-pleebo
+config_name: openmrs-config-pihliberia
+config_version: 1.0.0-SNAPSHOT
+
 package_release: 'stable/'
 server_timezone: Africa/Monrovia
 

@@ -2,7 +2,8 @@
 package_release: 'stable/'
 package_version: '1.0.4604-1'
 pih_config: mexico,mexico-reforma
-config_dir: mexico
+config_name: openmrs-config-ces
+config_version: 1.0.0-SNAPSHOT
 
 server_timezone: America/Mexico_City
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
@@ -13,5 +14,4 @@ tomcat_enable_http_8080: true
 openmrs_auto_update_database: true
 session_timeout: 120
 
-config_name: openmrs-config-ces
-config_version: 1.0.0-SNAPSHOT
+
