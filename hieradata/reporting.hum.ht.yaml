@@ -1,5 +1,10 @@
 webapp_name: mirebalais
+
+package_release: 'stable/'
+
 pih_config: mirebalais,mirebalais-reporting
+config_name: openmrs-config-zl
+config_version: 1.0.0-SNAPSHOT
 
 server_timezone: America/New_York
 ntp_server_1: 192.168.1.151
@@ -10,10 +15,8 @@ ntp_server_4: 192.168.1.174
 openmrs_auto_update_database: true
 site_domain: reporting.hum.ht
 
-package_release: 'stable/'
-
 mysql_server_id: 3
-mysql_master_ip: 
+mysql_master_ip:
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_expire_logs_days: 1
 mysql_binary_logging: false

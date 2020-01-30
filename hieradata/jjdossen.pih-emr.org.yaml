@@ -1,7 +1,12 @@
 ---
 site_domain: jjdossen.pih-emr.org
-pih_config: liberia,liberia-harper,liberia-harper-jjdossen
+
 package_release: 'stable/'
+
+pih_config: liberia,liberia-harper,liberia-harper-jjdossen
+config_name: openmrs-config-pihliberia
+config_version: 1.0.0-SNAPSHOT
+
 server_timezone: Africa/Monrovia
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
@@ -26,8 +31,6 @@ ssl_cert_file: '45554e4453e21fc.crt'
 ssl_chain_file: 'gd_bundle-g2-g1.crt'
 ssl_key_file: 'pih-emr.org.key'
 ssl_use_letsencrypt: false
-
-#feature toggles
 
 mysql_innodb_buffer_pool_size: 1G
 mysql_innodb_buffer_pool_instances: 1

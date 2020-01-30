@@ -133,25 +133,17 @@ class openmrs (
     onlyif => "test -f ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml"
   }
 
-  # bit of hack to install up to 5 config files; we should switch to using a loop once we upgrade to version of puppet that supports that
+  # TODO I have switched these to absent, can remove entirely after previous configurations have been cleaned up
   if ($pih_config_array[0] != undef) {
     file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[0]}.json":
-      ensure  => present,
-      source  => "puppet:///modules/openmrs/config/pih-config-${pih_config_array[0]}.json",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
+      ensure  => absent,
       require => File["/home/${tomcat}/.OpenMRS"]
     }
   }
 
   if ($pih_config_array[1] != undef) {
     file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[1]}.json":
-      ensure  => present,
-      source  => "puppet:///modules/openmrs/config/pih-config-${pih_config_array[1]}.json",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
+      ensure  => absent,
       require => File["/home/${tomcat}/.OpenMRS"]
     }
   }
@@ -159,11 +151,7 @@ class openmrs (
 
   if ($pih_config_array[2] != undef) {
     file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[2]}.json":
-      ensure  => present,
-      source  => "puppet:///modules/openmrs/config/pih-config-${pih_config_array[2]}.json",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
+      ensure  => absent,
       require => File["/home/${tomcat}/.OpenMRS"]
     }
   }
@@ -171,38 +159,15 @@ class openmrs (
 
   if ($pih_config_array[3] != undef) {
     file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[3]}.json":
-      ensure  => present,
-      source  => "puppet:///modules/openmrs/config/pih-config-${pih_config_array[3]}.json",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
+      ensure  => absent,
       require => File["/home/${tomcat}/.OpenMRS"]
     }
   }
 
   if ($pih_config_array[4] != undef) {
     file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[4]}.json":
-      ensure  => present,
-      source  => "puppet:///modules/openmrs/config/pih-config-${pih_config_array[4]}.json",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
+      ensure  => absent,
       require => File["/home/${tomcat}/.OpenMRS"]
-    }
-  }
-
-  /* TODO: remove after we migrate Peru */
-  /* Add the configuration/ directory to the application data directory,
-     according to the parameter `config_dir` */
-  if ($config_dir != undef) {
-    file { "/home/${tomcat}/.OpenMRS/configuration":
-      ensure  => directory,
-      recurse => 'remote',
-      source  => "puppet:///modules/openmrs/app-data-config/${config_dir}/configuration",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
-      require => [ File["/home/${tomcat}/.OpenMRS"] ]
     }
   }
 
