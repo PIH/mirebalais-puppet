@@ -2,7 +2,12 @@
 webapp_name: mirebalais
 openmrs_auto_update_database: true
 site_domain: emrtest.hum.ht
+
+package_release: 'stable/'
+
 pih_config: mirebalais,mirebalais-training
+config_name: openmrs-config-zl
+config_version: 1.0.0-SNAPSHOT
 
 server_timezone: America/New_York
 ntp_server_1: 192.168.1.151
@@ -10,7 +15,6 @@ ntp_server_2: 192.168.1.174
 ntp_server_3: 192.168.1.151
 ntp_server_4: 192.168.1.174
 
-package_release: 'stable/'
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 

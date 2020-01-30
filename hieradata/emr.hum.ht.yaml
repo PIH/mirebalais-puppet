@@ -1,5 +1,11 @@
 webapp_name: mirebalais
+
+package_release: 'stable/'
+
 pih_config: mirebalais,mirebalais-production
+config_name: openmrs-config-zl
+config_version: 1.0.0-SNAPSHOT
+
 server_timezone: America/New_York
 ntp_server_1: 192.168.1.151
 ntp_server_2: 192.168.1.174
@@ -16,7 +22,6 @@ site_domain: emr.hum.ht
 
 tomcat_restart_nightly: true
 
-package_release: 'stable/'
 mysql_server_id: 1
 mysql_innodb_buffer_pool_size: 16G
 mysql_innodb_buffer_pool_instances: 16

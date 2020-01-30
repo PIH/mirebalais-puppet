@@ -1,9 +1,13 @@
 ---
-package_release: 'stable/'
 site_domain: hinche-server.pih-emr.org
-pih_config: haiti,haiti-hinche
-server_timezone: America/New_York
 
+package_release: 'stable/'
+
+pih_config: haiti,haiti-hinche
+config_name: openmrs-config-zl
+config_version: 1.0.0-SNAPSHOT
+
+server_timezone: America/New_York
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 

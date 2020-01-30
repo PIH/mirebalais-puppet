@@ -1,8 +1,11 @@
 ---
 webapp_name: mirebalais
+
 package_release: 'stable/'
 
 pih_config: mirebalais,mirebalais-humdemo
+config_name: openmrs-config-zl
+config_version: 1.0.0-SNAPSHOT
 
 openmrs_auto_update_database: true
 site_domain: humdemo.pih-emr.org
