@@ -1,6 +1,6 @@
 ---
-package_release: 'unstable/'
 site_domain: peru-ci.pih-emr.org
+
 pih_config: peru
 config_name: openmrs-config-ses
 config_version: 1.0.0-SNAPSHOT

@@ -1,6 +1,7 @@
 ---
 site_domain: harper-meq-emrdemo.pih-emr.org
 pih_config: liberia,liberia-harper,liberia-harper-demo
+
 config_name: openmrs-config-pihliberia
 config_version: 1.0.0-SNAPSHOT
 

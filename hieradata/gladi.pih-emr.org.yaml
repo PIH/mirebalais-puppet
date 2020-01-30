@@ -1,5 +1,6 @@
 
 site_domain: gladi.pih-emr.org
+
 pih_config: sierraLeone,sierraLeone-gladi
 config_name: openmrs-config-pihsl
 config_version: 1.0.0-SNAPSHOT
