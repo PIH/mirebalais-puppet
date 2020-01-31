@@ -11,6 +11,7 @@ node default {
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -33,6 +34,7 @@ node 'emr.hum.ht' {
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
@@ -66,6 +68,7 @@ node 'humci.pih-emr.org' {
   include ntpdate
   include apt_upgrades
   include wget
+  include unzip
 
   include java
   include mysql_setup
