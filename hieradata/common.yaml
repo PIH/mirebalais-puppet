@@ -7,7 +7,7 @@ ntp_server_3: 2.ubuntu.pool.ntp.org
 ntp_server_4: 3.ubuntu.pool.ntp.org
 keyserver: keyserver.ubuntu.com
 
-pih_config: haiti,haiti-training
+pih_config:
 site_domain: foo.org
 
 #owas
@@ -16,7 +16,7 @@ owa_order_entry_version: 1.1.0
 owa_lab_workflow_version: 0.2.0
 
 package_release: 'unstable/'
-package_version: '1.0.4670-1'
+package_version: '1.0.4734-1'
 
 mysql_server_id: 1
 mysql_root_password: foo
@@ -122,5 +122,8 @@ activitylog_enabled: false
 
 # atomfeed
 openmrs_modules_dir: /home/tomcat7/.OpenMRS/modules
-atomfeed_version: 1.0.12
-atomfeed_repo_url: https://dl.bintray.com/openmrs/omod
+atomfeed_version: 1.0.13-SNAPSHOT
+atomfeed_repo_url: https://openmrs.jfrog.io/artifactory/snapshots
+
+config_name: ""
+config_version: ""

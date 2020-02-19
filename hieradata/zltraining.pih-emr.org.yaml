@@ -1,8 +1,12 @@
 # this has been temporarily changed so we can run the production Lacolline server on this server
 ---
-package_release: 'stable/'
 site_domain: zltraining.pih-emr.org
+
+package_release: 'stable/'
+
 pih_config: haiti,haiti-hinche
+config_name: openmrs-config-zl
+config_version: 1.0.0-SNAPSHOT
 server_timezone: America/New_York
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]

@@ -16,6 +16,10 @@ class openmrs (
     $activitylog_enabled = hiera('activitylog_enabled'),
     $session_timeout = hiera('session_timeout'),
 
+    # PIH EMR config
+    $config_name = hiera('config_name'),
+    $config_version = hiera('config_version'),
+
     #Feature_toggles
     $reportingui_ad_hoc_analysis = hiera('reportingui_ad_hoc_analysis'),
     $radiology_contrast_studies = hiera('radiology_contrast_studies'),
@@ -129,25 +133,17 @@ class openmrs (
     onlyif => "test -f ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml"
   }
 
-  # bit of hack to install up to 5 config files; we should switch to using a loop once we upgrade to version of puppet that supports that
+  # TODO I have switched these to absent, can remove entirely after previous configurations have been cleaned up
   if ($pih_config_array[0] != undef) {
     file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[0]}.json":
-      ensure  => present,
-      source  => "puppet:///modules/openmrs/config/pih-config-${pih_config_array[0]}.json",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
+      ensure  => absent,
       require => File["/home/${tomcat}/.OpenMRS"]
     }
   }
 
   if ($pih_config_array[1] != undef) {
     file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[1]}.json":
-      ensure  => present,
-      source  => "puppet:///modules/openmrs/config/pih-config-${pih_config_array[1]}.json",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
+      ensure  => absent,
       require => File["/home/${tomcat}/.OpenMRS"]
     }
   }
@@ -155,11 +151,7 @@ class openmrs (
 
   if ($pih_config_array[2] != undef) {
     file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[2]}.json":
-      ensure  => present,
-      source  => "puppet:///modules/openmrs/config/pih-config-${pih_config_array[2]}.json",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
+      ensure  => absent,
       require => File["/home/${tomcat}/.OpenMRS"]
     }
   }
@@ -167,38 +159,44 @@ class openmrs (
 
   if ($pih_config_array[3] != undef) {
     file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[3]}.json":
-      ensure  => present,
-      source  => "puppet:///modules/openmrs/config/pih-config-${pih_config_array[3]}.json",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
+      ensure  => absent,
       require => File["/home/${tomcat}/.OpenMRS"]
     }
   }
 
   if ($pih_config_array[4] != undef) {
     file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[4]}.json":
-      ensure  => present,
-      source  => "puppet:///modules/openmrs/config/pih-config-${pih_config_array[4]}.json",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
+      ensure  => absent,
       require => File["/home/${tomcat}/.OpenMRS"]
     }
   }
 
-  /* Add the configuration/ directory to the application data directory,
-     according to the parameter `config_dir` */
-  if ($config_dir != undef) {
-    file { "/home/${tomcat}/.OpenMRS/configuration":
-      ensure  => directory,
-      recurse => 'remote',
-      source  => "puppet:///modules/openmrs/app-data-config/${config_dir}/configuration",
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
-      require => [ File["/home/${tomcat}/.OpenMRS"] ]
+  if ($config_name != "") {
+
+    if ('SNAPSHOT' in $config_version) {
+      $config_repo = "snapshots"
     }
+    else {
+      $config_repo = "releases"
+    }
+
+    $config_url = "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}"
+
+    # TODO can we change this so it only redownloads if needed?
+    wget::fetch { 'download-openmrs-configuration':
+      source      => "${config_url}",
+      destination => "/tmp/${config_name}.zip",
+      timeout     => 0,
+      verbose     => false,
+      redownload => true,
+    }
+
+    exec{'install-openmrs-configuration':
+      command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/configuration && mkdir /home/${tomcat}/.OpenMRS/configuration && mv /tmp/configuration/* /home/${tomcat}/.OpenMRS/configuration",
+      require => [ Wget::Fetch['download-openmrs-configuration'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ],
+      notify => [ Exec['tomcat-restart'] ]
+    }
+
   }
 
   exec { 'tomcat-restart':
@@ -213,3 +211,4 @@ class openmrs (
    }
 
 }
+
