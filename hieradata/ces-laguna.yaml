@@ -1,6 +1,6 @@
 ---
 package_release: 'stable/'
-package_version: '1.0.4604-1'
+package_version: '1.0.4734-1'
 pih_config: mexico,mexico-laguna
 config_name: openmrs-config-ces
 config_version: 1.0.0-SNAPSHOT
@@ -12,7 +12,6 @@ openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 tomcat_enable_http_8080: true
 openmrs_auto_update_database: true
-
 session_timeout: 120
 
 
