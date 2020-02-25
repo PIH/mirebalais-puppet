@@ -1,12 +1,11 @@
-class scripts (
+class openmrs::backup (
     $tomcat = hiera('tomcat'),
     $archive_directory = decrypt(hiera('archive_folder')),
-    $sequence_directory = decrypt(hiera('sequence_folder'))
-
-  ) {
+    $sequence_directory = decrypt(hiera('sequence_folder')),
+  ){
 
   file { "cleandiskspace":
-    ensure => present,
+    ensure  => present,
     path    => '/usr/local/sbin/cleandiskspace.sh',
     mode    => '0700',
     owner   => 'root',
@@ -14,13 +13,12 @@ class scripts (
     content => template('scripts/cleandiskspace.sh.erb'),
   }
 
-  cron { 'clean-disk-space':
+  cron { 'clean-disk-space'':
     ensure  => present,
+    command => '/usr/local/sbin/cleandiskspace.sh >/dev/null 2>&1',
     user    => 'root',
     hour    => 19,
-    minute  => 25,
-    command => '/usr/local/sbin/cleandiskspace.sh >/dev/null 2>&1',
+    minute  => 30,
     environment => "MAILTO=${sysadmin_email}",
   }
-
 }
