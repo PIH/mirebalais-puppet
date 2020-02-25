@@ -1,14 +1,13 @@
 #/bin/bash
 
 arch_backup_dir='<%= @archive_directory %>'
-#"/home/tomcat7/backups/archive/"
 seq_backup_dir='<%= @sequence_directory %>'
-#"/home/tomcat7/backups/sequences/"
+
 disk_size="$(df -k /dev/dm-0 | tail -1 | awk '{print $4}')"
 
 
 if (($disk_size<50000000)); then
-  # find all files under /home/tomcat7/backups/sequences/ and /home/tomcat7/backups/archive/ that are more than a day old and delete them
-  find $seq_backup_dir -name "*.7z" -type f -mtime +1 -exec rm -f {} \;
-  find $arch_backup_dir -name "*.7z" -type f -mtime +1 -exec rm -f {} \;
+  # find all files under /home/tomcat7/backups/sequences/ and /home/tomcat7/backups/archive/ that are more than 3 days old and delete them
+  find $seq_backup_dir -name "*.7z" -type f -mtime +3 -exec rm -f {} \;
+  find $arch_backup_dir -name "*.7z" -type f -mtime +3 -exec rm -f {} \;
 fi
