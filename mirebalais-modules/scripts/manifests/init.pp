@@ -1,6 +1,6 @@
 class scripts (
-
-$clean_disk_hour = hiera('clean_disk_hour'),
+$tomcat = hiera('tomcat'),
+$clean_disk_hour = hiera('clean_disk_hour')
 
 ) {
 
@@ -10,7 +10,7 @@ file { "cleandiskspace":
    mode    => '0700',
    owner   => 'root',
    group   => 'root',
-   content => template('.erb'),
+   content => template('cleandiskspace.sh.erb'),
    require => File["/home/${tomcat}/backups"]
   }
 
