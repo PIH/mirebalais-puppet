@@ -17,11 +17,12 @@ file { "cleandiskspace":
 
 cron { 'clean-disk-space':
    ensure  => present,
-   command => '/usr/local/sbin/cleandiskspace.sh > /dev/null',
+   command => '/usr/local/sbin/cleandiskspace.sh > /dev/null 2>&1',
    user    => 'root',
-   hour    => "${clean_disk_hour}",
+   hour    => 19,
    minute  => 00,
    environment => "MAILTO=${sysadmin_email}",
+   require => [ File['cleandiskspace.sh'] ]
   }
 
 }
