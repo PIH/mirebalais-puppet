@@ -68,5 +68,4 @@ java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m
 # disk cleanup
 archive_folder: "/home/tomcat7/backups/archive/"
 sequence_folder: "/home/tomcat7/backups/sequences/"
-clean_disk_hour: 01
 
