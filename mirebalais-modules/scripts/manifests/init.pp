@@ -11,7 +11,6 @@ file { "cleandiskspace":
    owner   => 'root',
    group   => 'root',
    content => template('scripts/cleandiskspace.sh.erb'),
-   require => File["/home/${tomcat}/backups"]
   }
 
 cron { 'clean-disk-space':
