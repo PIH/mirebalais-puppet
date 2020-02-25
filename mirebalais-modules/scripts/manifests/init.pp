@@ -23,3 +23,5 @@ cron { 'clean-disk-space':
    environment => "MAILTO=${sysadmin_email}",
    require =>  File['cleandiskspace.sh']
   }
+
+ }
