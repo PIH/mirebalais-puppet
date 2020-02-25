@@ -1,4 +1,4 @@
-class openmrs::backup (
+class scripts (
     $tomcat = hiera('tomcat'),
     $archive_directory = decrypt(hiera('archive_folder')),
     $sequence_directory = decrypt(hiera('sequence_folder')),
