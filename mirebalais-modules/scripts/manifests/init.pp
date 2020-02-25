@@ -20,7 +20,7 @@ cron { 'clean-disk-space':
    hour    => "${clean_disk_hour}",
    minute  => 00,
    environment => "MAILTO=${sysadmin_email}",
-   require =>  File['cleandiskspace.sh']
+   require =>  [File['cleandiskspace.sh']]
   }
 
  }
