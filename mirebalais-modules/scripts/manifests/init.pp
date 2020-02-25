@@ -1,6 +1,8 @@
 class scripts (
 $tomcat = hiera('tomcat'),
-$clean_disk_hour = hiera('clean_disk_hour')
+$clean_disk_hour = hiera('clean_disk_hour'),
+$archive_directory = decrypt(hiera('archive_folder'))
+$sequence_directory = decrypt(hiera('sequence_folder'))
 
 ) {
 

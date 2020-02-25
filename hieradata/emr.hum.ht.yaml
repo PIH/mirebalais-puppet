@@ -66,7 +66,7 @@ ssl_use_letsencrypt: false
 java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
 # disk cleanup
-archive_directory: "/home/tomcat7/backups/archive/"
-sequence_directory: "/home/tomcat7/backups/sequences/"
+archive_folder: "/home/tomcat7/backups/archive/"
+sequence_folder: "/home/tomcat7/backups/sequences/"
 clean_disk_hour: 01
 
