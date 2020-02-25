@@ -14,7 +14,7 @@ file { "cleandiskspace":
    content => template('scripts/cleandiskspace.sh.erb'),
   }
 
-cron { 'clean-disk-space':
+cron { 'cleandiskspace':
    ensure  => present,
    command => '/usr/local/sbin/cleandiskspace.sh > /dev/null 2>&1',
    user    => 'root',
