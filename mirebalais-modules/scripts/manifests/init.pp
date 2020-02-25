@@ -18,7 +18,6 @@ cron { 'clean-disk-space':
     ensure  => present,
     user    => 'root',
     hour    => 19,
-    minute  => 20,
     command => '/usr/local/sbin/cleandiskspace.sh >/dev/null 2>&1',
     environment => "MAILTO=${sysadmin_email}",
   }
