@@ -10,7 +10,7 @@ file { "cleandiskspace":
    mode    => '0700',
    owner   => 'root',
    group   => 'root',
-   content => template('cleandiskspace.sh.erb'),
+   content => template('scripts/cleandiskspace.sh.erb'),
    require => File["/home/${tomcat}/backups"]
   }
 
