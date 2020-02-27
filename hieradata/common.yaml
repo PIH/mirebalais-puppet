@@ -83,6 +83,9 @@ services_enable: true
 junit_username: junit
 junit_password: Junit123
 
+commcare_user: ''
+commcare_password: ''
+
 # pwa_configuration--currently supports only a single PWA per site, we will need update this long-term
 pwa_enabled: false
 pwa_webapp_name: ''
