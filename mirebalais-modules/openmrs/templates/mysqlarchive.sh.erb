@@ -28,6 +28,9 @@ then
       mv ${DIR}/sequences/${ARCHIVEFILE} ${DIR}/archive/${YEAR}
 fi
 
+# Delete all backups (older than 30 days)
+find ${DIR}/sequences/ -name "*.7z" -type f -mtime +30 -exec rm -f {} \;
+
 # Delete all backups (older than 10 days) in sequence folder if disk size if greater than 55 GB
 disk_size1="$(df -k /dev/dm-0 | tail -1 | awk '{print $4}')"
 if (($disk_size1<55000000)); then
