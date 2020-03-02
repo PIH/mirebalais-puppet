@@ -19,7 +19,7 @@ archive_hour: 02
 backup_delete_older_than_x_days: 60
 
 remote_db_user: backups
-remote_db_server: 172.16.10.10
+remote_db_server: 25.62.129.248
 remote_backup_dir: liberia/jjdossen/db
 
 openmrs_auto_update_database: true
