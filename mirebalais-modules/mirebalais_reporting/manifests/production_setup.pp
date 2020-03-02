@@ -46,8 +46,6 @@ class mirebalais_reporting::production_setup (
     require => [ File['mirebalaisreportscleanup.sh'] ]
   }
 
-
-
   file { 'mirebalais-percona-backup.sh':
     ensure  => present,
     path    => '/home/percona/scripts/mirebalais-percona-backup.sh',
@@ -55,6 +53,15 @@ class mirebalais_reporting::production_setup (
     owner   => 'root',
     group   => 'root',
     content => template('mirebalais_reporting/mirebalais-percona-backup.sh.erb'),
+  }
+
+  file { 'mirebalais-percona-delete-dir.sh':
+    ensure  => present,
+    path    => '/home/percona/scripts/mirebalais-percona-delete-dir.sh',
+    mode    => '0700',
+    owner   => 'root',
+    group   => 'root',
+    content => template('mirebalais_reporting/mirebalais-percona-delete-dir.sh.erb'),
   }
 
   cron { 'mirebalais-percona-backup':
@@ -77,4 +84,13 @@ class mirebalais_reporting::production_setup (
     require => [ File['mirebalais-percona-backup.sh'] ]
   }
 
+  cron { 'mirebalais-percona-delete-dir':
+      ensure  => present,
+      command => '/home/percona/scripts/mirebalais-percona-delete-dir.sh >/dev/null 2>&1',
+      user    => 'root',
+      hour    => 02,
+      minute  => 30,
+      environment => 'MAILTO=${sysadmin_email}',
+      require => [ File['mirebalais-percona-delete-dir.sh'] ]
+    }
 }
