@@ -13,6 +13,7 @@ RELEASENAME=${PREFIX}_backup_release_*.sql.7z
 ARCHIVEFILE=$(ls -t1 |  head -n 1)
 YEAR=$(date +"%Y")
 MONTH=$(date +"%b")
+DAY=$(date +"%d")
 
 # Delete all pre-release backups older than 15 days
 #find ${DIR}/sequences/${RELEASENAME} -mtime +15 -exec rm {} \;
@@ -20,31 +21,23 @@ MONTH=$(date +"%b")
 # Create the archive directory
 mkdir -p ${DIR}/archive
 mkdir -p ${DIR}/archive/${YEAR}
-mkdir -p ${DIR}/archive/${YEAR}/${MONTH}
 
-# Archive backups from the 1st of the month (if they exist)
-cd ${DIR}/sequences
-mv ${DIR}/sequences/${ARCHIVEFILE} ${DIR}/archive/${YEAR}/${MONTH}/.
+# Archive database on first day of month
+if(($DAY == 01));
+then
+      mv ${DIR}/sequences/${ARCHIVEFILE} ${DIR}/archive/${YEAR}
+fi
 
-
-# Delete all older backups backups
-find ${DIR}/sequences/ -name "*.7z" -type f -mtime +15 -exec rm -f {} \;
+# Delete all backups (older than 10 days) in sequence folder if disk size if greater than 55 GB
+disk_size1="$(df -k /dev/dm-0 | tail -1 | awk '{print $4}')"
+if (($disk_size1<55000000)); then
+find ${DIR}/sequences/ -name "*.7z" -type f -mtime +10 -exec rm -f {} \;
+fi
 
 # Delete folders in the archive directory only if the disk space is greater than 70 GB
 disk_size="$(df -k /dev/dm-0 | tail -1 | awk '{print $4}')"
 #
 if (($disk_size<70000000)); then
 # find all files under /home/tomcat7/backups/sequences/ and /home/tomcat7/backups/archive/ that are more than a day old and delete them
- find ${DIR}/archive/${YEAR}/Jan -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/Feb -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/Mar -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/Apr -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/May -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/Jun -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/Jul -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/Aug -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/Sep -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/Oct -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/Nov -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
- find ${DIR}/archive/${YEAR}/Dec -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
+ find ${DIR}/archive/${YEAR} -name "*.7z" -type f -mtime +15 -exec rm -f {} \; 2>/dev/null
 fi
