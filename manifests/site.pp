@@ -56,8 +56,6 @@ node 'emr.hum.ht' {
   include crashplan
   include mirebalais_reporting::production_setup
 
-  include scripts
-
 }
 
 node 'humci.pih-emr.org' {
