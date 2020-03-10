@@ -204,7 +204,7 @@ class openmrs (
   # hack to let us remote the mirebalais metadata module from the build; can be removed after it has been removed from all servers
   # TODO: will this break things when starting from scratch?
   exec { 'make mirebalais metadata module not mandatory':
-    command     => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'update openmrs_mirebalais.global_property set property_value=\"false\" where property=\"mirebalaismetadata.mandatory\"'",
+    command     => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'update ${openmrs_db}.global_property set property_value=\"false\" where property=\"mirebalaismetadata.mandatory\"'",
     user        => 'root',
     require => Package['pihemr'],
     notify => [ Exec['tomcat-restart'] ]
