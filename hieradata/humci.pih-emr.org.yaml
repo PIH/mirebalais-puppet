@@ -11,6 +11,9 @@ mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
+commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
+commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
+
 lacolline_server_url: 'http://boston.pih-emr.org:8080/openmrs'
 lacolline_username: wsuser
 lacolline_password: wsuser123

@@ -55,6 +55,7 @@ node 'emr.hum.ht' {
   include openmrs::backup
   include crashplan
   include mirebalais_reporting::production_setup
+
 }
 
 node 'humci.pih-emr.org' {
