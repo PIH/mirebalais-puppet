@@ -12,7 +12,7 @@ class mysql_setup::legacy (
 
   apt::source { 'mysql':
     ensure      => present,
-    location    => 'http://bamboo.pih-emr.org/mysql-repo',
+    location    => 'https://bamboo.pih-emr.org:81/mysql-repo',
     release     => 'stable/',
     repos       => '',
     include_src => false,

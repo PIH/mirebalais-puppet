@@ -152,7 +152,7 @@ class bahmni::openmrs (
 
   # TODO this is just temporary, until we get a workable version of the bahmnicore module
   wget::fetch { 'download-bahmnicore':
-    source      => 'http://bamboo.pih-emr.org/bahmni-repo/bahmnicore-omod-0.78-SNAPSHOT.omod',
+    source      => 'https://bamboo.pih-emr.org:81/bahmni-repo/bahmnicore-omod-0.78-SNAPSHOT.omod',
     destination => "/home/${tomcat}/.OpenMRS/modules/bahmnicore-0.78-SNAPSHOT.omod",
     timeout     => 0,
     verbose     => false,

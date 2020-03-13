@@ -36,7 +36,7 @@ class openmrs::owa (
 
   # if CI environment (unstable) then install latest from unstable, otherwise
   $order_entry_url = $package_release ? {
-    /unstable/ =>   "http://bamboo.pih-emr.org/owa-repo/unstable/orderentry.zip",
+    /unstable/ =>   "https://bamboo.pih-emr.org:81/owa-repo/unstable/orderentry.zip",
     default    =>   "https://dl.bintray.com/openmrs/owa/orderentry-${owa_order_entry_version}.zip",
   }
 
@@ -57,7 +57,7 @@ class openmrs::owa (
 
   # if CI environment (unstable) then install latest from unstable, otherwise
   $lab_workflow_url = $package_release ? {
-    /unstable/ =>   "http://bamboo.pih-emr.org/owa-repo/unstable/labworkflow.zip",
+    /unstable/ =>   "https://bamboo.pih-emr.org:81/owa-repo/unstable/labworkflow.zip",
     default    =>   "https://dl.bintray.com/openmrs/owa/labworkflow-${owa_lab_workflow_version}.zip",
   }
 
@@ -78,7 +78,7 @@ class openmrs::owa (
 
   # install oncology owa from bamboo
  /* exec{'retrieve_oncology_owa':
-    command => "/usr/bin/wget -q http://bamboo.pih-emr.org/owa-repo/${package_release}openmrs-owa-oncology.zip -O /home/${tomcat}/.OpenMRS/owa/openmrs-owa-oncology.zip",
+    command => "/usr/bin/wget -q https://bamboo.pih-emr.org:81/owa-repo/${package_release}openmrs-owa-oncology.zip -O /home/${tomcat}/.OpenMRS/owa/openmrs-owa-oncology.zip",
     require => File["/home/${tomcat}/.OpenMRS/owa"]
   }
 
