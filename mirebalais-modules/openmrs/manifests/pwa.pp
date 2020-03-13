@@ -15,7 +15,7 @@ class openmrs::pwa (
   if ($pwa_enabled) {
     # install PWA from bamboo
     exec { 'retrieve_pwa':
-      command => "/usr/bin/wget -q http://bamboo.pih-emr.org/pwa-repo/${package_release}${pwa_filename} -O ${tomcat_webapp_dir}/${pwa_filename}",
+      command => "/usr/bin/wget -q https://bamboo.pih-emr.org:81/pwa-repo/${package_release}${pwa_filename} -O ${tomcat_webapp_dir}/${pwa_filename}",
       require => Service["$tomcat"]
     }
 
