@@ -5,7 +5,7 @@ pih_config: mexico,mexico-demo
 config_name: openmrs-config-ces
 config_version: 1.0.0-SNAPSHOT
 spa: true
-spa_ci: false
+spa_ci: true
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
