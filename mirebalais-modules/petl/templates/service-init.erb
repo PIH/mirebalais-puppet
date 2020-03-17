@@ -1,0 +1,33 @@
+#!/bin/bash
+
+SERVICE_USER="<%= @petl_user %>"
+SERVICE_GROUP="<%= @petl_user %>"
+SERVICE_SCRIPT="/home/<%= @petl_user %>/petl.sh"
+
+start() {
+	start-stop-daemon --start --background --quiet --chuid $SERVICE_USER:$SERVICE_GROUP --exec $SERVICE_SCRIPT start > /dev/null
+}
+
+stop() {
+	sh $SERVICE_SCRIPT stop
+}
+case $1 in
+	start)
+		start
+	;;
+	status)
+		sh $SERVICE_SCRIPT status
+	;;
+	stop)
+		stop
+	;;
+	restart)
+		stop
+		sleep 5
+		start
+	;;
+	*)
+		sh $SERVICE_SCRIPT
+	;;
+esac
+exit 0

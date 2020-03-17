@@ -83,6 +83,10 @@ pwa_enabled: false
 pwa_webapp_name: ''
 pwa_filename: ''
 
+# petl default configuration
+petl_user: "petl"
+petl_version: "2.0.0-SNAPSHOT"
+petl_java_opts: ""
 
 # note that this should only be enabled if you are installing biometrics server on the same server as OpenMRS
 # Enabling fingerprinting and connecting to a biometrics server is done via pih-config
