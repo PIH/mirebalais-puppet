@@ -74,7 +74,7 @@ class petl (
   }
 
   wget::fetch { "download-petl-jar":
-    source      => "http://bamboo.pih-emr.org/artifacts/petl-$version.jar",
+    source      => "http://bamboo.pih-emr.org/artifacts/petl-$petl_version.jar",
     destination => "/home/$petl/bin/petl.jar",
     timeout     => 0,
     verbose     => false,
