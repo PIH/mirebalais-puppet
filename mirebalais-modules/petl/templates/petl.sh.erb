@@ -2,6 +2,12 @@
 
 #!/bin/bash
 
+source ./petl.env
+
+echo "PETL_HOME = $PETL_HOME"
+echo "PETL_JOB_DIR = $PETL_JOB_DIR"
+echo "PETL_DATASOURCE_DIR = $PETL_DATASOURCE_DIR"
+
 APP_USER="<%= @petl_user %>"
 
 RED_COLOR="\e[00;31m"
@@ -10,7 +16,7 @@ GREEN_COLOR="\e[00;32m"
 APP_PID=$(echo `ps -fe | grep "petl.sh" | grep -v grep | tr -s " "|cut -d" " -f2`)
 CURRENT_USER=$(echo `whoami`)
 
-APP_COMMAND="java -jar <%= @petl_java_opts %> /home<%= @petl_user %>/bin/petl-<%= @petl_version %>.jar"
+APP_COMMAND="<%= @petl_java_home %>/bin/java -jar <%= @petl_java_opts %> /home<%= @petl_user %>/bin/petl-<%= @petl_version %>.jar"
 
 # Stop the script if an error occurs
 set -e
@@ -27,6 +33,7 @@ start() {
 		if [ "$CURRENT_USER" = "$APP_USER" ]; then
 			$APP_COMMAND
 		else
+		  echo "$APP_COMMAND"
 			sudo -u $APP_USER $APP_COMMAND
 		fi
 	fi
@@ -42,7 +49,7 @@ status() {
 }
 
 log() {
-	tail -f {{ /home/<%= @petl_user %>/logs/petl.log }}
+	tail -f /home/<%= @petl_user %>/logs/petl.log
 }
 
 stop() {

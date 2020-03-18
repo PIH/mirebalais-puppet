@@ -1,7 +1,10 @@
 class petl (
-  $petl                   = hiera("petl_user"),
-  $version                = hiera("petl_version"),
-  $java_memory_parameters = hiera("java_memory_parameters")
+  $petl                        = hiera("petl"),
+  $petl_version                = hiera("petl_version"),
+  $petl_java_home              = hiera("petl_java_home"),
+  $petl_java_opts              = hiera("petl_java_opts"),
+  $petl_job_dir                = hiera("petl_job_dir"),
+  $petl_datasource_dir         = hiera("petl_datasource_dir")
 ) {
 
   # Setup Group, User, and Home Directory for PETL installation
@@ -40,7 +43,6 @@ class petl (
     ensure  => file,
     source  => "puppet:///modules/petl/logrotate",
     require => File["/home/$petl/logs"],
-    notify  => Service[$petl]
   }
 
   # Setup work and data directories
@@ -72,34 +74,35 @@ class petl (
   }
 
   wget::fetch { "download-petl-jar":
-    source      => "http://bamboo.pih-emr.org/artifacts/petl-$petl_version.jar",
+    source      => "http://bamboo.pih-emr.org/artifacts/petl-$version.jar",
     destination => "/home/$petl/bin/petl.jar",
     timeout     => 0,
     verbose     => false,
     require => File["/home/$petl/bin"]
   }
 
-  # Set up scripts and services to start PETL
+  # Set up scripts and services to execute PETL
 
-  # Option 1, try to set this up using system V
-  # See:  https://docs.spring.io/spring-boot/docs/1.3.1.RELEASE/reference/html/deployment-install.html#deployment-initd-service
-
-  file { "/etc/init.d/$petl" :
-    ensure => 'link',
-    target => "/home/$petl/bin/petl.jar",
+  package { "openjdk-8-jdk":
+    ensure  => present
   }
-
-
-
-  # Another option, similar to what we did with pih-biometrics a while back
 
   file { "/home/$petl/bin/petl.sh":
     ensure  => present,
-    content => template("petl/peth.sh.erb"),
+    content => template("petl/petl.sh.erb"),
     owner   => $petl,
     group   => $petl,
     mode    => "0755",
-    require => File["/home/$petl/bin"]
+    require => [ File["/home/$petl/bin"], Package["openjdk-8-jdk"] ]
+  }
+
+  file { "/home/$petl/bin/petl.env":
+    ensure  => present,
+    content => template("petl/petl.env.erb"),
+    owner   => $petl,
+    group   => $petl,
+    mode    => "0755",
+    require => [ File["/home/$petl/bin"], Package["openjdk-8-jdk"] ]
   }
 
   file { "/etc/init.d/$petl":
