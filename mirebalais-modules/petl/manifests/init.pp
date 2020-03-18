@@ -29,22 +29,6 @@ class petl (
     require => User["$petl"]
   }
 
-  # Setup Logging
-
-  file { "/home/$petl/logs":
-    ensure  => directory,
-    owner   => "$petl",
-    group   => "$petl",
-    mode    => "0755",
-    require => File["/home/$petl"]
-  }
-
-  file { "/etc/logrotate.d/$petl":
-    ensure  => file,
-    source  => "puppet:///modules/petl/logrotate",
-    require => File["/home/$petl/logs"],
-  }
-
   # Setup work and data directories
 
   file { "/home/$petl/data":
@@ -81,41 +65,38 @@ class petl (
     require => File["/home/$petl/bin"]
   }
 
+  file { "/home/$petl/bin/petl.jar":
+    ensure  => present,
+    owner   => $petl,
+    group   => $petl,
+    mode    => "0755",
+    require => Wget::Fetch['download-petl-jar']
+  }
+
+  file { "/home/$petl/bin/petl.conf":
+    ensure  => present,
+    content => template("petl/petl.conf.erb"),
+    owner   => $petl,
+    group   => $petl,
+    mode    => "0755",
+    require => File["/home/$petl/bin/petl.jar"]
+  }
+
   # Set up scripts and services to execute PETL
 
   package { "openjdk-8-jdk":
     ensure  => present
   }
 
-  file { "/home/$petl/bin/petl.sh":
-    ensure  => present,
-    content => template("petl/petl.sh.erb"),
-    owner   => $petl,
-    group   => $petl,
-    mode    => "0755",
-    require => [ File["/home/$petl/bin"], Package["openjdk-8-jdk"] ]
-  }
-
-  file { "/home/$petl/bin/petl.env":
-    ensure  => present,
-    content => template("petl/petl.env.erb"),
-    owner   => $petl,
-    group   => $petl,
-    mode    => "0755",
-    require => [ File["/home/$petl/bin"], Package["openjdk-8-jdk"] ]
-  }
-
-  file { "/etc/init.d/$petl":
-    ensure  => present,
-    content => template("petl/service-init.erb"),
-    mode    => "0755",
-    require => File["/home/$petl/bin/petl.sh"]
+  file { "/etc/init.d/$petl" :
+    ensure => 'link',
+    target => "/home/$petl/bin/petl.jar",
+    require => [ File["/home/$petl/bin/petl.conf"], File["/home/$petl/bin/petl.jar"] ]
   }
 
   exec { 'petl-startup-enable':
     command     => "/usr/sbin/update-rc.d -f $petl defaults 81",
     user        => 'root',
-    refreshonly => true,
     require => File["/etc/init.d/$petl"]
   }
 
