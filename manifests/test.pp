@@ -11,6 +11,5 @@ node default {
   include ntpdate
   include apt_upgrades
   include wget
-  include java
   include petl
 }
