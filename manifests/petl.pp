@@ -8,6 +8,5 @@ node default {
 
   include wget
   include petl::java
-  #include petl::uninstall
   include petl
 }
