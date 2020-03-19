@@ -6,10 +6,8 @@ node default {
     always_apt_update => true,
   }
 
-  include security
-  include mailx
-  include ntpdate
-  include apt_upgrades
   include wget
+  include petl::java
+  #include petl::uninstall
   include petl
 }
