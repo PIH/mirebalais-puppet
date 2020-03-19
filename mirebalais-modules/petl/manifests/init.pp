@@ -136,6 +136,7 @@ class petl (
   }
 
   service { $petl:
+    ensure  => running,
     enable  => true,
     require => Exec["petl-startup-enable"]
   }
