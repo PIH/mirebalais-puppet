@@ -108,6 +108,15 @@ class petl (
     require => File["/home/$petl/bin/petl.jar"]
   }
 
+  file { "/home/$petl/bin/application.yml":
+    ensure  => present,
+    content => template("petl/application.yml.erb"),
+    owner   => $petl,
+    group   => $petl,
+    mode    => "0755",
+    require => File["/home/$petl/bin/petl.jar"]
+  }
+
   # Set up scripts and services to execute PETL
 
   package { "openjdk-8-jdk":
