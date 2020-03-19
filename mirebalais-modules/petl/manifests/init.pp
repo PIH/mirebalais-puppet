@@ -7,18 +7,12 @@ class petl (
   $petl_datasource_dir         = hiera("petl_datasource_dir")
 ) {
 
-  # Setup Group, User, and Home Directory for PETL installation
-
-  group { "$petl":
-    ensure => "present"
-  }
+  # Setup User, and Home Directory for PETL installation
 
   user { "$petl":
     ensure  => "present",
     home    => "/home/$petl",
-    shell   => "/bin/bash",
-    groups  => ["$petl"],
-    require => Group["$petl"]
+    shell   => "/bin/bash"
   }
 
   file { "/home/$petl":
