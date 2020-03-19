@@ -83,6 +83,8 @@ node 'humci.pih-emr.org' {
 
   include openmrs::atomfeed
 
+  include petl
+
   #include mirth
   #include mirth::channel_setup
 
