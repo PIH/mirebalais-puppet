@@ -119,9 +119,7 @@ class petl (
 
   # Set up scripts and services to execute PETL
 
-  package { "openjdk-8-jdk":
-    ensure  => present
-  }
+  # TODO: This requires openjdk-8-jdk to be installed
 
   file { "/etc/init.d/$petl" :
     ensure => 'link',
