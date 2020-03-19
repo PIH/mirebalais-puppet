@@ -96,8 +96,8 @@ petl: "petl"
 petl_version: "2.0.0-SNAPSHOT"
 petl_java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
 petl_java_opts: ""
-petl_job_dir: ""
-petl_datasource_dir: ""
+petl_job_dir: "/home/petl/config/jobs"
+petl_datasource_dir: "/home/petl/config/datasources"
 
 # note that this should only be enabled if you are installing biometrics server on the same server as OpenMRS
 # Enabling fingerprinting and connecting to a biometrics server is done via pih-config

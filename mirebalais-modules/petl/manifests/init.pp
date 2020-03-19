@@ -47,6 +47,32 @@ class petl (
     require => File["/home/$petl"]
   }
 
+  # Set up job and datasource configuration
+
+  file { "/home/$petl/config":
+    ensure  => directory,
+    owner   => "$petl",
+    group   => "$petl",
+    mode    => "0755",
+    require => File["/home/$petl"]
+  }
+
+  file { "/home/$petl/config/datasources":
+    ensure  => directory,
+    owner   => "$petl",
+    group   => "$petl",
+    mode    => "0755",
+    require => File["/home/$petl/config"]
+  }
+
+  file { "/home/$petl/config/jobs":
+    ensure  => directory,
+    owner   => "$petl",
+    group   => "$petl",
+    mode    => "0755",
+    require => File["/home/$petl/config"]
+  }
+
   # Setup application binaries
 
   file { "/home/$petl/bin":
