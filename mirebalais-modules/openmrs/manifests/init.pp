@@ -17,6 +17,7 @@ class openmrs (
     $config_dir = hiera('config_dir', undef),
     $activitylog_enabled = hiera('activitylog_enabled'),
     $session_timeout = hiera('session_timeout'),
+    $spa = hiera('spa'),
 
     # PIH EMR config
     $config_name = hiera('config_name'),
@@ -42,7 +43,7 @@ class openmrs (
   include openmrs::owa
   include openmrs::pwa
 
-  if ('mexico-demo' in $pih_config_array) {
+  if ($spa) {
       include openmrs::spa
   }
 
