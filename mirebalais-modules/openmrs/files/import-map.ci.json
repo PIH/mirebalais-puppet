@@ -1,0 +1,20 @@
+{
+    "imports": {
+      "@openmrs/@esm-error-handling": "https://bamboo.pih-emr.org:81/spa-repo/openmrs-esm-error-handling/unstable/openmrs-esm-error-handling.js",
+      "@openmrs/esm-api": "https://bamboo.pih-emr.org:81/spa-repo/openmrs-esm-api/unstable/openmrs-esm-api.js",
+      "@openmrs/esm-devtools": "https://bamboo.pih-emr.org:81/spa-repo/openmrs-esm-devtools/unstable/openmrs-esm-devtools.js",
+      "@openmrs/esm-error-handling": "https://bamboo.pih-emr.org:81/spa-repo/openmrs-esm-error-handling/unstable/openmrs-esm-error-handling.js",
+      "@openmrs/esm-home": "https://bamboo.pih-emr.org:81/spa-repo/openmrs-esm-home/unstable/openmrs-esm-home.js",
+      "@openmrs/esm-login": "https://bamboo.pih-emr.org:81/spa-repo/openmrs-esm-login/unstable/openmrs-esm-login.js",
+      "@openmrs/esm-module-config": "https://bamboo.pih-emr.org:81/spa-repo/openmrs-esm-module-config/unstable/openmrs-esm-module-config.js",
+      "@openmrs/esm-primary-navigation": "https://bamboo.pih-emr.org:81/spa-repo/openmrs-esm-primary-navigation/unstable/openmrs-esm-primary-navigation.js",
+      "@openmrs/esm-root-config": "https://bamboo.pih-emr.org:81/spa-repo/pih-esm-root-config/unstable/pih-esm-root-config.js",
+      "@openmrs/esm-styleguide": "https://bamboo.pih-emr.org:81/spa-repo/openmrs-esm-styleguide/unstable/openmrs-esm-styleguide.js",
+      "i18next": "https://cdn.jsdelivr.net/npm/i18next@19.3.3/dist/umd/i18next.min.js",
+      "react": "/openmrs/frontend/react@16.13.0/umd/react.production.min.js",
+      "react-dom": "/openmrs/frontend/react-dom@16.13.0/umd/react-dom.production.min.js",
+      "react-i18next": "https://cdn.jsdelivr.net/npm/react-i18next@11.3.3/dist/umd/react-i18next.min.js",
+      "rxjs": "/openmrs/frontend/rxjs@6.5.4/bundles/rxjs.umd.min.js",
+      "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.1.1/lib/system/single-spa.min.js"
+    }
+  }
