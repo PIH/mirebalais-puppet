@@ -23,6 +23,9 @@ mirth_inbound_from_pacs_mirebalais_port: 6662
 biometrics_enabled: true
 biometrics_webapp_name: biometrics
 
+spa: true
+spa_ci: true
+
 # feature toggle settings
 reportingui_ad_hoc_analysis: true
 radiology_contrast_studies: true
