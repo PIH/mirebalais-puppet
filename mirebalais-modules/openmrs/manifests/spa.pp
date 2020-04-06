@@ -13,6 +13,16 @@ if ($spa_ci) {
     source  => 'puppet:///modules/openmrs/import-map.ci.json',
     require => [ Package[$tomcat], File["/home/${tomcat}/.OpenMRS/frontend"] ]
   }
+
+  exec { 'add_config_file_to_import_map':
+    require =>  File["/home/${tomcat}/.OpenMRS/frontend/import-map.json"],
+    command => "sed -i 's/\"react\":/\"config-file\": \"https://github.com/PIH/${config_name}/blob/master/frontend/assets/config.json\",\n      \"react\":/' /home/${tomcat}/.OpenMRS/frontend/import-map.json",
+    onlyif  => "grep -q config-file /home/${tomcat}/.OpenMRS/frontend/import-map.json"
+  }
+
+  
+
+
 } else {
   $config_suffix = regsubst($config_name, 'openmrs-config-', '')
   $package_url = "https://bamboo.pih-emr.org:81/spa-repo/pih-spa-frontend/unstable/pih-spa-frontend-${config_suffix}.zip"

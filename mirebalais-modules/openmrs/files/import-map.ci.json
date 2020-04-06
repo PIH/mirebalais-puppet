@@ -11,9 +11,9 @@
       "@openmrs/esm-root-config": "https://bamboo.pih-emr.org:81/spa-repo/pih-esm-root-config/unstable/pih-esm-root-config.js",
       "@pih/esm-referrals-queue": "https://bamboo.pih-emr.org:81/spa-repo/pih-esm-referrals-queue/unstable/pih-esm-referrals-queue.js",
       "@openmrs/esm-styleguide": "https://bamboo.pih-emr.org:81/spa-repo/openmrs-esm-styleguide/unstable/openmrs-esm-styleguide.js",
-      "i18next": "https://cdn.jsdelivr.net/npm/i18next@19.3.3/dist/umd/i18next.js",
       "react": "https://cdn.jsdelivr.net/npm/react@16.13.1/umd/react.development.js",
       "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@16.13.1/umd/react-dom.development.js",
+      "i18next": "https://cdn.jsdelivr.net/npm/i18next@19.3.3/dist/umd/i18next.js",
       "react-i18next": "https://cdn.jsdelivr.net/npm/react-i18next@11.3.3/dist/umd/react-i18next.min.js",
       "rxjs": "https://cdn.jsdelivr.net/npm/rxjs@6.5.4/bundles/rxjs.umd.min.js",
       "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.1.1/lib/system/single-spa.min.js"
