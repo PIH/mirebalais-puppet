@@ -11,8 +11,7 @@ class openmrs (
     $tomcat = hiera('tomcat'),
     $tomcat_webapp_dir = hiera('tomcat_webapp_dir'),
     $junit_username = hiera('junit_username'),
-    $junit_password = decrypt(hiera('junit_password')),
-    $pih_config = hiera('pih_config'),
+    $junit_password = decrypt(hiera('junit_password')), $pih_config = hiera('pih_config'),
     $pih_config_array = split(hiera('pih_config'), ','),
     $config_dir = hiera('config_dir', undef),
     $activitylog_enabled = hiera('activitylog_enabled'),
@@ -195,7 +194,7 @@ class openmrs (
     }
 
     exec{'install-openmrs-configuration':
-      command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/configuration && mkdir /home/${tomcat}/.OpenMRS/configuration && cp -r /tmp/configuration/* /home/${tomcat}/.OpenMRS/configuration && rm -rf /home/${tomcat}/.OpenMRS/configuration/frontend",
+      command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/configuration && mkdir /home/${tomcat}/.OpenMRS/configuration && cp -r /tmp/configuration/* /home/${tomcat}/.OpenMRS/configuration",
       require => [ Wget::Fetch['download-openmrs-configuration'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ],
       notify => [ Exec['tomcat-restart'] ]
     }

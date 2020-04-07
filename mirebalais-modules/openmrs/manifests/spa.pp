@@ -11,37 +11,20 @@ if ($spa_ci) {
   # are served by Apache on the Bamboo server. The site-specific assets also
   # are copied onto the server.
 
-  file { "/home/${tomcat}/.OpenMRS/frontend":
+  file { ["/home/${tomcat}/.OpenMRS/configuration/", "/home/${tomcat}/.OpenMRS/configuration/frontend"]:
     ensure => directory
   }
 
-  file { "/home/${tomcat}/.OpenMRS/frontend/import-map.json":
+  file { "/home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json":
     ensure  => file,
     source  => 'puppet:///modules/openmrs/import-map.ci.json',
-    require => [ Package[$tomcat], File["/home/${tomcat}/.OpenMRS/frontend"] ]
+    require => [ Package[$tomcat], File["/home/${tomcat}/.OpenMRS/configuration/frontend"], Exec["install-openmrs-configuration"] ]
   }
 
   if ($config_name != '') {
-
     exec { 'add_config_file_to_import_map':
-      require =>  File["/home/${tomcat}/.OpenMRS/frontend/import-map.json"],
-      command => "sed -i 's/\"react\":/\"config-file\": \"https://github.com/PIH/${config_name}/blob/master/frontend/assets/config.json\",\n      \"react\":/' /home/${tomcat}/.OpenMRS/frontend/import-map.json",
-      onlyif  => "grep -q config-file /home/${tomcat}/.OpenMRS/frontend/import-map.json"
-    }
-
-    $config_url = "https://github.com/PIH/${config_name}/archive/master.zip"
-
-    wget::fetch { 'download-openmrs-configuration':
-      source      => config_url,
-      destination => "/tmp/${config_name}.zip",
-      timeout     => 0,
-      verbose     => false,
-      redownload  => true,
-    }
-
-    exec{'install-openmrs-config-frontend':
-      command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && mv /tmp/configuration/frontend/* /home/${tomcat}/.OpenMRS/frontend",
-      require => [ Wget::Fetch['download-openmrs-configuration'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ]
+      require =>  File["/home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"],
+      command => "sed -i 's/\"react\":/\"config-file\": \"https:\/\/github.com\/PIH\/${config_name}\/blob\/master\/configuration\/frontend\/assets\/config.json\",\n      \"react\":/' /home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"
     }
   }
 
