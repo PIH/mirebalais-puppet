@@ -40,7 +40,7 @@ if ($spa_ci) {
     }
 
     exec{'install-openmrs-config-frontend':
-      command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && mv /tmp/frontend/* /home/${tomcat}/.OpenMRS/frontend",
+      command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && mv /tmp/configuration/frontend/* /home/${tomcat}/.OpenMRS/frontend",
       require => [ Wget::Fetch['download-openmrs-configuration'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ]
     }
   }

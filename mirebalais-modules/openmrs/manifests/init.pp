@@ -195,7 +195,7 @@ class openmrs (
     }
 
     exec{'install-openmrs-configuration':
-      command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/configuration && mkdir /home/${tomcat}/.OpenMRS/configuration && mv /tmp/configuration/* /home/${tomcat}/.OpenMRS/configuration",
+      command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf /home/${tomcat}/.OpenMRS/configuration && mkdir /home/${tomcat}/.OpenMRS/configuration && cp -r /tmp/configuration/* /home/${tomcat}/.OpenMRS/configuration && rm -rf /home/${tomcat}/.OpenMRS/configuration/frontend",
       require => [ Wget::Fetch['download-openmrs-configuration'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ],
       notify => [ Exec['tomcat-restart'] ]
     }
