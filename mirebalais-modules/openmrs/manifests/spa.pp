@@ -1,7 +1,8 @@
 class openmrs::spa (
   $tomcat = hiera('tomcat'),
   $spa_ci = hiera('spa_ci'),
-  $config_name = hiera('config_name')
+  $config_name = hiera('config_name'),
+  $webapp_name = hiera('webapp_name')
 ) {
   # Please see
   # https://pihemr.atlassian.net/wiki/spaces/PIHEMR/pages/555188230/CI+Release+and+Deployment
@@ -25,7 +26,7 @@ if ($spa_ci) {
   if ($config_name != '') {
     exec { 'add_config_file_to_import_map':
       require =>  File["/home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"],
-      command => "sed -i 's/\"react\":/\"config-file\": \"https:\/\/github.com\/PIH\/${config_name}\/blob\/master\/configuration\/frontend\/assets\/config.json\",\\n      \"react\":/' /home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"
+      command => "sed -i 's/\"react\":/\"config-file\": \"\/${webapp_name}\/frontend\/assets\/config.json\",\\n      \"react\":/' /home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"
     }
   }
 
