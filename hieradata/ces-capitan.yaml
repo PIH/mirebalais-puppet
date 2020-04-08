@@ -4,6 +4,8 @@ package_version: '1.0.4804-1'
 pih_config: mexico,mexico-capitan
 config_name: openmrs-config-ces
 config_version: 1.0.0
+spa: true
+spa_ci: true
 
 server_timezone: America/Mexico_City
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]

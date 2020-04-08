@@ -12,19 +12,20 @@ if ($spa_ci) {
   # are copied onto the server.
 
   file { ["/home/${tomcat}/.OpenMRS/configuration/", "/home/${tomcat}/.OpenMRS/configuration/frontend"]:
-    ensure => directory
+    ensure  => directory,
+    require => [ Exec['install-openmrs-configuration'] ]
   }
 
   file { "/home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json":
     ensure  => file,
     source  => 'puppet:///modules/openmrs/import-map.ci.json',
-    require => [ Package[$tomcat], File["/home/${tomcat}/.OpenMRS/configuration/frontend"], Exec["install-openmrs-configuration"] ]
+    require => [ Package[$tomcat], File["/home/${tomcat}/.OpenMRS/configuration/frontend"] ]
   }
 
   if ($config_name != '') {
     exec { 'add_config_file_to_import_map':
       require =>  File["/home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"],
-      command => "sed -i 's/\"react\":/\"config-file\": \"https:\/\/github.com\/PIH\/${config_name}\/blob\/master\/configuration\/frontend\/assets\/config.json\",\n      \"react\":/' /home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"
+      command => "sed -i 's/\"react\":/\"config-file\": \"https:\/\/github.com\/PIH\/${config_name}\/blob\/master\/configuration\/frontend\/assets\/config.json\",\\n      \"react\":/' /home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"
     }
   }
 
