@@ -76,7 +76,7 @@ class mirebalais_reporting::production_setup (
 
   cron { 'Copy percona backup over to reporting':
     ensure  => present,
-    command => 'scp -r /home/percona/backups/openmrs reporting@192.168.1.217:/home/reporting/percona/backups > /tmp/scp.log',
+    command => 'scp -r /home/percona/backups/openmrs root@192.168.1.217:/home/reporting/percona/backups > /tmp/scp.log',
     user    => 'root',
     hour    => 23,
     minute  => 00,
