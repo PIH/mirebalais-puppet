@@ -7,7 +7,7 @@ ntp_server_3: 2.ubuntu.pool.ntp.org
 ntp_server_4: 3.ubuntu.pool.ntp.org
 keyserver: keyserver.ubuntu.com
 
-pih_config:
+pih_config: default
 site_domain: foo.org
 
 # spa
