@@ -7,14 +7,16 @@ class mailx (
 		ensure => installed,
 	}
 
-	package { 'bsd-mailx':
-		ensure => installed,
-	}
-
 	package { 'msmtp-mta':
 		ensure => installed,
     require => [ Package['msmtp'] ]
 	}
+
+  package { 'bsd-mailx':
+    ensure => installed,
+    require => [ Package['msmtp'], Package['msmtp-mta'] ]
+  }
+
 
   package { 'mailutils':
     ensure => installed,
