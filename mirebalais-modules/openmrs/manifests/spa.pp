@@ -12,22 +12,21 @@ if ($spa_ci) {
   # are served by Apache on the Bamboo server. The site-specific assets also
   # are copied onto the server.
 
+  $config_suffix = regsubst($config_name, 'openmrs-config-', '')
+
   file { ["/home/${tomcat}/.OpenMRS/configuration/", "/home/${tomcat}/.OpenMRS/configuration/frontend"]:
     ensure  => directory,
     require => [ Exec['install-openmrs-configuration'] ]
   }
 
-  file { "/home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json":
-    ensure  => file,
-    source  => 'puppet:///modules/openmrs/import-map.ci.json',
-    require => [ Package[$tomcat], File["/home/${tomcat}/.OpenMRS/configuration/frontend"] ]
+  file { "/home/${tomcat}/.OpenMRS/configuration/globalproperties":
+    ensure  => directory,
+    require => [ "/home/${tomcat}/.OpenMRS/configuration/frontend" ]
   }
 
-  if ($config_name != '') {
-    exec { 'add_config_file_to_import_map':
-      require =>  File["/home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"],
-      command => "sed -i 's/\"react\":/\"config-file\": \"\/${webapp_name}\/frontend\/assets\/config.json\",\\n      \"react\":/' /home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"
-    }
+  file { "/home/${tomcat}/.OpenMRS/configuration/frontend/globalproperties/spa-ci-gp.xml":
+    ensure  => file,
+    content => template('openmrs/spa-ci-globalproperties.xml.erb')
   }
 
 } else {
