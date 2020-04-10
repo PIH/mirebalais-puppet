@@ -8,9 +8,9 @@ class openmrs::spa (
   # https://pihemr.atlassian.net/wiki/spaces/PIHEMR/pages/555188230/CI+Release+and+Deployment
   # for more information about this process
 if ($spa_ci) {
-  # In CI, the import map is located on the server, but refers to modules which
-  # are served by Apache on the Bamboo server. The site-specific assets also
-  # are copied onto the server.
+  # In CI, the server uses its own local frontend/assets directory, provided
+  # by the configuration repo. The server is configured to pull the import map
+  # from Bamboo. That import map refers to other files hosted in Bamboo.
 
   $config_suffix = regsubst($config_name, 'openmrs-config-', '')
 
@@ -26,7 +26,8 @@ if ($spa_ci) {
 
   file { "/home/${tomcat}/.OpenMRS/configuration/frontend/globalproperties/spa-ci-gp.xml":
     ensure  => file,
-    content => template('openmrs/spa-ci-globalproperties.xml.erb')
+    content => template('openmrs/spa-ci-globalproperties.xml.erb'),
+    notify => [ Exec['tomcat-restart'] ]
   }
 
 } else {
