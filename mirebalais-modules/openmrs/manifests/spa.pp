@@ -21,10 +21,11 @@ if ($spa_ci) {
 
   file { "/home/${tomcat}/.OpenMRS/configuration/globalproperties":
     ensure  => directory,
-    require => [ "/home/${tomcat}/.OpenMRS/configuration/frontend" ]
+    require => [ File["/home/${tomcat}/.OpenMRS/configuration"] ]
   }
 
-  file { "/home/${tomcat}/.OpenMRS/configuration/frontend/globalproperties/spa-ci-gp.xml":
+  file { "/home/${tomcat}/.OpenMRS/configuration/globalproperties/spa-ci-gp.xml":
+    require => [ File["/home/${tomcat}/.OpenMRS/configuration/globalproperties"] ],
     ensure  => file,
     content => template('openmrs/spa-ci-globalproperties.xml.erb'),
     notify => [ Exec['tomcat-restart'] ]
