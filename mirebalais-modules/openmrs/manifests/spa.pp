@@ -8,26 +8,27 @@ class openmrs::spa (
   # https://pihemr.atlassian.net/wiki/spaces/PIHEMR/pages/555188230/CI+Release+and+Deployment
   # for more information about this process
 if ($spa_ci) {
-  # In CI, the import map is located on the server, but refers to modules which
-  # are served by Apache on the Bamboo server. The site-specific assets also
-  # are copied onto the server.
+  # In CI, the server uses its own local frontend/assets directory, provided
+  # by the configuration repo. The server is configured to pull the import map
+  # from Bamboo. That import map refers to other files hosted in Bamboo.
+
+  $config_suffix = regsubst($config_name, 'openmrs-config-', '')
 
   file { ["/home/${tomcat}/.OpenMRS/configuration/", "/home/${tomcat}/.OpenMRS/configuration/frontend"]:
     ensure  => directory,
     require => [ Exec['install-openmrs-configuration'] ]
   }
 
-  file { "/home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json":
-    ensure  => file,
-    source  => 'puppet:///modules/openmrs/import-map.ci.json',
-    require => [ Package[$tomcat], File["/home/${tomcat}/.OpenMRS/configuration/frontend"] ]
+  file { "/home/${tomcat}/.OpenMRS/configuration/globalproperties":
+    ensure  => directory,
+    require => [ File["/home/${tomcat}/.OpenMRS/configuration"] ]
   }
 
-  if ($config_name != '') {
-    exec { 'add_config_file_to_import_map':
-      require =>  File["/home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"],
-      command => "sed -i 's/\"react\":/\"config-file\": \"\/${webapp_name}\/frontend\/assets\/config.json\",\\n      \"react\":/' /home/${tomcat}/.OpenMRS/configuration/frontend/import-map.json"
-    }
+  file { "/home/${tomcat}/.OpenMRS/configuration/globalproperties/spa-ci-gp.xml":
+    require => [ File["/home/${tomcat}/.OpenMRS/configuration/globalproperties"] ],
+    ensure  => file,
+    content => template('openmrs/spa-ci-globalproperties.xml.erb'),
+    notify => [ Exec['tomcat-restart'] ]
   }
 
 } else {
