@@ -10,17 +10,17 @@ version="${app_version}.${bamboo_buildNumber}"
 #=== Copy to build dir
 # the repo name for the root config is pih-spa-frontend, so we need to override
 directory_name=$(if [ "${bamboo_planRepository_name}" == "pih-spa-frontend" ];
-                 then "pih-esm-root-config";
-                 else ${bamboo_planRepository_name};
+                 then echo pih-esm-root-config;
+                 else echo ${bamboo_planRepository_name};
                  fi)
-parent_dir=/var/www/html/spa-repo/${directory_name}/unstable/
-ls "${parent_dir}"
-target_dir="${parent_dir}/${version}/"
+parent_dir="/var/www/html/spa-repo/${directory_name}/unstable"
+target_dir="${parent_dir}/${version}"
 mkdir -p "${target_dir}"
 cp -r dist/* "${target_dir}"
+ls "${parent_dir}"
 
 #=== Update latest/ symlink
-rm -rf "${parent_dir}/latest/"
+rm -rf "${parent_dir}/latest"
 ln -s ${target_dir} ${parent_dir}/latest
 
 #=== Update import maps
