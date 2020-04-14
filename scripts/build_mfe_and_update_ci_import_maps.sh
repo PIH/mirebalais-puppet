@@ -8,7 +8,12 @@ app_version="$(node -e 'console.log(require("./package.json").version);')"
 version="${app_version}.${bamboo_buildNumber}"
 
 #=== Copy to build dir
-parent_dir=/var/www/html/spa-repo/${bamboo_planRepository_name}/unstable/
+# the repo name for the root config is pih-spa-frontend, so we need to override
+directory_name=$(if [ "${bamboo_planRepository_name}" == "pih-spa-frontend" ];
+                 then "pih-esm-root-config";
+                 else ${bamboo_planRepository_name};
+                 fi)
+parent_dir=/var/www/html/spa-repo/${directory_name}/unstable/
 ls "${parent_dir}"
 target_dir="${parent_dir}/${version}/"
 mkdir -p "${target_dir}"
@@ -25,7 +30,7 @@ overrides["@pih/esm-root-config"]="@openmrs/esm-root-config"
 overrides["@pih/esm-refapp-navbar"]="@openmrs/esm-primary-navigation"
 package_name=${overrides["${package_name}"]:-${package_name}}
 # we escape the colons in new_url since that will be our sed delimiter
-new_url="https\://bamboo.pih-emr.org\:81/spa-repo/${bamboo_planRepository_name}/unstable/${version}/${bamboo_planRepository_name}.js"
+new_url="https\://bamboo.pih-emr.org\:81/spa-repo/${directory_name}/unstable/${version}/${directory_name}.js"
 for suffix in "ces" "zl"; do
     # using colon as delimiter because these variables are full of slashes
     sed -i "s:\"${package_name}\"\: \".*\":\"${package_name}\"\: \"${new_url}\":" "/var/www/html/spa-repo/import-map/import-map-ci-${suffix}.json"
