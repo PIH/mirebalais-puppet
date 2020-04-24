@@ -25,10 +25,10 @@ if ($spa_version == 'ci') {
   }
 
   file { "/home/${tomcat}/.OpenMRS/configuration/globalproperties/spa-ci-gp.xml":
-    require => [ File["/home/${tomcat}/.OpenMRS/configuration/globalproperties"] ],
     ensure  => file,
+    require => [ File["/home/${tomcat}/.OpenMRS/configuration/globalproperties"] ],
     content => template('openmrs/spa-ci-globalproperties.xml.erb'),
-    notify => [ Exec['tomcat-restart'] ]
+    notify  => [ Exec['tomcat-restart'] ]
   }
 
 } else {
