@@ -12,7 +12,7 @@ site_domain: foo.org
 
 # spa
 spa: false
-spa_ci: false
+spa_version: latest  # 'ci' is a special case
 
 #owas
 owa_cohort_builder_version: 1.0.0
