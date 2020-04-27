@@ -24,7 +24,7 @@ biometrics_enabled: true
 biometrics_webapp_name: biometrics
 
 spa: true
-spa_ci: true
+spa_version: ci
 
 # feature toggle settings
 reportingui_ad_hoc_analysis: true
