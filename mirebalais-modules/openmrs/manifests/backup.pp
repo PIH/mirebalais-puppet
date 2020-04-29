@@ -2,6 +2,7 @@ class openmrs::backup (
     $backup_user = decrypt(hiera('backup_db_user')),
     $backup_password = decrypt(hiera('backup_db_password')),
     $az_secret = decrypt(hiera('az_secret')),
+    $az_url = decrypt(hiera('az_url')),
     $remote_db_user = hiera('remote_db_user'),
     $remote_db_server = hiera('remote_db_server'),
     $remote_backup_dir = hiera('remote_backup_dir'),

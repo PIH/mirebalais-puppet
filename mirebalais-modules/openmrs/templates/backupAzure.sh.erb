@@ -5,6 +5,8 @@ cd /home/tomcat7/backups/sequences
 
 BACKUPFILE=$(ls -t | head -n1)
 AZSECRET='<%= @az_secret %>'
+AZURL='<%= @az_url %>'
+AZPATH='haiti/mirebalais'
 
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -16,7 +18,7 @@ log_file=/home/tomcat7/backups/logs/azcopy.logs
 echo -e "\e[32m"${bold}$(date +%F-time-%T)${normal} >> $log_file
 
 rm -rf $log_file
-azcopy copy "/home/tomcat7/backups/sequences/${BACKUPFILE}"  "https://openmrsbackup.blob.core.windows.net/backups/haiti/mirebalais/sequence/${BACKUPFILE}?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZSECRET}" --recursive=true >> $log_file
+azcopy copy "/home/tomcat7/backups/sequences/${BACKUPFILE}"  "${AZURL}/${AZPATH}/sequence/${BACKUPFILE}?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZSECRET}" --recursive=true >> $log_file
 
 #Remove a month old logs
 if(($DAY == 02));
