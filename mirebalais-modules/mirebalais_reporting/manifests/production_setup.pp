@@ -1,6 +1,7 @@
 class mirebalais_reporting::production_setup (
     $backup_db_user = decrypt(hiera('backup_db_user')),
     $backup_db_password = decrypt(hiera('backup_db_password')),
+    $percona_password = decrypt(hiera('percona_password')),
     $sysadmin_email = hiera('sysadmin_email'),
     $tomcat = hiera('tomcat')
   ){

@@ -32,6 +32,8 @@ replication_db_password: ENC[92IfbImaUmA3wqYSG5kWWwexEU8HqCrqQzSXAMKRPz0=]
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 mirth_db_password: ENC[pAmIyUYupu8RnrQvgH+XCHXR8DEbwO1UZYBT/0q0gIE=]
 mirth_password: ENC[xTn2ILoq1ik8jxllAn7pHz5qD+0apCTmRRtCZRMcjfk=]
+az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
+percona_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 
 pacs_mirebalais_ip_address: 192.168.7.38
 pacs_mirebalais_inbound_port: 6661
