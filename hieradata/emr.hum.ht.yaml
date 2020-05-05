@@ -1,4 +1,5 @@
 webapp_name: mirebalais
+az_backup_folder_path: haiti/mirebalais
 
 package_release: 'stable/'
 
