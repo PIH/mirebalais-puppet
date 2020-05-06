@@ -1,6 +1,9 @@
 class openmrs::backup (
     $backup_user = decrypt(hiera('backup_db_user')),
     $backup_password = decrypt(hiera('backup_db_password')),
+    $az_secret = decrypt(hiera('az_secret')),
+    $az_url = decrypt(hiera('az_url')),
+    $az_backup_folder_path = hiera('az_backup_folder_path'),
     $remote_db_user = hiera('remote_db_user'),
     $remote_db_server = hiera('remote_db_server'),
     $remote_backup_dir = hiera('remote_backup_dir'),
@@ -41,6 +44,39 @@ class openmrs::backup (
     owner   => 'root',
     group   => 'root',
     content => template('openmrs/mysqlbackup.sh.erb'),
+  }
+
+  wget::fetch { 'azcopy-download':
+    source      => 'http://bamboo.pih-emr.org/azcopy/azcopy',
+    destination => '/usr/local/sbin/azcopy',
+  }
+
+  file { 'azcopy':
+    path    => '/usr/local/sbin/azcopy',
+    mode    => '0755',
+    owner   => 'root',
+    group   => 'root',
+    require => [ Wget::Fetch['azcopy-download'] ]
+  }
+
+  file { 'backupAzure.sh':
+    ensure  => present,
+    path    => '/usr/local/sbin/backupAzure.sh',
+    mode    => '0700',
+    owner   => 'root',
+    group   => 'root',
+    content => template('openmrs/backupAzure.sh.erb'),
+    require => File["/usr/local/sbin/azcopy"]
+  }
+
+  cron { 'backup-az':
+    ensure  => present,
+    command => 'sh /usr/local/sbin/backupAzure.sh &> /dev/null',
+    user    => 'root',
+    hour    => '*/7',
+    minute  => 20,
+    environment => "MAILTO=${sysadmin_email}",
+    require => File['backupAzure.sh']
   }
 
   cron { 'mysql-archive':
