@@ -39,7 +39,7 @@ if ($spa_version == 'ci') {
 
   exec{'download_and_install_spa_frontend':
     command => "/usr/bin/wget -q ${package_url} -O /tmp/pih-spa-frontend.zip && unzip -o /tmp/pih-spa-frontend.zip && rm -rf /home/${tomcat}/.OpenMRS/configuration/frontend && mv openmrs/frontend/ /home/${tomcat}/.OpenMRS/configuration/",
-    require => [ File["/home/${tomcat}/.OpenMRS/configuration"],  Package['unzip'] ]
+    require => [ Exec['install-openmrs-configuration'],  Package['unzip'] ]
   }
 }
 }
