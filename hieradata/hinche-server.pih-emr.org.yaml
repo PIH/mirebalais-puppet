@@ -18,9 +18,6 @@ remote_backup_dir: haiti/hinche/db
 backup_file_prefix: hinche
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 
-# spa
-spa: true
-
 # Confirm uptime of server
 backup_hour: 14
 archive_hour: 15
