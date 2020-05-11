@@ -30,6 +30,9 @@ openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 replication_db_password: ENC[92IfbImaUmA3wqYSG5kWWwexEU8HqCrqQzSXAMKRPz0=]
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 
+# spa
+spa: true
+
 # SSL certificates for HUM
 ssl_cert_dir: '/etc/ssl/certs'
 ssl_key_dir: '/etc/ssl/private'

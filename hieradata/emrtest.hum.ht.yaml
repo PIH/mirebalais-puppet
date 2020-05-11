@@ -22,6 +22,9 @@ lacolline_server_url: 'http://boston.pih-emr.org:8080/openmrs'
 lacolline_username: wsuser
 lacolline_password: ENC[OV3IH5U9urv6gEb76vnyYA==]
 
+# spa
+spa: true
+
 # feature toggle settings
 appointmentscheduling_confidential: true
 radiology_contrast_studies: true

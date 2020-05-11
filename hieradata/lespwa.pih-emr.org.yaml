@@ -16,4 +16,7 @@ mysql_net_write_timeout: 120
 mysql_wait_timeout: 28800
 mysql_interactive_timeout: 28800
 
+# spa
+spa: true
+
 # java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
