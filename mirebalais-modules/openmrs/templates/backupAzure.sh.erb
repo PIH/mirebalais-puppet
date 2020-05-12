@@ -20,9 +20,3 @@ echo -e "\e[32m"${bold}$(date +%F-time-%T)${normal} >> $log_file
 
 azcopy sync "/home/tomcat7/backups/sequences/${BACKUPFILE}"  "${AZURL}/${AZPATH}/sequence/${BACKUPFILE}?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZSECRET}" --recursive=true >> $log_file
 
-#Remove a month old logs
-if(($DAY == 02));
-then
-        rm -rf root/.azcopy/*.log
-        rm -rf root/.azcopy/plans/*
-fi
