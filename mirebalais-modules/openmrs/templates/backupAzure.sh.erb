@@ -23,6 +23,6 @@ azcopy sync "/home/tomcat7/backups/sequences/${BACKUPFILE}"  "${AZURL}/${AZPATH}
 #Remove a month old logs
 if(($DAY == 02));
 then
-        rm -rf root/.azcopy/*.log
-        rm -rf root/.azcopy/plans/*
+        rm -rf /root/.azcopy/*.log
+        rm -rf /root/.azcopy/plans/*
 fi
