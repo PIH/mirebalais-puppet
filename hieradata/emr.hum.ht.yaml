@@ -57,6 +57,7 @@ remote_zlidentifier_password: ENC[IuAJgqs6Ci5Hw5xs/DYiZg==]
 
 # spa
 spa: true
+spa_version: mirebalais-latest
 
 # feature toggle settings
 insurance_collection: false

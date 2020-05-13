@@ -32,6 +32,7 @@ backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 
 # spa
 spa: true
+spa_version: mirebalais-latest
 
 # SSL certificates for HUM
 ssl_cert_dir: '/etc/ssl/certs'

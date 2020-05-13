@@ -20,6 +20,7 @@ commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 
 # spa
 spa: true
+spa_version: mirebalais-latest
 
 # feature toggle settings
 
