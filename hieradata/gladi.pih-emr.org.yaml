@@ -7,4 +7,3 @@ config_version: 1.0.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
-openmrs_auto_update_database: true
