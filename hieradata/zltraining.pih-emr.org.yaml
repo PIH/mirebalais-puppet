@@ -42,6 +42,7 @@ java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m
 
 # spa
 spa: true
+spa_version: mirebalais-latest
 
 # Use our old godaddy cert until we've tested the letsencrypt one for a few months
 ssl_cert_dir: '/etc/ssl/certs'
