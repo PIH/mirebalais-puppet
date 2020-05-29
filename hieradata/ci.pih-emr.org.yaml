@@ -1,7 +1,7 @@
 ---
 site_domain: ci.pih-emr.org
 
-pih_config: haiti,haiti-thomonde,haiti-thomonde-ci
+pih_config: haiti,haiti-hsn-ci
 config_name: openmrs-config-zl
 config_version: 1.3.0-SNAPSHOT
 
