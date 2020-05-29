@@ -34,12 +34,6 @@ backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 spa: true
 spa_version: mirebalais-latest
 
-# SSL certificates for HUM
-ssl_cert_dir: '/etc/ssl/certs'
-ssl_key_dir: '/etc/ssl/private'
-ssl_cert_file: 'e51acc674ff05659.crt'
-ssl_chain_file: 'gd_bundle-g2-g1.crt'
-ssl_key_file: 'hum.key'
-ssl_use_letsencrypt: false
+ssl_use_letsencrypt: true
 
 java_memory_parameters: '-Xmx10G -Xms1G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
