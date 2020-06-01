@@ -13,7 +13,6 @@ spa: true
 spa_version: ci
 
 # feature toggles
-additional_haiti_identifiers: true
 
 # TODO can be removed after next gold is cut
 hiv: true
