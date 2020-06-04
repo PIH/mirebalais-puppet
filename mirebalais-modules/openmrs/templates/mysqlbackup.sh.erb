@@ -45,7 +45,6 @@ ln -s ${DIR}/sequences/${FILENAME} ${DIR}/current/${CURRENT_FILENAME}
 # (This is generally handled by crashplan in our newer implementations and not used)
 if [ "$REMOTE_DB_SERVER" != "foo" ]
 then
-	scp ${DIR}/current/${CURRENT_FILENAME} ${REMOTE_DB}/${FILENAME}
+	#scp ${DIR}/current/${CURRENT_FILENAME} ${REMOTE_DB}/${FILENAME}
+	bash /usr/local/sbin/backupAzure.sh
 fi
-
-
