@@ -1,6 +1,6 @@
 ---
 package_release: 'stable/'
-package_version: '1.0.4897-1'
+package_version: '1.0.4956-1'
 site_domain: ces.pih-emr.org
 pih_config: mexico,mexico-production
 config_name: openmrs-config-ces
