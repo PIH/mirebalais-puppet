@@ -66,7 +66,13 @@ insurance_collection: false
 primary_care_note: false
 lab_tracking: true
 
-ssl_use_letsencrypt: true
+# SSL certificates for HUM
+ssl_cert_dir: '/etc/ssl/certs'
+ssl_key_dir: '/etc/ssl/private'
+ssl_cert_file: 'e51acc674ff05659.crt'
+ssl_chain_file: 'gd_bundle-g2-g1.crt'
+ssl_key_file: 'hum.key'
+ssl_use_letsencrypt: false
 
 java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
