@@ -7,7 +7,7 @@ package_release: 'stable/'
 
 pih_config: mirebalais,mirebalais-training
 config_name: openmrs-config-zl
-config_version: 1.3.1
+config_version: 1.3.2
 
 server_timezone: America/New_York
 ntp_server_1: 192.168.1.151
