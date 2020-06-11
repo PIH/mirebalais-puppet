@@ -1,4 +1,5 @@
 class apache2 (
+  $site_domain = hiera('site_domain'),
   $tomcat = hiera('tomcat'),
   $services_ensure = hiera('services_ensure'),
   $services_enable = hiera('services_enable'),
@@ -15,7 +16,7 @@ class apache2 (
   $biometrics_port = hiera('biometrics_port'),
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
-  $keyserver = hiera('keyserver')
+  $keyserver = hiera('keyserver'),
 ){
 
   # really ugly way to do string concat, ignoring empties
@@ -95,38 +96,59 @@ class apache2 (
 
   if ($ssl_use_letsencrypt == true) {
 
-    apt::ppa { 'ppa:certbot/certbot':
-      options => "-y -k ${keyserver}"
-    }
+    # hack for mirebalais until we upgrade to a more recenty version of Ubuntu
+    if ($site_domain == 'emr.hum.ht') {
 
-    package { 'software-properties-common':
-      ensure => present
-    }
+      # we manually installed cert-bot via this link:
+      # https://gist.github.com/craigvantonder/6dcc3c9565b04a36f21d6cf6ffa106b4
 
-    package { 'python-certbot-apache':
-      ensure => present,
-      require => [Apt::Ppa['ppa:certbot/certbot']]
-    }
+      # set up cron to renew certificates
+      # note that the command is "certbot-auto" in this case
+      cron { 'renew certificates':
+        ensure  => present,
+        command => 'certbot-auto renew --pre-hook "service apache2 stop" --post-hook "service apache2 start"',
+        user    => 'root',
+        hour    => 00,
+        minute  => 00,
+        environment => 'MAILTO=${sysadmin_email}',
+        require => [ Exec['generate certificates'] ]
+      }
 
-    # we need to generate the certs *before* we modify the default-ssl file
-    exec { 'generate certificates':
-      command => "certbot -n -m medinfo@pih.org --apache --agree-tos --domains ${site_domain} certonly",
-      user    => 'root',
-      require => [ Package['software-properties-common'], Package['python-certbot-apache'], Package['apache2'], File['/etc/apache2/sites-enabled/default-ssl.conf'] ],
-      subscribe => Package['python-certbot-apache'],
-      before => File['/etc/apache2/sites-available/default-ssl.conf'],
-      notify => Service['apache2']
     }
+    else {
+      apt::ppa { 'ppa:certbot/certbot':
+        options => "-y -k ${keyserver}"
+      }
 
-    # set up cron to renew certificates
-    cron { 'renew certificates':
-      ensure  => present,
-      command => 'certbot renew --pre-hook "service apache2 stop" --post-hook "service apache2 start"',
-      user    => 'root',
-      hour    => 00,
-      minute  => 00,
-      environment => 'MAILTO=${sysadmin_email}',
-      require => [ Exec['generate certificates'] ]
+      package { 'software-properties-common':
+        ensure => present
+      }
+
+      package { 'python-certbot-apache':
+        ensure => present,
+        require => [Apt::Ppa['ppa:certbot/certbot']]
+      }
+
+      # we need to generate the certs *before* we modify the default-ssl file
+      exec { 'generate certificates':
+        command => "certbot -n -m medinfo@pih.org --apache --agree-tos --domains ${site_domain} certonly",
+        user    => 'root',
+        require => [ Package['software-properties-common'], Package['python-certbot-apache'], Package['apache2'], File['/etc/apache2/sites-enabled/default-ssl.conf'] ],
+        subscribe => Package['python-certbot-apache'],
+        before => File['/etc/apache2/sites-available/default-ssl.conf'],
+        notify => Service['apache2']
+      }
+
+      # set up cron to renew certificates
+      cron { 'renew certificates':
+        ensure  => present,
+        command => 'certbot renew --pre-hook "service apache2 stop" --post-hook "service apache2 start"',
+        user    => 'root',
+        hour    => 00,
+        minute  => 00,
+        environment => 'MAILTO=${sysadmin_email}',
+        require => [ Exec['generate certificates'] ]
+      }
     }
 
   }
