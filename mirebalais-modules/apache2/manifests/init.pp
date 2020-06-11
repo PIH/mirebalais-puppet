@@ -1,5 +1,4 @@
 class apache2 (
-  $site_domain = hiera('site_domain'),
   $tomcat = hiera('tomcat'),
   $services_ensure = hiera('services_ensure'),
   $services_enable = hiera('services_enable'),
