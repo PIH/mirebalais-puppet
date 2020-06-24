@@ -98,6 +98,7 @@ class apache2 (
     # hack for mirebalais until we upgrade to a more recenty version of Ubuntu
     if ($site_domain == 'emr.hum.ht') {
 
+      # instead of the apt-get install process (see below),
       # we manually installed cert-bot via this link:
       # https://gist.github.com/craigvantonder/6dcc3c9565b04a36f21d6cf6ffa106b4
 
