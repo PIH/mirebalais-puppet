@@ -101,6 +101,7 @@ class apache2 (
       # instead of the apt-get install process (see below),
       # we manually installed cert-bot via this link:
       # https://gist.github.com/craigvantonder/6dcc3c9565b04a36f21d6cf6ffa106b4
+      # also see: https://pihemr.atlassian.net/browse/UHM-4638
 
       # set up cron to renew certificates
       # note that the command is "certbot-auto" in this case
