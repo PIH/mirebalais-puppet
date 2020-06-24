@@ -110,7 +110,6 @@ class apache2 (
         hour    => 00,
         minute  => 00,
         environment => 'MAILTO=${sysadmin_email}',
-        require => [ Exec['generate certificates'] ]
       }
 
     }
