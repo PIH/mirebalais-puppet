@@ -16,7 +16,7 @@ spa_version: latest  # 'ci' is a special case
 
 #owas
 owa_cohort_builder_version: 1.0.0
-owa_order_entry_version: 1.2.0
+owa_order_entry_version: 1.2.1
 owa_lab_workflow_version: 1.0.0
 
 package_release: 'unstable/'
