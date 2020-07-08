@@ -1,11 +1,23 @@
 class petl (
   $petl                        = hiera("petl"),
+  $petl_datasource_dir         = hiera("petl_datasource_dir"),
+  $petl_job_dir                = hiera("petl_job_dir"),
   $petl_version                = hiera("petl_version"),
   $petl_java_home              = hiera("petl_java_home"),
   $petl_java_opts              = hiera("petl_java_opts"),
   $petl_server_port            = hiera("petl_server_port"),
   $petl_job_dir                = hiera("petl_job_dir"),
-  $petl_datasource_dir         = hiera("petl_datasource_dir")
+  $petl_datasource_dir         = hiera("petl_datasource_dir"),
+  $petl_mysql_host             = hiera("petl_mysql_host"),
+  $petl_mysql_port             = hiera("petl_mysql_port"),
+  $petl_mysql_databaseName     = hiera("petl_mysql_databaseName"),
+  $petl_mysql_user             = hiera("petl_mysql_user"),
+  $petl_mysql_password         = hiera("petl_mysql_password"),
+  $petl_sqlserver_host             = hiera("petl_sqlserver_host"),
+  $petl_sqlserver_port             = hiera("petl_sqlserver_port"),
+  $petl_sqlserver_databaseName     = hiera("petl_sqlserver_databaseName"),
+  $petl_sqlserver_user             = hiera("petl_sqlserver_user"),
+  $petl_sqlserver_password         = hiera("petl_sqlserver_password"),
 ) {
 
   # Setup User, and Home Directory for PETL installation

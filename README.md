@@ -41,3 +41,10 @@ http://bundler.io/v1.7/rationale.html#checking-your-code-into-version-control
 
 On the server you wish to enable debugging on, edit `/etc/default/tomcat7.`. There is a line that reads `# To enable remote debugging uncomment the following line.` Uncomment the following line.
 Note that one each redeploy this will be reset.
+
+
+### Encryption/Decryption
+
+We use puppet-decrypt to encrypt and decrypt passwords in our puppet scripts.
+
+https://github.com/maxlinc/puppet-decrypt

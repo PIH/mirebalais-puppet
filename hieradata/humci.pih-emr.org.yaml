@@ -26,6 +26,14 @@ biometrics_webapp_name: biometrics
 spa: true
 spa_version: ci
 
+#PETL config
+petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+petl_sqlserver_host: pihmeq.database.windows.net
+petl_sqlserver_port: 1433
+petl_sqlserver_databaseName: openmrs_test
+petl_sqlserver_user: meqdbadmin@pihmeq
+petl_sqlserver_password: ENC[bYqmVXA4ExxN2fIR4dkScw==:xUHnOM9vbOYzDc3DZinQ+w==:dVZ4aU5yejl4RFNzMnh0TllwSDVxUT09]
+
 # feature toggle settings
 reportingui_ad_hoc_analysis: true
 radiology_contrast_studies: true

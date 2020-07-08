@@ -1,8 +1,24 @@
 
 petl:
   homeDir: "/home/<%= @petl %>"
-  datasourceDir: "${petl.homeDir}/config/datasources"
-  jobDir: "${petl.homeDir}/config/jobs"
+  datasourceDir: "<%= @petl_datasource_dir %>"
+  jobDir: "<%= @petl_job_dir %>"
+
+mysql:
+  host: "<%= @petl_mysql_host %>"
+  port: "<%= @petl_mysql_port %>"
+  databaseName: "<%= @petl_mysql_databaseName %>"
+  user: "<%= @petl_mysql_user %>"
+  password: "<%= @petl_mysql_password %>"
+
+sqlserver:
+  host: "<%= @petl_sqlserver_host %>"
+  port: "<%= @petl_sqlserver_port %>"
+  databaseName: "<%= @petl_sqlserver_databaseName %>"
+  user: "<%= @petl_sqlserver_user %>"
+  password: "<%= @petl_sqlserver_password %>"
 
 server:
   port: <%= @petl_server_port %>
+
+

@@ -97,12 +97,22 @@ pwa_filename: ''
 
 # PETL configuration
 petl: "petl"
-petl_version: "2.0.0-SNAPSHOT"
+petl_version: "2.0.0"
 petl_java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
 petl_java_opts: ""
 petl_server_port: 9109
-petl_job_dir: "/home/petl/config/jobs"
-petl_datasource_dir: "/home/petl/config/datasources"
+petl_job_dir: "/home/%{hiera('tomcat')}/.OpenMRA/configuration/pih/petl/jobs"
+petl_datasource_dir: "/home/%{hiera('tomcat')}/.OpenMRA/configuration/pih/petl/datasources"
+petl_mysql_host: localhost
+petl_mysql_port: 3306
+petl_mysql_databaseName: openmrs
+petl_mysql_user: openmrs
+petl_mysql_password: foo
+petl_sqlserver_host: localhost
+petl_sqlserver_port: 1433
+petl_sqlserver_databaseName: openmrs_extractions
+petl_sqlserver_user: foo
+petl_sqlserver_password: bar
 
 # note that this should only be enabled if you are installing biometrics server on the same server as OpenMRS
 # Enabling fingerprinting and connecting to a biometrics server is done via pih-config
