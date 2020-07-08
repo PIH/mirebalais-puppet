@@ -32,7 +32,7 @@ petl_sqlserver_host: pihmeq.database.windows.net
 petl_sqlserver_port: 1433
 petl_sqlserver_databaseName: openmrs_test
 petl_sqlserver_user: meqdbadmin@pihmeq
-petl_sqlserver_password: ENC[bYqmVXA4ExxN2fIR4dkScw==:xUHnOM9vbOYzDc3DZinQ+w==:dVZ4aU5yejl4RFNzMnh0TllwSDVxUT09]
+petl_sqlserver_password: ENC[/cSHzuUSEKFZpys8DD4VkQ==]
 
 # feature toggle settings
 reportingui_ad_hoc_analysis: true
