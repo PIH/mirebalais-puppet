@@ -92,19 +92,29 @@ class petl (
 
   wget::fetch { "download-petl-jar":
     source      => "http://bamboo.pih-emr.org/artifacts/petl-$petl_version.jar",
-    destination => "/home/$petl/bin/petl.jar",
-   # cache_dir   => '/var/cache/wget',
+    destination => "/home/$petl/bin/petl-$petl_version.jar",
     timeout     => 0,
     verbose     => false,
     require => File["/home/$petl/bin"]
   }
 
-  file { "/home/$petl/bin/petl.jar":
+  file { "/home/$petl/bin/petl-$petl_version.jar":
     ensure  => present,
     owner   => $petl,
     group   => $petl,
     mode    => "0755",
     require => Wget::Fetch['download-petl-jar']
+  }
+
+  file { "/home/$petl/bin/petl.jar":
+    ensure  => link,
+    target => "/home/$petl/bin/petl-$petl_version.jar",
+    require => File["/home/$petl/bin/petl-$petl_version.jar"]
+  }
+
+  # remove any old versions of PETL
+  exec { "rm -f $(find . -maxdepth 1 -type f -name 'petl-*.jar' ! -name 'petl-$petl_version.jar')":
+    require => File["/home/$petl/bin/petl.jar"]
   }
 
   file { "/home/$petl/bin/petl.conf":
