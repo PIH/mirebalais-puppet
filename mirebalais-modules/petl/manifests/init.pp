@@ -160,8 +160,9 @@ class petl (
   }
 
   exec { 'petl-restart':
-    command     => "service petl restart",
+    command     => "service $petl restart",
     user        => 'root',
+    require => Service["$petl"],
     refreshonly => true
   }
 
