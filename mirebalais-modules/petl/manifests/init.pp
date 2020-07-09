@@ -109,7 +109,8 @@ class petl (
   file { "/home/$petl/bin/petl.jar":
     ensure  => link,
     target => "/home/$petl/bin/petl-$petl_version.jar",
-    require => File["/home/$petl/bin/petl-$petl_version.jar"]
+    require => File["/home/$petl/bin/petl-$petl_version.jar"],
+    notify => Exec['petl-restart']
   }
 
   # remove any old versions of PETL
@@ -132,7 +133,8 @@ class petl (
     owner   => $petl,
     group   => $petl,
     mode    => "0755",
-    require => File["/home/$petl/bin/petl.jar"]
+    require => File["/home/$petl/bin/petl.jar"],
+    notify => Exec['petl-restart']
   }
 
   # Set up scripts and services to execute PETL
@@ -155,6 +157,12 @@ class petl (
     ensure  => running,
     enable  => true,
     require => Exec["petl-startup-enable"]
+  }
+
+  exec { 'petl-restart':
+    command     => "service petl restart",
+    user        => 'root',
+    refreshonly => true
   }
 
 }
