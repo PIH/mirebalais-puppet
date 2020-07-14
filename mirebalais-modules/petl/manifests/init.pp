@@ -1,7 +1,5 @@
 class petl (
   $petl                        = hiera("petl"),
-  $petl_datasource_dir         = hiera("petl_datasource_dir"),
-  $petl_job_dir                = hiera("petl_job_dir"),
   $petl_version                = hiera("petl_version"),
   $petl_java_home              = hiera("petl_java_home"),
   $petl_java_opts              = hiera("petl_java_opts"),
