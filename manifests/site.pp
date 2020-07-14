@@ -147,6 +147,8 @@ node 'reporting.hum.ht' {
   #include monitoring
   include logging
 
+  include petl
+
   include mirebalais_reporting::reporting_setup
 }
 
