@@ -6,47 +6,6 @@ class mirebalais_reporting::production_setup (
     $tomcat = hiera('tomcat')
   ){
 
-
-  file { 'mirebalaisreportingdbdump.sh':
-    ensure  => absent,    # disabling the old reporting dump solution in favor of the new one
-    path    => '/usr/local/sbin/mirebalaisreportingdbdump.sh',
-    mode    => '0700',
-    owner   => 'root',
-    group   => 'root',
-    content => template('mirebalais_reporting/mirebalaisreportingdbdump.sh.erb'),
-  }
-
-  # note that we don't install p7zip-full here because it is already installed as part of the openmrs main package
-
-  cron { 'mysql-reporting-db-dump':
-    ensure  => absent,    # disabling the old reporting dump solution in favor of the new one
-    command => '/usr/local/sbin/mirebalaisreportingdbdump.sh >/dev/null',
-    user    => 'root',
-    hour    => 0,
-    minute  => 00,
-    environment => 'MAILTO=${sysadmin_email}',
-    require => [ File['mirebalaisreportingdbdump.sh'], Package['p7zip-full'] ]
-  }
-
-  file { 'mirebalaisreportscleanup.sh':
-    ensure => absent,    # disabling the old reporting dump solution in favor of the new one
-    path => '/usr/local/sbin/mirebalaisreportscleanup.sh',
-    mode => '0700',
-    owner => 'root',
-    group => 'root',
-    content => template('mirebalais_reporting/mirebalaisreportscleanup.sh.erb')
-  }
-
-  cron { 'mirebalais-reports-cleanup':
-    ensure => absent,    # disabling the old reporting dump solution in favor of the new one
-    command => '/usr/local/sbin/mirebalaisreportscleanup.sh >/dev/null',
-    user => 'root',
-    hour =>	5,
-    minute => 00,
-    environment => 'MAILTO=${sysadmin_email}',
-    require => [ File['mirebalaisreportscleanup.sh'] ]
-  }
-
   file { 'mirebalais-percona-backup.sh':
     ensure  => present,
     path    => '/home/percona/scripts/mirebalais-percona-backup.sh',
