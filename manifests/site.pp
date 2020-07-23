@@ -277,7 +277,7 @@ node 'kouka.pih-emr.org', 'padi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.org
   #include monitoring
 }
 
-node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org' {
+node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org', 'ces-laguna.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
