@@ -2,13 +2,15 @@
 package_release: 'stable/'
 pih_config: mexico,mexico-capitan
 config_name: openmrs-config-ces
-config_version: 1.1.0-SNAPSHOT
+config_version: 1.1.0
 
+az_backup_folder_path: mexico/capitan
+az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
+az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 server_timezone: America/Mexico_City
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
-tomcat_enable_http_8080: true
 openmrs_auto_update_database: true
 session_timeout: 120
+ssl_use_letsencrypt: true
