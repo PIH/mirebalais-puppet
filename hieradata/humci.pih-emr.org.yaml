@@ -28,11 +28,19 @@ spa_version: ci
 
 #PETL config
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
-petl_sqlserver_host: pihmeq.database.windows.net
-petl_sqlserver_port: 1433
 petl_sqlserver_databaseName: openmrs_test
-petl_sqlserver_user: meqdbadmin@pihmeq
-petl_sqlserver_password: ENC[/cSHzuUSEKFZpys8DD4VkQ==]
+
+# SQL Server Azure Cloud
+#petl_sqlserver_host: pihmeq.database.windows.net
+#petl_sqlserver_port: 1433
+#petl_sqlserver_user: meqdbadmin@pihmeq
+#petl_sqlserver_password: ENC[/cSHzuUSEKFZpys8DD4VkQ==]
+
+# SQL Server 2014 Boston office
+petl_sqlserver_host: us-pru-wired-cjkhhhbvh.dynamic-m.com
+petl_sqlserver_port: 62451
+petl_sqlserver_user: medinfoadmin
+petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 
 # feature toggle settings
 reportingui_ad_hoc_analysis: true
