@@ -131,11 +131,11 @@ class petl (
     require => Exec["petl-startup-enable"]
   }
 
+  # just restart PETL every time the deploy runs
   exec { 'petl-restart':
     command     => "service $petl restart",
     user        => 'root',
     require => Service["$petl"],
-    refreshonly => true
   }
 
 }
