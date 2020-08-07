@@ -28,6 +28,7 @@ spa_version: ci
 
 #PETL config
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 petl_sqlserver_databaseName: openmrs_test
 #use memory-resident database so that all jobs are rerun on each PETL restart
 petl_database_url: "jdbc:h2:mem:petl"
