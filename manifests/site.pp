@@ -259,7 +259,7 @@ node 'wellbody.pih-emr.org' {
   include crashplan
 }
 
-node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.org', 'lespwa.pih-emr.org' , 'ces-ci.pih-emr.org', 'peru-ci.pih-emr.org' {
+node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.org', 'lespwa.pih-emr.org' , 'ces-ci.pih-emr.org', 'peru-ci.pih-emr.org', 'haitihivtest.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
