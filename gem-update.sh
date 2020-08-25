@@ -27,6 +27,10 @@ gem install bundler --no-ri --no-rdoc
 bundle
 bundle update
 
+# hack to remove the problematic ec2 fact, see: https://pihemr.atlassian.net/browse/UHM-3869
+rm -f /var/lib/gems/2.3.0/gems/facter-2.5.7/lib/facter/util/ec2.rb
+rm -f /var/lib/gems/2.3.0/gems/facter-2.5.7/lib/facter/ec2.rb
+
 fi
 
 echo "modulepath = /etc/puppet/modules:/etc/puppet/mirebalais-modules" > puppet.conf
