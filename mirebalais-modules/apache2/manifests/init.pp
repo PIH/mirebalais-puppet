@@ -16,6 +16,9 @@ class apache2 (
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
   $keyserver = hiera('keyserver'),
+  $letsencrypt_user = decrypt(hiera('letsencrypt_user')),
+  $letsencrypt_user_password = decrypt(hiera('letsencrypt_user_password')),
+  $sysadmin_email = hiera('sysadmin_email'),
   $azure_dns_subscription_id = decrypt(hiera('azure_dns_subscription_id')),
   $azure_dns_tenant_id = decrypt(hiera('azure_dns_tenant_id')),
   $azure_dns_app_id = decrypt(hiera('azure_dns_app_id')),
@@ -181,57 +184,74 @@ class apache2 (
     require  => [ Package['apache2'], Package['libapache2-mod-jk'] ],
   }
 
-  user { 'acme':
+  user { "$letsencrypt_user":
     ensure => 'present',
-    home => '/var/acme',
+    password => "$letsencrypt_user_password",
+    home => "/var/$letsencrypt_user",
     managehome => true,
     shell => '/bin/bash'
   }
 
   file { "/etc/letsencrypt" :
     ensure => directory,
-    owner   => "acme",
+    owner   => "$letsencrypt_user",
     group   => "root",
-    require => User['acme']
+    require => User["$letsencrypt_user"]
   }
 
   file { "/etc/letsencrypt/live" :
     ensure => directory,
-    owner   => "acme",
+    owner   => "$letsencrypt_user",
     group   => "root",
-    require => File['/etc/letsencrypt']
+    require => File["/etc/letsencrypt"]
   }
 
   file { "/etc/letsencrypt/live/$site_domain" :
     ensure => directory,
-    owner   => "acme",
+    owner   => "$letsencrypt_user",
     group   => "root",
     mode    => '0710',
-    require => File['/etc/letsencrypt/live']
+    require => File["/etc/letsencrypt/live"]
   }
 
-  file { 'install-letsencrypt-acme.sh':
+  file { "install-letsencrypt.sh":
     ensure  => present,
-    path    => '/var/acme/install-letsencrypt-acme.sh',
+    path    => "/var/$letsencrypt_user/install-letsencrypt.sh",
     mode    => '0700',
-    owner   => 'acme',
-    group   => 'acme',
-    content => template('apache2/install-letsencrypt-acme.sh.erb'),
-    require => User['acme']
+    owner   => "$letsencrypt_user",
+    group   => "$letsencrypt_user",
+    content => template('apache2/install-letsencrypt.sh.erb'),
+    require => User["$letsencrypt_user"]
   }
 
-  exec { 'download and run install letsencrypt using acme':
-    command => "/var/acme/install-letsencrypt-acme.sh",
-    require => [ User['acme'], File['install-letsencrypt-acme.sh']]
+  exec { "add user to sudoers":
+    command => "echo '$letsencrypt_user    ALL=(ALL) NOPASSWD: /usr/sbin/service apache2 restart' | sudo EDITOR='tee -a' visudo",
+    require => User["$letsencrypt_user"]
   }
 
-  cron { 'renew certificates using acme user':
+  exec { "download and from the git repo":
+    command => "rm -rf /var/$letsencrypt_user/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/$letsencrypt_user/acme.sh",
+    require => User["$letsencrypt_user"]
+  }
+
+  exec { "Initial letsencrypt install":
+    command => "su $letsencrypt_user && cd /var/$letsencrypt_user/acme.sh && /bin/bash acme.sh --install",
+    require => [User["$letsencrypt_user"], Exec['download and from the git repo']]
+  }
+
+  exec { "download and run install letsencrypt using $letsencrypt_user":
+    command => "/var/$letsencrypt_user/install-letsencrypt.sh",
+    require => [User["$letsencrypt_user"], Exec['Initial letsencrypt install']]
+  }
+
+  cron { "renew certificates using $letsencrypt_user user":
     ensure  => present,
-    command => '"/var/acme/.acme.sh"/acme.sh --cron --home "/var/acme/.acme.sh" > /dev/null',
-    user    => 'acme',
+    command => "'/var/$letsencrypt_user/.$letsencrypt_user.sh'/$letsencrypt_user.sh --cron --home '/var/$letsencrypt_user/.$letsencrypt_user.sh' > /dev/null",
+    user    => "$letsencrypt_user",
     hour    => 23,
     minute  => 00,
     environment => 'MAILTO=${sysadmin_email}',
+    require => User["$letsencrypt_user"]
   }
 
   # allows other modules to trigger an apache restart

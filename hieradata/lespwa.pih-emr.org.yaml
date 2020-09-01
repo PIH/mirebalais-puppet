@@ -16,4 +16,10 @@ mysql_net_write_timeout: 120
 mysql_wait_timeout: 28800
 mysql_interactive_timeout: 28800
 
+#letsencrypt
+azure_dns_subscription_id: ENC[roYSeZU0cSjB6+P6aOWEXYVgCL64D33EQcfUd7L80970icq7M7LFmvlOSyYPI3bm]
+azure_dns_tenant_id: ENC[5LWTjj76sYS2kxC4FktrecjxHpznSDVezymGgwlCzdNGmdymse5ihQOOKFpAwCJa]
+azure_dns_app_id: ENC[shiW8Zw+zKNZjwEojjsm0pzj3SOJGUpRJl7pMZ9FULbrxVKYi/nWrAmRAGifWya3]
+azure_dns_client_secret: ENC[f+Bvtjd7pyxAFpRgF3ZM8kzj5BfsQY3bZJ3jZrlebuPs5yF4zR69KWwP8l98Ut+5]
+
 # java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'

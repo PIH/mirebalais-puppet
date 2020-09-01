@@ -31,12 +31,6 @@ azure_dns_tenant_id: ENC[5LWTjj76sYS2kxC4FktrecjxHpznSDVezymGgwlCzdNGmdymse5ihQO
 azure_dns_app_id: ENC[NiY0+gdLyMzvHgzA34X8GV/dUjVLK+XaXz67Q9CzdJS7zqQUshiqA6J/2FgkD1pl]
 azure_dns_client_secret: ENC[Illfbs4LPZrUvdg3f/WH7cKUcUI+E9zbWzeGoFG2pOIJxa/0MNibYkymcRQefLGr]
 
-ssl_cert_dir: '/etc/letsencrypt/live/$site_domain'
-ssl_key_dir: '/etc/letsencrypt/live/$site_domain'
-ssl_cert_file: 'cert.pem'
-ssl_chain_file: 'fullchain.pem'
-ssl_key_file: 'privkey.pem'
-
 # spa
 spa: true
 spa_version: mirebalais-latest

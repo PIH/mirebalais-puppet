@@ -154,3 +154,7 @@ atomfeed_repo_url: https://openmrs.jfrog.io/artifactory/snapshots
 
 config_name: ""
 config_version: ""
+
+#letsencrypt
+letsencrypt_user: ENC[9FMGMhzduPP8o91p6Dr7iQ==]
+letsencrypt_user_password: ENC[eL1m774+TJrHbEzwAad61Q==]

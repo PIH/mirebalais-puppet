@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -x
+
+EMRREPORTING='<%= @site_domain %>'
+export EMRREPORTING='<%= @site_domain %>'
+
+sudo EMRREPORTING=$EMRREPORTING -s -u  <%= @letsencrypt_user %> bash
+
+chown -R  <%= @letsencrypt_user %>:<%= @letsencrypt_user %> /var/<%= @letsencrypt_user %>/<%= @letsencrypt_user %>.sh
+
+export AZUREDNS_SUBSCRIPTIONID='<%= @azure_dns_subscription_id %>'
+export AZUREDNS_TENANTID='<%= @azure_dns_tenant_id %>'
+export AZUREDNS_APPID='<%= @azure_dns_app_id %>'
+export AZUREDNS_CLIENTSECRET='<%= @azure_dns_client_secret %>'
+
+/bin/bash /var/<%= @letsencrypt_user %>/<%= @letsencrypt_user %>.sh/<%= @letsencrypt_user %>.sh --issue --dns dns_azure -d "$EMRREPORTING" --force
+/bin/bash /var/<%= @letsencrypt_user %>/<%= @letsencrypt_user %>.sh/<%= @letsencrypt_user %>.sh --install-cert --domain "$EMRREPORTING" --cert-file /etc/letsencrypt/live/"$EMRREPORTING"/cert.pem --key-file /etc/letsencrypt/live/"$EMRREPORTING"/privkey.pem --fullchain-file /etc/letsencrypt/live/"$EMRREPORTING"/fullchain.pem --ca-file /etc/letsencrypt/live/"$EMRREPORTING"/chain.pem --reloadcmd "sudo /usr/sbin/service apache2 restart" --force
+/bin/bash /var/<%= @letsencrypt_user %>/<%= @letsencrypt_user %>.sh/<%= @letsencrypt_user %>.sh --uninstall-cronjob --force
