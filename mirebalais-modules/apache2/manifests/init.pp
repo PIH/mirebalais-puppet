@@ -16,6 +16,10 @@ class apache2 (
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
   $keyserver = hiera('keyserver'),
+  $azure_dns_subscription_id = decrypt(hiera('azure_dns_subscription_id')),
+  $azure_dns_tenant_id = decrypt(hiera('azure_dns_tenant_id')),
+  $azure_dns_app_id = decrypt(hiera('azure_dns_app_id')),
+  $azure_dns_client_secret = decrypt(hiera('azure_dns_client_secret')),
 ){
 
   # really ugly way to do string concat, ignoring empties
@@ -175,6 +179,59 @@ class apache2 (
     ensure   => $services_ensure,
     enable   => $services_enable,
     require  => [ Package['apache2'], Package['libapache2-mod-jk'] ],
+  }
+
+  user { 'acme':
+    ensure => 'present',
+    home => '/var/acme',
+    managehome => true,
+    shell => '/bin/bash'
+  }
+
+  file { "/etc/letsencrypt" :
+    ensure => directory,
+    owner   => "acme",
+    group   => "root",
+    require => User['acme']
+  }
+
+  file { "/etc/letsencrypt/live" :
+    ensure => directory,
+    owner   => "acme",
+    group   => "root",
+    require => File['/etc/letsencrypt']
+  }
+
+  file { "/etc/letsencrypt/live/$site_domain" :
+    ensure => directory,
+    owner   => "acme",
+    group   => "root",
+    mode    => '0710',
+    require => File['/etc/letsencrypt/live']
+  }
+
+  file { 'install-letsencrypt-acme.sh':
+    ensure  => present,
+    path    => '/var/acme/install-letsencrypt-acme.sh',
+    mode    => '0700',
+    owner   => 'acme',
+    group   => 'acme',
+    content => template('apache2/install-letsencrypt-acme.sh.erb'),
+    require => User['acme']
+  }
+
+  exec { 'download and run install letsencrypt using acme':
+    command => "/var/acme/install-letsencrypt-acme.sh",
+    require => [ User['acme'], File['install-letsencrypt-acme.sh']]
+  }
+
+  cron { 'renew certificates using acme user':
+    ensure  => present,
+    command => '"/var/acme/.acme.sh"/acme.sh --cron --home "/var/acme/.acme.sh" > /dev/null',
+    user    => 'acme',
+    hour    => 23,
+    minute  => 00,
+    environment => 'MAILTO=${sysadmin_email}',
   }
 
   # allows other modules to trigger an apache restart
