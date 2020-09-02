@@ -148,7 +148,9 @@ class apache2 (
     require => User["$letsencrypt_user"]
   }
 
+  # the unless condition only allow this script to run once.
   exec { "download and run install letsencrypt using $letsencrypt_user":
+    unless  => "/bin/ls -ap /var/$letsencrypt_user | grep '^\..*/$' | grep acme.sh | grep -v grep",
     command => "/var/$letsencrypt_user/install-letsencrypt.sh",
     require => [User["$letsencrypt_user"], Exec['download and from the git repo']]
   }
