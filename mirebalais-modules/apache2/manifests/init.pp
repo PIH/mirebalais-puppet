@@ -28,6 +28,10 @@ class apache2 (
   # really ugly way to do string concat, ignoring empties
   $worker_list = join(split("${webapp_name} ${pwa_webapp_name} ${biometrics_webapp_name}", '\s+'), ',')
 
+  package { 'software-properties-common':
+    ensure => present
+  }
+
   package { 'apache2':
     ensure => installed,
   }
@@ -36,11 +40,10 @@ class apache2 (
     ensure => installed,
   }
 
-  # ensure symlink created between sites enabled and sites available (should happen automatically but I blew this away in one case)
-  file { '/etc/apache2/sites-enabled/default-ssl.conf':
-    ensure  => link,
-    target  => '../sites-available/default-ssl.conf',
-    require => Package['apache2']
+  service { 'apache2':
+    ensure   => $services_ensure,
+    enable   => $services_enable,
+    require  => [ Package['apache2'], Package['libapache2-mod-jk'] ],
   }
 
   file { '/etc/logrotate.d/apache2':
@@ -76,12 +79,6 @@ class apache2 (
     notify => Service['apache2']
   }
 
-  file { '/etc/apache2/sites-available/default-ssl.conf':
-    ensure => file,
-    content => template('apache2/default-ssl.conf.erb'),
-    notify => Service['apache2']
-  }
-
   file { '/var/www/html/.htaccess':
     ensure => file,
     source => 'puppet:///modules/apache2/www/htaccess'
@@ -98,90 +95,6 @@ class apache2 (
     subscribe   => [ Package['apache2'], Package['libapache2-mod-jk'] ],
     refreshonly => true,
     notify      => Service['apache2']
-  }
-
-  if ($ssl_use_letsencrypt == true) {
-
-    # hack for mirebalais until we upgrade to a more recenty version of Ubuntu
-    if ($site_domain == 'emr.hum.ht') {
-
-      # instead of the apt-get install process (see below),
-      # we manually installed cert-bot via this link:
-      # https://gist.github.com/craigvantonder/6dcc3c9565b04a36f21d6cf6ffa106b4
-      # also see: https://pihemr.atlassian.net/browse/UHM-4638
-
-      # set up cron to renew certificates
-      # note that the command is "certbot-auto" in this case
-      cron { 'renew certificates':
-        ensure  => present,
-        command => 'certbot-auto renew --pre-hook "service apache2 stop" --post-hook "service apache2 start"',
-        user    => 'root',
-        hour    => 00,
-        minute  => 00,
-        environment => 'MAILTO=${sysadmin_email}',
-      }
-
-    }
-    else {
-      apt::ppa { 'ppa:certbot/certbot':
-        options => "-y -k ${keyserver}"
-      }
-
-      package { 'software-properties-common':
-        ensure => present
-      }
-
-      package { 'python-certbot-apache':
-        ensure => present,
-        require => [Apt::Ppa['ppa:certbot/certbot']]
-      }
-
-      # we need to generate the certs *before* we modify the default-ssl file
-      exec { 'generate certificates':
-        command => "certbot -n -m medinfo@pih.org --apache --agree-tos --domains ${site_domain} certonly",
-        user    => 'root',
-        require => [ Package['software-properties-common'], Package['python-certbot-apache'], Package['apache2'], File['/etc/apache2/sites-enabled/default-ssl.conf'] ],
-        subscribe => Package['python-certbot-apache'],
-        before => File['/etc/apache2/sites-available/default-ssl.conf'],
-        notify => Service['apache2']
-      }
-
-      # set up cron to renew certificates
-      cron { 'renew certificates':
-        ensure  => present,
-        command => 'certbot renew --pre-hook "service apache2 stop" --post-hook "service apache2 start"',
-        user    => 'root',
-        hour    => 00,
-        minute  => 00,
-        environment => 'MAILTO=${sysadmin_email}',
-        require => [ Exec['generate certificates'] ]
-      }
-    }
-
-  }
-  else {
-    file { "${ssl_cert_dir}/${ssl_cert_file}":
-      ensure => file,
-      source => "puppet:///modules/apache2/etc/ssl/certs/${ssl_cert_file}",
-      notify => Service['apache2']
-    }
-
-    file { "${ssl_cert_dir}/${ssl_chain_file}":
-      ensure => file,
-      source => "puppet:///modules/apache2/etc/ssl/certs/${ssl_chain_file}",
-      notify => Service['apache2']
-    }
-
-    file { "${ssl_key_dir}/${ssl_key_file}":
-      ensure => present,
-      notify => Service['apache2']
-    }
-  }
-
-  service { 'apache2':
-    ensure   => $services_ensure,
-    enable   => $services_enable,
-    require  => [ Package['apache2'], Package['libapache2-mod-jk'] ],
   }
 
   user { "$letsencrypt_user":
@@ -219,12 +132,13 @@ class apache2 (
     path    => "/var/$letsencrypt_user/install-letsencrypt.sh",
     mode    => '0700',
     owner   => "$letsencrypt_user",
-    group   => "$letsencrypt_user",
+    group   => root,
     content => template('apache2/install-letsencrypt.sh.erb'),
     require => User["$letsencrypt_user"]
   }
 
   exec { "add user to sudoers":
+    unless  => "/bin/cat /etc/sudoers | grep $letsencrypt_user",
     command => "echo '$letsencrypt_user    ALL=(ALL) NOPASSWD: /usr/sbin/service apache2 restart' | sudo EDITOR='tee -a' visudo",
     require => User["$letsencrypt_user"]
   }
@@ -234,14 +148,9 @@ class apache2 (
     require => User["$letsencrypt_user"]
   }
 
-  exec { "Initial letsencrypt install":
-    command => "su $letsencrypt_user && cd /var/$letsencrypt_user/acme.sh && /bin/bash acme.sh --install",
-    require => [User["$letsencrypt_user"], Exec['download and from the git repo']]
-  }
-
   exec { "download and run install letsencrypt using $letsencrypt_user":
     command => "/var/$letsencrypt_user/install-letsencrypt.sh",
-    require => [User["$letsencrypt_user"], Exec['Initial letsencrypt install']]
+    require => [User["$letsencrypt_user"], Exec['download and from the git repo']]
   }
 
   cron { "renew certificates using $letsencrypt_user user":
@@ -250,8 +159,32 @@ class apache2 (
     user    => "$letsencrypt_user",
     hour    => 23,
     minute  => 00,
-    environment => 'MAILTO=${sysadmin_email}',
+    environment => "MAILTO=${sysadmin_email}",
     require => User["$letsencrypt_user"]
+  }
+
+  cron { "restart apache2 $letsencrypt_user user":
+    ensure  => present,
+    command => "sudo service apache2 restart > /dev/null",
+    user    => root,
+    hour    => 23,
+    minute  => 03,
+    environment => "MAILTO=${sysadmin_email}",
+    require => Cron["renew certificates using $letsencrypt_user user"]
+  }
+
+  file { '/etc/apache2/sites-available/default-ssl.conf':
+    ensure => file,
+    content => template('apache2/default-ssl.conf.erb'),
+    require => [Package['apache2'], User["$letsencrypt_user"], Exec['download and from the git repo'], Exec["download and run install letsencrypt using $letsencrypt_user"]],
+    notify => Service['apache2']
+  }
+
+  # ensure symlink created between sites enabled and sites available (should happen automatically but I blew this away in one case)
+  file { '/etc/apache2/sites-enabled/default-ssl.conf':
+    ensure  => link,
+    target  => '../sites-available/default-ssl.conf',
+    require => [Package['apache2'], User["$letsencrypt_user"], Exec['download and from the git repo'], Exec["download and run install letsencrypt using $letsencrypt_user"]]
   }
 
   # allows other modules to trigger an apache restart
