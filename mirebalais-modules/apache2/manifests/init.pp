@@ -21,6 +21,10 @@ class apache2 (
   $azure_dns_tenant_id = decrypt(hiera('azure_dns_tenant_id')),
   $azure_dns_app_id = decrypt(hiera('azure_dns_app_id')),
   $azure_dns_client_secret = decrypt(hiera('azure_dns_client_secret')),
+  $cert_cron_hour = hiera('cert_cron_hour'),
+  $cert_cron_min = hiera('cert_cron_min'),
+  $apache_cron_restart_hour = hiera('apache_cron_restart_hour'),
+  $apache_cron_restart_min = hiera('apache_cron_restart_min'),
 ){
 
   # really ugly way to do string concat, ignoring empties
@@ -148,8 +152,8 @@ class apache2 (
     ensure  => present,
     command => "'/var/acme/.acme.sh'/acme.sh --cron --home '/var/acme/.acme.sh' > /dev/null",
     user    => "root",
-    hour    => 23,
-    minute  => 00,
+    hour    => "$cert_cron_hour",
+    minute  => "$cert_cron_min",
     environment => "MAILTO=${sysadmin_email}",
     require => File["/var/acme"]
   }
@@ -158,8 +162,8 @@ class apache2 (
     ensure  => present,
     command => "service apache2 restart > /dev/null",
     user    => root,
-    hour    => 23,
-    minute  => 03,
+    hour    => "$apache_cron_restart_hour",
+    minute  => "$apache_cron_restart_min",
     environment => "MAILTO=${sysadmin_email}",
     require => Cron["renew certificates using acme user"]
   }
