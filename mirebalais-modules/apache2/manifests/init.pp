@@ -16,8 +16,6 @@ class apache2 (
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
   $keyserver = hiera('keyserver'),
-  $letsencrypt_user = decrypt(hiera('letsencrypt_user')),
-  $letsencrypt_user_password = decrypt(hiera('letsencrypt_user_password')),
   $sysadmin_email = hiera('sysadmin_email'),
   $azure_dns_subscription_id = decrypt(hiera('azure_dns_subscription_id')),
   $azure_dns_tenant_id = decrypt(hiera('azure_dns_tenant_id')),
@@ -97,31 +95,28 @@ class apache2 (
     notify      => Service['apache2']
   }
 
-  user { "$letsencrypt_user":
-    ensure => 'present',
-    password => "$letsencrypt_user_password",
-    home => "/var/$letsencrypt_user",
-    managehome => true,
-    shell => '/bin/bash'
+  file { "/var/acme":
+    ensure => directory,
+    owner   => "root",
+    group   => "root"
   }
 
   file { "/etc/letsencrypt" :
     ensure => directory,
-    owner   => "$letsencrypt_user",
-    group   => "root",
-    require => User["$letsencrypt_user"]
+    owner   => "root",
+    group   => "root"
   }
 
   file { "/etc/letsencrypt/live" :
     ensure => directory,
-    owner   => "$letsencrypt_user",
+    owner   => "root",
     group   => "root",
     require => File["/etc/letsencrypt"]
   }
 
   file { "/etc/letsencrypt/live/$site_domain" :
     ensure => directory,
-    owner   => "$letsencrypt_user",
+    owner   => "root",
     group   => "root",
     mode    => '0710',
     require => File["/etc/letsencrypt/live"]
@@ -129,56 +124,50 @@ class apache2 (
 
   file { "install-letsencrypt.sh":
     ensure  => present,
-    path    => "/var/$letsencrypt_user/install-letsencrypt.sh",
+    path    => "/var/acme/install-letsencrypt.sh",
     mode    => '0700',
-    owner   => "$letsencrypt_user",
-    group   => root,
+    owner   => "root",
+    group   => "root",
     content => template('apache2/install-letsencrypt.sh.erb'),
-    require => User["$letsencrypt_user"]
+    require => File["/var/acme"]
   }
 
-  exec { "add user to sudoers":
-    unless  => "/bin/cat /etc/sudoers | grep $letsencrypt_user",
-    command => "echo '$letsencrypt_user    ALL=(ALL) NOPASSWD: /usr/sbin/service apache2 restart' | sudo EDITOR='tee -a' visudo",
-    require => User["$letsencrypt_user"]
-  }
-
-  exec { "download and from the git repo":
-    command => "rm -rf /var/$letsencrypt_user/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/$letsencrypt_user/acme.sh",
-    require => User["$letsencrypt_user"]
+  exec { "download acme from the git repo":
+    command => "rm -rf /var/acme/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/acme/acme.sh",
+    require => File["/var/acme"]
   }
 
   # the unless condition only allow this script to run once.
-  exec { "download and run install letsencrypt using $letsencrypt_user":
-    unless  => "/bin/ls -ap /var/$letsencrypt_user | grep '^\..*/$' | grep acme.sh | grep -v grep",
-    command => "/var/$letsencrypt_user/install-letsencrypt.sh",
-    require => [User["$letsencrypt_user"], Exec['download and from the git repo']]
+  exec { "download and run install letsencrypt":
+    unless  => "/bin/ls -ap /var/acme | grep '^\..*/$' | grep acme.sh | grep -v grep",
+    command => "/var/acme/install-letsencrypt.sh",
+    require =>  Exec['download acme from the git repo']
   }
 
-  cron { "renew certificates using $letsencrypt_user user":
+  cron { "renew certificates using acme user":
     ensure  => present,
-    command => "'/var/$letsencrypt_user/.$letsencrypt_user.sh'/$letsencrypt_user.sh --cron --home '/var/$letsencrypt_user/.$letsencrypt_user.sh' > /dev/null",
-    user    => "$letsencrypt_user",
+    command => "'/var/acme/.acme.sh'/acme.sh --cron --home '/var/acme/.acme.sh' > /dev/null",
+    user    => "root",
     hour    => 23,
     minute  => 00,
     environment => "MAILTO=${sysadmin_email}",
-    require => User["$letsencrypt_user"]
+    require => File["/var/acme"]
   }
 
-  cron { "restart apache2 $letsencrypt_user user":
+  cron { "restart apache2":
     ensure  => present,
-    command => "sudo service apache2 restart > /dev/null",
+    command => "service apache2 restart > /dev/null",
     user    => root,
     hour    => 23,
     minute  => 03,
     environment => "MAILTO=${sysadmin_email}",
-    require => Cron["renew certificates using $letsencrypt_user user"]
+    require => Cron["renew certificates using acme user"]
   }
 
   file { '/etc/apache2/sites-available/default-ssl.conf':
     ensure => file,
     content => template('apache2/default-ssl.conf.erb'),
-    require => [Package['apache2'], User["$letsencrypt_user"], Exec['download and from the git repo'], Exec["download and run install letsencrypt using $letsencrypt_user"]],
+    require => [Package['apache2'], Exec['download acme from the git repo'], Exec["download and run install letsencrypt"]],
     notify => Service['apache2']
   }
 
@@ -186,7 +175,7 @@ class apache2 (
   file { '/etc/apache2/sites-enabled/default-ssl.conf':
     ensure  => link,
     target  => '../sites-available/default-ssl.conf',
-    require => [Package['apache2'], User["$letsencrypt_user"], Exec['download and from the git repo'], Exec["download and run install letsencrypt using $letsencrypt_user"]]
+    require => [Package['apache2'], Exec['download acme from the git repo'], Exec["download and run install letsencrypt"]]
   }
 
   # allows other modules to trigger an apache restart
