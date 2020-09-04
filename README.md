@@ -48,3 +48,10 @@ Note that one each redeploy this will be reset.
 We use puppet-decrypt to encrypt and decrypt passwords in our puppet scripts.
 
 https://github.com/maxlinc/puppet-decrypt
+
+
+### SSL & LetsEncrypt
+
+LetsEncrypt uses the `site_domain` parameter in hieradata to generate an SSL cert.
+Puppet only ever attempts to initialize it once, so if setup fails for any
+reason you will need to `rm -r /var/acme` before running `./puppet-apply.sh site` again.
