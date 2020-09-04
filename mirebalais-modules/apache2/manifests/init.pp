@@ -16,10 +16,23 @@ class apache2 (
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
   $keyserver = hiera('keyserver'),
+  $sysadmin_email = hiera('sysadmin_email'),
+  $azure_dns_subscription_id = decrypt(hiera('azure_dns_subscription_id')),
+  $azure_dns_tenant_id = decrypt(hiera('azure_dns_tenant_id')),
+  $azure_dns_app_id = decrypt(hiera('azure_dns_app_id')),
+  $azure_dns_client_secret = decrypt(hiera('azure_dns_client_secret')),
+  $cert_cron_hour = hiera('cert_cron_hour'),
+  $cert_cron_min = hiera('cert_cron_min'),
+  $apache_cron_restart_hour = hiera('apache_cron_restart_hour'),
+  $apache_cron_restart_min = hiera('apache_cron_restart_min'),
 ){
 
   # really ugly way to do string concat, ignoring empties
   $worker_list = join(split("${webapp_name} ${pwa_webapp_name} ${biometrics_webapp_name}", '\s+'), ',')
+
+  package { 'software-properties-common':
+    ensure => present
+  }
 
   package { 'apache2':
     ensure => installed,
@@ -29,11 +42,10 @@ class apache2 (
     ensure => installed,
   }
 
-  # ensure symlink created between sites enabled and sites available (should happen automatically but I blew this away in one case)
-  file { '/etc/apache2/sites-enabled/default-ssl.conf':
-    ensure  => link,
-    target  => '../sites-available/default-ssl.conf',
-    require => Package['apache2']
+  service { 'apache2':
+    ensure   => $services_ensure,
+    enable   => $services_enable,
+    require  => [ Package['apache2'], Package['libapache2-mod-jk'] ],
   }
 
   file { '/etc/logrotate.d/apache2':
@@ -69,12 +81,6 @@ class apache2 (
     notify => Service['apache2']
   }
 
-  file { '/etc/apache2/sites-available/default-ssl.conf':
-    ensure => file,
-    content => template('apache2/default-ssl.conf.erb'),
-    notify => Service['apache2']
-  }
-
   file { '/var/www/html/.htaccess':
     ensure => file,
     source => 'puppet:///modules/apache2/www/htaccess'
@@ -93,88 +99,87 @@ class apache2 (
     notify      => Service['apache2']
   }
 
-  if ($ssl_use_letsencrypt == true) {
-
-    # hack for mirebalais until we upgrade to a more recenty version of Ubuntu
-    if ($site_domain == 'emr.hum.ht') {
-
-      # instead of the apt-get install process (see below),
-      # we manually installed cert-bot via this link:
-      # https://gist.github.com/craigvantonder/6dcc3c9565b04a36f21d6cf6ffa106b4
-      # also see: https://pihemr.atlassian.net/browse/UHM-4638
-
-      # set up cron to renew certificates
-      # note that the command is "certbot-auto" in this case
-      cron { 'renew certificates':
-        ensure  => present,
-        command => 'certbot-auto renew --pre-hook "service apache2 stop" --post-hook "service apache2 start"',
-        user    => 'root',
-        hour    => 00,
-        minute  => 00,
-        environment => 'MAILTO=${sysadmin_email}',
-      }
-
-    }
-    else {
-      apt::ppa { 'ppa:certbot/certbot':
-        options => "-y -k ${keyserver}"
-      }
-
-      package { 'software-properties-common':
-        ensure => present
-      }
-
-      package { 'python-certbot-apache':
-        ensure => present,
-        require => [Apt::Ppa['ppa:certbot/certbot']]
-      }
-
-      # we need to generate the certs *before* we modify the default-ssl file
-      exec { 'generate certificates':
-        command => "certbot -n -m medinfo@pih.org --apache --agree-tos --domains ${site_domain} certonly",
-        user    => 'root',
-        require => [ Package['software-properties-common'], Package['python-certbot-apache'], Package['apache2'], File['/etc/apache2/sites-enabled/default-ssl.conf'] ],
-        subscribe => Package['python-certbot-apache'],
-        before => File['/etc/apache2/sites-available/default-ssl.conf'],
-        notify => Service['apache2']
-      }
-
-      # set up cron to renew certificates
-      cron { 'renew certificates':
-        ensure  => present,
-        command => 'certbot renew --pre-hook "service apache2 stop" --post-hook "service apache2 start"',
-        user    => 'root',
-        hour    => 00,
-        minute  => 00,
-        environment => 'MAILTO=${sysadmin_email}',
-        require => [ Exec['generate certificates'] ]
-      }
-    }
-
-  }
-  else {
-    file { "${ssl_cert_dir}/${ssl_cert_file}":
-      ensure => file,
-      source => "puppet:///modules/apache2/etc/ssl/certs/${ssl_cert_file}",
-      notify => Service['apache2']
-    }
-
-    file { "${ssl_cert_dir}/${ssl_chain_file}":
-      ensure => file,
-      source => "puppet:///modules/apache2/etc/ssl/certs/${ssl_chain_file}",
-      notify => Service['apache2']
-    }
-
-    file { "${ssl_key_dir}/${ssl_key_file}":
-      ensure => present,
-      notify => Service['apache2']
-    }
+  file { "/var/acme":
+    ensure => directory,
+    owner   => "root",
+    group   => "root"
   }
 
-  service { 'apache2':
-    ensure   => $services_ensure,
-    enable   => $services_enable,
-    require  => [ Package['apache2'], Package['libapache2-mod-jk'] ],
+  file { "/etc/letsencrypt" :
+    ensure => directory,
+    owner   => "root",
+    group   => "root"
+  }
+
+  file { "/etc/letsencrypt/live" :
+    ensure => directory,
+    owner   => "root",
+    group   => "root",
+    require => File["/etc/letsencrypt"]
+  }
+
+  file { "/etc/letsencrypt/live/$site_domain" :
+    ensure => directory,
+    owner   => "root",
+    group   => "root",
+    mode    => '0710',
+    require => File["/etc/letsencrypt/live"]
+  }
+
+  file { "install-letsencrypt.sh":
+    ensure  => present,
+    path    => "/var/acme/install-letsencrypt.sh",
+    mode    => '0700',
+    owner   => "root",
+    group   => "root",
+    content => template('apache2/install-letsencrypt.sh.erb'),
+    require => File["/var/acme"]
+  }
+
+  exec { "download acme from the git repo":
+    command => "rm -rf /var/acme/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/acme/acme.sh",
+    require => File["/var/acme"]
+  }
+
+  # the unless condition only allow this script to run once.
+  exec { "download and run install letsencrypt":
+    unless  => "/bin/ls -ap /var/acme | grep '^\..*/$' | grep acme.sh | grep -v grep",
+    command => "/var/acme/install-letsencrypt.sh",
+    require =>  Exec['download acme from the git repo']
+  }
+
+  cron { "renew certificates using acme user":
+    ensure  => present,
+    command => "'/var/acme/.acme.sh'/acme.sh --cron --home '/var/acme/.acme.sh' > /dev/null",
+    user    => "root",
+    hour    => "$cert_cron_hour",
+    minute  => "$cert_cron_min",
+    environment => "MAILTO=${sysadmin_email}",
+    require => File["/var/acme"]
+  }
+
+  cron { "restart apache2":
+    ensure  => present,
+    command => "service apache2 restart > /dev/null",
+    user    => root,
+    hour    => "$apache_cron_restart_hour",
+    minute  => "$apache_cron_restart_min",
+    environment => "MAILTO=${sysadmin_email}",
+    require => Cron["renew certificates using acme user"]
+  }
+
+  file { '/etc/apache2/sites-available/default-ssl.conf':
+    ensure => file,
+    content => template('apache2/default-ssl.conf.erb'),
+    require => [Package['apache2'], Exec['download acme from the git repo'], Exec["download and run install letsencrypt"]],
+    notify => Service['apache2']
+  }
+
+  # ensure symlink created between sites enabled and sites available (should happen automatically but I blew this away in one case)
+  file { '/etc/apache2/sites-enabled/default-ssl.conf':
+    ensure  => link,
+    target  => '../sites-available/default-ssl.conf',
+    require => [Package['apache2'], Exec['download acme from the git repo'], Exec["download and run install letsencrypt"]]
   }
 
   # allows other modules to trigger an apache restart
