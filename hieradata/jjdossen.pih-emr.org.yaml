@@ -5,7 +5,7 @@ package_release: 'stable/'
 
 pih_config: liberia,liberia-harper,liberia-harper-jjdossen
 config_name: openmrs-config-pihliberia
-config_version: 1.2.0-SNAPSHOT
+config_version: 1.1.2
 
 server_timezone: Africa/Monrovia
 
