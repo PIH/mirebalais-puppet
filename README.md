@@ -55,3 +55,16 @@ https://github.com/maxlinc/puppet-decrypt
 LetsEncrypt uses the `site_domain` parameter in hieradata to generate an SSL cert.
 Puppet only ever attempts to initialize it once, so if setup fails for any
 reason you will need to `rm -r /var/acme` before running `./puppet-apply.sh site` again.
+
+
+### Azcopy
+
+Ensure that in the yaml file `az_backup_folder_path` is set correctly
+
+for example for HUM:
+
+```
+az_backup_folder_path: haiti/mirebalais
+```
+
+where `haiti` is the country name and `mirebalais` is the site name.
