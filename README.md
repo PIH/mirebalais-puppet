@@ -48,3 +48,12 @@ Note that one each redeploy this will be reset.
 We use puppet-decrypt to encrypt and decrypt passwords in our puppet scripts.
 
 https://github.com/maxlinc/puppet-decrypt
+
+### Azcopy
+Ensure that in the yaml file az_backup_folder_path is set to the correct parameters
+
+for example for HUM:
+
+az_backup_folder_path: haiti/mirebalais
+
+where haiti is the country name and "mirebalais" is the site name.

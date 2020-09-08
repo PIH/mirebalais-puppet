@@ -2,7 +2,7 @@
 worker.list=<%= @worker_list %>
 
 worker.<%= @webapp_name %>.port=8009
-worker.<%= @webapp_name %>.host=localhost
+worker.<%= @webapp_name %>.host=127.0.0.1
 worker.<%= @webapp_name %>.type=ajp13
 
 <% if @biometrics_enabled == true %>
