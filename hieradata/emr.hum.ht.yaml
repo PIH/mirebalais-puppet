@@ -1,6 +1,7 @@
 webapp_name: mirebalais
 az_backup_folder_path: haiti/mirebalais
 
+package_version: '1.0.4979-1'
 package_release: 'stable/'
 
 pih_config: mirebalais,mirebalais-production
