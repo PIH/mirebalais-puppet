@@ -139,4 +139,10 @@ class petl (
     require => Service["$petl"],
   }
 
+  ## logrotate
+  file { '/etc/logrotate.d/petl':
+    ensure  => file,
+    content  => template('petl/logrotate.erb')
+  }
+
 }
