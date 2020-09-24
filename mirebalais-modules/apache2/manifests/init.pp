@@ -160,7 +160,7 @@ class apache2 (
 
   cron { "restart apache2":
     ensure  => present,
-    command => "service apache2 restart > /dev/null",
+    command => "/usr/sbin/service apache2 restart > /dev/null",
     user    => root,
     hour    => "$apache_cron_restart_hour",
     minute  => "$apache_cron_restart_min",

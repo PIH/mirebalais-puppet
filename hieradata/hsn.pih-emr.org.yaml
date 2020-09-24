@@ -14,7 +14,6 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 remote_db_user: backups
-remote_db_server: amigo.pih-emr.org
 remote_backup_dir: haiti/hsn/db
 
 backup_file_prefix: hsn
