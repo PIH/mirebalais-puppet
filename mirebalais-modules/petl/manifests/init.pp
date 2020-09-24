@@ -6,6 +6,7 @@ class petl (
   $petl_server_port            = hiera("petl_server_port"),
   $petl_job_dir                = hiera("petl_job_dir"),
   $petl_datasource_dir         = hiera("petl_datasource_dir"),
+  $petl_database_url           = hiera("petl_database_url"),
   $petl_mysql_host             = hiera("petl_mysql_host"),
   $petl_mysql_port             = hiera("petl_mysql_port"),
   $petl_mysql_databaseName     = hiera("petl_mysql_databaseName"),
