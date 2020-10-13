@@ -1,6 +1,6 @@
 ---
 webapp_name: openmrs
-site_domain: belladere.pih-emr.org
+site_domain: boucancarre.pih-emr.org
 
 package_release: 'stable/'
 
