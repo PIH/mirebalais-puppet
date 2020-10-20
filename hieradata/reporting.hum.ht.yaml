@@ -40,6 +40,7 @@ petl_sqlserver_port: 1433
 petl_sqlserver_databaseName: openmrs_reporting
 petl_sqlserver_user: openmrs
 petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
+petl_error_subject: HUM Reporting petl errors
 
 # spa
 spa: true

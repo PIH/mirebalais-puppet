@@ -18,6 +18,10 @@ class petl (
   $petl_sqlserver_databaseName     = hiera("petl_sqlserver_databaseName"),
   $petl_sqlserver_user             = hiera("petl_sqlserver_user"),
   $petl_sqlserver_password         = decrypt(hiera("petl_sqlserver_password")),
+  $petl_cron_hour                  = hiera('petl_cron_hour'),
+  $petl_error_subject              = hiera('petl_error_subject'),
+  $sysadmin_email                  = hiera('sysadmin_email'),
+
 ) {
 
   # Setup User, and Home Directory for PETL installation
@@ -144,6 +148,25 @@ class petl (
   file { '/etc/logrotate.d/petl':
     ensure  => file,
     content  => template('petl/logrotate.erb')
+  }
+
+  # Petl error file
+  file { "/usr/local/sbin/checkPetlErrors.sh":
+    ensure  => present,
+    content => template('petl/checkPetlErrors.sh.erb'),
+    owner   => root,
+    group   => root,
+    mode    => '0755',
+    require => File["/home/$petl/bin"]
+  }
+
+  cron { 'petl-error':
+    ensure  => present,
+    command => '/usr/local/sbin/checkPetlErrors.sh &> /dev/null',
+    user    => 'root',
+    hour    => "${petl_cron_hour}",
+    minute  => 00,
+    require => File["/usr/local/sbin/checkPetlErrors.sh"]
   }
 
 }

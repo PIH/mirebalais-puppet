@@ -1,0 +1,25 @@
+#!/bin/bash
+
+EMAIL="<%= @sysadmin_email %>"
+SUBJECT="<%= @petl_error_subject %>"
+PETL_LOGS="/usr/local/sbin/petl-errors"
+PETL_ORIG_LOGS="/var/log/petl.log"
+
+/bin/rm -rf ${PETL_LOGS}
+
+## read and write today's errors from petl log file to petl-error
+/bin/cat ${PETL_ORIG_LOGS} | /bin/grep $(date +"%Y")-$(date +"%m")-$(date +"%d") | /bin/grep "ERROR" >> ${PETL_LOGS}
+
+# Read last error line
+LAST_ERROR_LINE=$(/usr/bin/tail -n 1 ${PETL_LOGS} | /bin/grep -oE '[^ ]+$')
+#[[ ! -z ${LAST_ERROR_LINE} ]] && echo ${LAST_ERROR_LINE}
+
+#Delete file to consistently use one file name
+/bin/rm -rf ${PETL_LOGS}
+
+# Read error. it output 60 line above and below the ${LAST_ERROR_LINE}
+# This is read only if ${LAST_ERROR_LINE} is not empty)
+[ ! -z ${LAST_ERROR_LINE} ] && /bin/cat ${PETL_ORIG_LOGS} | /bin/grep -C 60 "${LAST_ERROR_LINE}" >> ${PETL_LOGS}
+
+# mail the error to sys admins (if the ${PETL_LOGS} file is not empty)
+[ -s  ${PETL_LOGS} ] && mail -s "${SUBJECT}" ${EMAIL} <  ${PETL_LOGS}

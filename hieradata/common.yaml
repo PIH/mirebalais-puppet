@@ -115,6 +115,8 @@ petl_sqlserver_port: 1433
 petl_sqlserver_databaseName: openmrs_extractions
 petl_sqlserver_user: foo
 petl_sqlserver_password: bar
+petl_error_subject: Petl errors
+petl_cron_hour: '*/6'
 
 # note that this should only be enabled if you are installing biometrics server on the same server as OpenMRS
 # Enabling fingerprinting and connecting to a biometrics server is done via pih-config
