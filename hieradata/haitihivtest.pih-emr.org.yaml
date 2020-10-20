@@ -27,6 +27,8 @@ petl_sqlserver_host: us-pru-wired-cjkhhhbvh.dynamic-m.com
 petl_sqlserver_port: 62451
 petl_sqlserver_user: medinfoadmin
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
+petl_error_subject: HaitiHivTest petl errors
+petl_cron_hour: '*/4'
 
 # feature toggles
 additional_haiti_identifiers: true
