@@ -4,7 +4,7 @@ site_domain: humci.pih-emr.org
 
 pih_config: mirebalais,mirebalais-humci
 config_name: openmrs-config-zl
-config_version: 1.10.0-SNAPSHOT
+config_version: 1.12.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
@@ -33,6 +33,8 @@ petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%
 petl_sqlserver_databaseName: openmrs_humci
 #use memory-resident database so that all jobs are rerun on each PETL restart
 petl_database_url: "jdbc:h2:mem:petl"
+petl_error_subject: Humci petl errors
+petl_cron_hour: '*/4'
 
 # SQL Server Azure Cloud
 #petl_sqlserver_host: pihmeq.database.windows.net

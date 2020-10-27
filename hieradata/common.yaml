@@ -20,7 +20,7 @@ owa_order_entry_version: 1.2.1
 owa_lab_workflow_version: 1.0.0
 
 package_release: 'unstable/'
-package_version: '1.0.5159-1'
+package_version: '1.0.5186-1'
 
 mysql_server_id: 1
 mysql_root_password: foo
@@ -115,6 +115,8 @@ petl_sqlserver_port: 1433
 petl_sqlserver_databaseName: openmrs_extractions
 petl_sqlserver_user: foo
 petl_sqlserver_password: bar
+petl_error_subject: Petl errors
+petl_cron_hour: '*/6'
 
 # note that this should only be enabled if you are installing biometrics server on the same server as OpenMRS
 # Enabling fingerprinting and connecting to a biometrics server is done via pih-config
