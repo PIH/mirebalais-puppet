@@ -24,7 +24,7 @@ biometrics_enabled: true
 biometrics_webapp_name: biometrics
 
 spa: true
-spa_version: ci
+spa_version: mirebalais-latest
 
 #PETL config
 petl_version: "2.1.0-SNAPSHOT"   # ues latest snapshot
