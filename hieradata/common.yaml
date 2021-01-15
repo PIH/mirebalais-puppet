@@ -102,7 +102,7 @@ petl_java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
 petl_java_opts: ""
 petl_database_url: "jdbc:h2:file:${petl.homeDir}/data/petl;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE"
 petl_server_port: 9109
-petl_job_dir: "/home/%{hiera('tomcat')}/.OpenMRS/configuration/pih/petl/jobs"
+petl_job_dir: "/home/%{hiera('tomcat')}/.OpenMRS/configuration"
 petl_datasource_dir: "/home/%{hiera('tomcat')}/.OpenMRS/configuration/pih/petl/datasources"
 petl_mysql_host: localhost
 petl_mysql_port: 3306
