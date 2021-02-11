@@ -31,9 +31,6 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 #petl_error_subject: HaitiHivTest petl errors
 #petl_cron_hour: '*/4'
 
-# feature toggles
-additional_haiti_identifiers: true
-
 mysql_net_read_timeout: 120
 mysql_net_write_timeout: 120
 mysql_wait_timeout: 28800
