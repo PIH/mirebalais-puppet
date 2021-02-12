@@ -7,7 +7,7 @@ az_backup_folder_path: liberia/pleebo
 
 pih_config: liberia,liberia-pleebo
 config_name: openmrs-config-pihliberia
-config_version: 1.1.2
+config_version: 1.2.0
 
 server_timezone: Africa/Monrovia
 
