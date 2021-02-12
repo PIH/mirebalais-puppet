@@ -128,7 +128,6 @@ biometrics_port: 9009
 insurance_collection: true
 radiology_contrast_studies: false
 appointmentscheduling_confidential: false
-additional_haiti_identifiers: false
 reportingui_ad_hoc_analysis: false
 htmlformentryui_simpleform_navbuttons: false
 

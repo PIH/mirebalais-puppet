@@ -31,9 +31,6 @@ petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 petl_error_subject: HaitiHivTest petl errors
 petl_cron_hour: '*/4'
 
-# feature toggles
-additional_haiti_identifiers: true
-
 mysql_net_read_timeout: 120
 mysql_net_write_timeout: 120
 mysql_wait_timeout: 28800
