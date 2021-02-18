@@ -304,6 +304,8 @@ node 'haitihivtest.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
+  include percona
+
   include petl
 
   #include monitoring
@@ -330,6 +332,32 @@ node 'haiti-test.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
+  include percona
+
+}
+
+node 'haititest.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mailx
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include apache2
+  include tomcat
+
+  include openmrs
+  include openmrs::initial_setup
+
+  include percona
 }
 
 node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org', 'ces-laguna.pih-emr.org' {

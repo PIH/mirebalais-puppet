@@ -1,6 +1,6 @@
 ---
 webapp_name: openmrs
-site_domain: haitihivtest.pih-emr.org
+site_domain: haititest.pih-emr.org
 
 pih_config: haiti-hiv,haiti-hiv-ci
 config_name: openmrs-config-zl
@@ -10,6 +10,9 @@ openmrs_auto_update_database: true
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+
+mysql_innodb_buffer_pool_size: 6G
+mysql_innodb_buffer_pool_instances: 8
 
 #PETL config
 petl_version: "2.1.0-SNAPSHOT"   # ues latest snapshot
