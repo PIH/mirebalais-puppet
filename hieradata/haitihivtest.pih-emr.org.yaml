@@ -11,6 +11,9 @@ openmrs_auto_update_database: true
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
+mysql_innodb_buffer_pool_size: 8G
+mysql_innodb_buffer_pool_instances: 8
+
 #PETL config
 petl_version: "2.1.0-SNAPSHOT"   # ues latest snapshot
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
