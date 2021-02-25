@@ -1,7 +1,7 @@
 
 site_domain: kgh-test.pih-emr.org
 
-pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-kgh
+pih_config: sierraLeone,sierraLeone-kgh
 config_name: openmrs-config-pihsl
 config_version: 1.5.0-SNAPSHOT
 
