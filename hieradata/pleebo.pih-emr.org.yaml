@@ -21,7 +21,7 @@ archive_hour: 02
 backup_delete_older_than_x_days: 60
 
 remote_db_user: backups
-remote_db_server: 25.62.129.248
+remote_db_server: 10.160.18.22
 remote_backup_dir: liberia/pleebo/db
 
 openmrs_auto_update_database: true
