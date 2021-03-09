@@ -14,7 +14,7 @@ bundle
 
 fi
 
-if [ $(lsb_release -rs) == "16.04" ]
+if [ $(lsb_release -rs) == "16.04" ] || [ $(lsb_release -rs) == "20.04" ]
 then
 add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
 apt-get -y update
@@ -30,6 +30,28 @@ bundle update
 # hack to remove the problematic ec2 fact, see: https://pihemr.atlassian.net/browse/UHM-3869
 rm -f /var/lib/gems/2.3.0/gems/facter-2.5.7/lib/facter/util/ec2.rb
 rm -f /var/lib/gems/2.3.0/gems/facter-2.5.7/lib/facter/ec2.rb
+
+fi
+
+if  [ $(lsb_release -rs) == "20.04" ]
+then
+add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
+add-apt-repository 'deb http://archive.ubuntu.com/ubuntu xenial universe'
+add-apt-repository 'deb http://archive.ubuntu.com/ubuntu focal universe'
+apt-get -y update
+apt-get -y upgrade
+cp -r Gemfile2004 Gemfile
+sudo apt-get -y install build-essential ruby-full
+
+gem install bundler --no-document
+
+bundle
+bundle update
+
+# hack to remove the problematic ec2 fact, see: https://pihemr.atlassian.net/browse/UHM-3869
+# not sure if this is an issue but for now removing them too
+rm -f /var/lib/gems/2.7.0/gems/facter-2.5.7/lib/facter/util/ec2.rb
+rm -f /var/lib/gems/2.7.0/gems/facter-2.5.7/lib/facter/ec2.rb
 
 fi
 
