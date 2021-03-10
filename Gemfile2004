@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'puppet', '= 6.21.1'
+gem 'puppet', '= 5.5.22'
 gem 'puppet-lint', '= 0.3.2'
 gem 'librarian-puppet', '= 3.0.0'
 gem 'rspec-puppet', '= 0.1.5'
