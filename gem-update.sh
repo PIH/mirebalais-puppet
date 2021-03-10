@@ -55,8 +55,10 @@ bundle update
 
 # hack to remove the problematic ec2 fact, see: https://pihemr.atlassian.net/browse/UHM-3869
 # not sure if this is an issue but for now removing them too
-rm -f /var/lib/gems/2.3.3/gems/facter-2.5.7/lib/facter/util/ec2.rb
-rm -f /var/lib/gems/2.3.3/gems/facter-2.5.7/lib/facter/ec2.rb
+rm -f /var/lib/gems/2.7.0/gems/facter-2.5.7/lib/facter/util/ec2.rb
+rm -f /var/lib/gems/2.7.0/gems/facter-2.5.7/lib/facter/ec2.rb
+
+puppet module install pegas-cron --version 0.10.0
 
 fi
 
