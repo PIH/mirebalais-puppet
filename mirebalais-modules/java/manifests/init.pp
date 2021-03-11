@@ -15,7 +15,7 @@ class java (
   package { 'openjdk-8-jdk':
     ensure  => present,
     notify => Service[$tomcat],
-    require => [File['/etc/environment'], Apt::Ppa['ppa:openjdk-r/ppa']]
+    require => [File['/etc/environment']]
   }
 
   # uninstall OpenJDK 7
