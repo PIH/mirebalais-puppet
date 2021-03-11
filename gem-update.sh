@@ -27,16 +27,14 @@ downloadUrlRuby=(
 http://archive.ubuntu.com/ubuntu/pool/main/g/gdbm/libgdbm5_1.14.1-6_amd64.deb
 http://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb
 http://archive.ubuntu.com/ubuntu/pool/main/r/readline/libreadline7_7.0-3_amd64.deb
-http://archive.ubuntu.com/ubuntu/pool/main/r/readline/libreadline7_7.0-3_amd64.deb
 http://archive.ubuntu.com/ubuntu/pool/main/n/ncurses/libtinfo5_6.1-1ubuntu1_amd64.deb
 http://launchpadlibrarian.net/362101842/ruby_2.5.1_amd64.deb
 )
 
 rubyPackages=(
+libtinfo5_6.1-1ubuntu1_amd64.deb
 libgdbm5_1.14.1-6_amd64.deb
 libffi6_3.2.1-8_amd64.deb
-libreadline7_7.0-3_amd64.deb
-libtinfo5_6.1-1ubuntu1_amd64.deb
 libreadline7_7.0-3_amd64.deb
 )
 
@@ -97,9 +95,9 @@ downloadRubyPackages() {
 }
 
 installRuby() {
-                                        for rubyPackages in ${rubyPackages[@]}
+                                        for rubyPackage in ${rubyPackages[@]}
                                         do
-                                                /usr/bin/dpkg $rubyPackages
+                                                /usr/bin/dpkg -i $rubyPackages
                                         done
 
 }
@@ -147,8 +145,9 @@ removeOsPackages
 
 downloadRubyPackages
 installRuby
-apt install rake libruby2.5 ruby2.5
-dpkg -i ruby_2.5.1_amd64.deb
+
+apt install -y rake libruby2.5 ruby2.5
+/usr/bin/dpkg -i ruby_2.5.1_amd64.deb
 
 deleteDownloadedRubyPackages
 
