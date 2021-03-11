@@ -156,6 +156,8 @@ gem install bundler --no-document
 bundle
 bundle update
 
+apt-get update --allow-insecure-repositories
+
 fi
 
 echo "modulepath = /etc/puppet/modules:/etc/puppet/mirebalais-modules" > puppet.conf
