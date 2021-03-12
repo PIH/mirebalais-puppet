@@ -62,7 +62,7 @@ node 'emr.hum.ht' {
 
 }
 
-node 'humci.pih-emr.org', 'testing-upgrade.pih-emr.org' {
+node 'humci.pih-emr.org', 'humtest.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
