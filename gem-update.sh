@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 deleteDownloadedRubyPackages=(
 ruby_2.5.1_amd64*
@@ -97,7 +97,7 @@ downloadRubyPackages() {
 installRuby() {
                                         for rubyPackage in ${rubyPackages[@]}
                                         do
-                                                /usr/bin/dpkg -i $rubyPackages
+                                                /usr/bin/dpkg -i $rubyPackage
                                         done
 
 }
@@ -112,7 +112,7 @@ installOsPackages() {
 removeOsPackages() {
  					for osPackages in ${downloadedOsPackages[@]}
                                         do
-                                                /usr/bin/dpkg -i $osPackages
+                                                /bin/rm -rf $osPackages
                                         done
 }
 
