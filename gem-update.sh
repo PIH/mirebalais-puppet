@@ -38,6 +38,55 @@ libffi6_3.2.1-8_amd64.deb
 libreadline7_7.0-3_amd64.deb
 )
 
+deleteDownloadedRubyPackages() {
+                                        for rubyPackage in ${deleteDownloadedRubyPackages[@]}
+                                        do
+                                                /bin/rm -rf $rubyPackage
+                                        done
+}
+
+
+downloadOsPackages() {
+                                        for osPackage in ${osPackagesToDowload[@]}
+                                        do
+                                                wget $osPackage
+                                        done
+}
+
+downloadRubyPackages() {
+                                        for rubyPackage in ${downloadUrlRuby[@]}
+                                        do
+                                                wget $rubyPackage
+                                        done
+
+}
+
+installRuby() {
+                                        for rubyPackage in ${rubyPackages[@]}
+                                        do
+                                                /usr/bin/dpkg -i $rubyPackage
+                                        done
+
+}
+
+installOsPackages() {
+                                        for osPackages in ${downloadedOsPackages[@]}
+                                        do
+                                                /usr/bin/dpkg -i $osPackages
+                                        done
+}
+
+removeOsPackages() {
+                                        for osPackages in ${downloadedOsPackages[@]}
+                                        do
+                                                /bin/rm -rf $osPackages
+                                        done
+}
+
+isPackageInstalled() {
+    /usr/bin/apt list --installed | grep "$1" &> /dev/null
+}
+
 # hack to make sure we have ruby1.9 installed instead of ruby1.8
 if [ $(lsb_release -rs) == "14.04" ]
 then
@@ -71,52 +120,6 @@ rm -f /var/lib/gems/2.3.0/gems/facter-2.5.7/lib/facter/ec2.rb
 
 fi
 
-deleteDownloadedRubyPackages() {
- 					for rubyPackage in ${deleteDownloadedRubyPackages[@]}
-                                        do
-                                                /bin/rm -rf $rubyPackage
-                                        done
-}
-
-
-downloadOsPackages() {
-                                        for osPackage in ${osPackagesToDowload[@]}
-                                        do
-                                                wget $osPackage
-                                        done
-}
-
-downloadRubyPackages() {
-					for rubyPackage in ${downloadUrlRuby[@]}
-                                        do
-                                                wget $rubyPackage
-                                        done
-
-}
-
-installRuby() {
-                                        for rubyPackage in ${rubyPackages[@]}
-                                        do
-                                                /usr/bin/dpkg -i $rubyPackage
-                                        done
-
-}
-
-installOsPackages() {
-                                        for osPackages in ${downloadedOsPackages[@]}
-                                        do
-                                                /usr/bin/dpkg -i $osPackages
-                                        done
-}
-
-removeOsPackages() {
- 					for osPackages in ${downloadedOsPackages[@]}
-                                        do
-                                                /bin/rm -rf $osPackages
-                                        done
-}
-
-
 if  [ $(lsb_release -rs) == "20.04" ]
 then
 add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
@@ -125,37 +128,52 @@ add-apt-repository 'deb http://archive.ubuntu.com/ubuntu focal universe'
 add-apt-repository 'deb http://security.ubuntu.com/ubuntu bionic-security main'
 apt-get -y update
 apt-get -y upgrade
-apt-get -y install libssl-dev
 cp -r Gemfile2004 Gemfile
 
-deleteDownloadedRubyPackages
-
-apt-get purge -y ruby
-apt-get autoclean -y
-
 apt-get -y install build-essential
-apt-get -f install
-apt --fix-broken install
 
-apt-mark hold libruby2.7:i386 ruby:i386 ruby2.7:i386 libruby2.7 ruby2.7
+### If ruby2.5 is already installed, do no remove it
+if ! isPackageInstalled ruby2.5 ; then
 
-downloadOsPackages
-installOsPackages
-removeOsPackages
+	apt-get purge -y ruby
+	apt-get autoclean -y
 
-downloadRubyPackages
-installRuby
+	apt-mark hold libruby2.7:i386 ruby:i386 ruby2.7:i386 libruby2.7 ruby2.7
 
-apt install -y rake libruby2.5 ruby2.5
-/usr/bin/dpkg -i ruby_2.5.1_amd64.deb
+	apt-get -f install
+	apt --fix-broken install
 
-deleteDownloadedRubyPackages
+        echo "installing ruby2.5"
+	/usr/bin/apt-get -y install libssl-dev
+	deleteDownloadedRubyPackages
+	downloadRubyPackages
+	installRuby
+	deleteDownloadedRubyPackages
+
+	/usr/bin/apt install -y rake libruby2.5 ruby2.5
+	/usr/bin/dpkg -i ruby_2.5.1_amd64.deb
+else
+	echo "ruby2.5 is already installed"
+fi
+
+### if mysql-server-5.6 does not exist, install it. If it exists, do not remove
+if ! isPackageInstalled mysql-server-5.6 ; then
+        echo "installing irequired packages for mysql-server-5.6 to be installed"
+	removeOsPackages
+	downloadOsPackages
+	installOsPackages
+	removeOsPackages
+else
+        echo "mysql-server-5.6 is already installed"
+fi
 
 gem install bundler --no-document
 
 bundle
 bundle update
 
+apt-get -f install
+apt --fix-broken install
 apt-get update --allow-insecure-repositories
 
 fi
