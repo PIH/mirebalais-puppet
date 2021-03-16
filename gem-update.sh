@@ -158,7 +158,8 @@ fi
 
 ### if mysql-server-5.6 does not exist, install it. If it exists, do not remove
 if ! isPackageInstalled mysql-server-5.6 ; then
-        echo "installing irequired packages for mysql-server-5.6 to be installed"
+        echo "installing required packages for mysql-server-5.6 to be installed"
+	/bin/rm -rf /var/lib/mysql/debian-*
 	removeOsPackages
 	downloadOsPackages
 	installOsPackages
