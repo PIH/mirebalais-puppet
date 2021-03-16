@@ -18,9 +18,9 @@ http://archive.ubuntu.com/ubuntu/pool/main/i/insserv/insserv_1.14.0-5ubuntu3_amd
 )
 
 downloadedOsPackages=(
-initscripts_2.88dsf-59.3ubuntu2_amd64.deb
 sysv-rc_2.88dsf-59.3ubuntu2_all.deb
 insserv_1.14.0-5ubuntu3_amd64.deb
+initscripts_2.88dsf-59.3ubuntu2_amd64.deb
 )
 
 downloadUrlRuby=(
@@ -135,13 +135,10 @@ apt-get -y install build-essential
 ### If ruby2.5 is already installed, do no remove it
 if ! isPackageInstalled ruby2.5 ; then
 
-	apt-get purge -y ruby
+	apt-get purge -y libruby2.7 ruby2.7
 	apt-get autoclean -y
 
 	apt-mark hold libruby2.7:i386 ruby:i386 ruby2.7:i386 libruby2.7 ruby2.7
-
-	apt-get -f install
-	apt --fix-broken install
 
         echo "installing ruby2.5"
 	/usr/bin/apt-get -y install libssl-dev
