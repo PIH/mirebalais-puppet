@@ -84,7 +84,7 @@ removeOsPackages() {
 }
 
 isPackageInstalled() {
-    /usr/bin/apt list --installed | grep "$1" &> /dev/null
+    					/usr/bin/apt list --installed | grep "$1" &> /dev/null
 }
 
 # hack to make sure we have ruby1.9 installed instead of ruby1.8
@@ -132,23 +132,26 @@ cp -r Gemfile2004 Gemfile
 
 apt-get -y install build-essential
 
+apt-mark hold libruby2.7:i386 ruby:i386 ruby2.7:i386 libruby2.7 ruby2.7 libruby2.7:amd64.deb ruby2.7:amd64.deb
+apt-get autoclean -y
+
 ### If ruby2.5 is already installed, do no remove it
 if ! isPackageInstalled ruby2.5 ; then
 
-	apt-get purge -y libruby2.7 ruby2.7
-	apt-get autoclean -y
-
-	apt-mark hold libruby2.7:i386 ruby:i386 ruby2.7:i386 libruby2.7 ruby2.7
-
         echo "installing ruby2.5"
+	apt-get purge -y libruby2.7 ruby2.7 ruby
+	/bin/rm -rf /var/lib/gems/2.7.0
+	
 	/usr/bin/apt-get -y install libssl-dev
+	
 	deleteDownloadedRubyPackages
 	downloadRubyPackages
 	installRuby
-	deleteDownloadedRubyPackages
-
-	/usr/bin/apt install -y rake libruby2.5 ruby2.5
+	
+	/usr/bin/apt install -y rake ruby-did-you-mean libruby2.5 ruby2.5
 	/usr/bin/dpkg -i ruby_2.5.1_amd64.deb
+
+	deleteDownloadedRubyPackages
 else
 	echo "ruby2.5 is already installed"
 fi
@@ -156,7 +159,14 @@ fi
 ### if mysql-server-5.6 does not exist, install it. If it exists, do not remove
 if ! isPackageInstalled mysql-server-5.6 ; then
         echo "installing required packages for mysql-server-5.6 to be installed"
-	/bin/rm -rf /var/lib/mysql/debian-*
+	apt-get remove php-mysql php7.4-mysql
+	apt-get purge libdbd-mysql* libdbd-mysql-perl libmysqlclient21 mysql*
+	/bin/rm -rf /var/lib/mysql
+	/bin/rm -rf /var/lib/mysql-keyring
+	/bin/rm -rf /var/lib/mysql-files
+	/bin/rm -rf /etc/mysql
+	apt-get autoclean -y
+
 	removeOsPackages
 	downloadOsPackages
 	installOsPackages
