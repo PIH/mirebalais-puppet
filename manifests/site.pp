@@ -62,7 +62,7 @@ node 'emr.hum.ht' {
 
 }
 
-node 'humci.pih-emr.org', 'humtest.pih-emr.org' {
+node 'humci.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
@@ -95,6 +95,29 @@ node 'humci.pih-emr.org', 'humtest.pih-emr.org' {
   #include monitoring
 }
 
+node humtest.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mailx
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include tomcat
+  include apache2
+
+  include openmrs
+  include openmrs::initial_setup
+
+  include openmrs::atomfeed
+}
 
 node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
 
