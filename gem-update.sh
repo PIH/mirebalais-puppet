@@ -159,8 +159,8 @@ fi
 ### if mysql-server-5.6 does not exist, install it. If it exists, do not remove
 if ! isPackageInstalled mysql-server-5.6 ; then
         echo "installing required packages for mysql-server-5.6 to be installed"
-	apt-get remove php-mysql php7.4-mysql
-	apt-get purge libdbd-mysql* libdbd-mysql-perl libmysqlclient21 mysql*
+	apt-get remove -y php-mysql php7.4-mysql
+	apt-get purge -y libdbd-mysql* libdbd-mysql-perl libmysqlclient21 mysql*
 	/bin/rm -rf /var/lib/mysql
 	/bin/rm -rf /var/lib/mysql-keyring
 	/bin/rm -rf /var/lib/mysql-files
@@ -180,9 +180,10 @@ gem install bundler --no-document
 bundle
 bundle update
 
-apt-get -f install
-apt --fix-broken install
-apt-get update --allow-insecure-repositories
+apt-get -f install -y
+apt --fix-broken install -y
+apt-get update --allow-insecure-repositories -y
+apt-get autoremove -y
 
 fi
 
