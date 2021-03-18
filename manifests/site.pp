@@ -95,7 +95,7 @@ node 'humci.pih-emr.org' {
   #include monitoring
 }
 
-node humtest.pih-emr.org' {
+node 'humtest.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
