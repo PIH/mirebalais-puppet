@@ -35,7 +35,7 @@ if ($spa_version == 'ci') {
   # In a deployment, the bundle produced by Bamboo is deployed onto the server.
 
   $config_suffix = regsubst($config_name, 'openmrs-config-', '')
-  $package_url = "http://bamboo.pih-emr.org:81/spa-repo/pih-spa-frontend/pih-spa-${config_suffix}-${spa_version}.zip"
+  $package_url = "https://bamboo.pih-emr.org:81/spa-repo/pih-spa-frontend/pih-spa-${config_suffix}-${spa_version}.zip"
 
   exec{'download_and_install_spa_frontend':
     command => "/usr/bin/wget -q ${package_url} -O /tmp/pih-spa-frontend.zip && unzip -o /tmp/pih-spa-frontend.zip && rm -rf /home/${tomcat}/.OpenMRS/configuration/frontend && mv openmrs/frontend/ /home/${tomcat}/.OpenMRS/configuration/",
