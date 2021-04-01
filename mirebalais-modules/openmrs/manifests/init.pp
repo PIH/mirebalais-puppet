@@ -102,7 +102,7 @@ class openmrs (
     require => User[$tomcat]
   }
 
-  # added this to handle reworking off application data directory in Core 2.x
+  # added this to handle reworking of application data directory in Core 2.x
   file { "/home/${tomcat}/.OpenMRS/${webapp_name}":
     ensure  => 'link',
     owner   => $tomcat,
