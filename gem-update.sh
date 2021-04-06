@@ -1,16 +1,5 @@
 #!/bin/bash
 
-deleteDownloadedRubyPackages=(
-ruby_2.5.1_amd64*
-libffi6_3.2.1-8_amd64*
-libgdbm5_1.14.1-6_amd64*
-libreadline7_7.0-3_amd64*
-libtinfo5_6.1-1ubuntu1_amd64*
-initscripts_2.88dsf-59.3ubuntu2_amd64*
-sysv-rc_2.88dsf-59.3ubuntu2_all*
-insserv_1.14.0-5ubuntu3_amd64*
-)
-
 osPackagesToDowload=(
 http://archive.ubuntu.com/ubuntu/pool/main/s/sysvinit/initscripts_2.88dsf-59.3ubuntu2_amd64.deb
 http://archive.ubuntu.com/ubuntu/pool/main/s/sysvinit/sysv-rc_2.88dsf-59.3ubuntu2_all.deb
@@ -23,50 +12,11 @@ insserv_1.14.0-5ubuntu3_amd64.deb
 initscripts_2.88dsf-59.3ubuntu2_amd64.deb
 )
 
-downloadUrlRuby=(
-http://archive.ubuntu.com/ubuntu/pool/main/g/gdbm/libgdbm5_1.14.1-6_amd64.deb
-http://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb
-http://archive.ubuntu.com/ubuntu/pool/main/r/readline/libreadline7_7.0-3_amd64.deb
-http://archive.ubuntu.com/ubuntu/pool/main/n/ncurses/libtinfo5_6.1-1ubuntu1_amd64.deb
-http://launchpadlibrarian.net/362101842/ruby_2.5.1_amd64.deb
-)
-
-rubyPackages=(
-libtinfo5_6.1-1ubuntu1_amd64.deb
-libgdbm5_1.14.1-6_amd64.deb
-libffi6_3.2.1-8_amd64.deb
-libreadline7_7.0-3_amd64.deb
-)
-
-deleteDownloadedRubyPackages() {
-                                        for rubyPackage in ${deleteDownloadedRubyPackages[@]}
-                                        do
-                                                /bin/rm -rf $rubyPackage
-                                        done
-}
-
-
 downloadOsPackages() {
                                         for osPackage in ${osPackagesToDowload[@]}
                                         do
                                                 wget $osPackage
                                         done
-}
-
-downloadRubyPackages() {
-                                        for rubyPackage in ${downloadUrlRuby[@]}
-                                        do
-                                                wget $rubyPackage
-                                        done
-
-}
-
-installRuby() {
-                                        for rubyPackage in ${rubyPackages[@]}
-                                        do
-                                                /usr/bin/dpkg -i $rubyPackage
-                                        done
-
 }
 
 installOsPackages() {
@@ -126,6 +76,7 @@ add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
 add-apt-repository 'deb http://archive.ubuntu.com/ubuntu xenial universe'
 add-apt-repository 'deb http://archive.ubuntu.com/ubuntu focal universe'
 add-apt-repository 'deb http://security.ubuntu.com/ubuntu bionic-security main'
+
 apt-get -y update
 apt-get -y upgrade
 cp -r Gemfile2004 Gemfile
@@ -139,19 +90,26 @@ apt-get autoclean -y
 if ! isPackageInstalled ruby2.5 ; then
 
         echo "installing ruby2.5"
-	apt-get purge -y libruby2.7 ruby2.7 ruby
+	apt-get purge -y ruby*
+	
 	/bin/rm -rf /var/lib/gems/2.7.0
-	
+	/bin/rm -rf /var/lib/gems/2.3.0
+	/bin/rm -rf /var/lib/gems/1.9.0
+	/bin/rm -rf /usr/local/bin/librarian-puppet
+     	/bin/rm -rf /usr/local/bin/puppet
+
 	/usr/bin/apt-get -y install libssl-dev
-	
-	deleteDownloadedRubyPackages
-	downloadRubyPackages
-	installRuby
+
+	# ruby 2.5
+        apt-add-repository -y ppa:brightbox/ruby-ng
+        apt-get -y update
+        apt-get -y upgrade
+	apt-get -y dist-upgrade
 	
 	/usr/bin/apt install -y rake ruby-did-you-mean libruby2.5 ruby2.5
-	/usr/bin/dpkg -i ruby_2.5.1_amd64.deb
 
-	deleteDownloadedRubyPackages
+	bundle update --bundler
+
 else
 	echo "ruby2.5 is already installed"
 fi
@@ -180,9 +138,6 @@ gem install bundler --no-document
 bundle
 bundle update
 
-apt-get -f install -y
-apt --fix-broken install -y
-apt-get update --allow-insecure-repositories -y
 apt-get autoremove -y
 
 fi
