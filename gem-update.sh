@@ -108,6 +108,7 @@ if ! isPackageInstalled ruby2.5 ; then
 	
 	/usr/bin/apt install -y rake ruby-did-you-mean libruby2.5 ruby2.5
 
+	gem install bundler --no-document
 	bundle update --bundler
 
 else
@@ -129,14 +130,10 @@ if ! isPackageInstalled mysql-server-5.6 ; then
 	downloadOsPackages
 	installOsPackages
 	removeOsPackages
+
 else
         echo "mysql-server-5.6 is already installed"
 fi
-
-gem install bundler --no-document
-
-bundle
-bundle update
 
 apt-get autoremove -y
 
