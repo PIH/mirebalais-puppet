@@ -108,9 +108,6 @@ if ! isPackageInstalled ruby2.5 ; then
 	
 	/usr/bin/apt install -y rake ruby-did-you-mean libruby2.5 ruby2.5
 
-	gem install bundler --no-document
-	bundle update --bundler
-
 else
 	echo "ruby2.5 is already installed"
 fi
@@ -138,6 +135,11 @@ fi
 apt-get autoremove -y
 
 fi
+
+gem install bundler --no-ri --no-rdoc
+
+bundle
+bundle update
 
 echo "modulepath = /etc/puppet/modules:/etc/puppet/mirebalais-modules" > puppet.conf
 echo "environment = $1" >> puppet.conf
