@@ -39,7 +39,6 @@ class openmrs (
 
 ){
 
-  include openmrs::owa
   include openmrs::pwa
 
   if ($spa) {
