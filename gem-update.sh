@@ -88,22 +88,23 @@ apt-get autoclean -y
 
 ### If ruby2.5 is already installed, do no remove it
 if ! isPackageInstalled ruby2.5 ; then
-
-        echo "installing ruby2.5"
+  echo "installing ruby2.5"
 	apt-get purge -y ruby*
-	
+
+	## remove these files because they cause conflicts
 	/bin/rm -rf /var/lib/gems/2.7.0
 	/bin/rm -rf /var/lib/gems/2.3.0
 	/bin/rm -rf /var/lib/gems/1.9.0
+	/bin/rm -rf /var/lib/gems/1.9.1
 	/bin/rm -rf /usr/local/bin/librarian-puppet
-     	/bin/rm -rf /usr/local/bin/puppet
+  /bin/rm -rf /usr/local/bin/puppet
 
 	/usr/bin/apt-get -y install libssl-dev
 
 	# ruby 2.5
-        apt-add-repository -y ppa:brightbox/ruby-ng
-        apt-get -y update
-        apt-get -y upgrade
+  apt-add-repository -y ppa:brightbox/ruby-ng
+  apt-get -y update
+  apt-get -y upgrade
 	apt-get -y dist-upgrade
 	
 	/usr/bin/apt install -y rake ruby-did-you-mean libruby2.5 ruby2.5
@@ -114,9 +115,10 @@ fi
 
 ### if mysql-server-5.6 does not exist, install it. If it exists, do not remove
 if ! isPackageInstalled mysql-server-5.6 ; then
-        echo "installing required packages for mysql-server-5.6 to be installed"
-	apt-get remove -y php-mysql php7.4-mysql
-	apt-get purge -y libdbd-mysql* libdbd-mysql-perl libmysqlclient21 mysql*
+  echo "removing none required packges and installing required packages for mysql-server-5.6 to be installed"
+	#### remove any default version of mysql installed if mysql 5.6 has not been installed
+	### puppet takes care of installing mysql 5.6 later
+	apt-get purge -y php-mysql php7.4-mysql  libdbd-mysql* libdbd-mysql-perl libmysqlclient21 mysql*
 	/bin/rm -rf /var/lib/mysql
 	/bin/rm -rf /var/lib/mysql-keyring
 	/bin/rm -rf /var/lib/mysql-files
@@ -134,12 +136,16 @@ fi
 
 apt-get autoremove -y
 
-fi
-
 gem install bundler --no-ri --no-rdoc
 
 bundle
 bundle update
+
+# hack to remove the problematic ec2 fact
+/bin/rm -rf /var/lib/gems/2.5.0/gems/facter-2.5.7/lib/facter/ec2.rb
+/bin/rm -rf /var/lib/gems/2.5.0/gems/facter-2.5.7/lib/facter/util/ec2.rb
+
+fi
 
 echo "modulepath = /etc/puppet/modules:/etc/puppet/mirebalais-modules" > puppet.conf
 echo "environment = $1" >> puppet.conf
