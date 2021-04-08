@@ -1,5 +1,7 @@
 #!/bin/bash
 
+### These below packages are required for installing mysql 5.6
+#######################################################################
 osPackagesToDowload=(
 http://archive.ubuntu.com/ubuntu/pool/main/s/sysvinit/initscripts_2.88dsf-59.3ubuntu2_amd64.deb
 http://archive.ubuntu.com/ubuntu/pool/main/s/sysvinit/sysv-rc_2.88dsf-59.3ubuntu2_all.deb
@@ -38,6 +40,7 @@ isPackageInstalled() {
 }
 
 # hack to make sure we have ruby1.9 installed instead of ruby1.8
+### ubuntu 15.04
 if [ $(lsb_release -rs) == "14.04" ]
 then
 cp -r Gemfile1404 Gemfile
@@ -51,6 +54,7 @@ bundle
 
 fi
 
+### ubuntu 16.04
 if [ $(lsb_release -rs) == "16.04" ]
 then
 add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
@@ -70,8 +74,11 @@ rm -f /var/lib/gems/2.3.0/gems/facter-2.5.7/lib/facter/ec2.rb
 
 fi
 
+### ubuntu 20.04
 if  [ $(lsb_release -rs) == "20.04" ]
 then
+### authenticating old repos since its some required packages
+## are available in old repos
 add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
 add-apt-repository 'deb http://archive.ubuntu.com/ubuntu xenial universe'
 add-apt-repository 'deb http://archive.ubuntu.com/ubuntu focal universe'
@@ -83,6 +90,8 @@ cp -r Gemfile2004 Gemfile
 
 apt-get -y install build-essential
 
+## puppet 5 doesnot work with ruby 2.7, ensuring that ruby 2.7 is not installed.
+## note: ruby 2.7 is the official ruby version of ubuntu 20.04
 apt-mark hold libruby2.7:i386 ruby:i386 ruby2.7:i386 libruby2.7 ruby2.7 libruby2.7:amd64.deb ruby2.7:amd64.deb
 apt-get autoclean -y
 
