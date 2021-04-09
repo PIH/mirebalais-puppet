@@ -16,11 +16,11 @@ spa_version: latest  # 'ci' is a special case
 
 #owas
 owa_cohort_builder_version: 1.0.0
-owa_order_entry_version: 1.2.1
-owa_lab_workflow_version: 1.0.0
+owa_order_entry_version: 1.2.3
+owa_lab_workflow_version: 1.1.0
 
 package_release: 'unstable/'
-package_version: '1.0.5537-1'
+package_version: '1.0.5563-1'
 
 mysql_server_id: 1
 mysql_root_password: foo
@@ -97,7 +97,7 @@ pwa_filename: ''
 
 # PETL configuration
 petl: "petl"
-petl_version: "2.0.1"
+petl_version: "2.1.0"
 petl_java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
 petl_java_opts: ""
 petl_database_url: "jdbc:h2:file:${petl.homeDir}/data/petl;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE"
