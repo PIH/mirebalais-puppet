@@ -118,6 +118,8 @@ if ! isPackageInstalled ruby2.5 ; then
 	
 	/usr/bin/apt install -y rake ruby-did-you-mean libruby2.5 ruby2.5
 
+	bundle update --bundler
+
 else
 	echo "ruby2.5 is already installed"
 fi
