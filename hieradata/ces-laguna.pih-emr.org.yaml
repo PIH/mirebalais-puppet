@@ -3,7 +3,7 @@ package_release: 'stable/'
 site_domain: ces-laguna.pih-emr.org
 pih_config: mexico,mexico-laguna
 config_name: openmrs-config-ces
-config_version: 1.3.0-SNAPSHOT
+config_version: 1.4.0
 
 az_backup_folder_path: mexico/laguna
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
