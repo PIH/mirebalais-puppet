@@ -60,7 +60,7 @@ class openmrs (
 
   apt::source { 'pihemr':
     ensure      => present,
-    location    => 'http://bamboo.pih-emr.org/pihemr-repo',
+    location    => '[trusted=yes] https://bamboo.pih-emr.org:81/pihemr-repo',
     release     => $package_release,
     repos       => '',
     include_src => false,
@@ -102,7 +102,7 @@ class openmrs (
     require => User[$tomcat]
   }
 
-  # added this to handle reworking off application data directory in Core 2.x
+  # added this to handle reworking of application data directory in Core 2.x
   file { "/home/${tomcat}/.OpenMRS/${webapp_name}":
     ensure  => 'link',
     owner   => $tomcat,
