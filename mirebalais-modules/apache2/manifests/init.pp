@@ -184,11 +184,11 @@ class apache2 (
 
   # allows other modules to trigger an apache restart
   # there's an annoying tight dependency here we should fix
-  exec { 'apache-restart':
+ /* exec { 'apache-restart':
     command     => "service apache2 restart",
     user        => 'root',
     refreshonly => true,
     subscribe => [ File["orderentry.zip"], File["labworkflow.zip"] ]
   }
-
+*/
 }

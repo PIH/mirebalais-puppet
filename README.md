@@ -68,3 +68,19 @@ az_backup_folder_path: haiti/mirebalais
 ```
 
 where `haiti` is the country name and `mirebalais` is the site name.
+
+### Upgrading to Ubuntu 20.04
+To upgrade the existing servers to Ubuntu 20.04 ensure that you hold the necessary packages required for the PIHEMR to run.
+There is a script called hold-packages.sh that you can run to hold these packages. Ensure that you run this script before upgrading to any new ubuntu distribution
+
+To upgrade to ubuntu 18.04
+```
+./hold-packages.sh
+do-release-upgrade
+```
+
+To upgrade to ubuntu 20.04
+```
+./hold-packages.sh
+do-release-upgrade
+```
