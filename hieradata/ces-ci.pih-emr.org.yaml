@@ -8,6 +8,7 @@ spa: true
 spa_version: latest
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
