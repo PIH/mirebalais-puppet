@@ -32,35 +32,15 @@ class openmrs::initial_setup(
     user       => "root@localhost",
     require    => [Service['mysqld'], Package['pihemr']]
   }
-  /*
-    ,notify  => Openmrs::Liquibase_migrate['migrate base schema'];
-  } */
 
   file { '/usr/local/liquibase.jar':
     ensure => present,
     source => 'puppet:///modules/openmrs/liquibase.jar'
   }
-/*
-  openmrs::liquibase_migrate { 'migrate base schema':
-    dataset => 'liquibase-schema-only.xml',
-    unless  => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'desc patient'",
-    refreshonly => true,
-    notify  => Openmrs::Liquibase_migrate['migrate core data']
-  }
-
-  openmrs::liquibase_migrate { 'migrate core data':
-    dataset     => 'liquibase-core-data.xml',
-    refreshonly => true
-  } */
- /* openmrs::liquibase_migrate { 'migrate update to latest':
-    dataset     => 'liquibase-update-to-latest.xml',
-    refreshonly => true
-  }*/
 
   exec { 'tomcat-start':
     command     => "service ${tomcat} start",
     user        => 'root',
-    /* subscribe   => Openmrs::Liquibase_migrate['migrate core data'], */
     refreshonly => true
   }
 }
