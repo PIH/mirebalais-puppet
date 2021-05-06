@@ -15,7 +15,7 @@ spa: false
 spa_version: latest  # 'ci' is a special case
 
 package_release: 'unstable/'
-package_version: '1.0.5630-1'
+package_version: '1.0.5637-1'
 
 mysql_server_id: 1
 mysql_root_password: foo
