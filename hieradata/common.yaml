@@ -164,4 +164,4 @@ config_name: ""
 config_version: ""
 
 # initializer
-initializer_domains: "!programs,programworkflows,programworkflowstates"
+initializer_domains: "!programs,programworkflows,programworkflowstates,drugs"
