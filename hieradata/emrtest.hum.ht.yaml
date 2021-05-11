@@ -27,10 +27,6 @@ azure_dns_tenant_id: ENC[5LWTjj76sYS2kxC4FktrecjxHpznSDVezymGgwlCzdNGmdymse5ihQO
 azure_dns_app_id: ENC[NiY0+gdLyMzvHgzA34X8GV/dUjVLK+XaXz67Q9CzdJS7zqQUshiqA6J/2FgkD1pl]
 azure_dns_client_secret: ENC[Illfbs4LPZrUvdg3f/WH7cKUcUI+E9zbWzeGoFG2pOIJxa/0MNibYkymcRQefLGr]
 
-# spa
-spa: true
-spa_version: mirebalais-latest
-
 # feature toggle settings
 appointmentscheduling_confidential: true
 radiology_contrast_studies: true

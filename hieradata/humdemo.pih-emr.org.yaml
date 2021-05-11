@@ -18,10 +18,6 @@ lacolline_password: ENC[OV3IH5U9urv6gEb76vnyYA==]
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 
-# spa
-spa: true
-spa_version: mirebalais-latest
-
 # feature toggle settings
 
 

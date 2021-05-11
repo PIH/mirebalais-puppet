@@ -57,10 +57,6 @@ remote_zlidentifier_url: 'https://zanmi.pih-emr.org/openmrs/module/idgen/exportI
 remote_zlidentifier_username: mirebalais
 remote_zlidentifier_password: ENC[IuAJgqs6Ci5Hw5xs/DYiZg==]
 
-# spa
-spa: true
-spa_version: mirebalais-latest
-
 # feature toggle settings
 insurance_collection: false
 

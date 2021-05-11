@@ -9,9 +9,6 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
-spa: true
-spa_version: ci
-
 # feature toggles
 
 # TODO can be removed after next gold is cut
