@@ -205,7 +205,7 @@ class openmrs (
   }
 
   # hack to change webapp name in the frontend application after it has already been built into the deb
-  exec {
+  exec { 'fix spa application webapp name':
     unless  => "test ${webapp_name} = openmrs",
     command => "sed -i 's/\/openmrs\([\/\"]\)/\/${webapp_name}\1/g' /home/${tomcat}/.OpenMRS/frontend/index.html",
     require => Package['pihemr']
