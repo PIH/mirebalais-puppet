@@ -18,7 +18,6 @@ class openmrs (
     $config_dir = hiera('config_dir', undef),
     $activitylog_enabled = hiera('activitylog_enabled'),
     $session_timeout = hiera('session_timeout'),
-    $spa = hiera('spa'),
 
     # PIH EMR config
     $config_name = hiera('config_name'),
@@ -41,10 +40,6 @@ class openmrs (
 ){
 
   include openmrs::pwa
-
-  if ($spa) {
-      include openmrs::spa
-  }
 
   package { 'p7zip-full' :
     ensure => 'installed'
@@ -215,10 +210,10 @@ class openmrs (
     refreshonly => true
   }
 
-   # this is legacy, this is now handled by our custom app loader factor
-   file { "/home/${tomcat}/.OpenMRS/appframework-config.json":
-	ensure => absent
-   }
+  # this is legacy, this is now handled by our custom app loader factor
+  file { "/home/${tomcat}/.OpenMRS/appframework-config.json":
+    ensure => absent
+  }
 
 }
 

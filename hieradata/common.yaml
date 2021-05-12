@@ -10,10 +10,6 @@ keyserver: keyserver.ubuntu.com
 pih_config: default
 site_domain: foo.org
 
-# spa
-spa: false
-spa_version: latest  # 'ci' is a special case
-
 package_release: 'unstable/'
 package_version: '1.0.5637-1'
 

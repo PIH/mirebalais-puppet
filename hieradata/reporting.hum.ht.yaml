@@ -42,10 +42,6 @@ petl_sqlserver_user: openmrs
 petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
 petl_error_subject: HUM Reporting petl errors
 
-# spa
-spa: true
-spa_version: mirebalais-latest
-
 ssl_use_letsencrypt: true
 
 java_memory_parameters: '-Xmx10G -Xms1G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
