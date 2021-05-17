@@ -39,22 +39,18 @@ class openmrs::initial_setup(
     source => 'puppet:///modules/openmrs/liquibase.jar'
   }
 
-  openmrs::liquibase_migrate { 'migrate base schema':
+  openmrs::liquibase_migrate { 'install base schema':
     dataset => 'liquibase-schema-only.xml',
     unless  => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'desc patient'",
     refreshonly => true,
     notify  => Openmrs::Liquibase_migrate['migrate core data']
   }
 
-  openmrs::liquibase_migrate { 'migrate core data':
+  openmrs::liquibase_migrate { 'install core data':
     dataset     => 'liquibase-core-data.xml',
+    unless  => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'desc patient'",
     refreshonly => true
   }
-
- /* openmrs::liquibase_migrate { 'migrate update to latest':
-    dataset     => 'liquibase-update-to-latest.xml',
-    refreshonly => true
-  }*/
 
   exec { 'tomcat-start':
     command     => "service ${tomcat} start",
