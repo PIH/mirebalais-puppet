@@ -254,7 +254,7 @@ node 'zltraining.pih-emr.org.orig' {
   include openmrs::initial_setup
 }
 
-node 'wellbody.pih-emr.org' {
+node 'wellbody.pih-emr.org', 'kgh.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
