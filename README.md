@@ -30,7 +30,6 @@ vagrant ssh
 sudo apt-get install openssh-server git
 sudo rm -rf /etc/puppet
 git clone https://github.com/PIH/mirebalais-puppet.git /etc/puppet
-sudo mkdir /etc/puppet
 cd /etc/puppet
 sudo ./install.sh (note that you have to have credentials to log into the amigo server)
 ```
