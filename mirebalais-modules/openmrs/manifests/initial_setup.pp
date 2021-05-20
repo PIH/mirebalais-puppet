@@ -48,6 +48,7 @@ class openmrs::initial_setup(
 
   openmrs::liquibase_migrate { 'set up core data':
     dataset     => 'liquibase-core-data.xml',
+    before => Package['pihemr'],
     refreshonly => true
   }
 
