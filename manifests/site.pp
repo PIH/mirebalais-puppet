@@ -62,7 +62,7 @@ node 'emr.hum.ht' {
 
 }
 
-node 'humci.pih-emr.org' {
+node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,

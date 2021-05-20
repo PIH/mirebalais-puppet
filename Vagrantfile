@@ -1,20 +1,20 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.hostname = "vagrant-test.pih-emr.org"
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # using a specific IP.
+   config.vm.network "private_network", ip: "192.168.33.101"
 
-  config.vm.box = "ubuntu/trusty64"
-  config.vm.hostname = "neno2015.pih-emr.org"
-  config.vm.network "forwarded_port", guest: 80, host: 8180
-  config.vm.network "forwarded_port", guest: 443, host: 8143
-  config.vm.network "forwarded_port", guest: 8080, host: 8080
-  config.vm.network "forwarded_port", guest: 8443, host: 8443
-
-  config.vm.provider :virtualbox do |vb|
-     vb.customize ["modifyvm", :id, "--memory", "2048"]
+  # Create a public network, which generally matched to bridged network.
+  #
+   config.vm.provider "virtualbox" do |vb|
+     vb.memory = "6096"
    end
-
+  #
+   config.vm.provision "shell", inline: "hostnamectl set-hostname vagrant-test.pih-emr.org"
+   config.vm.provision "shell", inline: "apt -y update"
+   config.vm.provision "shell", inline: "apt -y upgrade"
 end

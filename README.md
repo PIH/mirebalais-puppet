@@ -23,14 +23,15 @@ be copied to the root of the application data directory.
 ### Using Vagrant
 
 ```
+As root, create a Vagrant directory
+cd into this directory and create a VagrantFile with the contents of the VagrantFile in this repo (see above)
 vagrant up
 vagrant ssh
 sudo apt-get install openssh-server git
-sudo rm -fR /etc/puppet
-sudo mkdir /etc/puppet
-sudo cp -a /vagrant/* /etc/puppet/
+sudo rm -rf /etc/puppet
+git clone https://github.com/PIH/mirebalais-puppet.git /etc/puppet
 cd /etc/puppet
-sudo ./install.sh local
+sudo ./install.sh (note that you have to have credentials to log into the amigo server)
 ```
 
 ### Using bundler
