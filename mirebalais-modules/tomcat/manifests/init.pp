@@ -130,7 +130,7 @@ class tomcat (
   if $restart_nightly {
     cron { 'restart-tomcat':
       ensure  => present,
-      command => "service ${tomcat} restart",
+      command => "service ${tomcat} restart > /dev/null",
       user    => 'root',
       hour    => 5,
       minute  => 00,
