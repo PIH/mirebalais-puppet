@@ -160,4 +160,4 @@ config_name: ""
 config_version: ""
 
 # initializer
-initializer_domains: "!programs,programworkflows,programworkflowstates,drugs"
+initializer_domains: "!programs,programworkflows,programworkflowstates,drugs,orderfrequencies"
