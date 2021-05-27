@@ -159,5 +159,3 @@ atomfeed_repo_url: https://openmrs.jfrog.io/artifactory/snapshots
 config_name: ""
 config_version: ""
 
-# initializer
-initializer_domains: "!programs,programworkflows,programworkflowstates,drugs"

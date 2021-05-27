@@ -4,7 +4,6 @@ class openmrs (
     $openmrs_db_password = decrypt(hiera('openmrs_db_password')),
     $cc_user_name = decrypt(hiera('commcare_user')),
     $cc_user_password = decrypt(hiera('commcare_password')),
-    $initializer_domains = hiera('initializer_domains'),
     $openmrs_auto_update_database = hiera('openmrs_auto_update_database'),
     $package_release = hiera('package_release'),
     $package_version = hiera('package_version'),
