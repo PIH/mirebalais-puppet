@@ -68,3 +68,5 @@ java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m
 archive_folder: "/home/tomcat7/backups/archive/"
 sequence_folder: "/home/tomcat7/backups/sequences/"
 
+# old os version
+old_os_version: true

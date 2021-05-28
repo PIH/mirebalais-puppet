@@ -36,6 +36,9 @@ class openmrs (
     $lacolline_username = decrypt(hiera('lacolline_username')),
     $lacolline_password = decrypt(hiera('lacolline_password')),
 
+    # os version
+    $old_os_version = hiera('old_os_version'),
+
 ){
 
   include openmrs::pwa
@@ -52,12 +55,23 @@ class openmrs (
     mode    => '0644'
   }
 
-  apt::source { 'pihemr':
-    ensure      => present,
-    location    => '[trusted=yes] https://bamboo.pih-emr.org:81/pihemr-repo',
-    release     => $package_release,
-    repos       => '',
-    include_src => false,
+  if $old_os_version {
+    apt::source { 'pihemr':
+      ensure      => present,
+      location    => 'http://bamboo.pih-emr.org/pihemr-repo',
+      release     => $package_release,
+      repos       => '',
+      include_src => false,
+    }
+  }
+  else {
+    apt::source { 'pihemr':
+      ensure      => present,
+      location    => '[trusted=yes] https://bamboo.pih-emr.org:81/pihemr-repo',
+      release     => $package_release,
+      repos       => '',
+      include_src => false,
+    }
   }
 
   # if we are using unstable repo (ie for ci servers) always use latest, otherwise use version specified by package release
