@@ -69,4 +69,4 @@ archive_folder: "/home/tomcat7/backups/archive/"
 sequence_folder: "/home/tomcat7/backups/sequences/"
 
 # old os version
-old_os_version: true
+ubuntu_14: true

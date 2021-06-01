@@ -37,7 +37,7 @@ class openmrs (
     $lacolline_password = decrypt(hiera('lacolline_password')),
 
     # os version
-    $old_os_version = hiera('old_os_version'),
+    $ubuntu_14 = hiera('ubuntu_14'),
 
 ){
 
@@ -55,7 +55,7 @@ class openmrs (
     mode    => '0644'
   }
 
-  if $old_os_version {
+  if $ubuntu_14 {
     apt::source { 'pihemr':
       ensure      => present,
       location    => 'http://bamboo.pih-emr.org/pihemr-repo',

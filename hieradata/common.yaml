@@ -160,4 +160,4 @@ config_name: ""
 config_version: ""
 
 # old os version
-old_os_version: false
+ubuntu_14: false
