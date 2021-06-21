@@ -354,7 +354,7 @@ node 'haiti-test.pih-emr.org' {
   include openmrs::initial_setup
 
   include percona
-
+  include petl
 }
 
 node 'haititest.pih-emr.org' {
