@@ -353,6 +353,8 @@ node 'haiti-test.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
+  include percona
+
 }
 
 node 'haititest.pih-emr.org' {
