@@ -4,7 +4,7 @@ site_domain: haiti-test.pih-emr.org
 
 pih_config: haiti-hiv,haiti-hiv-ci
 config_name: openmrs-config-zl
-config_version: 1.21.0-SNAPSHOT
+config_version: 1.23.0-SNAPSHOT
 
 openmrs_auto_update_database: true
 
@@ -12,10 +12,10 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 #PETL config
-#petl_version: "2.3.0-SNAPSHOT"   # ues latest snapshot
-#petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
-#petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
-#petl_sqlserver_databaseName: openmrs_haitihivtest
+petl_version: "2.4.0-SNAPSHOT"   # use latest snapshot
+petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
+petl_sqlserver_databaseName: openmrs_hivhaititest
 
 # SQL Server Azure Cloud
 #petl_sqlserver_host: pihmeq.database.windows.net
@@ -24,12 +24,12 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 #petl_sqlserver_password: ENC[/cSHzuUSEKFZpys8DD4VkQ==]
 
 # SQL Server 2014 Boston office
-#petl_sqlserver_host: us-pru-wired-cjkhhhbvh.dynamic-m.com
-#petl_sqlserver_port: 62451
-#petl_sqlserver_user: medinfoadmin
-#petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
-#petl_error_subject: HaitiHivTest petl errors
-#petl_cron_hour: '*/4'
+petl_sqlserver_host: us-pru-wired-cjkhhhbvh.dynamic-m.com
+petl_sqlserver_port: 62451
+petl_sqlserver_user: medinfoadmin
+petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
+petl_error_subject: HaitiHivTest petl errors
+petl_cron_hour: '*/4'
 
 mysql_net_read_timeout: 120
 mysql_net_write_timeout: 120
