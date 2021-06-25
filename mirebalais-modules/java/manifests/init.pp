@@ -9,7 +9,7 @@ class java (
 
   apt::ppa { 'ppa:openjdk-r/ppa':
    # options => "-y -k ${keyserver}"
-    options => "-y -k"
+    options => "-y"
   }
 
   # install OpenJDK 8
