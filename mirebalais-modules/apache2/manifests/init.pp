@@ -15,7 +15,6 @@ class apache2 (
   $biometrics_port = hiera('biometrics_port'),
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
-  $keyserver = hiera('keyserver'),
   $sysadmin_email = hiera('sysadmin_email'),
   $azure_dns_subscription_id = decrypt(hiera('azure_dns_subscription_id')),
   $azure_dns_tenant_id = decrypt(hiera('azure_dns_tenant_id')),
