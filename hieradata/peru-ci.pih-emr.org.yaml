@@ -18,7 +18,7 @@ petl_sqlserver_databaseName: openmrs_peruci
 
 # SQL Server 2014 Boston office
 petl_sqlserver_host: 10.160.12.28
-petl_sqlserver_port: 62451
+petl_sqlserver_port: 1433
 petl_sqlserver_user: medinfoadmin
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 petl_error_subject: peru-ci petl errors
