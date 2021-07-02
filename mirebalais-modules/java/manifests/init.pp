@@ -1,6 +1,6 @@
 class java (
   $tomcat = hiera('tomcat'),
-  #$keyserver = hiera('keyserver')
+  $keyserver = hiera('keyserver')
 ){
 
   file { '/etc/environment':
@@ -8,8 +8,7 @@ class java (
   }
 
   apt::ppa { 'ppa:openjdk-r/ppa':
-   # options => "-y -k ${keyserver}"
-    options => "-y"
+    options => "-y -k ${keyserver}"
   }
 
   # install OpenJDK 8
