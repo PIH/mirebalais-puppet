@@ -1,14 +1,9 @@
 class java (
-  $tomcat = hiera('tomcat'),
-  $keyserver = hiera('keyserver')
+  $tomcat = hiera('tomcat')
 ){
 
   file { '/etc/environment':
     source => 'puppet:///modules/java/etc/environment'
-  }
-
-  apt::ppa { 'ppa:openjdk-r/ppa':
-    options => "-y -k ${keyserver}"
   }
 
   # install OpenJDK 8
