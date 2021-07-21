@@ -1,0 +1,27 @@
+#!/bin/bash
+
+######################################################################
+###### This script restarts the server. Before the server restarts,
+#### mysql and tomcat are stopped in the order:
+##### tomcat first then mysql
+
+stopTomcat()
+	{
+	/etc/init.d/tomcat7 stop
+}
+
+stopMySql()
+	{
+ 	/etc/init.d/mysql stop
+}
+
+rebootServer()
+	{
+	/sbin/shutdown -r now
+}
+
+stopTomcat
+sleep 15
+stopMySql
+sleep 15
+rebootServer
