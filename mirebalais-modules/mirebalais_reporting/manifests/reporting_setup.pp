@@ -111,4 +111,30 @@ class mirebalais_reporting::reporting_setup (
 		environment => 'MAILTO=${sysadmin_email}',
 		require => [ File['mirebalais-warehouse-n-reporting-tables.sh'] ]
 	}
+
+	file { "/usr/local/sbin/restart-server.sh":
+		ensure  => present,
+		content => template('mirebalais_reporting/restart-server.sh.erb'),
+		owner   => root,
+		group   => root,
+		mode    => '0755'
+	}
+
+	cron { 'restart-server.sh':
+		ensure  => present,
+		command => '/usr/local/sbin/restart-server.sh &>/dev/null 2>&1',
+		user    => 'root',
+		hour    => 06,
+		minute  => 10,
+		require => [ File['/usr/local/sbin/restart-server.sh'] ]
+	}
+
+	cron { 'restart-server.sh':
+		ensure  => present,
+		command => '/usr/local/sbin/restart-server.sh &>/dev/null 2>&1',
+		user    => 'root',
+		hour    => 08,
+		minute  => 45,
+		require => [ File['/usr/local/sbin/restart-server.sh'] ]
+	}
 }
