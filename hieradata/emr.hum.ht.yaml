@@ -71,5 +71,4 @@ sequence_folder: "/home/tomcat7/backups/sequences/"
 # old os version
 ubuntu_14: true
 
-# enable activity logging
-activitylog_enabled: true
+
