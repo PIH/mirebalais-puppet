@@ -8,3 +8,10 @@ config_version: 1.7.0-SNAPSHOT
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mysql_bind_address: 0.0.0.0
+
+#feature toggles
+
+mysql_innodb_buffer_pool_size: 1G
+mysql_innodb_buffer_pool_instances: 1
+
+java_memory_parameters: '-Xmx4G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
