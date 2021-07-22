@@ -31,3 +31,5 @@ mysql_innodb_buffer_pool_instances: 1
 
 java_memory_parameters: '-Xmx4G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
+# enable activity logging
+activitylog_enabled: true
