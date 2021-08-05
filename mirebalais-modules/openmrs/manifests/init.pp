@@ -13,7 +13,6 @@ class openmrs (
     $junit_username = hiera('junit_username'),
     $junit_password = decrypt(hiera('junit_password')),
     $pih_config = hiera('pih_config'),
-    $pih_config_array = split(hiera('pih_config'), ','),
     $config_dir = hiera('config_dir', undef),
     $activitylog_enabled = hiera('activitylog_enabled'),
     $session_timeout = hiera('session_timeout'),
@@ -141,44 +140,6 @@ class openmrs (
     require =>  Package['pihemr'],
     command => "sed -i 's/<session-config>.*$/<session-config><session-timeout>${session_timeout}<\/session-timeout>/' ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml",
     onlyif => "test -f ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml"
-  }
-
-  # TODO I have switched these to absent, can remove entirely after previous configurations have been cleaned up
-  if ($pih_config_array[0] != undef) {
-    file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[0]}.json":
-      ensure  => absent,
-      require => File["/home/${tomcat}/.OpenMRS"]
-    }
-  }
-
-  if ($pih_config_array[1] != undef) {
-    file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[1]}.json":
-      ensure  => absent,
-      require => File["/home/${tomcat}/.OpenMRS"]
-    }
-  }
-
-
-  if ($pih_config_array[2] != undef) {
-    file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[2]}.json":
-      ensure  => absent,
-      require => File["/home/${tomcat}/.OpenMRS"]
-    }
-  }
-
-
-  if ($pih_config_array[3] != undef) {
-    file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[3]}.json":
-      ensure  => absent,
-      require => File["/home/${tomcat}/.OpenMRS"]
-    }
-  }
-
-  if ($pih_config_array[4] != undef) {
-    file { "/home/${tomcat}/.OpenMRS/pih-config-${pih_config_array[4]}.json":
-      ensure  => absent,
-      require => File["/home/${tomcat}/.OpenMRS"]
-    }
   }
 
   if ($config_name != "") {
