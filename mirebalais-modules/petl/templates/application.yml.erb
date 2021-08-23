@@ -3,6 +3,8 @@ petl:
   homeDir: "/home/<%= @petl %>"
   datasourceDir: "<%= @petl_datasource_dir %>"
   jobDir: "<%= @petl_job_dir %>"
+  schedule:
+    cron: "<%= @petl_schedule_cron %>"
 
 mysql:
   host: "<%= @petl_mysql_host %>"
