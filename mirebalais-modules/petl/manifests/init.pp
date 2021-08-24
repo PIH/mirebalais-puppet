@@ -5,6 +5,7 @@ class petl (
   $petl_java_opts              = hiera("petl_java_opts"),
   $petl_server_port            = hiera("petl_server_port"),
   $petl_job_dir                = hiera("petl_job_dir"),
+  $petl_schedule_cron          = hiera("petl_schedule_cron"),
   $petl_datasource_dir         = hiera("petl_datasource_dir"),
   $petl_database_url           = hiera("petl_database_url"),
   $petl_mysql_host             = hiera("petl_mysql_host"),
@@ -18,7 +19,7 @@ class petl (
   $petl_sqlserver_databaseName     = hiera("petl_sqlserver_databaseName"),
   $petl_sqlserver_user             = hiera("petl_sqlserver_user"),
   $petl_sqlserver_password         = decrypt(hiera("petl_sqlserver_password")),
-  $petl_cron_hour                  = hiera('petl_cron_hour'),
+  $petl_check_errors_cron_hour     = hiera('petl_check_errors_cron_hour'),
   $petl_error_subject              = hiera('petl_error_subject'),
   $sysadmin_email                  = hiera('sysadmin_email'),
 
@@ -164,7 +165,7 @@ class petl (
     ensure  => present,
     command => '/usr/local/sbin/checkPetlErrors.sh &> /dev/null',
     user    => 'root',
-    hour    => "${petl_cron_hour}",
+    hour    => "${petl_check_errors_cron_hour}",
     minute  => 00,
     require => File["/usr/local/sbin/checkPetlErrors.sh"]
   }
