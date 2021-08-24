@@ -87,7 +87,7 @@ pwa_filename: ''
 
 # PETL configuration
 petl: "petl"
-petl_version: "2.5.0-SNAPSHOT"
+petl_version: "2.5.0"
 petl_java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
 petl_java_opts: ""
 petl_database_url: "jdbc:h2:file:${petl.homeDir}/data/petl;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE"
