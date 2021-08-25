@@ -24,7 +24,7 @@ biometrics_enabled: true
 biometrics_webapp_name: biometrics
 
 #PETL config
-petl_version: "2.3.0-SNAPSHOT"   # ues latest snapshot
+petl_version: "2.6.0-SNAPSHOT"   # ues latest snapshot
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 petl_sqlserver_databaseName: openmrs_humci
