@@ -203,7 +203,7 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   include crashplan
 }
 
-node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr.org', 'lacolline.pih-emr.org', 'belladere.pih-emr.org', 'zltraining.pih-emr.org', 'hsn.pih-emr.org', 'boucancarre.pih-emr.org' {
+node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr.org', 'lacolline.pih-emr.org', 'belladere.pih-emr.org', 'hsn.pih-emr.org', 'boucancarre.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
@@ -232,7 +232,7 @@ node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr
   # Crashplan removed (May 2018)
 }
 
-node 'zltraining.pih-emr.org.orig' {
+node 'zltraining.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
