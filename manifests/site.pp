@@ -223,13 +223,10 @@ node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr
 
   include openmrs
   include openmrs::initial_setup
-
-  #include monitoring
-  #include logging
-
   include openmrs::backup
 
-  # Crashplan removed (May 2018)
+  include petl
+
 }
 
 node 'zltraining.pih-emr.org' {
