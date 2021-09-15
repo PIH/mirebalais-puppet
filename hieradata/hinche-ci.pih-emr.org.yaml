@@ -1,8 +1,6 @@
 ---
 site_domain: hinche-ci.pih-emr.org
 
-package_release: 'stable/'
-
 pih_config: haiti,haiti-hinche
 config_name: openmrs-config-zl
 config_version: 1.26.0-SNAPSHOT
