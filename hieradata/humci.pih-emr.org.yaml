@@ -4,7 +4,7 @@ site_domain: humci.pih-emr.org
 
 pih_config: mirebalais,mirebalais-humci
 config_name: openmrs-config-zl
-config_version: 1.26.0-SNAPSHOT
+config_version: 1.27.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
