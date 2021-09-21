@@ -62,5 +62,5 @@ petl_sqlserver_host: 10.160.12.27
 petl_sqlserver_port: 1433
 petl_sqlserver_databaseName: openmrs_hsn
 petl_sqlserver_user: openmrs
-petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
+petl_sqlserver_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_error_subject: ZL HSN petl errors
