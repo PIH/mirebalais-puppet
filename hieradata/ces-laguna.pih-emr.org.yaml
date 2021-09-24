@@ -5,7 +5,7 @@ pih_config: mexico,mexico-laguna
 config_name: openmrs-config-ces
 config_version: 1.11.6
 
-az_backup_folder_path: mexico/laguna
+az_backup_folder_path: mexico/ces-laguna
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 server_timezone: America/Mexico_City
