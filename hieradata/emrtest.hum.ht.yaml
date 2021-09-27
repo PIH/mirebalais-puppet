@@ -7,7 +7,7 @@ package_release: 'stable/'
 
 pih_config: mirebalais,mirebalais-training
 config_name: openmrs-config-zl
-config_version: 1.25.0
+config_version: 1.27.0
 
 server_timezone: America/New_York
 

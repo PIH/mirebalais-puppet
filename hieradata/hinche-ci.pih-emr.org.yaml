@@ -3,7 +3,7 @@ site_domain: hinche-ci.pih-emr.org
 
 pih_config: haiti,haiti-hinche
 config_name: openmrs-config-zl
-config_version: 1.27.0-SNAPSHOT
+config_version: 1.28.0-SNAPSHOT
 
 server_timezone: America/New_York
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
