@@ -62,6 +62,33 @@ node 'emr.hum.ht' {
 
 }
 
+node 'zlemr.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mailx
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include apache2
+  include tomcat
+
+  include openmrs
+  include openmrs::initial_setup
+
+  include percona
+
+  include openmrs::backup
+
+}
+
 node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
   class { 'apt':
