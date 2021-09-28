@@ -83,7 +83,7 @@ node 'zlemr.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
-  include percona
+  include petl
 
   include openmrs::backup
 
