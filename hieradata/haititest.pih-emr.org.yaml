@@ -2,7 +2,7 @@
 webapp_name: openmrs
 site_domain: haititest.pih-emr.org
 
-pih_config: haiti-hiv,haiti-hiv-ci
+pih_config: haiti,haiti-hiv,haiti-hiv-ci
 config_name: openmrs-config-zl
 config_version: 1.28.0-SNAPSHOT
 
