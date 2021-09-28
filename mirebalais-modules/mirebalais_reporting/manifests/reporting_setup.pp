@@ -128,13 +128,4 @@ class mirebalais_reporting::reporting_setup (
 		minute  => 10,
 		require => [ File['/usr/local/sbin/restart-server.sh'] ]
 	}
-
-	cron { 'restart-server.sh':
-		ensure  => present,
-		command => '/usr/local/sbin/restart-server.sh &>/dev/null 2>&1',
-		user    => 'root',
-		hour    => 08,
-		minute  => 45,
-		require => [ File['/usr/local/sbin/restart-server.sh'] ]
-	}
 }
