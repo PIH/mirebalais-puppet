@@ -9,7 +9,7 @@ class mail (
 
 	package { 'mailutils':
 		ensure => installed,
-    require => [ Package['sendmail'] ]
+    		require => [ Package['sendmail'] ]
 	}
 
 	file { "/etc/mail/authinfo":
@@ -35,11 +35,11 @@ class mail (
 	}
 
 	file { '/etc/mail/sendmail.mc':
-	    ensure  => file,
-    	group   => smmsp,
-    	mode    => '0644',
-	    content => template('mail/sendmail.mc.erb'),
-	    require => Package['sendmail']
+	    	ensure  => file,
+    		group   => smmsp,
+    		mode    => '0644',
+	    	content => template('mail/sendmail.mc.erb'),
+	    	require => Package['sendmail']
 	}
 
 	exec { 'rebuild_sendmail_config':
