@@ -11,7 +11,7 @@ fully-qualifed-domain-name properly configured; when testing on a VM, you can un
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -34,7 +34,7 @@ node 'emr.hum.ht' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -69,7 +69,7 @@ node 'zlemr.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -96,7 +96,7 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -129,7 +129,7 @@ node 'humtest.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -153,7 +153,7 @@ node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -178,7 +178,7 @@ node 'reporting.hum.ht' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -209,7 +209,7 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -237,7 +237,7 @@ node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -263,7 +263,7 @@ node 'zltraining.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -285,7 +285,7 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -313,7 +313,7 @@ node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.or
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -338,7 +338,7 @@ node 'peru-ci.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -364,7 +364,7 @@ node 'haitihivtest.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -390,7 +390,7 @@ node 'haiti-test.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -415,7 +415,7 @@ node 'haititest.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -438,7 +438,7 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org', 'ces-laguna.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -462,7 +462,7 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano',
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
@@ -487,7 +487,7 @@ node 'pleebo-mirror.pih-emr.org' {
   }
 
   include security
-  include mailx
+  include mail
   include ntpdate
   include apt_upgrades
   include wget
