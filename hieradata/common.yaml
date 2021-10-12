@@ -38,10 +38,12 @@ tomcat_webapp_dir: /var/lib/tomcat7/webapps
 tomcat_enable_http_8080: false
 session_timeout: 30
 
+# For both Azure & Amigo backups
 backup_file_prefix: foo
 backup_hour: 1
 backup_delete_older_than_x_days: 90
 archive_hour: 3
+# For Amigo backups only
 remote_db_user: foo
 remote_db_server: foo
 remote_backup_dir: foo
