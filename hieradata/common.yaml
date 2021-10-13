@@ -50,8 +50,8 @@ remote_backup_dir: foo
 
 sysadmin_email: emrsysadmin@pih.org
 
-smtp_username: emralerts@pih.org
-smtp_userpassword: Medinfo999
+smtp_username: ENC[c7aCd9ntirLMUMSHySbdI42b3Uxdu45IeP1k1zMWtXw=:t8Ku94J6xhsGLIXpnbQhpg==:WDUxWld2d05na3lRQ0dJb2ZXdWhYdz09]
+smtp_userpassword: ENC[S6/9UffAD7ivo4VXNZEirw==:NBkEbRNVaqIJjI5uJsEmFg==:ZjNYZ0hsREdsVGpsZm1WTXRTbTIvdz09]
 
 mirth_db: mirthdb
 mirth_db_user: mirth
