@@ -71,4 +71,6 @@ sequence_folder: "/home/tomcat7/backups/sequences/"
 # old os version
 ubuntu_14: true
 
-
+#
+smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
+smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]
