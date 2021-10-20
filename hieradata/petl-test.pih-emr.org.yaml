@@ -1,0 +1,35 @@
+---
+site_domain: petl-test.pih-emr.org
+
+#PETL config
+petl_version: "3.0.0-SNAPSHOT"
+petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
+petl_sqlserver_databaseName: openmrs_petl_test
+#use memory-resident database so that all jobs are rerun on each PETL restart
+petl_database_url: "jdbc:h2:mem:petl"
+petl_error_subject: Petl-Test petl errors
+petl_cron_hour: '*/4'
+
+# SQL Server 2014 Boston office
+petl_sqlserver_host: 10.160.12.28
+petl_sqlserver_port: 1433
+petl_sqlserver_user: medinfoadmin
+petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
+
+server_timezone: America/New_York
+
+mysql_server_id: 3
+mysql_master_ip:
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+mysql_expire_logs_days: 1
+mysql_binary_logging: false
+mysql_net_read_timeout: 1800
+mysql_net_write_timeout: 1800
+
+mysql_innodb_buffer_pool_size: 8G
+mysql_innodb_buffer_pool_instances: 8
+
+openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+replication_db_password: ENC[92IfbImaUmA3wqYSG5kWWwexEU8HqCrqQzSXAMKRPz0=]
+backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]

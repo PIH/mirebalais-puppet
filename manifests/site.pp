@@ -122,30 +122,6 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
   #include monitoring
 }
 
-node 'humtest.pih-emr.org' {
-
-  class { 'apt':
-    always_apt_update => true,
-  }
-
-  include security
-  include mail
-  include ntpdate
-  include apt_upgrades
-  include wget
-  include unzip
-
-  include java
-  include mysql_setup
-  include tomcat
-  include apache2
-
-  include openmrs
-  include openmrs::initial_setup
-
-  include openmrs::atomfeed
-}
-
 node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
 
   class { 'apt':
@@ -503,4 +479,25 @@ node 'pleebo-mirror.pih-emr.org' {
 
   include monitoring
   include logging
+}
+
+node 'petl-test.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+
+  include percona
+  include petl
+
 }
