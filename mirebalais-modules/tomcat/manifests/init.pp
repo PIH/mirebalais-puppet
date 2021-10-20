@@ -62,7 +62,7 @@ class tomcat (
   package { $tomcat :
     ensure => installed,
     require => [ User[$tomcat], File["/usr/local/apache-tomcat-6.0.36"], File["/usr/local/apache-tomcat-7.0.62"], File["/usr/local/apache-tomcat-7.0.68"],
-        Exec['remove /etc/init.d/tomcat'], Exec['remove /etc/default/tomcat'], Exec['remove /etc/logrotate.d/tomcat']],
+        Exec['remove /etc/init.d/tomcat'], Exec['remove /etc/default/tomcat'], Exec['remove /etc/logrotate.d/tomcat'], Package['openjdk-8-jdk']],
     notify  => Service["$tomcat"]
   }
 

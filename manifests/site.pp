@@ -496,7 +496,6 @@ node 'petl-test.pih-emr.org' {
 
   include java
   include mysql_setup
-  include tomcat
 
   include percona
   include petl
