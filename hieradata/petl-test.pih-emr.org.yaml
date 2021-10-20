@@ -2,7 +2,7 @@
 site_domain: petl-test.pih-emr.org
 
 #PETL config
-petl_version: "2.7.0-SNAPSHOT"
+petl_version: "3.0.0-SNAPSHOT"
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 petl_sqlserver_databaseName: openmrs_petl_test
