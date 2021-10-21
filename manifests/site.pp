@@ -431,7 +431,7 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org', 'ces-laguna.pih-emr.org' {
 }
 
 node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano', 'ces-monterrey',
-    'ces-plan', 'ces-reforma', 'ces-salvador', 'ces-soledad' {
+    'ces-plan', 'ces-plan-alta', 'ces-reforma', 'ces-salvador', 'ces-soledad' {
 
   class { 'apt':
     always_apt_update => true,
