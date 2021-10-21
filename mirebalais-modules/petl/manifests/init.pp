@@ -12,16 +12,16 @@ class petl (
   $petl_mysql_port             = hiera("petl_mysql_port"),
   $petl_mysql_databaseName     = hiera("petl_mysql_databaseName"),
   $petl_mysql_options          = hiera("petl_mysql_options"),
-  $petl_mysql_user             = decrypt(hiera('petl_mysql_user')),
+  $petl_mysql_user             = decrypt(hiera("petl_mysql_user")),
   $petl_mysql_password         = decrypt(hiera("petl_mysql_password")),
   $petl_sqlserver_host             = hiera("petl_sqlserver_host"),
   $petl_sqlserver_port             = hiera("petl_sqlserver_port"),
   $petl_sqlserver_databaseName     = hiera("petl_sqlserver_databaseName"),
   $petl_sqlserver_user             = hiera("petl_sqlserver_user"),
   $petl_sqlserver_password         = decrypt(hiera("petl_sqlserver_password")),
-  $petl_check_errors_cron_hour     = hiera('petl_check_errors_cron_hour'),
-  $petl_error_subject              = hiera('petl_error_subject'),
-  $sysadmin_email                  = hiera('sysadmin_email'),
+  $petl_check_errors_cron_hour     = hiera("petl_check_errors_cron_hour"),
+  $petl_error_subject              = hiera("petl_error_subject"),
+  $sysadmin_email                  = hiera("sysadmin_email"),
 
 ) {
 

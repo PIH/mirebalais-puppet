@@ -1,6 +1,6 @@
 class petl::mysql (
-  $petl_mysql_user = decrypt(hiera('petl_mysql_user')),
-  $petl_mysql_password = decrypt(hiera('petl_mysql_password'))
+  $petl_mysql_user = decrypt(hiera("petl_mysql_user")),
+  $petl_mysql_password = decrypt(hiera("petl_mysql_password"))
 ){
 
   mysql_user { "${petl_mysql_user}@localhost":
@@ -11,7 +11,7 @@ class petl::mysql (
 
   mysql_grant { "${petl_mysql_user}@localhost/*.*":
     options    => ['GRANT'],
-    privileges => ['ALL'],
+    privileges => ['SELECT'],
     table => '*.*',
     user => "${petl_mysql_user}@localhost",
     require => [ Service['mysqld'] ],
