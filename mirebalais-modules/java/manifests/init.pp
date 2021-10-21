@@ -25,7 +25,6 @@ class java (
   }
 
   exec { "ln -sf /usr/lib/jvm/java-8-openjdk-amd64 /usr/lib/jvm/default-java":
-    notify => Service[$tomcat],
     subscribe => Exec["rm -f /usr/lib/jvm/default-java"],
     refreshonly => true
   }
