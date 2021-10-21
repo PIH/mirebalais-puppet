@@ -499,6 +499,6 @@ node 'petl-test.pih-emr.org' {
 
   include percona
   include petl
-  include petl::user
+  include petl::mysql
 
 }

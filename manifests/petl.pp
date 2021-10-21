@@ -9,5 +9,5 @@ node default {
   include wget
   include petl::java
   include petl
-  include petl::user
+  include petl::mysql
 }

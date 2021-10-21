@@ -1,6 +1,6 @@
-class petl::user (
-  $petl_db_user = decrypt(hiera('petl_mysql_user')),
-  $petl_db_password = decrypt(hiera('petl_mysql_password'))
+class petl::mysql (
+  $petl_mysql_user = decrypt(hiera('petl_mysql_user')),
+  $petl_mysql_password = decrypt(hiera('petl_mysql_password'))
 ){
 
   mysql_user { "${petl_mysql_user}@localhost":
