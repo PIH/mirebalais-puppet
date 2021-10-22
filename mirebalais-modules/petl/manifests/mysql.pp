@@ -11,7 +11,7 @@ class petl::mysql (
 
   mysql_grant { "${petl_mysql_user}@localhost/*.*":
     options    => ['GRANT'],
-    privileges => ['SELECT'],
+    privileges => ['ALL'],
     table => '*.*',
     user => "${petl_mysql_user}@localhost",
     require => [ Service['mysqld'] ],
