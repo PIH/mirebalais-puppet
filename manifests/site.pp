@@ -502,3 +502,22 @@ node 'petl-test.pih-emr.org' {
   include petl::mysql
 
 }
+
+node 'malawi-dw.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+
+  include petl
+
+}

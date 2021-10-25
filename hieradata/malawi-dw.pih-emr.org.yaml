@@ -1,0 +1,23 @@
+---
+site_domain: malawi-dw.pih-emr.org
+
+#PETL config
+petl_version: "3.0.0-SNAPSHOT"
+petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
+petl_sqlserver_databaseName: openmrs_malawi
+
+##use memory-resident database so that all jobs are rerun on each PETL restart
+petl_database_url: "jdbc:h2:mem:petl"
+petl_error_subject: Malawi DW PETL Errors
+petl_cron_hour: '*/4'
+
+##petl db mysql user
+petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
+petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+
+## SQL Server 2014 Boston office
+petl_sqlserver_host: 10.160.22.17
+petl_sqlserver_port: 1433
+petl_sqlserver_user: medinfoadmin
+petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
