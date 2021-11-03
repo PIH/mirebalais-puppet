@@ -91,6 +91,7 @@ pwa_filename: ''
 petl: "petl"
 petl_user: "petl"
 petl_base_dir: "petl"
+petl_job_dir: "jobs"
 petl_version: "2.6.0"
 petl_java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
 petl_java_opts: ""

@@ -16,7 +16,6 @@ petl_error_subject: Petl-Test petl errors
 petl_cron_hour: '*/4'
 petl_config_dir_url: "https://github.com/PIH/pih-pentaho"
 petl_config_name: pih-pentaho
-petl_job_dir: "/home/petl/jobs"
 petl_base_dir: "malawi-petl"
 petl_site:   "malawi
 
