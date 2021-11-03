@@ -1,6 +1,10 @@
 ---
 site_domain: petl-test.pih-emr.org
 
+# config files
+config_name: openmrs-config-zl
+config_version: 1.27.0
+
 #PETL config
 petl_version: "3.0.0-SNAPSHOT"
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
@@ -10,6 +14,11 @@ petl_sqlserver_databaseName: openmrs_petl_test
 petl_database_url: "jdbc:h2:mem:petl"
 petl_error_subject: Petl-Test petl errors
 petl_cron_hour: '*/4'
+petl_config_dir_url: "https://github.com/PIH/pih-pentaho"
+petl_config_name: pih-pentaho
+petl_job_dir: "/home/petl/jobs"
+petl_base_dir: "malawi-petl"
+petl_site:   "malawi
 
 #petl db mysql user
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
