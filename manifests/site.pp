@@ -228,8 +228,6 @@ node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr
   include openmrs::initial_setup
   include openmrs::backup
 
-  include petl
-
 }
 
 node 'zltraining.pih-emr.org' {
