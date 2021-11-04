@@ -6,7 +6,7 @@ class petl::configdatadir(
   $petl_job_dir     = hiera("petl_job_dir"),
   $pih_etl_repo_url = hiera('pih_etl_repo_url'),
   $config_name      = hiera('config_name'),
-  $config_repo      = hiera('config_repo')
+  $config_repo      = hiera('config_repo'),
   $config_version   = hiera('config_version')
 
 ){

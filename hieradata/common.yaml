@@ -113,12 +113,13 @@ petl_sqlserver_password: bar
 petl_error_subject: Petl errors
 petl_check_errors_cron_hour: '*/6'
 
+config_name: ""
+config_version: ""
+config_repo: ""
 ## choose between pih-pentaho (for malawi and rwanda) and petl (for other sites that run the pihemr and use openmrs-config-sitename)
 ## for the malawi and rwanda sites, add pih_etl_git_repo: "pih-pentaho" to the site specific yaml file
 pih_etl_git_repo: "petl"
 pih_etl_repo_url: "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('config_name')}&r=%{hiera('config_repo')}&p=zip&v=%{hiera('config_version')}"
-
-
 
 # note that this should only be enabled if you are installing biometrics server on the same server as OpenMRS
 # Enabling fingerprinting and connecting to a biometrics server is done via pih-config
@@ -166,9 +167,6 @@ activitylog_enabled: false
 openmrs_modules_dir: /home/tomcat7/.OpenMRS/modules
 atomfeed_version: 1.0.13-SNAPSHOT
 atomfeed_repo_url: https://openmrs.jfrog.io/artifactory/snapshots
-
-config_name: ""
-config_version: ""
 
 # old os version
 ubuntu_14: false
