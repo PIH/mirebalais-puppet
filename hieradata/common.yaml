@@ -90,14 +90,13 @@ pwa_filename: ''
 # PETL configuration
 petl: "petl"
 petl_user: "petl"
-petl_base_dir: "petl"
-petl_job_dir: "jobs"
+petl_home_dir: "/home/petl"
 petl_version: "2.6.0"
 petl_java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
 petl_java_opts: ""
 petl_database_url: "jdbc:h2:file:${petl.homeDir}/data/petl;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE"
 petl_server_port: 9109
-petl_job_dir: "/home/%{hiera('tomcat')}/.OpenMRS/configuration/pih/petl/jobs"
+petl_job_dir: "jobs"
 petl_datasource_dir: "/home/%{hiera('tomcat')}/.OpenMRS/configuration/pih/petl/datasources"
 petl_schedule_cron: "0 30 6 ? * *"
 petl_mysql_host: localhost
@@ -113,6 +112,13 @@ petl_sqlserver_user: foo
 petl_sqlserver_password: bar
 petl_error_subject: Petl errors
 petl_check_errors_cron_hour: '*/6'
+
+## choose between pih-pentaho (for malawi and rwanda) and petl (for other sites that run the pihemr and use openmrs-config-sitename)
+## for the malawi and rwanda sites, add pih_etl_git_repo: "pih-pentaho" to the site specific yaml file
+pih_etl_git_repo: "petl"
+pih_etl_repo_url: "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('config_name')}&r=%{hiera('config_repo')}&p=zip&v=%{hiera('config_version')}"
+
+
 
 # note that this should only be enabled if you are installing biometrics server on the same server as OpenMRS
 # Enabling fingerprinting and connecting to a biometrics server is done via pih-config

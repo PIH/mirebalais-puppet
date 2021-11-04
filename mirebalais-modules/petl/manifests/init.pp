@@ -1,7 +1,7 @@
 class petl (
   $petl                        = hiera("petl"),
   $petl_user                   = hiera("petl_user"),
-  $petl_base_dir               = hiera("petl_base_dir"),
+  $petl_home_dir               = hiera("petl_home_dir"),
   $petl_site                   = hiera('petl_site'),
   $petl_version                = hiera("petl_version"),
   $petl_java_home              = hiera("petl_java_home"),
@@ -32,55 +32,55 @@ class petl (
 
   user { "$petl_user":
     ensure  => "present",
-    home    => "/opt/$petl",
+    home    => "$petl_home_dir",
     shell   => "/bin/bash"
   }
 
-  file { "/opt/$petl_base_dir":
+  file { "${petl_home_dir}":
     ensure  => directory,
-    owner   => "$petl",
-    group   => "$petl",
+    owner   => "$petl_user",
+    group   => "$petl_user",
     mode    => "0755",
     require => User["$petl_user"]
   }
 
   # Setup work and data directories
 
-  file { "/opt/$petl_base_dir/data":
-    ensure  => directory,
-    owner   => "$petl",
-    group   => "$petl",
-    mode    => "0755",
-    require => File["/opt/$petl_base_dir"]
-  }
-
-  file { "/opt/$petl_base_dir/work":
+  file { "${petl_home_dir}/data":
     ensure  => directory,
     owner   => "$petl_user",
     group   => "$petl_user",
     mode    => "0755",
-    require => File["/opt/$petl_base_dir"]
+    require => File["${petl_home_dir}"]
+  }
+
+  file { "${petl_home_dir}/work":
+    ensure  => directory,
+    owner   => "$petl_user",
+    group   => "$petl_user",
+    mode    => "0755",
+    require => File["$petl_home_dir"]
   }
 
   # Setup application binaries
 
-  file { "/opt/$petl_base_dir/bin":
+  file { "$petl_home_dir/bin":
     ensure  => directory,
     owner   => "$petl_user",
     group   => "$petl_user",
     mode    => "0755",
-    require => File["/opt/$petl_base_dir"]
+    require => File["$petl_home_dir"]
   }
 
   wget::fetch { "download-petl-jar":
     source      => "http://bamboo.pih-emr.org/artifacts/petl-$petl_version.jar",
-    destination => "/opt/$petl_base_dir/bin/petl-$petl_version.jar",
+    destination => "$petl_home_dir/bin/petl-$petl_version.jar",
     timeout     => 0,
     verbose     => false,
-    require => File["/opt/$petl_base_dir/bin"]
+    require => File["$petl_home_dir/bin"]
   }
 
-  file { "/opt/$petl_base_dir/bin/petl-$petl_version.jar":
+  file { "$petl_home_dir/bin/petl-$petl_version.jar":
     ensure  => present,
     owner   => $petl_user,
     group   => $petl_user,
@@ -88,34 +88,34 @@ class petl (
     require => Wget::Fetch['download-petl-jar']
   }
 
-  file { "/opt/$petl_base_dir/bin/petl.jar":
+  file { "$petl_home_dir/bin/petl.jar":
     ensure  => link,
-    target => "/opt/$petl_base_dir/bin/petl-$petl_version.jar",
-    require => File["/opt/$petl_base_dir/bin/petl-$petl_version.jar"],
+    target => "$petl_home_dir/bin/petl-$petl_version.jar",
+    require => File["$petl_home_dir/bin/petl-$petl_version.jar"],
     notify => Exec['petl-restart']
   }
 
   # remove any old versions of PETL
   exec { "rm -f $(find . -maxdepth 1 -type f -name 'petl-*.jar' ! -name 'petl-$petl_version.jar')":
-    require => File["/opt/$petl_base_dir/bin/petl.jar"]
+    require => File["$petl_home_dir/bin/petl.jar"]
   }
 
-  file { "/opt/$petl_base_dir/bin/petl.conf":
+  file { "$petl_home_dir/bin/petl.conf":
     ensure  => present,
     content => template("petl/petl.conf.erb"),
     owner   => $petl_user,
     group   => $petl_user,
     mode    => "0755",
-    require => File["/opt/$petl_base_dir/bin/petl.jar"]
+    require => File["$petl_home_dir/bin/petl.jar"]
   }
 
-  file { "/opt/$petl_base_dir/bin/application.yml":
+  file { "$petl_home_dir/bin/application.yml":
     ensure  => present,
     content => template("petl/application.yml.erb"),
     owner   => $petl_user,
     group   => $petl_user,
     mode    => "0755",
-    require => File["/opt/$petl_base_dir/bin/petl.jar"],
+    require => File["$petl_home_dir/bin/petl.jar"],
     notify => Exec['petl-restart']
   }
 
@@ -125,8 +125,8 @@ class petl (
 
   file { "/etc/init.d/$petl" :
     ensure => 'link',
-    target => "/opt/$petl_base_dir/bin/petl.jar",
-    require => [ File["/opt/$petl_base_dir/bin/petl.conf"], File["/opt/$petl_base_dir/bin/petl.jar"] ]
+    target => "$petl_home_dir/bin/petl.jar",
+    require => [ File["$petl_home_dir/bin/petl.conf"], File["$petl_home_dir/bin/petl.jar"] ]
   }
 
   exec { 'petl-startup-enable':
@@ -161,7 +161,7 @@ class petl (
     owner   => root,
     group   => root,
     mode    => '0755',
-    require => File["/opt/$petl_base_dir/bin"]
+    require => File["$petl_home_dir/bin"]
   }
 
   cron { 'petl-error':
