@@ -8,7 +8,7 @@ config_version: 1.27.0
 
 #PETL config
 petl_site: "mirebalais"
-petl_home_dir: "/opt/ %{hiera('petl_site')}-petl"
+petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
 
 petl_version: "3.0.0-SNAPSHOT"
 
@@ -19,8 +19,7 @@ petl_cron_hour: '*/4'
 
 ## choose between pih-pentaho (for malawi and rwanda) and petl (for other sites that run the pihemr and use openmrs-config-sitename)
 ## for the malawi and rwanda sites, add pih_etl_git_repo: "pih-pentaho" to the site specific yaml file
-pih_etl_git_repo: "petl"
-pih_etl_repo_url: "https://github.com/PIH/pih-pentaho"
+pih_etl_git_repo: ""
 
 #petl db mysql user
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]

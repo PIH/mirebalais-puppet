@@ -4,7 +4,6 @@ class petl (
   $petl_home_dir               = hiera("petl_home_dir"),
   $petl_site                   = hiera('petl_site'),
   $pih_etl_git_repo            = hiera('pih_etl_git_repo'),
-  $pih_etl_repo_url            = hiera('pih_etl_repo_url'),
   $petl_version                = hiera("petl_version"),
   $petl_java_home              = hiera("petl_java_home"),
   $petl_java_opts              = hiera("petl_java_opts"),
@@ -145,12 +144,15 @@ class petl (
   }
 
   # petl configuration
-  if('pih-pentaho' in $petl_etl_git_repo)  {
+  if('pih-pentaho' in $pih_etl_git_repo)  {
+    exec { "delete-petl-config-dir":
+      command => "rm -rf ${petl_home_dir}/${petl_config_dir}"
+    }
     vcsrepo { "${petl_home_dir}/${petl_config_dir}":
       ensure   => latest,
       provider => git,
-      source      => "${pih_etl_repo_url}",
-      require => Service["$petl"],
+      source      => "https://github.com/PIH/pih-pentaho",
+      require => [Service["$petl"], Exec["delete-petl-config-dir"]],
       notify => Exec['petl-restart']
     }
   }
