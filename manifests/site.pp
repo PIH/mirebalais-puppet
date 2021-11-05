@@ -498,6 +498,5 @@ node 'petl-test.pih-emr.org' {
   include percona
   include petl
   include petl::mysql
-  include petl::configdatadir
 
 }

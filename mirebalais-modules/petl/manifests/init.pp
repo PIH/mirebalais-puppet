@@ -3,13 +3,14 @@ class petl (
   $petl_user                   = hiera("petl_user"),
   $petl_home_dir               = hiera("petl_home_dir"),
   $petl_site                   = hiera('petl_site'),
+  $pih_etl_git_repo            = hiera('pih_etl_git_repo'),
+  $pih_etl_repo_url            = hiera('pih_etl_repo_url'),
   $petl_version                = hiera("petl_version"),
   $petl_java_home              = hiera("petl_java_home"),
   $petl_java_opts              = hiera("petl_java_opts"),
   $petl_server_port            = hiera("petl_server_port"),
-  $petl_job_dir                = hiera("petl_job_dir"),
+  $petl_config_dir             = hiera("petl_config_dir"),
   $petl_schedule_cron          = hiera("petl_schedule_cron"),
-  $petl_datasource_dir         = hiera("petl_datasource_dir"),
   $petl_database_url           = hiera("petl_database_url"),
   $petl_mysql_host             = hiera("petl_mysql_host"),
   $petl_mysql_port             = hiera("petl_mysql_port"),
@@ -25,6 +26,8 @@ class petl (
   $petl_check_errors_cron_hour     = hiera("petl_check_errors_cron_hour"),
   $petl_error_subject              = hiera("petl_error_subject"),
   $sysadmin_email                  = hiera("sysadmin_email"),
+  $config_name                     = hiera('config_name'),
+  $config_version                  = hiera('config_version')
 
 ) {
 
@@ -141,36 +144,67 @@ class petl (
     require => Exec["petl-startup-enable"]
   }
 
-  # just restart PETL every time the deploy runs
-  exec { 'petl-restart':
-    command     => "service $petl restart",
-    user        => 'root',
-    require => Service["$petl"],
+  # petl configuration
+  if('pih-pentaho' in $petl_etl_git_repo)  {
+    vcsrepo { "${petl_home_dir}/${petl_config_dir}":
+      ensure   => latest,
+      provider => git,
+      source      => "${pih_etl_repo_url}",
+      require => Service["$petl"],
+      notify => Exec['petl-restart']
+    }
   }
+  else {
+    if ('SNAPSHOT' in $config_version) {
+      $config_repo = "snapshots"
+    }
+    else {
+      $config_repo = "releases"
+    }
+    wget::fetch { 'download-petl-config-dir':
+    source      => "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}",
+    destination => "/tmp/petl-${config_name}.zip",
+    timeout     => 0,
+    verbose     => false,
+    redownload  => true,
+    }
+    exec { 'install-petl-config-dir':
+    command => "rm -rf /tmp/petl_configuration && unzip -o /tmp/petl-${config_name}.zip -d /tmp/petl_configuration && rm -rf ${petl_home_dir}/${petl_config_dir} && mkdir -p ${petl_home_dir}/${petl_config_dir} && cp -r /tmp/petl_configuration/pih/petl/* ${petl_home_dir}/${petl_config_dir}",
+    require => [ Wget::Fetch['download-petl-config-dir'], Package['unzip'], Service["$petl"]],
+    notify  => Exec['petl-restart']
+      }
+    }
 
-  ## logrotate
-  file { '/etc/logrotate.d/petl':
-    ensure  => file,
-    content  => template('petl/logrotate.erb')
-  }
+    # just restart PETL every time the deploy runs
+    exec { 'petl-restart':
+      command => "service $petl restart",
+      user    => 'root',
+      require => Service["$petl"],
+    }
 
-  # Petl error file
-  file { "/usr/local/sbin/checkPetlErrors.sh":
-    ensure  => present,
-    content => template('petl/checkPetlErrors.sh.erb'),
-    owner   => root,
-    group   => root,
-    mode    => '0755',
-    require => File["$petl_home_dir/bin"]
-  }
+    ## logrotate
+    file { '/etc/logrotate.d/petl':
+      ensure  => file,
+      content => template('petl/logrotate.erb')
+    }
 
-  cron { 'petl-error':
-    ensure  => present,
-    command => '/usr/local/sbin/checkPetlErrors.sh &> /dev/null',
-    user    => 'root',
-    hour    => "${petl_check_errors_cron_hour}",
-    minute  => 00,
-    require => File["/usr/local/sbin/checkPetlErrors.sh"]
-  }
+    # Petl error file
+    file { "/usr/local/sbin/checkPetlErrors.sh":
+      ensure  => present,
+      content => template('petl/checkPetlErrors.sh.erb'),
+      owner   => root,
+      group   => root,
+      mode    => '0755',
+      require => File["$petl_home_dir/bin"]
+    }
+
+    cron { 'petl-error':
+      ensure  => present,
+      command => '/usr/local/sbin/checkPetlErrors.sh &> /dev/null',
+      user    => 'root',
+      hour    => "${petl_check_errors_cron_hour}",
+      minute  => 00,
+      require => File["/usr/local/sbin/checkPetlErrors.sh"]
+    }
 
 }

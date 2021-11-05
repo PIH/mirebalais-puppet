@@ -1,8 +1,8 @@
 
 petl:
-  homeDir: "/home/<%= @petl %>"
-  datasourceDir: "<%= @petl_datasource_dir %>"
-  jobDir: "<%= @petl_job_dir %>"
+  homeDir: "<%= @petl_home_dir %>"
+  datasourceDir: "<%= @petl_home_dir %>/<%= @petl_config_dir %>/datasources"
+  jobDir: "<%= @petl_home_dir %>/<%= @petl_config_dir %>/jobs"
   schedule:
     cron: "<%= @petl_schedule_cron %>"
 
