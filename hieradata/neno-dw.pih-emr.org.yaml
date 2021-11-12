@@ -18,6 +18,7 @@ petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLM
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 
+petl_server_port: 9110
 # petl sql
 petl_sqlserver_port: 1433
 petl_sqlserver_user: ENC[5ChP50972ydOmVvG8h/FMQ==:R6hlTaSylcFEt9+3cXVQaQ==:WWY4STRXNXpCWjNDZkRPZ0FqbUFvZz09]

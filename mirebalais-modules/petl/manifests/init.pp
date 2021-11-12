@@ -25,8 +25,7 @@ class petl (
   $sysadmin_email                  = hiera("sysadmin_email"),
   $petl_config_name                = hiera('petl_config_name'),
   $petl_config_version             = hiera('petl_config_version'),
-  $imb_etl                         = hiera('imb_etl'),
-  $server_port                     = hiera('server_port')
+  $imb_etl                         = hiera('imb_etl')
 ) {
 
   # Setup User, and Home Directory for PETL installation
@@ -110,7 +109,7 @@ class petl (
   }
     file { "$petl_home_dir/bin/application.yml":
       ensure  => present,
-      content => template("petl/application-${petl_site}-.yml.erb"),
+      content => template("petl/application-${petl_site}.yml.erb"),
       owner   => $petl,
       group   => $petl,
       mode    => "0755",
