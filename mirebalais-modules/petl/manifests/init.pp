@@ -198,13 +198,13 @@ class petl (
     }
 
     ## logrotate
-    file { '/etc/logrotate.d/${petl_site}':
+    file { "/etc/logrotate.d/petl-${petl_site}":
       ensure  => file,
       content => template('petl/logrotate.erb')
     }
 
     # Petl error file
-    file { "/usr/local/sbin/check-${petl_site}-Errors.sh":
+    file { "/usr/local/sbin/petl-${petl_site}-checkErrors.sh":
       ensure  => present,
       content => template('petl/checkPetlErrors.sh.erb'),
       owner   => root,
@@ -215,11 +215,11 @@ class petl (
 
     cron { 'petl-error':
       ensure  => present,
-      command => '/usr/local/sbin/check-${petl_site}-Errors.sh &> /dev/null',
+      command => '/usr/local/sbin/petl-${petl_site}-checkErrors.sh &> /dev/null',
       user    => 'root',
       hour    => "${petl_check_errors_cron_hour}",
       minute  => 00,
-      require => File["/usr/local/sbin/check-${petl_site}-Errors.sh"]
+      require => File["/usr/local/sbin/petl-${petl_site}-checkErrors.sh"]
     }
 
 }
