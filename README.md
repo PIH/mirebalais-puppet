@@ -95,7 +95,7 @@ Production
   zl-report  
 
 Test
-  petl-test
+  zl-test (for petl-test.pih-emr.org)
   humci
 ```
 The pih-pentaho repo still hosts the rwanda etl. If you are installing a rwanda etl server, ensure that in the yaml file you set
