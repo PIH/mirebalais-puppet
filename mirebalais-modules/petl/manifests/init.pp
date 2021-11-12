@@ -1,9 +1,7 @@
 class petl (
   $petl                        = hiera("petl"),
-  $petl_user                   = hiera("petl_user"),
   $petl_home_dir               = hiera("petl_home_dir"),
   $petl_site                   = hiera('petl_site'),
-  $pih_etl_git_repo            = hiera('pih_etl_git_repo'),
   $petl_version                = hiera("petl_version"),
   $petl_java_home              = hiera("petl_java_home"),
   $petl_java_opts              = hiera("petl_java_opts"),
@@ -25,14 +23,13 @@ class petl (
   $petl_check_errors_cron_hour     = hiera("petl_check_errors_cron_hour"),
   $petl_error_subject              = hiera("petl_error_subject"),
   $sysadmin_email                  = hiera("sysadmin_email"),
-  $config_name                     = hiera('config_name'),
-  $config_version                  = hiera('config_version')
-
+  $petl_config_name                     = hiera('petl_config_name'),
+  $petl_config_version                  = hiera('petl_config_version'),
+  $imb_etl                         = hiera('imb_etl')
 ) {
 
   # Setup User, and Home Directory for PETL installation
-
-  user { "$petl_user":
+  user { "$petl":
     ensure  => "present",
     home    => "$petl_home_dir",
     shell   => "/bin/bash"
@@ -40,26 +37,26 @@ class petl (
 
   file { "${petl_home_dir}":
     ensure  => directory,
-    owner   => "$petl_user",
-    group   => "$petl_user",
+    owner   => "$petl",
+    group   => "$petl",
     mode    => "0755",
-    require => User["$petl_user"]
+    require => User["$petl"]
   }
 
   # Setup work and data directories
 
   file { "${petl_home_dir}/data":
     ensure  => directory,
-    owner   => "$petl_user",
-    group   => "$petl_user",
+    owner   => "$petl",
+    group   => "$petl",
     mode    => "0755",
     require => File["${petl_home_dir}"]
   }
 
   file { "${petl_home_dir}/work":
     ensure  => directory,
-    owner   => "$petl_user",
-    group   => "$petl_user",
+    owner   => "$petl",
+    group   => "$petl",
     mode    => "0755",
     require => File["$petl_home_dir"]
   }
@@ -68,8 +65,8 @@ class petl (
 
   file { "$petl_home_dir/bin":
     ensure  => directory,
-    owner   => "$petl_user",
-    group   => "$petl_user",
+    owner   => "$petl",
+    group   => "$petl",
     mode    => "0755",
     require => File["$petl_home_dir"]
   }
@@ -84,8 +81,8 @@ class petl (
 
   file { "$petl_home_dir/bin/petl-$petl_version.jar":
     ensure  => present,
-    owner   => $petl_user,
-    group   => $petl_user,
+    owner   => $petl,
+    group   => $petl,
     mode    => "0755",
     require => Wget::Fetch['download-petl-jar']
   }
@@ -105,21 +102,20 @@ class petl (
   file { "$petl_home_dir/bin/petl.conf":
     ensure  => present,
     content => template("petl/petl.conf.erb"),
-    owner   => $petl_user,
-    group   => $petl_user,
+    owner   => $petl,
+    group   => $petl,
     mode    => "0755",
     require => File["$petl_home_dir/bin/petl.jar"]
   }
-
-  file { "$petl_home_dir/bin/application.yml":
-    ensure  => present,
-    content => template("petl/application.yml.erb"),
-    owner   => $petl_user,
-    group   => $petl_user,
-    mode    => "0755",
-    require => File["$petl_home_dir/bin/petl.jar"],
-    notify => Exec['petl-restart']
-  }
+    file { "$petl_home_dir/bin/application.yml":
+      ensure  => present,
+      content => template("petl/application.yml.erb"),
+      owner   => $petl,
+      group   => $petl,
+      mode    => "0755",
+      require => File["$petl_home_dir/bin/petl.jar"],
+      notify  => Exec['petl-restart']
+    }
 
   # Set up scripts and services to execute PETL
 
@@ -144,10 +140,11 @@ class petl (
   }
 
   # petl configuration
-  if('pih-pentaho' in $pih_etl_git_repo)  {
-    exec { "delete-petl-config-dir":
+  exec { "delete-petl-config-dir":
       command => "rm -rf ${petl_home_dir}/${petl_config_dir}"
-    }
+  }
+
+  if $imb_etl  {
     vcsrepo { "${petl_home_dir}/${petl_config_dir}":
       ensure   => latest,
       provider => git,
@@ -155,27 +152,44 @@ class petl (
       require => [Service["$petl"], Exec["delete-petl-config-dir"]],
       notify => Exec['petl-restart']
     }
+    ## imb application.yml file
   }
   else {
-    if ('SNAPSHOT' in $config_version) {
-      $config_repo = "snapshots"
+    if ('SNAPSHOT' in $petl_config_version) {
+      $petl_config_repo = "snapshots"
     }
     else {
-      $config_repo = "releases"
+      $petl_config_repo = "releases"
     }
-    wget::fetch { 'download-petl-config-dir':
-    source      => "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}",
-    destination => "/tmp/petl-${config_name}.zip",
-    timeout     => 0,
-    verbose     => false,
-    redownload  => true,
-    }
-    exec { 'install-petl-config-dir':
-    command => "rm -rf /tmp/petl_configuration && unzip -o /tmp/petl-${config_name}.zip -d /tmp/petl_configuration && rm -rf ${petl_home_dir}/${petl_config_dir} && mkdir -p ${petl_home_dir}/${petl_config_dir} && cp -r /tmp/petl_configuration/pih/petl/* ${petl_home_dir}/${petl_config_dir}",
-    require => [ Wget::Fetch['download-petl-config-dir'], Package['unzip'], Service["$petl"]],
-    notify  => Exec['petl-restart']
+    if ('apzu-etl' in $petl_config_name) {
+      wget::fetch { 'download-azpu-petl-config-dir':
+      source      => "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${petl_config_name}&r=${petl_config_repo}&c=distribution&p=zip&v=${petl_config_version}",
+      destination => "/tmp/petl-${petl_config_name}.zip",
+      timeout     => 0,
+      verbose     => false,
+      redownload  => true,
+      }
+      exec { 'install-apzu-petl-config-dir':
+      command => "rm -rf /tmp/petl_configuration && unzip -o /tmp/petl-${petl_config_name}.zip -d /tmp/petl_configuration && rm -rf ${petl_home_dir}/${petl_config_dir} && mkdir -p ${petl_home_dir}/${petl_config_dir} && cp -r /tmp/petl_configuration/* ${petl_home_dir}/${petl_config_dir}",
+      require => [ Wget::Fetch['download-azpu-petl-config-dir'], Package['unzip'], Service["$petl"]],
+      notify  => Exec['petl-restart']
       }
     }
+    else {
+      wget::fetch { 'download-petl-config-dir':
+      source => "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${petl_config_name}&r=${petl_config_repo}&p=zip&v=${petl_config_version}",
+      destination => "/tmp/petl-${petl_config_name}.zip",
+      timeout    => 0,
+      verbose    => false,
+      redownload => true,
+        }
+      exec { 'install-petl-config-dir':
+      command => "rm -rf /tmp/petl_configuration && unzip -o /tmp/petl-${petl_config_name}.zip -d /tmp/petl_configuration && rm -rf ${petl_home_dir}/${petl_config_dir} && mkdir -p ${petl_home_dir}/${petl_config_dir} && cp -r /tmp/petl_configuration/pih/petl/* ${petl_home_dir}/${petl_config_dir}",
+      require => [ Wget::Fetch['download-petl-config-dir'], Package['unzip'], Service["$petl"]],
+      notify  => Exec['petl-restart']
+      }
+    }
+  }
 
     # just restart PETL every time the deploy runs
     exec { 'petl-restart':
@@ -185,7 +199,7 @@ class petl (
     }
 
     ## logrotate
-    file { '/etc/logrotate.d/petl':
+    file { '/etc/logrotate.d/$petl':
       ensure  => file,
       content => template('petl/logrotate.erb')
     }

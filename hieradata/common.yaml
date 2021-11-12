@@ -117,9 +117,8 @@ petl_error_subject: Petl errors
 petl_schedule_cron: "0 30 6 ? * *"
 petl_check_errors_cron_hour: '*/6'
 
-## choose between pih-pentaho (for malawi and rwanda) and petl (for other sites that run the pihemr and use openmrs-config-sitename)
-## for the malawi and rwanda sites, add pih_etl_git_repo: "pih-pentaho" to the site specific yaml file
-pih_etl_git_repo: "petl"
+# this is used to download the imb etl repo
+imb_etl: false
 
 # note that this should only be enabled if you are installing biometrics server on the same server as OpenMRS
 # Enabling fingerprinting and connecting to a biometrics server is done via pih-config

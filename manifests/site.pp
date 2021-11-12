@@ -500,3 +500,19 @@ node 'petl-test.pih-emr.org' {
   include petl::mysql
 
 }
+
+node 'neno-dw.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+
+  include petl
+
+}
