@@ -1,0 +1,115 @@
+petl:
+  homeDir: "<%= @petl_home_dir -%>"
+  datasourceDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/datasources"
+  jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
+  startup:
+    jobs:
+      - "create-partitions.yml"
+      - "refresh-openmrs-data.yml"
+
+server:
+  port: <%= @server_port -%>
+
+logging:
+  level:
+    root: "WARN"
+    org.pih: "DEBUG"
+
+datasources:
+  mysql:
+    user: "<%= @petl_mysql_user -%>"
+    password: "<%= @petl_mysql_password -%>"
+    options: " <%= @petl_mysql_options -%>"
+
+  openmrs:
+    ces:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_prod"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+    plan:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_plan"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+    plan-alta:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_plan_alta"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+    salvador:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_salvador"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+    reforma:
+      host: "<%= @petl_mysql_host -%>"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "openmrs_ces_reforma"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    soledad:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_soledad"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+    honduras:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_honduras"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+    capitan:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_capitan"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+    laguna:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_laguna"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+    matazano:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_matazano"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+    letrero:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_letrero"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+    monterrey:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_ces_monterrey"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+
+   warehouse:
+       host: "<%= @petl_sqlserver_host -%>"
+       port: "<%= @petl_sqlserver_port -%>"
+       databaseName: "<%= @petl_sqlserver_databaseName -%>"
+       user: "<%= @petl_sqlserver_user -%>"
+       password: "<%= @petl_sqlserver_password -%>"
