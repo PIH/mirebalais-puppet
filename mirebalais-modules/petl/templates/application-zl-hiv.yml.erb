@@ -28,9 +28,9 @@ datasources:
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
 
-   warehouse:
+  warehouse:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
        databaseName: "<%= @petl_sqlserver_databaseName -%>"
        user: "<%= @petl_sqlserver_user -%>"
-       password: "<%= @petl_sqlserver_password -%>
+       password: "<%= @petl_sqlserver_password -%>"
