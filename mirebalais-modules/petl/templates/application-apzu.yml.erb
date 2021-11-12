@@ -1,0 +1,60 @@
+petl:
+  homeDir: "<%= @petl_home_dir -%>"
+  datasourceDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/datasources"
+  jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
+  startup:
+    jobs:
+      - "refresh-full.yml"
+server:
+  port: <%= @petl_server_port -%>
+
+logging:
+  level:
+    root: "WARN"
+    org.pih: "DEBUG"
+
+datasources:
+  mysql:
+    user: "<%= @petl_mysql_user -%>"
+    password: "<%= @petl_mysql_password -%>"
+    options: " <%= @petl_mysql_options -%>"
+
+    openmrs
+        upperNenoOpenmrs:
+            host: "<%= @petl_mysql_host -%>"
+            port: "<%= @petl_mysql_port -%>"
+            databaseName: "neno"
+            user: "${datasources.mysql.user}"
+            password: "${datasources.mysql.password}"
+            options: "${datasources.mysql.options}"
+
+        lowerNenoOpenmrs:
+            host: "<%= @petl_mysql_host -%>"
+            port: "<%= @petl_mysql_port -%>"
+            databaseName: "lisungwi"
+            user: "${datasources.mysql.user}"
+            password: "${datasources.mysql.password}"
+            options: "${datasources.mysql.options}"
+
+        upperNenoReporting:
+            host: "<%= @petl_mysql_host -%>"
+            port: "<%= @petl_mysql_port -%>"
+            databaseName: "neno_reporting"
+            user: "${datasources.mysql.user}"
+            password: "${datasources.mysql.password}"
+            options: "${datasources.mysql.options}"
+
+        lowerNenoReporting:
+            host: "<%= @petl_mysql_host -%>"
+            port: "<%= @petl_mysql_port -%>"
+            databaseName: "lisungwi_reporting"
+            user: "${datasources.mysql.user}"
+            password: "${datasources.mysql.password}"
+            options: "${datasources.mysql.options}"
+
+    consolidatedReporting:
+        host: "<%= @petl_mysql_host -%>"
+        port: "<%= @petl_sqlserver_port -%>"
+        databaseName: "<%= @petl_sqlserver_databaseName -%>"
+        user: "<%= @petl_sqlserver_user -%>"
+        password: "<%= @petl_sqlserver_password -%>"

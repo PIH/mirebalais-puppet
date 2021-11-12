@@ -89,27 +89,36 @@ pwa_filename: ''
 
 # PETL configuration
 petl: "petl"
+petl_site: mirebalais
+petl_user: "petl"
 petl_version: "2.6.0"
+
+petl_home_dir: "/opt/petl"
+petl_config_dir: "configurations"
 petl_java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
 petl_java_opts: ""
+
 petl_database_url: "jdbc:h2:file:${petl.homeDir}/data/petl;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE"
-petl_server_port: 9109
-petl_job_dir: "/home/%{hiera('tomcat')}/.OpenMRS/configuration/pih/petl/jobs"
-petl_datasource_dir: "/home/%{hiera('tomcat')}/.OpenMRS/configuration/pih/petl/datasources"
-petl_schedule_cron: "0 30 6 ? * *"
 petl_mysql_host: localhost
 petl_mysql_port: 3306
 petl_mysql_databaseName: openmrs
 petl_mysql_options: ""
 petl_mysql_user: openmrs
 petl_mysql_password: foo
+
+petl_server_port: 9109
 petl_sqlserver_host: localhost
 petl_sqlserver_port: 1433
 petl_sqlserver_databaseName: openmrs_extractions
 petl_sqlserver_user: foo
 petl_sqlserver_password: bar
+
 petl_error_subject: Petl errors
+petl_schedule_cron: "0 30 6 ? * *"
 petl_check_errors_cron_hour: '*/6'
+
+# this is used to download the imb etl repo
+imb_etl: false
 
 # note that this should only be enabled if you are installing biometrics server on the same server as OpenMRS
 # Enabling fingerprinting and connecting to a biometrics server is done via pih-config
@@ -157,9 +166,6 @@ activitylog_enabled: false
 openmrs_modules_dir: /home/tomcat7/.OpenMRS/modules
 atomfeed_version: 1.0.13-SNAPSHOT
 atomfeed_repo_url: https://openmrs.jfrog.io/artifactory/snapshots
-
-config_name: ""
-config_version: ""
 
 # old os version
 ubuntu_14: false

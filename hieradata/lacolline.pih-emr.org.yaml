@@ -44,17 +44,6 @@ az_backup_folder_path: haiti/lacolline
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
-#PETL config
-petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
-petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
-petl_sqlserver_host: 10.160.12.27
-petl_sqlserver_port: 1433
-petl_sqlserver_databaseName: openmrs_lacolline
-petl_sqlserver_user: openmrs
-petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
-petl_error_subject: ZL Lacolline petl errors
-
-
 # mail
 smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
 smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]

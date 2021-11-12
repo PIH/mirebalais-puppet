@@ -6,7 +6,7 @@ mod 'puppetlabs-apt',
 mod 'puppetlabs-mysql',
   :git => 'https://github.com/puppetlabs/puppetlabs-mysql',
   :ref => '1.0.0'
-mod 'puppetlabs/vcsrepo', '1.3.1'
+mod 'puppetlabs/vcsrepo', '3.2.1'
 mod 'maestrodev/wget', '1.7.0'
 mod 'maestrodev/puppet-maven',
   :git => 'https://github.com/maestrodev/puppet-maven', 
