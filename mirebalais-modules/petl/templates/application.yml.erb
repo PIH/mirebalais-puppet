@@ -39,6 +39,7 @@ datasources:
     password: "<%= @petl_mysql_password -%>"
     options: " <%= @petl_mysql_options -%>"
 
+## test servers
 <% if @petl_site == "zl-test" -%>
   openmrs:
     cange:
@@ -90,6 +91,67 @@ datasources:
        databaseName: "<%= @petl_sqlserver_databaseName -%>"
        user: "<%= @petl_sqlserver_user -%>"
        password: "<%= @petl_sqlserver_password -%>
+<% end -%>
+
+<% if @petl_site == "humci" -%>
+  openmrs:
+    humci:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "<%= @petl_mysql_databaseName -%>"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+
+    warehouse:
+       host: "<%= @petl_sqlserver_host -%>"
+       port: "<%= @petl_sqlserver_port -%>"
+       databaseName: "<%= @petl_sqlserver_databaseName -%>"
+       user: "<%= @petl_sqlserver_user -%>"
+       password: "<%= @petl_sqlserver_password -%>
+<% end -%>
+
+## production
+<% if @petl_site == "apzu" -%>
+    openmrs
+        upperNenoOpenmrs:
+            host: "<%= @petl_mysql_host -%>"
+            port: "<%= @petl_mysql_port -%>"
+            databaseName: "neno"
+            user: "${datasources.mysql.user}"
+            password: "${datasources.mysql.password}"
+            options: "${datasources.mysql.options}"
+
+        lowerNenoOpenmrs:
+            host: "<%= @petl_mysql_host -%>"
+            port: "<%= @petl_mysql_port -%>"
+            databaseName: "lisungwi"
+            user: "${datasources.mysql.user}"
+            password: "${datasources.mysql.password}"
+            options: "${datasources.mysql.options}"
+
+        upperNenoReporting:
+            host: "<%= @petl_mysql_host -%>"
+            port: "<%= @petl_mysql_port -%>"
+            databaseName: "neno_reporting"
+            user: "${datasources.mysql.user}"
+            password: "${datasources.mysql.password}"
+            options: "${datasources.mysql.options}"
+
+        lowerNenoReporting:
+            host: "<%= @petl_mysql_host -%>"
+            port: "<%= @petl_mysql_port -%>"
+            databaseName: "lisungwi_reporting"
+            user: "${datasources.mysql.user}"
+            password: "${datasources.mysql.password}"
+            options: "${datasources.mysql.options}"
+
+    consolidatedReporting:
+        host: "<%= @petl_mysql_host -%>"
+        port: "<%= @petl_sqlserver_port -%>"
+        databaseName: "<%= @petl_sqlserver_databaseName -%>"
+        user: "<%= @petl_sqlserver_user -%>"
+        password: "<%= @petl_sqlserver_password -%>"
 <% end -%>
 
 <% if @petl_site == "ces" -%>
@@ -187,43 +249,55 @@ datasources:
        password: "<%= @petl_sqlserver_password -%>"
 <% end -%>
 
-<% if @petl_site == "apzu" -%>
-upperNenoOpenmrs:
-  host: "<%= @petl_mysql_host -%>"
-  port: "<%= @petl_mysql_port -%>"
-  databaseName: "neno"
-  user: "${datasources.mysql.user}"
-  password: "${datasources.mysql.password}"
-  options: "${datasources.mysql.options}"
+<% if @petl_site == "zl-reporting" -%>
+  openmrs:
+    cange:
+      host: "<%= @petl_mysql_host -%>"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "<%= @petl_mysql_databaseName -%>"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    hinche:
+      host: "<%= @petl_mysql_host -%>"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "<%= @petl_mysql_databaseName -%>"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    saint_marc_hsn:
+      host: "<%= @petl_mysql_host -%>"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "<%= @petl_mysql_databaseName -%>"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    lacolline:
+      host: "<%= @petl_mysql_host -%>"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "<%= @petl_mysql_databaseName -%>"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    thomonde:
+      host: "<%= @petl_mysql_host -%>"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "<%= @petl_mysql_databaseName -%>"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+     mirebalais:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "<%= @petl_mysql_databaseName -%>"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
 
-lowerNenoOpenmrs:
-  host: "<%= @petl_mysql_host -%>"
-  port: "<%= @petl_mysql_port -%>"
-  databaseName: "lisungwi"
-  user: "${datasources.mysql.user}"
-  password: "${datasources.mysql.password}"
-  options: "${datasources.mysql.options}"
-
-upperNenoReporting:
-  host: "<%= @petl_mysql_host -%>"
-  port: "<%= @petl_mysql_port -%>"
-  databaseName: "neno_reporting"
-  user: "${datasources.mysql.user}"
-  password: "${datasources.mysql.password}"
-  options: "${datasources.mysql.options}"
-
-lowerNenoReporting:
-  host: "<%= @petl_mysql_host -%>"
-  port: "<%= @petl_mysql_port -%>"
-  databaseName: "lisungwi_reporting"
-  user: "${datasources.mysql.user}"
-  password: "${datasources.mysql.password}"
-  options: "${datasources.mysql.options}"
-
-consolidatedReporting:
-  host: "<%= @petl_mysql_host -%>"
-  port: "<%= @petl_sqlserver_port -%>"
-  databaseName: "<%= @petl_sqlserver_databaseName -%>"
-  user: "<%= @petl_sqlserver_user -%>"
-  password: "<%= @petl_sqlserver_password -%>"
+   warehouse:
+       host: "<%= @petl_sqlserver_host -%>"
+       port: "<%= @petl_sqlserver_port -%>"
+       databaseName: "<%= @petl_sqlserver_databaseName -%>"
+       user: "<%= @petl_sqlserver_user -%>"
+       password: "<%= @petl_sqlserver_password -%>
 <% end -%>

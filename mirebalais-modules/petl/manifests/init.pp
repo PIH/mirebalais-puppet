@@ -18,13 +18,13 @@ class petl (
   $petl_sqlserver_host             = hiera("petl_sqlserver_host"),
   $petl_sqlserver_port             = hiera("petl_sqlserver_port"),
   $petl_sqlserver_databaseName     = hiera("petl_sqlserver_databaseName"),
-  $petl_sqlserver_user             = hiera("petl_sqlserver_user"),
+  $petl_sqlserver_user             = decrypt(hiera("petl_sqlserver_user")),
   $petl_sqlserver_password         = decrypt(hiera("petl_sqlserver_password")),
   $petl_check_errors_cron_hour     = hiera("petl_check_errors_cron_hour"),
   $petl_error_subject              = hiera("petl_error_subject"),
   $sysadmin_email                  = hiera("sysadmin_email"),
-  $petl_config_name                     = hiera('petl_config_name'),
-  $petl_config_version                  = hiera('petl_config_version'),
+  $petl_config_name                = hiera('petl_config_name'),
+  $petl_config_version             = hiera('petl_config_version'),
   $imb_etl                         = hiera('imb_etl')
 ) {
 
@@ -152,7 +152,6 @@ class petl (
       require => [Service["$petl"], Exec["delete-petl-config-dir"]],
       notify => Exec['petl-restart']
     }
-    ## imb application.yml file
   }
   else {
     if ('SNAPSHOT' in $petl_config_version) {
@@ -199,13 +198,13 @@ class petl (
     }
 
     ## logrotate
-    file { '/etc/logrotate.d/$petl':
+    file { '/etc/logrotate.d/${petl_site}':
       ensure  => file,
       content => template('petl/logrotate.erb')
     }
 
     # Petl error file
-    file { "/usr/local/sbin/checkPetlErrors.sh":
+    file { "/usr/local/sbin/check-${petl_site}-Errors.sh":
       ensure  => present,
       content => template('petl/checkPetlErrors.sh.erb'),
       owner   => root,
@@ -216,11 +215,11 @@ class petl (
 
     cron { 'petl-error':
       ensure  => present,
-      command => '/usr/local/sbin/checkPetlErrors.sh &> /dev/null',
+      command => '/usr/local/sbin/check-${petl_site}-Errors.sh &> /dev/null',
       user    => 'root',
       hour    => "${petl_check_errors_cron_hour}",
       minute  => 00,
-      require => File["/usr/local/sbin/checkPetlErrors.sh"]
+      require => File["/usr/local/sbin/check-${petl_site}-Errors.sh"]
     }
 
 }

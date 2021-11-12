@@ -83,8 +83,6 @@ node 'zlemr.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
-  include petl
-
   include openmrs::backup
 
 }
@@ -116,10 +114,6 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
   include petl
 
-  #include mirth
-  #include mirth::channel_setup
-
-  #include monitoring
 }
 
 node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
@@ -326,7 +320,6 @@ node 'peru-ci.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
-  include petl
 }
 
 
@@ -352,9 +345,6 @@ node 'haitihivtest.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
-  include petl
-
-  #include monitoring
 }
 
 node 'haiti-test.pih-emr.org' {
@@ -379,7 +369,6 @@ node 'haiti-test.pih-emr.org' {
   include openmrs::initial_setup
 
   include percona
-  include petl
 }
 
 node 'haititest.pih-emr.org' {
