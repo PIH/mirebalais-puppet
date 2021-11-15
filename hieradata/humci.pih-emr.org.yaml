@@ -25,13 +25,13 @@ biometrics_webapp_name: biometrics
 
 ####PETL
 #config
-petl: "petl-humci"
+petl: "petl"
 petl_site: "humci"
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
 petl_config_name: openmrs-config-zl
 
 #version
-petl_config_version: 1.27.0-SNAPSHOT
+petl_config_version: 1.28.0-SNAPSHOT
 petl_version: "3.0.0-SNAPSHOT"
 
 #petl mysql
