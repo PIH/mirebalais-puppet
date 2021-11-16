@@ -5,7 +5,7 @@ petl:
   startup:
     jobs:
       - "create-partitions.yml"
-      - "refresh-openmrs-data.yml"
+      - "refresh-humci-data.yml"
 
 server:
   port: <%= @petl_server_port -%>
@@ -25,7 +25,7 @@ datasources:
     humci:
       host: "<%= @petl_mysql_host -%>"
       port: "<%= @petl_mysql_port -%>"
-      databaseName: "openmrs_haiti_cange"
+      databaseName: "openmrs"
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
