@@ -169,7 +169,7 @@ class petl (
       redownload  => true,
       }
       exec { 'install-apzu-petl-config-dir':
-      command => "rm -rf /tmp/petl_configuration && unzip -o /tmp/petl-${petl_config_name}.zip -d /tmp/petl_configuration && rm -rf ${petl_home_dir}/${petl_config_dir} && mkdir -p ${petl_home_dir}/${petl_config_dir} && cp -r /tmp/petl_configuration/* ${petl_home_dir}/${petl_config_dir}",
+      command => "rm -rf /tmp/petl_configuration && unzip -o /tmp/petl-${petl_config_name}.zip -d /tmp/petl_configuration && rm -rf ${petl_home_dir}/${petl_config_dir} && mkdir -p ${petl_home_dir}/${petl_config_dir} && cp -r /tmp/petl_configuration/* ${petl_home_dir}/${petl_config_dir} && chown -R ${petl}:${petl} ${petl_home_dir}/${petl_config_dir}",
       require => [ Wget::Fetch['download-azpu-petl-config-dir'], Package['unzip'], Service["$petl"]],
       notify  => Exec['petl-restart']
       }
