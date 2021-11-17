@@ -104,13 +104,8 @@ imb_etl: true
 ```
 #### *application.yml*
 
-The application.yml file holds all the etl configs, the respective configuration are represented as below. site_name can be any of the site mentioned above.
-```
-<% if @petl_site == "site_name" -%>
+The application.yml file holds all the configs, the each site has its respective application.yml file
 
-     site config details
-     
-<% end -%>
 ```
 
 #### *Installing multiple petl instances on the same server.*
