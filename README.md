@@ -106,10 +106,8 @@ imb_etl: true
 
 The application.yml file holds all the configs, the each site has its respective application.yml file
 
-```
-
 #### *Installing multiple petl instances on the same server.*
-
+```
 This is achievable by running puppet more than once (on the same server). 
 ***Note that this is not recommened on a productions instance*** 
 
