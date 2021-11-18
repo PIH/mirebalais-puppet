@@ -19,4 +19,4 @@ sed -i '/^petl_config_version\b/Id' /etc/puppet/hieradata/petl-test.pih-emr.org.
 echo $'' >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
 echo "petl_${CES_PETL_CONFIG_VERSION}" >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
 echo $'' >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
-echo "port: 9110" >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
+echo "petl_server_port: 9110" >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
