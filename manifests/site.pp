@@ -473,7 +473,7 @@ node 'petl-test.pih-emr.org' {
   class { 'apt':
     always_apt_update => true,
   }
-## the commentedgit  are one time installation (until changes are made)
+## the commented lines are one time installation (uncomment if changes are made)
   include security
   include mail
   include ntpdate
