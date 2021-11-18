@@ -107,14 +107,17 @@ imb_etl: true
 The application.yml file holds all the configs, the each site has its respective application.yml file
 
 #### *Installing multiple petl instances on the same server.*
-```
+
 This is achievable by running puppet more than once (on the same server). 
-***Note that this is not recommened on a productions instance*** 
+***Note that this is not recommended on a productions instance*** 
+There is a script called replace-petltest-vars.sh that you can relate to, to do this.
 
 To install more that one petl instance on the same server, change the below variables 
+
 ```aidl
   petl: 
   petl_site:
   petl_config_name:
   petl_config_version:
+  petl_sqlserver_databaseName:
 ```
