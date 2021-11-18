@@ -4,14 +4,14 @@ server_timezone: America/New_York
 
 # config files
 config_name: openmrs-config-zl
-config_version: 1.27.0
+config_version: 1.28.0-SNAPSHOT
 
 #PETL config
 ## site should be apzu, imb, zl, ces
 petl: petl
 petl_site: "zl-test"
 petl_config_name: openmrs-config-zl
-petl_config_version: 1.27.0
+petl_config_version: 1.28.0-SNAPSHOT
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
 petl_version: "3.0.0-SNAPSHOT"
 

@@ -473,7 +473,7 @@ node 'petl-test.pih-emr.org' {
   class { 'apt':
     always_apt_update => true,
   }
-
+## the commend are one time installation (until changes are made)
   include security
   include mail
   include ntpdate
@@ -482,11 +482,11 @@ node 'petl-test.pih-emr.org' {
   include unzip
 
   include java
-  include mysql_setup
+  #include mysql_setup
 
-  include percona
+  #include percona
   include petl
-  include petl::mysql
+  #include petl::mysql
 
 }
 
@@ -496,6 +496,9 @@ node 'neno-dw.pih-emr.org' {
     always_apt_update => true,
   }
 
+  include security
+  include mail
+  include ntpdate
   include apt_upgrades
   include wget
   include unzip
