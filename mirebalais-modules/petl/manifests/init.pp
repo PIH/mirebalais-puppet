@@ -184,7 +184,7 @@ class petl (
         }
       exec { 'install-petl-config-dir':
       command => "rm -rf /tmp/petl_configuration && unzip -o /tmp/petl-${petl_config_name}.zip -d /tmp/petl_configuration && rm -rf ${petl_home_dir}/${petl_config_dir} && mkdir -p ${petl_home_dir}/${petl_config_dir} && cp -r /tmp/petl_configuration/pih/petl/* ${petl_home_dir}/${petl_config_dir} && chown -R ${petl}:${petl} ${petl_home_dir}",
-      require => [ Wget::Fetch['download-petl-config-dir'], Package['unzip'], Service["$petl"]],
+      require => [ Wget::Fetch['download-petl-config-dir'], Package['unzip']],
       notify  => Exec['petl-restart']
       }
     }
