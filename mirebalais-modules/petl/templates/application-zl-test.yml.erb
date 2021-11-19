@@ -65,10 +65,23 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+    hiv:
+       host: "172.17.0.1"
+       port: "3356"
+       databaseName: "openmrs"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       ptions: "${datasources.mysql.options}"
 
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
        databaseName: "<%= @petl_sqlserver_databaseName -%>"
+       user: "<%= @petl_sqlserver_user -%>"
+       password: "<%= @petl_sqlserver_password -%>"
+  warehouse-hiv:
+       host: "<%= @petl_sqlserver_host -%>"
+       port: "<%= @petl_sqlserver_port -%>"
+       databaseName: "openmrs_haitihivtest"
        user: "<%= @petl_sqlserver_user -%>"
        password: "<%= @petl_sqlserver_password -%>"
