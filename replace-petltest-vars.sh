@@ -18,7 +18,9 @@ echo $'' >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
 echo "petl_${CES_PETL_CONFIG_VERSION}" >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
 echo $'' >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
 echo "petl_server_port: 9110" >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
-echo "petl_java_home: "/usr/lib/jvm/java8-ces-petl-test/jdk1.8.0_171" >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
+echo $'' >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
+echo 'petl_java_home: "/usr/lib/jvm/java8-ces-petl-test/jdk1.8.0_171"' >> /etc/puppet/hieradata/petl-test.pih-emr.org.yaml
+
 
 ## Download java and extract java
 rm -rf /usr/lib/jvm/java8-ces-petl-test
