@@ -4,10 +4,10 @@ petl:
   jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
   startup:
     jobs:
-      - refresh-hiv-data.yml"
+      - "refresh-hiv-data.yml"
 
 executeCron:
-  refreshOpenmrsData: "<%= @petl_cron_time -%>"
+  refreshOpenmrsData: ""
   refreshHumciData: ""
   refreshHivData: "<%= @petl_cron_time -%>"
 

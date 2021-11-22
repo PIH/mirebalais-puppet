@@ -5,12 +5,11 @@ petl:
   startup:
     jobs:
       - "create-partitions.yml"
-      - "refresh-openmrs-data.yml"
 
 executeCron:
   refreshOpenmrsData: "<%= @petl_cron_time -%>"
   refreshHumciData: ""
-  refreshHivData: "<%= @petl_cron_time -%>"
+  refreshHivData: ""
 
 server:
   port: <%= @petl_server_port -%>
