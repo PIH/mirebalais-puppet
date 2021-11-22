@@ -322,6 +322,30 @@ node 'peru-ci.pih-emr.org' {
 
 }
 
+node 'ses-cor.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include tomcat
+  include apache2
+
+  include openmrs
+  include openmrs::initial_setup
+  include openmrs::backup
+
+}
+
 
 
 node 'haitihivtest.pih-emr.org' {
