@@ -7,6 +7,11 @@ petl:
       - "create-partitions.yml"
       - "refresh-humci-data.yml"
 
+executeCron:
+  refreshOpenmrsData: ""
+  refreshHumciData: "<%= @petl_cron_time -%>"
+  refreshHivData: ""
+
 server:
   port: <%= @petl_server_port -%>
 

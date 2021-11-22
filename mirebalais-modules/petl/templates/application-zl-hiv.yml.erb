@@ -5,6 +5,12 @@ petl:
   startup:
     jobs:
       - refresh-hiv-data.yml"
+
+executeCron:
+  refreshOpenmrsData: "<%= @petl_cron_time -%>"
+  refreshHumciData: ""
+  refreshHivData: "<%= @petl_cron_time -%>"
+
 server:
   port: <%= @petl_server_port -%>
 
