@@ -28,7 +28,6 @@ mysql_innodb_buffer_pool_instances: 3
 openmrs_auto_update_database: true
 
 remote_db_user: backups
-remote_db_server: amigo.pih-emr.org
 remote_backup_dir: haiti/zltraining/db
 
 backup_file_prefix: zltraining

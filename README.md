@@ -57,7 +57,6 @@ LetsEncrypt uses the `site_domain` parameter in hieradata to generate an SSL cer
 Puppet only ever attempts to initialize it once, so if setup fails for any
 reason you will need to `rm -r /var/acme` before running `./puppet-apply.sh site` again.
 
-
 ### Azcopy
 
 Ensure that in the yaml file `az_backup_folder_path` is set correctly
@@ -84,4 +83,41 @@ To upgrade to ubuntu 20.04
 ```
 ./hold-packages.sh
 do-release-upgrade
+```
+### Petl
+petl supports the sites below
+```aidl
+Production
+  apzu
+  ces
+  imb
+  zl-hiv
+  zl-report  
+
+Test
+  zl-test (for petl-test.pih-emr.org)
+  humci
+```
+The pih-pentaho repo still hosts the rwanda etl. If you are installing a rwanda etl server, ensure that in the yaml file you set
+```
+imb_etl: true
+```
+#### *application.yml*
+
+The application.yml file holds all the configs, the each site has its respective application.yml file
+
+#### *Installing multiple petl instances on the same server.*
+
+This is achievable by running puppet more than once (on the same server). 
+***Note that this is not recommended on a productions instance*** 
+There is a script called replace-petltest-vars.sh that you can relate to, to do this.
+
+To install more that one petl instance on the same server, change the below variables 
+
+```aidl
+  petl: 
+  petl_site:
+  petl_config_name:
+  petl_config_version:
+  petl_sqlserver_databaseName:
 ```

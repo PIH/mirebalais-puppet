@@ -23,6 +23,8 @@ export AZUREDNS_TENANTID='<%= @azure_dns_tenant_id %>'
 export AZUREDNS_APPID='<%= @azure_dns_app_id %>'
 export AZUREDNS_CLIENTSECRET='<%= @azure_dns_client_secret %>'
 
+.acme.sh/acme.sh --set-default-ca --server letsencrypt
+.acme.sh/acme.sh --register-account -m emrsysadmin@pih.org
 .acme.sh/acme.sh --issue --dns dns_azure -d "$SITE_DOMAIN" --force
 .acme.sh/acme.sh --install-cert --domain "$SITE_DOMAIN" --cert-file /etc/letsencrypt/live/"$SITE_DOMAIN"/cert.pem --key-file /etc/letsencrypt/live/"$SITE_DOMAIN"/privkey.pem --fullchain-file /etc/letsencrypt/live/"$SITE_DOMAIN"/fullchain.pem --ca-file /etc/letsencrypt/live/"$SITE_DOMAIN"/chain.pem --reloadcmd "sudo /usr/sbin/service apache2 restart" --force
 .acme.sh/acme.sh --uninstall-cronjob --force

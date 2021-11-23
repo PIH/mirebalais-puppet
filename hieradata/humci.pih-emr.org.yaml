@@ -23,25 +23,30 @@ mirth_inbound_from_pacs_mirebalais_port: 6662
 biometrics_enabled: true
 biometrics_webapp_name: biometrics
 
-#PETL config
-petl_version: "2.7.0-SNAPSHOT"   # use latest snapshot
+####PETL
+#config
+petl: "petl"
+petl_site: "humci"
+petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
+petl_config_name: openmrs-config-zl
+
+#version
+petl_config_version: 1.28.0-SNAPSHOT
+petl_version: "3.0.0-SNAPSHOT"
+
+#petl mysql
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 petl_sqlserver_databaseName: openmrs_humci
+
 #use memory-resident database so that all jobs are rerun on each PETL restart
 petl_database_url: "jdbc:h2:mem:petl"
-petl_error_subject: Humci petl errors
+petl_error_subject: "%{hiera('petl_site')} PETL Errors"
 petl_cron_hour: '*/4'
 
-# SQL Server Azure Cloud
-#petl_sqlserver_host: pihmeq.database.windows.net
-#petl_sqlserver_port: 1433
-#petl_sqlserver_user: meqdbadmin@pihmeq
-#petl_sqlserver_password: ENC[/cSHzuUSEKFZpys8DD4VkQ==]
-
-# SQL Server 2014 Boston office
-petl_sqlserver_host: us-pru-wired-cjkhhhbvh.dynamic-m.com
-petl_sqlserver_port: 62451
+# petl SQL Server 2016
+petl_sqlserver_host: 10.160.12.28
+petl_sqlserver_port: 1433
 petl_sqlserver_user: medinfoadmin
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 

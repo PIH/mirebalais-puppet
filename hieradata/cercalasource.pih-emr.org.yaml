@@ -13,7 +13,6 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 remote_db_user: backups
-remote_db_server: amigo.pih-emr.org
 remote_backup_dir: haiti/cerca/db
 
 backup_file_prefix: cerca
@@ -52,15 +51,5 @@ ssl_use_letsencrypt: false
 az_backup_folder_path: haiti/cercalasource
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
-
-#PETL config
-petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
-petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
-petl_sqlserver_host: 10.160.12.27
-petl_sqlserver_port: 1433
-petl_sqlserver_databaseName: openmrs_cercalasource
-petl_sqlserver_user: openmrs
-petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
-petl_error_subject: ZL Cerca la Source petl errors
 
 # feature toggles

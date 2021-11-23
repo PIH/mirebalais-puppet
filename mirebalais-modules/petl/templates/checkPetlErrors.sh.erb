@@ -2,8 +2,8 @@
 
 EMAIL="<%= @sysadmin_email %>"
 SUBJECT="<%= @petl_error_subject %>"
-PETL_LOGS="/usr/local/sbin/petl-errors"
-PETL_ORIG_LOGS="/var/log/petl.log"
+PETL_LOGS="/usr/local/sbin/<%= @petl %>-errors"
+PETL_ORIG_LOGS="/var/log/<%= @petl %>.log"
 
 /bin/rm -rf ${PETL_LOGS}
 

@@ -1,0 +1,42 @@
+petl:
+  homeDir: "<%= @petl_home_dir -%>"
+  datasourceDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/datasources"
+  jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
+  startup:
+    jobs:
+      - "create-partitions.yml"
+
+executeCron:
+  refreshOpenmrsData: ""
+  refreshHumciData: "<%= @petl_cron_time -%>"
+  refreshHivData: ""
+
+server:
+  port: <%= @petl_server_port -%>
+
+logging:
+  level:
+    root: "WARN"
+    org.pih: "DEBUG"
+
+datasources:
+  mysql:
+    user: "<%= @petl_mysql_user -%>"
+    password: "<%= @petl_mysql_password -%>"
+    options: " <%= @petl_mysql_options -%>"
+
+  openmrs:
+    humci:
+      host: "<%= @petl_mysql_host -%>"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+
+  warehouse:
+       host: "<%= @petl_sqlserver_host -%>"
+       port: "<%= @petl_sqlserver_port -%>"
+       databaseName: "<%= @petl_sqlserver_databaseName -%>"
+       user: "<%= @petl_sqlserver_user -%>"
+       password: "<%= @petl_sqlserver_password -%>"

@@ -83,8 +83,6 @@ node 'zlemr.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
-  include petl
-
   include openmrs::backup
 
 }
@@ -116,34 +114,6 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
   include petl
 
-  #include mirth
-  #include mirth::channel_setup
-
-  #include monitoring
-}
-
-node 'humtest.pih-emr.org' {
-
-  class { 'apt':
-    always_apt_update => true,
-  }
-
-  include security
-  include mail
-  include ntpdate
-  include apt_upgrades
-  include wget
-  include unzip
-
-  include java
-  include mysql_setup
-  include tomcat
-  include apache2
-
-  include openmrs
-  include openmrs::initial_setup
-
-  include openmrs::atomfeed
 }
 
 node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
@@ -252,8 +222,6 @@ node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr
   include openmrs::initial_setup
   include openmrs::backup
 
-  include petl
-
 }
 
 node 'zltraining.pih-emr.org' {
@@ -352,7 +320,30 @@ node 'peru-ci.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
-  include petl
+}
+
+node 'ses-cor.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include tomcat
+  include apache2
+
+  include openmrs
+  include openmrs::initial_setup
+  include openmrs::backup
+
 }
 
 
@@ -378,9 +369,6 @@ node 'haitihivtest.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
-  include petl
-
-  #include monitoring
 }
 
 node 'haiti-test.pih-emr.org' {
@@ -405,7 +393,6 @@ node 'haiti-test.pih-emr.org' {
   include openmrs::initial_setup
 
   include percona
-  include petl
 }
 
 node 'haititest.pih-emr.org' {
@@ -455,7 +442,7 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org', 'ces-laguna.pih-emr.org' {
 }
 
 node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano', 'ces-monterrey',
-    'ces-plan', 'ces-reforma', 'ces-salvador', 'ces-soledad' {
+    'ces-plan', 'ces-plan-alta', 'ces-reforma', 'ces-salvador', 'ces-soledad' {
 
   class { 'apt':
     always_apt_update => true,
@@ -503,4 +490,45 @@ node 'pleebo-mirror.pih-emr.org' {
 
   include monitoring
   include logging
+}
+
+node 'petl-test.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+## the commented lines are one time installation (uncomment if changes are made)
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  #include mysql_setup
+
+  #include percona
+  include petl
+  #include petl::mysql
+
+}
+
+node 'neno-dw.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+
+  include petl
+
 }
