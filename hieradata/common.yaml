@@ -97,7 +97,7 @@ petl_home_dir: "/opt/petl"
 petl_config_dir: "configurations"
 petl_java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
 petl_java_opts: ""
-petl_cron_time: "0 0 5 ? * *"
+petl_cron_time: "0 */4 * ? * *"
 
 petl_database_url: "jdbc:h2:file:${petl.homeDir}/data/petl;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE"
 petl_mysql_host: localhost
