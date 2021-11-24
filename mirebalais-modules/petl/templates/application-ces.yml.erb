@@ -7,7 +7,7 @@ petl:
       - "create-partitions.yml"
 
 executeCron:
-  refreshOpenmrsData: <%= @petl_cron_time -%>
+  refreshOpenmrsData: "<%= @petl_cron_time -%>"
 
 server:
   port: <%= @petl_server_port -%>
