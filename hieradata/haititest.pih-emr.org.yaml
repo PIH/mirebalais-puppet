@@ -14,26 +14,6 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mysql_innodb_buffer_pool_size: 6G
 mysql_innodb_buffer_pool_instances: 8
 
-#PETL config
-petl_version: "2.7.0-SNAPSHOT"   # ues latest snapshot
-petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
-petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
-petl_sqlserver_databaseName: openmrs_haitihivtest
-
-# SQL Server Azure Cloud
-#petl_sqlserver_host: pihmeq.database.windows.net
-#petl_sqlserver_port: 1433
-#petl_sqlserver_user: meqdbadmin@pihmeq
-#petl_sqlserver_password: ENC[/cSHzuUSEKFZpys8DD4VkQ==]
-
-# SQL Server 2014 Boston office
-petl_sqlserver_host: us-pru-wired-cjkhhhbvh.dynamic-m.com
-petl_sqlserver_port: 62451
-petl_sqlserver_user: medinfoadmin
-petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
-petl_error_subject: HaitiHivTest petl errors
-petl_cron_hour: '*/4'
-
 mysql_net_read_timeout: 120
 mysql_net_write_timeout: 120
 mysql_wait_timeout: 28800
@@ -41,4 +21,30 @@ mysql_interactive_timeout: 28800
 
 ssl_use_letsencrypt: true
 
-# java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
+#PETL config
+## site should be apzu, imb, zl, ces
+petl: petl
+petl_site: "zl-hiv"
+petl_config_name: openmrs-config-zl
+petl_config_version: 1.28.0-SNAPSHOT
+petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
+petl_version: "3.0.0-SNAPSHOT"
+
+#use memory-resident database so that all jobs are rerun on each PETL restart
+petl_database_url: "jdbc:h2:mem:petl"
+
+petl_error_subject: "%{hiera('petl_site')}-test (haititest) PETL Errors"
+petl_cron_hour: '*/4'
+
+#petl db mysql user
+petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
+petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
+petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+
+# SQL Server 2016
+petl_sqlserver_databaseName: openmrs_haitihivtest
+petl_sqlserver_host: 10.160.12.28
+petl_sqlserver_port: 1433
+petl_sqlserver_user: ENC[v1pMAcFAh0ag0IlcLSYolQ==:WDaxbE1p9+iN7x8/aybOWA==:MWVZR2U5YlBXemlyVDNUVXdxSjB1dz09]
+petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]

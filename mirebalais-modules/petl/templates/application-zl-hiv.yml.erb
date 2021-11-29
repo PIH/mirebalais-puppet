@@ -4,7 +4,7 @@ petl:
   jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
   startup:
     jobs:
-      - "refresh-hiv-data.yml"
+      - "create-partitions.yml"
 
 executeCron:
   refreshOpenmrsData: ""
@@ -34,7 +34,7 @@ datasources:
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
 
-  warehouse:
+  warehouse-hiv:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
        databaseName: "<%= @petl_sqlserver_databaseName -%>"
