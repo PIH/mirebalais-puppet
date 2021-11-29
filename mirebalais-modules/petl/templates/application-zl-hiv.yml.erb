@@ -34,7 +34,13 @@ datasources:
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
 
-  warehouse-hiv:
+   warehouse:
+       host: "<%= @petl_sqlserver_host -%>"
+       port: "<%= @petl_sqlserver_port -%>"
+       databaseName: "<%= @petl_sqlserver_databaseName -%>"
+       user: "<%= @petl_sqlserver_user -%>"
+       password: "<%= @petl_sqlserver_password -%>"
+   warehouse-hiv:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
        databaseName: "<%= @petl_sqlserver_databaseName -%>"

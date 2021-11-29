@@ -39,8 +39,8 @@ petl_cron_hour: '*/4'
 #petl db mysql user
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
-petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
-petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+petl_mysql_user: openmrs
+petl_cron_time: "0 0 9 ? * *"
 
 # SQL Server 2016
 petl_sqlserver_databaseName: openmrs_haitihivtest
