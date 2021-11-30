@@ -42,7 +42,7 @@ java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m
 # Use our old godaddy cert until we've tested the letsencrypt one for a few months
 ssl_cert_dir: '/etc/ssl/certs'
 ssl_key_dir: '/etc/ssl/private'
-ssl_cert_file: '45554e4453e21fc.crt'
+ssl_cert_file: '8ec70940872b4327.crt'
 ssl_chain_file: 'gd_bundle-g2-g1.crt'
 ssl_key_file: 'pih-emr.org.key'
 ssl_use_letsencrypt: false
