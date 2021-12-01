@@ -26,9 +26,9 @@ ssl_use_letsencrypt: true
 petl: petl
 petl_site: "zl-hiv"
 petl_config_name: openmrs-config-zl
-petl_config_version: 1.28.0-SNAPSHOT
+petl_config_version: "%{hiera('config_version')}"
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
-petl_version: "3.0.0-SNAPSHOT"
+petl_version: "3.0.1-SNAPSHOT"
 
 #use memory-resident database so that all jobs are rerun on each PETL restart
 petl_database_url: "jdbc:h2:mem:petl"
