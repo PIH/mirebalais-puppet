@@ -42,6 +42,8 @@ petl_config_name: openmrs-config-zl
 #version
 petl_config_version: "%{hiera('config_version')}"
 
+
+petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 petl_sqlserver_host: 192.168.1.206
