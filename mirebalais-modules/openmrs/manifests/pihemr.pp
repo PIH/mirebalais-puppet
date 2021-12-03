@@ -10,6 +10,7 @@ class openmrs::pihemr (
   $package_version = hiera('package_version'),
   $webapp_name = hiera('webapp_name'),
   $tomcat = hiera('tomcat'),
+  $tomcat_home_dir = hiera('tomcat_home_dir'),
   $tomcat_webapp_dir = hiera('tomcat_webapp_dir'),
   $junit_username = hiera('junit_username'),
   $junit_password = decrypt(hiera('junit_password')),
@@ -66,19 +67,28 @@ class openmrs::pihemr (
     default    =>  $package_version,
   }
 
+  file { "${tomcat_home_dir}/.OpenMRS":
+    ensure  => directory,
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0755',
+    require => User[$tomcat]
+  }
+
+  # added this to handle reworking of application data directory in Core 2.x
+  file { "${tomcat_home_dir}/.OpenMRS/${webapp_name}":
+    ensure  => 'link',
+    owner   => $tomcat,
+    group   => $tomcat,
+    target  => "/home/${tomcat}/.OpenMRS"
+  }
+
   # remove any hold on pihemr package (if it exists) (grep -c returns line count, so mimics true/false)
   exec { 'pihemr_unhold':
     command => 'apt-mark unhold pihemr',
     user => 'root',
     onlyif => 'apt-mark showhold | grep -c pihemr',
     require => Apt::Source['pihemr'],
-  }
-
-  package { 'pihemr':
-    ensure  => $pihemr_version,
-    install_options => [ '--allow-change-held-packages' ],
-    require => [ Package[$tomcat], Service[$tomcat], Service['mysqld'], Exec['pihemr_unhold'],
-      File["${tomcat_home_dir}/.OpenMRS/${webapp_name}-runtime.properties"], File['/etc/apt/apt.conf.d/99auth'] ],
   }
 
   # prevent inadvertent upgrade when manually running "apt-get upgrade" (without specifying pihemr)
@@ -104,6 +114,13 @@ class openmrs::pihemr (
     group   => $tomcat,
     mode    => '0644',
     require => File["${tomcat_home_dir}/.OpenMRS"]
+  }
+
+  package { 'pihemr':
+    ensure  => $pihemr_version,
+    install_options => [ '--allow-change-held-packages' ],
+    require => [ Package[$tomcat], Service[$tomcat], Service['mysqld'], Exec['pihemr_unhold'],
+      File["${tomcat_home_dir}/.OpenMRS/${webapp_name}-runtime.properties"] ],
   }
 
   # Adds session-timeout in the session-config block. If there's no existing session-config block, we're in trouble.

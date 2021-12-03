@@ -16,12 +16,4 @@ class openmrs (
     mode    => '0644'
   }
 
-  file { "${tomcat_home_dir}/.OpenMRS":
-    ensure  => directory,
-    owner   => $tomcat,
-    group   => $tomcat,
-    mode    => '0755',
-    require => User[$tomcat]
-  }
-
 }
