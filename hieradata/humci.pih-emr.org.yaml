@@ -32,7 +32,7 @@ petl_config_name: openmrs-config-zl
 
 #version
 petl_config_version: "%{hiera('config_version')}"
-petl_version: "3.0.0-SNAPSHOT"
+petl_version: "3.0.1-SNAPSHOT"
 
 #petl mysql
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
