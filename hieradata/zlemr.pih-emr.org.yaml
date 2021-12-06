@@ -4,7 +4,7 @@ site_domain: zlemr.pih-emr.org
 
 pih_config: haiti,haiti-hiv
 config_name: openmrs-config-zl
-config_version: 1.26.0
+config_version: 1.28.0
 
 openmrs_auto_update_database: true
 

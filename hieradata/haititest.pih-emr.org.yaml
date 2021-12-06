@@ -4,7 +4,7 @@ site_domain: haititest.pih-emr.org
 
 pih_config: haiti,haiti-hiv,haiti-hiv-ci
 config_name: openmrs-config-zl
-config_version: 1.28.0-SNAPSHOT
+config_version: 1.29.0-SNAPSHOT
 
 openmrs_auto_update_database: true
 

@@ -4,7 +4,7 @@ server_timezone: America/New_York
 
 # config files
 config_name: openmrs-config-zl
-config_version: 1.28.0-SNAPSHOT
+config_version: 1.29.0-SNAPSHOT
 ### note this version goes hand in hand with the config_version
 petl_config_version: "%{hiera('config_version')}"
 
