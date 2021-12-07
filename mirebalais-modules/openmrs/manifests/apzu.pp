@@ -55,13 +55,13 @@ class openmrs::apzu (
   }
 
   exec { 'move-malawi-modules':
-    command => "rm -rf ${tomcat_home_dir}/.OpenMRS/modules/* && cp -r /tmp/malawi-distro/openmrs_modules/* ${tomcat_home_dir}/.OpenMRS/modules/ && chown -R ${tomcat}:${tomcat} ${tomcat_home_dir}/.OpenMRS/modules",
+    command => "mv /tmp/malawi-distro/* /tmp/malawi-distribution && rm -rf ${tomcat_home_dir}/.OpenMRS/modules/* && cp -r /tmp/malawi-distribution/openmrs_modules/* ${tomcat_home_dir}/.OpenMRS/modules/ && chown -R ${tomcat}:${tomcat} ${tomcat_home_dir}/.OpenMRS/modules",
     require => [ Wget::Fetch['download-malawi-modules'], Exec['extract-malawi-modules'], File["${tomcat_home_dir}/.OpenMRS/modules"]],
     notify => [ Exec['tomcat-restart'] ]
   }
 
   exec { 'move-malawi-war-file':
-    command => "rm -rf /var/lib/${tomcat}/webapps/* && cp -r /tmp/malawi-distro/openmrs_webapps/openmrs.war /var/lib/${tomcat}/webapps && chown -R ${tomcat}:${tomcat} /var/lib/${tomcat}/webapps",
+    command => "rm -rf /var/lib/${tomcat}/webapps/* && cp -r /tmp/malawi-distribution/openmrs_webapps/openmrs.war /var/lib/${tomcat}/webapps && chown -R ${tomcat}:${tomcat} /var/lib/${tomcat}/webapps",
     require => [ Wget::Fetch['download-malawi-modules'], Exec['extract-malawi-modules'] ],
     notify => [ Exec['tomcat-restart'] ]
   }
