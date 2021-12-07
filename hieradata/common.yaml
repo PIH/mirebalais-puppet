@@ -12,6 +12,8 @@ site_domain: foo.org
 package_release: 'unstable/'
 package_version: '1.0.6088-1'
 
+repo_url: ENC[guOgejmsDLkHjo2iCrV9MAWEt/Y9usi32Rs4qPepBu0=]
+
 mysql_server_id: 1
 mysql_root_password: foo
 mysql_bind_address: 127.0.0.1
