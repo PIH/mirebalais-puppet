@@ -19,4 +19,5 @@ node 'neno.pih-emr.org' {
   include tomcat
 
   include openmrs::apzu
+  include openmrs::backup
 }

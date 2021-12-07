@@ -22,7 +22,7 @@ fully-qualifed-domain-name properly configured; when testing on a VM, you can un
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
 }*/
@@ -45,7 +45,7 @@ node 'emr.hum.ht' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   include percona
@@ -80,7 +80,7 @@ node 'zlemr.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   include openmrs::backup
@@ -105,7 +105,7 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
   include tomcat
   include apache2
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   include percona
@@ -134,7 +134,7 @@ node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   #include monitoring
@@ -159,7 +159,7 @@ node 'reporting.hum.ht' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   include percona
@@ -190,7 +190,7 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   #include monitoring
@@ -218,7 +218,7 @@ node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
   include openmrs::backup
 
@@ -242,7 +242,7 @@ node 'zltraining.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 }
 
@@ -264,7 +264,7 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   #include monitoring
@@ -292,7 +292,7 @@ node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.or
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   #include monitoring
@@ -317,7 +317,7 @@ node 'peru-ci.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
 }
@@ -340,7 +340,7 @@ node 'ses-cor.pih-emr.org' {
   include tomcat
   include apache2
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
   include openmrs::backup
 
@@ -366,7 +366,7 @@ node 'haitihivtest.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
 }
@@ -389,7 +389,7 @@ node 'haiti-test.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   include percona
@@ -413,7 +413,7 @@ node 'haititest.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   include petl
@@ -438,7 +438,7 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org', 'ces-laguna.pih-emr.org' {
   include tomcat
   include apache2
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
   include openmrs::backup
 }
@@ -461,7 +461,7 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano',
   include mysql_setup
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   include cesemr_user_resources
@@ -487,7 +487,7 @@ node 'pleebo-mirror.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs
+  include openmrs::pihemr
   include openmrs::initial_setup
 
   include monitoring
@@ -533,4 +533,26 @@ node 'neno-dw.pih-emr.org' {
 
   include petl
 
+}
+
+node 'neno.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include apache2
+  include tomcat
+
+  include openmrs::apzu
+  include openmrs::backup
 }
