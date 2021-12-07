@@ -37,7 +37,7 @@ class openmrs::apzu (
   }
 
   exec { 'cleanup-malawi-modules-dir':
-    command => "rm -rf /tmp/malawi-modules && rm -rf /tmp/malawi-distro"
+    command => "rm -rf /tmp/malawi-modules && rm -rf /tmp/malawi-distro && rm -rf /tmp/malawi-distribution"
   }
 
   wget::fetch { 'download-malawi-modules':
