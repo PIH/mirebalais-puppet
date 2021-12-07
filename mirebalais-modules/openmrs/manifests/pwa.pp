@@ -1,10 +1,11 @@
 class openmrs::pwa (
-  $tomcat = hiera('tomcat'),
-  $tomcat_webapp_dir = hiera('tomcat_webapp_dir'),
-  $package_release = hiera('package_release'),
-  $pwa_enabled = hiera('pwa_enabled'),
-  $pwa_filename = hiera('pwa_filename'),
-  $pwa_webapp_name = hiera('pwa_webapp_name')
+  $tomcat             = hiera('tomcat'),
+  $tomcat_webapp_dir  = hiera('tomcat_webapp_dir'),
+  $package_release    = hiera('package_release'),
+  $pwa_enabled        = hiera('pwa_enabled'),
+  $pwa_filename       = hiera('pwa_filename'),
+  $pwa_webapp_name    = hiera('pwa_webapp_name'),
+  $repo_url           = decrypt(hiera('repo_url')),
 ) {
 
   # currently supports only a single PWA per site, we will need update this long-term
@@ -15,7 +16,7 @@ class openmrs::pwa (
   if ($pwa_enabled) {
     # install PWA from bamboo
     exec { 'retrieve_pwa':
-      command => "/usr/bin/wget -q https://bamboo.pih-emr.org:81/pwa-repo/${package_release}${pwa_filename} -O ${tomcat_webapp_dir}/${pwa_filename}",
+      command => "/usr/bin/wget -q ${repo_url}:81/pwa-repo/${package_release}${pwa_filename} -O ${tomcat_webapp_dir}/${pwa_filename}",
       require => Service["$tomcat"]
     }
 

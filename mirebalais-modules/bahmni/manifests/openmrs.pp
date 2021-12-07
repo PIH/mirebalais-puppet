@@ -36,6 +36,7 @@ class bahmni::openmrs (
   $uiframework_version = '3.4',
   $uilibrary_version = '2.0.4',
   $webservices_rest_version = '2.12',
+  $repo_url           = decrypt(hiera('repo_url')),
 ){
 
   file { '/etc/apt/apt.conf.d/99auth':
@@ -152,7 +153,7 @@ class bahmni::openmrs (
 
   # TODO this is just temporary, until we get a workable version of the bahmnicore module
   wget::fetch { 'download-bahmnicore':
-    source      => 'https://bamboo.pih-emr.org:81/bahmni-repo/bahmnicore-omod-0.78-SNAPSHOT.omod',
+    source      => "${repo_url}:81/bahmni-repo/bahmnicore-omod-0.78-SNAPSHOT.omod",
     destination => "/home/${tomcat}/.OpenMRS/modules/bahmnicore-0.78-SNAPSHOT.omod",
     timeout     => 0,
     verbose     => false,
