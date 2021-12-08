@@ -32,12 +32,14 @@ petl_config_name: openmrs-config-zl
 
 #version
 petl_config_version: "%{hiera('config_version')}"
-petl_version: "3.0.0-SNAPSHOT"
+petl_version: "3.0.1-SNAPSHOT"
 
 #petl mysql
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 petl_sqlserver_databaseName: openmrs_humci
+petl_cron_time: "0 0/3 * ? * *"
+petl_hiv_cron_time: "0 0/5 * ? * *"
 
 #use memory-resident database so that all jobs are rerun on each PETL restart
 petl_database_url: "jdbc:h2:mem:petl"
