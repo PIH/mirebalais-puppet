@@ -36,11 +36,14 @@ class openmrs::pihemr (
   $lacolline_server_url         = hiera('lacolline_server_url'),
   $lacolline_username           = decrypt(hiera('lacolline_username')),
   $lacolline_password           = decrypt(hiera('lacolline_password')),
+  $repo_url                     = decrypt(hiera('repo_url')),
 
   # os version
   $ubuntu_14 = hiera('ubuntu_14'),
-  
+
 ) {
+
+  require openmrs
 
   if $ubuntu_14 {
     apt::source { 'pihemr':
@@ -61,18 +64,11 @@ class openmrs::pihemr (
     }
   }
 
+
   # if we are using unstable repo (ie for ci servers) always use latest, otherwise use version specified by package release
   $pihemr_version = $package_release ? {
     /unstable/ => 'latest',
     default    =>  $package_version,
-  }
-
-  file { "${tomcat_home_dir}/.OpenMRS":
-    ensure  => directory,
-    owner   => $tomcat,
-    group   => $tomcat,
-    mode    => '0755',
-    require => User[$tomcat]
   }
 
   # added this to handle reworking of application data directory in Core 2.x

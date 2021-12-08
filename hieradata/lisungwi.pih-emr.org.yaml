@@ -1,6 +1,6 @@
 ---
 webapp_name: openmrs
-site_domain: neno.pih-emr.org
+site_domain: lisungwi.pih-emr.org
 server_timezone: Africa/Blantyre
 
 pih_malawi_distribution_version: pihmalawi-distribution
@@ -15,6 +15,6 @@ openmrs_auto_update_database: false
 
 
 # backup azure
-az_backup_folder_path: malawi/upper-neno
+az_backup_folder_path: malawi/lower-neno
 
 java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'

@@ -15,9 +15,7 @@ class openmrs::backup (
     $archive_hour = hiera('archive_hour'),
   ){
 
-  package { 'p7zip-full' :
-    ensure => 'installed'
-  }
+  require openmrs
 
   database_user { "${backup_user}@localhost":
     ensure        => present,

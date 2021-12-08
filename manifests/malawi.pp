@@ -1,6 +1,6 @@
 Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/', '/usr/local/bin/' ] }
 
-node 'neno.pih-emr.org' {
+node 'default' {
 
   class { 'apt':
     always_apt_update => true,
@@ -15,9 +15,9 @@ node 'neno.pih-emr.org' {
 
   include java
   include mysql_setup
-  include apache2
+
   include tomcat
 
   include openmrs::apzu
-  include openmrs::backup
+
 }
