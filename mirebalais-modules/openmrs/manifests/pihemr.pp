@@ -22,7 +22,7 @@ class openmrs::pihemr (
   # PIH EMR config
   $config_name    = hiera('config_name'),
   $config_version = hiera('config_version'),
-  $repo_url                     = decrypt(hiera('repo_url')),
+  $repo_url       = decrypt(hiera('repo_url')),
   #Feature_toggles
   $reportingui_ad_hoc_analysis            = hiera('reportingui_ad_hoc_analysis'),
   $radiology_contrast_studies             = hiera('radiology_contrast_studies'),
