@@ -2,9 +2,9 @@ petl:
   homeDir: "<%= @petl_home_dir -%>"
   datasourceDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/datasources"
   jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
-
-executeCron:
-  refreshFullData: "<%= @petl_cron_time -%> "
+  startup:
+    jobs:
+      - "refresh-full.yml"
 
 server:
   port: <%= @petl_server_port -%>
