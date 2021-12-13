@@ -23,5 +23,6 @@ petl_server_port: 9110
 petl_sqlserver_host: 10.160.22.17
 petl_sqlserver_port: 1433
 petl_sqlserver_user: ENC[5ChP50972ydOmVvG8h/FMQ==:R6hlTaSylcFEt9+3cXVQaQ==:WWY4STRXNXpCWjNDZkRPZ0FqbUFvZz09]
-petl_sqlserver_password: ENC[EFNbFAlwpLwOGua8P/EjXg==:GGjty4c6pLgZKHs+NhnCtg==:MDBNTGU1YXVWUGRKYlhEaDlVRGU3Zz09]
+petl_sqlserver_password: ENC[8YqsgFxKSOnCiG1dnnUHmQ==:Xz5oTQJsIBS43NKHL2065Q==:RW5RbFFQNmVXMUtoc3hSSDUrTGJtZz09]
+
 petl_sqlserver_databaseName: "openmrs_reporting"
