@@ -516,7 +516,7 @@ node 'petl-test.pih-emr.org' {
 
 }
 
-node 'neno-dw.pih-emr.org' {
+node 'malawi-dw.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
