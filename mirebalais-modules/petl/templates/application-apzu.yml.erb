@@ -23,7 +23,7 @@ datasources:
         upperNenoOpenmrs:
             host: "<%= @petl_mysql_host -%>"
             port: "<%= @petl_mysql_port -%>"
-            databaseName: "neno"
+            databaseName: "upper_neno"
             user: "${datasources.mysql.user}"
             password: "${datasources.mysql.password}"
             options: "${datasources.mysql.options}"
@@ -32,22 +32,6 @@ datasources:
             host: "<%= @petl_mysql_host -%>"
             port: "<%= @petl_mysql_port -%>"
             databaseName: "lisungwi"
-            user: "${datasources.mysql.user}"
-            password: "${datasources.mysql.password}"
-            options: "${datasources.mysql.options}"
-
-        upperNenoReporting:
-            host: "<%= @petl_mysql_host -%>"
-            port: "<%= @petl_mysql_port -%>"
-            databaseName: "neno_reporting"
-            user: "${datasources.mysql.user}"
-            password: "${datasources.mysql.password}"
-            options: "${datasources.mysql.options}"
-
-        lowerNenoReporting:
-            host: "<%= @petl_mysql_host -%>"
-            port: "<%= @petl_mysql_port -%>"
-            databaseName: "lisungwi_reporting"
             user: "${datasources.mysql.user}"
             password: "${datasources.mysql.password}"
             options: "${datasources.mysql.options}"
