@@ -7,7 +7,6 @@ petl_site: "apzu"
 petl_config_name: "apzu-etl"
 petl_config_version: 1.0.0-SNAPSHOT
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
-petl_version: "3.0.0-SNAPSHOT"
 
 petl_database_url: "jdbc:h2:mem:petl"
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
