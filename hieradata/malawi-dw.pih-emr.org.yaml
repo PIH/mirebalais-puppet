@@ -2,7 +2,7 @@
 site_domain: neno-dw.pih-emr.org
 server_timezone: Africa/Blantyre
 
-petl: "petl-apzu"
+petl: "petl"
 petl_site: "apzu"
 petl_config_name: "apzu-etl"
 petl_config_version: 1.0.0-SNAPSHOT
