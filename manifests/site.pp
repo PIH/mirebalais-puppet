@@ -535,7 +535,7 @@ node 'malawi-dw.pih-emr.org' {
 
 }
 
-node 'neno.pih-emr.org', 'lisungwi.pih-emr.org' {
+node 'neno.pih-emr.org', 'lisungwi.pih-emr.org', 'neno20.pih-emr.org'  {
 
   class { 'apt':
     always_apt_update => true,
