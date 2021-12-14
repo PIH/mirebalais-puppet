@@ -36,7 +36,6 @@ class openmrs::pihemr (
   $lacolline_server_url         = hiera('lacolline_server_url'),
   $lacolline_username           = decrypt(hiera('lacolline_username')),
   $lacolline_password           = decrypt(hiera('lacolline_password')),
-  $repo_url                     = decrypt(hiera('repo_url')),
 
   # os version
   $ubuntu_14 = hiera('ubuntu_14'),
