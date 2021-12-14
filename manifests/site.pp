@@ -523,7 +523,7 @@ node 'malawi-dw.pih-emr.org' {
   }
 
   include security
-  include mail
+  # include mail -- one time installation
   include ntpdate
   include apt_upgrades
   include wget
