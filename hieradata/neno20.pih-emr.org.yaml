@@ -1,6 +1,6 @@
 ---
 webapp_name: openmrs
-site_domain: neno.pih-emr.org
+site_domain: neno20.pih-emr.org
 server_timezone: Africa/Blantyre
 
 pih_malawi_distribution_version: 6.9.0-SNAPSHOT
