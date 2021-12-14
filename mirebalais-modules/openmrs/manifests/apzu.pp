@@ -38,7 +38,7 @@ class openmrs::apzu (
   }
 
   wget::fetch { 'download-malawi-openmrs-distribution':
-    source      => "${repo_url}:81/malawi-repo/pihmalawi-distribution-${pih_malawi_distribution_version}.zip",
+    source      => "${repo_url}:81/malawi-repo/pihmalawi-${pih_malawi_distribution_version}.zip",
     destination => "/tmp/malawi-openmrs-distribution",
     timeout     => 0,
     verbose     => false,
