@@ -9,6 +9,9 @@ define openmrs::liquibase_migrate(
   $tomcat = hiera('tomcat')
 ) {
 
+  require openmrs
+  require openmrs::pihemr
+
   exec { $title:
     cwd         =>  '/usr/local/',
     command     => "java -Dliquibase.databaseChangeLogTableName=liquibasechangelog -Dliquibase.databaseChangeLogLockTableName=liquibasechangeloglock -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/var/lib/${tomcat}/webapps/${webapp_name}.war --url=jdbc:mysql://localhost:3306/${openmrs_db} --changeLogFile=${dataset} --username=${openmrs_db_user} --password='${openmrs_db_password}' update",

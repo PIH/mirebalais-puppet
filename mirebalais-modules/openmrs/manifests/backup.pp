@@ -15,6 +15,8 @@ class openmrs::backup (
     $archive_hour = hiera('archive_hour'),
   ){
 
+  require openmrs
+
   database_user { "${backup_user}@localhost":
     ensure        => present,
     password_hash => mysql_password($backup_password),

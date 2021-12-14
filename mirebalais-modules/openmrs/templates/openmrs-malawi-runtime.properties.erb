@@ -1,0 +1,7 @@
+scheduler.password=
+connection.url=jdbc:mysql://localhost:3306/<%= @openmrs_db %>?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8
+connection.username=<%= @openmrs_db_user %>
+connection.password=<%= @openmrs_db_password %>
+module.allow_web_admin=true
+auto_update_database=<%= @openmrs_auto_update_database %>
+custom.images.dir=<%= @tomcat_home_dir %>/.OpenMRS/images

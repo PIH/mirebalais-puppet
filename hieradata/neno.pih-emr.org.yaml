@@ -1,0 +1,20 @@
+---
+webapp_name: openmrs
+site_domain: neno.pih-emr.org
+server_timezone: Africa/Blantyre
+
+pih_malawi_distribution_version: 6.9.0-SNAPSHOT
+
+# mysql
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+mysql_bind_address: 127.0.0.1
+
+## openmrs
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+openmrs_auto_update_database: false
+
+
+# backup azure
+az_backup_folder_path: malawi/upper-neno
+
+java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'

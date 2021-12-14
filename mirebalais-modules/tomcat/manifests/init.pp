@@ -1,5 +1,6 @@
 class tomcat (
     $tomcat = hiera('tomcat'),
+    $tomcat_home_dir = hiera('tomcat_home_dir'),
     $services_enable = hiera('services_enable'),
     $java_memory_parameters = hiera('java_memory_parameters'),
     $java_profiler = hiera('java_profiler'),
@@ -109,11 +110,11 @@ class tomcat (
 
   user { $tomcat:
     ensure => 'present',
-    home   => "/home/${tomcat}",
+    home   => "${tomcat_home_dir}",
     shell  => '/bin/sh',
   }
 
-  file { "/home/${tomcat}":
+  file { $tomcat_home_dir:
     ensure  => directory,
     owner   => $tomcat,
     group   => $tomcat,

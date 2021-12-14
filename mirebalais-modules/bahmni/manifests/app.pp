@@ -1,5 +1,6 @@
 class bahmni::app (
-  $tomcat = hiera('tomcat')
+  $tomcat   = hiera('tomcat'),
+  $repo_url = decrypt(hiera('repo_url')),
 ){
 
   file { "/var/lib/${tomcat}/webapps/bahmniapps":
@@ -10,7 +11,7 @@ class bahmni::app (
   # TODO make this something that relies on a true deployment process, and allows use to apply updates
   # TODO right now it will only work the first time through
   wget::fetch { 'download-bahmniapps':
-    source      => 'https://bamboo.pih-emr.org:81/bahmni-repo/bahmniapps.tar.gz',
+    source      => "${repo_url}:81/bahmni-repo/bahmniapps.tar.gz",
     destination => "/var/lib/${tomcat}/webapps/bahmniapps/bahmniapps.tar.gz",
     timeout     => 0,
     verbose     => false,

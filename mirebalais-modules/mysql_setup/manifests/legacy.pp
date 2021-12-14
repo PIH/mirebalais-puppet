@@ -4,15 +4,16 @@
 
 
 class mysql_setup::legacy (
-  $root_password = decrypt(hiera('mysql_root_password')),
-  $mysql_bind_address = hiera('mysql_bind_address'),
-  $mysql_expire_logs_days = hiera('mysql_expire_logs_days'),
-  $mysql_innodb_buffer_pool_size = hiera('mysql_innodb_buffer_pool_size')
+  $root_password                    = decrypt(hiera('mysql_root_password')),
+  $mysql_bind_address               = hiera('mysql_bind_address'),
+  $mysql_expire_logs_days           = hiera('mysql_expire_logs_days'),
+  $mysql_innodb_buffer_pool_size    = hiera('mysql_innodb_buffer_pool_size'),
+  $repo_url                         = decrypt(hiera('repo_url')),
 ) {
 
   apt::source { 'mysql':
     ensure      => present,
-    location    => 'http://bamboo.pih-emr.org/mysql-repo',
+    location    => "${repo_url}/mysql-repo",
     release     => 'stable/',
     repos       => '',
     include_src => false,
