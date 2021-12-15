@@ -54,7 +54,7 @@ petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 
 # petl cron time
 petl_cron_time: "0 0 */3 ? * *"
-petl_hiv_cron_time: 0 0 */3 ? * *"
+petl_hiv_cron_time: "0 0 */3 ? * *"
 
 # feature toggle settings
 reportingui_ad_hoc_analysis: true
