@@ -10,7 +10,7 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 127.0.0.1
 
 ## openmrs
-openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+openmrs_db_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
 openmrs_auto_update_database: false
 
 
