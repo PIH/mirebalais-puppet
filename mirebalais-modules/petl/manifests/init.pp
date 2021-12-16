@@ -165,7 +165,7 @@ class petl (
     }
     if ('apzu-etl' in $petl_config_name) {
       wget::fetch { 'download-azpu-petl-config-dir':
-      source      => "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${petl_config_name}&r=${petl_config_repo}&c=distribution&p=zip&v=${petl_config_version}",
+      source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${petl_config_name}&r=${petl_config_repo}&c=distribution&p=zip&v=${petl_config_version}",
       destination => "/tmp/petl-${petl_config_name}.zip",
       timeout     => 0,
       verbose     => false,
@@ -179,7 +179,7 @@ class petl (
     }
     else {
       wget::fetch { 'download-petl-config-dir':
-      source => "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${petl_config_name}&r=${petl_config_repo}&p=zip&v=${petl_config_version}",
+      source => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${petl_config_name}&r=${petl_config_repo}&p=zip&v=${petl_config_version}",
       destination => "/tmp/petl-${petl_config_name}.zip",
       timeout    => 0,
       verbose    => false,

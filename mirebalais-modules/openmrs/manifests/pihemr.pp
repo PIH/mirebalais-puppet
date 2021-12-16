@@ -134,7 +134,7 @@ class openmrs::pihemr (
       $config_repo = "releases"
     }
 
-    $config_url = "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}"
+    $config_url = "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}"
 
     # TODO can we change this so it only redownloads if needed?
     wget::fetch { 'download-openmrs-configuration':
