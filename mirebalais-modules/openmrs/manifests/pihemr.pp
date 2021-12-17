@@ -167,7 +167,7 @@ class openmrs::pihemr (
       $frontend_repo = "releases"
     }
 
-    $frontend_url = "https://oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${frontend_name}&r=${frontend_repo}&p=zip&v=${frontend_version}"
+    $frontend_url = "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${frontend_name}&r=${frontend_repo}&p=zip&v=${frontend_version}"
 
     # TODO can we change this so it only redownloads if needed?
     wget::fetch { 'download-openmrs-frontend':
