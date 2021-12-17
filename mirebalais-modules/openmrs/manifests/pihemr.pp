@@ -23,6 +23,11 @@ class openmrs::pihemr (
   $config_name    = hiera('config_name'),
   $config_version = hiera('config_version'),
   $repo_url       = decrypt(hiera('repo_url')),
+
+  # Frontend
+  $frontend_name  = hiera('frontend_name'),
+  $frontend_version = hiera('frontend_version'),
+
   #Feature_toggles
   $reportingui_ad_hoc_analysis            = hiera('reportingui_ad_hoc_analysis'),
   $radiology_contrast_studies             = hiera('radiology_contrast_studies'),
@@ -149,6 +154,34 @@ class openmrs::pihemr (
       command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf ${tomcat_home_dir}/.OpenMRS/configuration && mkdir ${tomcat_home_dir}/.OpenMRS/configuration && cp -r /tmp/configuration/* ${tomcat_home_dir}/.OpenMRS/configuration",
       require => [ Wget::Fetch['download-openmrs-configuration'], Package['unzip'], File["${tomcat_home_dir}/.OpenMRS"] ],
       notify => [ Exec['tomcat-restart'] ]
+    }
+
+  }
+
+  if ($frontend_name != "") {
+
+    if ('SNAPSHOT' in $frontend_version) {
+      $frontend_repo = "snapshots"
+    }
+    else {
+      $frontend_repo = "releases"
+    }
+
+    $frontend_url = "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${frontend_name}&r=${frontend_repo}&p=zip&v=${frontend_version}"
+
+    # TODO can we change this so it only redownloads if needed?
+    wget::fetch { 'download-openmrs-frontend':
+      source      => $frontend_url,
+      destination => "/tmp/${frontend_name}.zip",
+      timeout     => 0,
+      verbose     => false,
+      redownload  => true,
+    }
+
+    exec{'install-openmrs-frontend':
+      command => "rm -rf /tmp/frontend && unzip -o /tmp/${frontend_name}.zip -d /tmp/frontend && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && cp -r /tmp/frontend/* /home/${tomcat}/.OpenMRS/frontend",
+      require => [ Wget::Fetch['download-openmrs-frontend'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ],
+      notify  => [ Exec['tomcat-restart'] ]
     }
 
   }
