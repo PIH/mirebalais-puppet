@@ -79,6 +79,7 @@ class petl (
     destination => "$petl_home_dir/bin/petl-$petl_version.jar",
     timeout     => 0,
     verbose     => false,
+    redownload => true,
     require => File["$petl_home_dir/bin"]
   }
 
