@@ -35,11 +35,8 @@ petl_config_version: "%{hiera('config_version')}"
 petl_version: "3.0.1-SNAPSHOT"
 
 #petl mysql
-petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
-petl_sqlserver_databaseName: openmrs_humci
-petl_cron_time: "0 0/3 * ? * *"
-petl_hiv_cron_time: "0 0/5 * ? * *"
+petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
 #use memory-resident database so that all jobs are rerun on each PETL restart
 petl_database_url: "jdbc:h2:mem:petl"
@@ -49,12 +46,9 @@ petl_cron_hour: '*/4'
 # petl SQL Server 2016
 petl_sqlserver_host: 10.160.12.28
 petl_sqlserver_port: 1433
+petl_sqlserver_databaseName: openmrs_humci
 petl_sqlserver_user: medinfoadmin
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
-
-# petl cron time
-petl_cron_time: "0 0 */3 ? * *"
-petl_hiv_cron_time: "0 0 */3 ? * *"
 
 # feature toggle settings
 reportingui_ad_hoc_analysis: true
