@@ -112,7 +112,7 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
   include openmrs::atomfeed
 
-  include petl
+  #include petl
 
 }
 
@@ -416,7 +416,7 @@ node 'haititest.pih-emr.org' {
   include openmrs::pihemr
   include openmrs::initial_setup
 
-  include petl
+  #include petl
 
 }
 
@@ -531,7 +531,7 @@ node 'malawi-dw.pih-emr.org' {
 
   include java
 
-  include petl
+  #include petl
 
 }
 
