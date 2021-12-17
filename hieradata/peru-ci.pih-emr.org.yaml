@@ -3,7 +3,7 @@ site_domain: peru-ci.pih-emr.org
 
 pih_config: peru
 config_name: openmrs-config-ses
-config_version: 1.1.0-SNAPSHOT
+config_version: 1.4.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
@@ -11,7 +11,7 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
 #PETL config
-petl_version: "2.7.0-SNAPSHOT"   # use latest snapshot
+petl_version: "3.0.1-SNAPSHOT"   # use latest snapshot
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 petl_sqlserver_databaseName: openmrs_peruci
