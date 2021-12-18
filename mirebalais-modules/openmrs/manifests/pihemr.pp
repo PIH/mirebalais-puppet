@@ -198,7 +198,7 @@ class openmrs::pihemr (
   exec { 'fix spa application webapp name':
     unless  => "test ${webapp_name} = openmrs",
     command => "sed -i 's/\/openmrs\([\/\"]\)/\/${webapp_name}\1/g' ${tomcat_home_dir}/.OpenMRS/frontend/index.html",
-    require => Package['pihemr']
+    require => Exec['install-openmrs-frontend']
   }
 
   # this is legacy, this is now handled by our custom app loader factor
