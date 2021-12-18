@@ -179,7 +179,7 @@ class openmrs::pihemr (
     }
 
     exec{'install-openmrs-frontend':
-      command => "rm -rf /tmp/frontend && unzip -o /tmp/${frontend_name}.zip -d /tmp/frontend && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && cp -r /tmp/frontend/* /home/${tomcat}/.OpenMRS/frontend",
+      command => "rm -rf /tmp/frontend && unzip -o /tmp/${frontend_name}.zip -d /tmp/frontend && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && cp -r /tmp/frontend/*/* /home/${tomcat}/.OpenMRS/frontend",
       require => [ Wget::Fetch['download-openmrs-frontend'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ],
       notify  => [ Exec['tomcat-restart'] ]
     }
@@ -198,7 +198,7 @@ class openmrs::pihemr (
   exec { 'fix spa application webapp name':
     unless  => "test ${webapp_name} = openmrs",
     command => "sed -i 's/\/openmrs\([\/\"]\)/\/${webapp_name}\1/g' ${tomcat_home_dir}/.OpenMRS/frontend/index.html",
-    require => Package['pihemr']
+    require => Exec['install-openmrs-frontend']
   }
 
   # this is legacy, this is now handled by our custom app loader factor
