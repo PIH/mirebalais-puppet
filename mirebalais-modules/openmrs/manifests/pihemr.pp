@@ -179,7 +179,7 @@ class openmrs::pihemr (
     }
 
     exec{'install-openmrs-frontend':
-      command => "rm -rf /tmp/frontend && unzip -o /tmp/${frontend_name}.zip -d /tmp/frontend && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && cp -r /tmp/frontend/* /home/${tomcat}/.OpenMRS/frontend",
+      command => "rm -rf /tmp/frontend && unzip -o /tmp/${frontend_name}.zip -d /tmp/frontend && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && cp -r /tmp/frontend/*/* /home/${tomcat}/.OpenMRS/frontend",
       require => [ Wget::Fetch['download-openmrs-frontend'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ],
       notify  => [ Exec['tomcat-restart'] ]
     }
