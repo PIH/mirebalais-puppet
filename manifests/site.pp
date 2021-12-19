@@ -416,8 +416,6 @@ node 'haititest.pih-emr.org' {
   include openmrs::pihemr
   include openmrs::initial_setup
 
-  #include petl
-
 }
 
 node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org', 'ces-laguna.pih-emr.org' {

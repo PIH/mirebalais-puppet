@@ -20,31 +20,3 @@ mysql_wait_timeout: 28800
 mysql_interactive_timeout: 28800
 
 ssl_use_letsencrypt: true
-
-#PETL config
-## site should be apzu, imb, zl, ces
-petl: petl
-petl_site: "zl-hiv"
-petl_config_name: openmrs-config-zl
-petl_config_version: "%{hiera('config_version')}"
-petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
-petl_version: "3.0.1-SNAPSHOT"
-
-#use memory-resident database so that all jobs are rerun on each PETL restart
-petl_database_url: "jdbc:h2:mem:petl"
-
-petl_error_subject: "%{hiera('petl_site')}-test (haititest) PETL Errors"
-petl_cron_hour: '*/4'
-
-#petl db mysql user
-petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
-petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
-petl_mysql_user: openmrs
-petl_cron_time: "0 30 20 ? * *"
-
-# SQL Server 2016
-petl_sqlserver_databaseName: openmrs_haitihivtest
-petl_sqlserver_host: 10.160.12.28
-petl_sqlserver_port: 1433
-petl_sqlserver_user: ENC[v1pMAcFAh0ag0IlcLSYolQ==:WDaxbE1p9+iN7x8/aybOWA==:MWVZR2U5YlBXemlyVDNUVXdxSjB1dz09]
-petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
