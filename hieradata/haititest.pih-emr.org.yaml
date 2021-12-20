@@ -18,5 +18,6 @@ mysql_net_read_timeout: 120
 mysql_net_write_timeout: 120
 mysql_wait_timeout: 28800
 mysql_interactive_timeout: 28800
+mysql_bind_address: 0.0.0.0
 
 ssl_use_letsencrypt: true
