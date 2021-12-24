@@ -22,8 +22,8 @@ petl_database_url: "jdbc:h2:mem:petl"
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
 
 petl_cron_hour: '*/4'
-petl_cron_time: "0 0 1 ? * *"
-petl_hiv_cron_time: "0 0 1 ? * *"
+petl_cron_time: "0 30 20 ? * *"
+petl_hiv_cron_time: "0 30 20 ? * *"
 
 #petl db mysql user
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
