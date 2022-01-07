@@ -180,10 +180,16 @@ class openmrs::pihemr (
 
     exec{'install-openmrs-frontend':
       command => "rm -rf /tmp/frontend && unzip -o /tmp/${frontend_name}.zip -d /tmp/frontend && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && cp -r /tmp/frontend/*/* /home/${tomcat}/.OpenMRS/frontend",
-      require => [ Wget::Fetch['download-openmrs-frontend'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ],
-      notify  => [ Exec['tomcat-restart'] ]
+      require => [ Wget::Fetch['download-openmrs-frontend'], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ]
     }
 
+  }
+
+  if ($config_name != '' and $frontend_name != '') {
+    exec{ 'link-configuration-into-frontend':
+      command => "ln -s ../configuration/frontend /home/${tomcat}/.OpenMRS/frontend/site",
+      require => [ Exec['install-openmrs-frontend'], Exec['install-openmrs-configuration'] ]
+    }
   }
 
   # hack to let us remote the mirebalais metadata module from the build; can be removed after it has been removed from all servers
