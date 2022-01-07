@@ -14,7 +14,7 @@ petl: petl
 petl_site: "zl-test"
 petl_config_name: openmrs-config-zl
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
-petl_version: 3.0.1-SNAPSHOT
+petl_version: 3.1.0-SNAPSHOT
 
 #use memory-resident database so that all jobs are rerun on each PETL restart
 petl_database_url: "jdbc:h2:mem:petl"

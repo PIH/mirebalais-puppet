@@ -32,7 +32,7 @@ petl_config_name: openmrs-config-zl
 
 #petl version
 petl_config_version: "%{hiera('config_version')}"
-petl_version: "3.0.1-SNAPSHOT"
+petl_version: "3.1.0-SNAPSHOT"
 
 #petl mysql
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
