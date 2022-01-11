@@ -13,8 +13,16 @@ mysql_bind_address: 127.0.0.1
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 openmrs_auto_update_database: false
 
-
 # backup azure
 az_backup_folder_path: malawi/lower-neno
+
+# petl for reports
+petl_site: "apzu-lowerneno-reports"
+petl_config_name: "apzu-etl"
+petl_config_version: 1.0.0-SNAPSHOT
+
+petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
+
+petl_server_port: 8181
 
 java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'

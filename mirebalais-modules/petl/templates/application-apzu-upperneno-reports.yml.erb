@@ -4,7 +4,7 @@ petl:
   jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
   startup:
     jobs:
-      - "refresh-full.yml"
+      - "refresh-upper-neno.yml"
     exitAutomatically: true
 
 server:
@@ -24,15 +24,7 @@ datasources:
 upperNenoOpenmrs:
   host: "<%= @petl_mysql_host -%>"
   port: "<%= @petl_mysql_port -%>"
-  databaseName: "upper_neno"
-  user: "${datasources.mysql.user}"
-  password: "${datasources.mysql.password}"
-  options: "${datasources.mysql.options}"
-
-lowerNenoOpenmrs:
-  host: "<%= @petl_mysql_host -%>"
-  port: "<%= @petl_mysql_port -%>"
-  databaseName: "lisungwi"
+  databaseName: "openmrs"
   user: "${datasources.mysql.user}"
   password: "${datasources.mysql.password}"
   options: "${datasources.mysql.options}"
@@ -40,22 +32,7 @@ lowerNenoOpenmrs:
 upperNenoReporting:
   host: "<%= @petl_mysql_host -%>"
   port: "<%= @petl_mysql_port -%>"
-  databaseName: "neno_reporting"
+  databaseName: "openmrs_warehouse"
   user: "${datasources.mysql.user}"
   password: "${datasources.mysql.password}"
   options: "${datasources.mysql.options}"
-
-lowerNenoReporting:
-  host: "<%= @petl_mysql_host -%>"
-  port: "<%= @petl_mysql_port -%>"
-  databaseName: "lisungwi_reporting"
-  user: "${datasources.mysql.user}"
-  password: "${datasources.mysql.password}"
-  options: "${datasources.mysql.options}"
-
-consolidatedReporting:
-  host: "<%= @petl_sqlserver_host -%>"
-  port: "<%= @petl_sqlserver_port -%>"
-  databaseName: "<%= @petl_sqlserver_databaseName -%>"
-  user: "<%= @petl_sqlserver_user -%>"
-  password: "<%= @petl_sqlserver_password -%>"
