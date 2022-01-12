@@ -6,6 +6,7 @@ server_timezone: Africa/Blantyre
 petl: "petl"
 petl_site: "apzu"
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
+petl_server_port: 9110
 
 # PETL Config
 petl_config_name: "apzu-etl"
