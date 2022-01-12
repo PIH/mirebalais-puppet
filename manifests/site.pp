@@ -553,4 +553,7 @@ node 'neno.pih-emr.org', 'lisungwi.pih-emr.org', 'neno20.pih-emr.org'  {
 
   include openmrs::apzu
   include openmrs::backup
+
+  include petl
+
 }
