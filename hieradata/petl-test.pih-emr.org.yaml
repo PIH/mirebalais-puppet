@@ -5,37 +5,34 @@ server_timezone: America/New_York
 # config files
 config_name: openmrs-config-zl
 config_version: 1.30.0-SNAPSHOT
-### note this version goes hand in hand with the config_version
-petl_config_version: "%{hiera('config_version')}"
 
-#PETL config
-## site should be apzu, imb, zl, ces
+
+# PETL
 petl: petl
+petl_version: "3.1.0-SNAPSHOT"
 petl_site: "zl-test"
-petl_config_name: openmrs-config-zl
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
-petl_version: 3.1.0-SNAPSHOT
 
-#use memory-resident database so that all jobs are rerun on each PETL restart
-petl_database_url: "jdbc:h2:mem:petl"
+# PETL config
+petl_config_name: openmrs-config-zl
+petl_config_version: "%{hiera('config_version')}"   ### note this version goes hand in hand with the config_version
 
-petl_error_subject: "%{hiera('petl_site')} PETL Errors"
-
-petl_cron_hour: '*/4'
-petl_cron_time: "0 30 20 ? * *"
-petl_hiv_cron_time: "0 30 20 ? * *"
-
-#petl db mysql user
+# PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
-# SQL Server 2016
+# PETL SQL Server 2106
 petl_sqlserver_databaseName: openmrs_haiti_warehouse
 petl_sqlserver_host: 10.160.12.28
 petl_sqlserver_port: 1433
 petl_sqlserver_user: ENC[v1pMAcFAh0ag0IlcLSYolQ==:WDaxbE1p9+iN7x8/aybOWA==:MWVZR2U5YlBXemlyVDNUVXdxSjB1dz09]
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
+
+# PETL Crons
+petl_error_subject: "%{hiera('petl_site')} PETL Errors"
+petl_cron_time: "0 30 20 ? * *"
+petl_hiv_cron_time: "0 30 20 ? * *"
 
 mysql_server_id: 3
 mysql_master_ip:

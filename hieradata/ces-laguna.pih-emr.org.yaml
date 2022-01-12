@@ -19,30 +19,34 @@ openmrs_auto_update_database: true
 session_timeout: 120
 ssl_use_letsencrypt: true
 
-###### petl configuration
+# TODO: PETL config is likely not currently used and would need to be updated before using again?
+# PETL
 petl: petl
+petl_version: "3.1.0-SNAPSHOT"
 petl_site: "ces"
+petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
+petl_server_port: 9110
+
+# PETL Config
 petl_config_name: openmrs-config-ces
 petl_config_version: 1.14.0-SNAPSHOT
-petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
-petl_version: "3.1.0-SNAPSHOT"
 
-#use memory-resident database so that all jobs are rerun on each PETL restart
+# PETL DB (use memory-resident database so that all jobs are rerun on each PETL restart)
 petl_database_url: "jdbc:h2:mem:petl"
 
-petl_error_subject: "%{hiera('petl_site')} PETL Errors"
-petl_cron_hour: '*/4'
-
-#petl db mysql user
+# PETL MySQL
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
-# SQL Server 2016
-petl_server_port: 9110
+# PETL SQL Server 2016
 petl_sqlserver_databaseName: openmrs_ces_warehouse
 petl_sqlserver_host: 10.160.12.28
 petl_sqlserver_port: 1433
 petl_sqlserver_user: ENC[v1pMAcFAh0ag0IlcLSYolQ==:WDaxbE1p9+iN7x8/aybOWA==:MWVZR2U5YlBXemlyVDNUVXdxSjB1dz09]
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
+
+# PETL Crons
+
+
