@@ -19,6 +19,9 @@ petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Africa/Blantyre"
 
 petl_server_port: 9110
+
+petl_cron_time: ""
+
 # petl sql
 petl_sqlserver_host: 10.160.22.17
 petl_sqlserver_port: 1433
