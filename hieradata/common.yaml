@@ -92,9 +92,9 @@ pwa_filename: ''
 
 # PETL configuration
 petl: "petl"
-petl_site: mirebalais
+petl_site: ""
 petl_user: "petl"
-petl_version: "3.1.0-SNAPSHOT"
+petl_version: "3.0.1"
 
 petl_home_dir: "/opt/petl"
 petl_config_dir: "configurations"
