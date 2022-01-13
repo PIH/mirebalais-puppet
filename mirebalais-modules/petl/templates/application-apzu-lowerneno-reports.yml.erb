@@ -2,13 +2,9 @@ petl:
   homeDir: "<%= @petl_home_dir -%>"
   datasourceDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/datasources"
   jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
-  startup:
-    jobs:
-      - "refresh-lower-neno.yml"
-    exitAutomatically: true
 
 executeCron:
-  refreshOpenmrsData: "<%= @petl_cron_time -%>"
+  refreshLowerNeno: "<%= @petl_cron_time -%>"
 
 server:
   port: <%= @petl_server_port -%>
