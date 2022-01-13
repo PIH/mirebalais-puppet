@@ -14,16 +14,21 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mysql_innodb_buffer_pool_size: 8G
 mysql_innodb_buffer_pool_instances: 8
 
-#PETL config
+# PETL
+
+# PETL MySQL
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
+
+# PETL SQL Server
 petl_sqlserver_databaseName: openmrs_haitihiv
 petl_sqlserver_host: 10.160.12.27
 petl_sqlserver_port: 1433
 petl_sqlserver_user: openmrs
 petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
+
+# PETL Cron
 petl_error_subject: Haiti Hiv (ZLEMR) petl errors
-petl_cron_hour: '*/4'
 
 mysql_net_read_timeout: 120
 mysql_net_write_timeout: 120

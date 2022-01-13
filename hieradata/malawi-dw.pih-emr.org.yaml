@@ -24,3 +24,5 @@ petl_sqlserver_port: 1433
 petl_sqlserver_user: ENC[5ChP50972ydOmVvG8h/FMQ==:R6hlTaSylcFEt9+3cXVQaQ==:WWY4STRXNXpCWjNDZkRPZ0FqbUFvZz09]
 petl_sqlserver_password: ENC[jp5eYCvDQs0jL/wK7Z02Bg==:pVi7ty2nGUKiVMf6Z0lL6Q==:K3MrZGpGTk5kSDMyc2VMTjZsb0Zadz09]
 petl_sqlserver_databaseName: "openmrs_reporting"
+
+# PETL Cron

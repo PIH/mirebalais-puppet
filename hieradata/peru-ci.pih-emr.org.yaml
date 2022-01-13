@@ -10,21 +10,24 @@ mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
-#PETL config
+# PETL
 petl_version: "3.1.0-SNAPSHOT"   # use latest snapshot
-petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
-petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
-petl_sqlserver_databaseName: openmrs_peruci
 
-#use memory-resident database so that all jobs are rerun on each PETL restart
+# PETL DB (use memory-resident database so that all jobs are rerun on each PETL restart
 petl_database_url: "jdbc:h2:mem:petl"
 
-# SQL Server 2014 Boston office
+# PETL MySQL
+petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
+
+# PETL SQL Server 2014 Boston office
 petl_sqlserver_host: 10.160.12.28
 petl_sqlserver_port: 1433
+petl_sqlserver_databaseName: openmrs_peruci
 petl_sqlserver_user: medinfoadmin
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
-petl_error_subject: peru-ci petl errors
-petl_cron_hour: '*/4'
+
+# PETL Crons
+petl_error_subject: peru-ci PETL errors
 
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
