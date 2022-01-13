@@ -5,6 +5,11 @@ petl:
   startup:
     jobs:
       - "refresh-full.yml"
+    exitAutomatically: true
+
+executeCron:
+  refreshUpperNeno: ""
+  refreshLowerNeno: ""
 
 server:
   port: <%= @petl_server_port -%>

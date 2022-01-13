@@ -27,4 +27,19 @@ az_backup_folder_path: malawi/upper-neno
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
+# petl for reports
+petl_site: "apzu-upperneno-reports"
+petl_config_name: "apzu-etl"
+petl_config_version: 1.0.0-SNAPSHOT
+
+petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
+
+petl_cron_time: "0 0 2 ? * *"
+
+petl_mysql_user: openmrs
+petl_mysql_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Africa/Blantyre"
+
+petl_server_port: 8181
+
 java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'

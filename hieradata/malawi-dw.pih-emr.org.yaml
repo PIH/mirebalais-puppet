@@ -26,4 +26,3 @@ petl_sqlserver_password: ENC[jp5eYCvDQs0jL/wK7Z02Bg==:pVi7ty2nGUKiVMf6Z0lL6Q==:K
 petl_sqlserver_databaseName: "openmrs_reporting"
 
 # PETL Cron
-
