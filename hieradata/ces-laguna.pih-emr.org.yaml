@@ -19,7 +19,6 @@ openmrs_auto_update_database: true
 session_timeout: 120
 ssl_use_letsencrypt: true
 
-# TODO: PETL config is likely not currently used and would need to be updated before using again?
 # PETL
 petl: petl
 petl_version: "3.1.0-SNAPSHOT"

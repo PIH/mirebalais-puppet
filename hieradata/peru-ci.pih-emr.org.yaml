@@ -10,7 +10,6 @@ mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
-# TODO: PETL config is likely not currently used and would need to be updated before using again?
 # PETL
 petl_version: "3.1.0-SNAPSHOT"   # use latest snapshot
 

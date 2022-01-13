@@ -14,7 +14,6 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mysql_innodb_buffer_pool_size: 8G
 mysql_innodb_buffer_pool_instances: 8
 
-# TODO: PETL config is likely not currently used and would need to be updated before using again?
 # PETL
 
 # PETL MySQL
