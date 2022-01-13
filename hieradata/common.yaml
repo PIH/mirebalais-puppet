@@ -105,9 +105,6 @@ petl_java_opts: ""
 # PETL Config
 petl_config_dir: "configurations"
 
-# PETL DB
-petl_database_url: "jdbc:h2:file:${petl.homeDir}/data/petl;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE"
-
 # PETL MySQL
 petl_mysql_host: localhost
 petl_mysql_port: 3306
