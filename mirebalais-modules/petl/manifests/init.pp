@@ -7,7 +7,6 @@ class petl (
   $petl_java_opts              = hiera("petl_java_opts"),
   $petl_server_port            = hiera("petl_server_port"),
   $petl_config_dir             = hiera("petl_config_dir"),
-  $petl_schedule_cron          = hiera("petl_schedule_cron"),
   $petl_database_url           = hiera("petl_database_url"),
   $petl_mysql_host             = hiera("petl_mysql_host"),
   $petl_mysql_port             = hiera("petl_mysql_port"),

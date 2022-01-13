@@ -8,8 +8,8 @@ petl:
 
 executeCron:
   refreshOpenmrsData: "<%= @petl_cron_time -%>"
-  refreshHumciData: ""
   refreshHivData: ""
+  refreshHumciData: ""
 
 server:
   port: <%= @petl_server_port -%>
@@ -19,6 +19,7 @@ logging:
     root: "WARN"
     org.pih: "DEBUG"
 
+# see: https://pihemr.atlassian.net/wiki/spaces/PIHEMR/pages/2397044737/ZL+Central+DataWarehouse+configuration+notes
 datasources:
   mysql:
     user: "<%= @petl_mysql_user -%>"

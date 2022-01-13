@@ -10,8 +10,8 @@ petl:
 
 executeCron:
   refreshOpenmrsData: ""
-  refreshHumciData: ""
   refreshHivData: ""
+  refreshHumciData: "<%= @petl_cron_time -%>""
 
 server:
   port: <%= @petl_server_port -%>
