@@ -10,12 +10,23 @@ executeCron:
   refreshOpenmrsData: "<%= @petl_cron_time -%>"
 
 server:
-  port: <%= @petl_server_port -%>
+  port: "<%= @petl_server_port -%>"
 
 logging:
   level:
     root: "WARN"
-    org.pih: "DEBUG"
+    org.pih: "INFO"
+
+spring:
+  datasource:
+    platform: "mssql"
+    driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=<%= @petl_sqlserver_databaseName -%>"
+    username: "<%= @petl_sqlserver_user -%>"
+    password: "<%= @petl_sqlserver_password -%>"
+  jpa:
+    hibernate:
+      dialect: "org.hibernate.dialect.SQLServer2012Dialect"
 
 datasources:
   mysql:
