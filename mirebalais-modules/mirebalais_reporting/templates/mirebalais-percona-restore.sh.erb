@@ -4,15 +4,17 @@
 
 backupDir="/home/reporting/percona/backups"
 compressedDir="/home/reporting/percona/backups/openmrs.tar"
-perconaLogs="/home/reporting/percona/logs"
-#perconaRestoreDir="/home/reporting/percona/backups"
-perconaRestoreDir="/home/reporting/percona/backups/openmrs"
 dataDir="/var/lib/mysql"
-reportingTables="/home/reporting/percona/dumps/reporing_tables.sql"
+
 mysqlDb="/home/reporting/percona/dumps/mysql.sql"
-reportingDumps="/home/reporting/percona/dumps"
-backupDir="/home/reporting/percona/backups"
+openmrsHomeDir="/home/tomcat7/.OpenMRS"
+
 perconaLogs="/home/reporting/percona/logs"
+perconaRestoreDir="/home/reporting/percona/backups/openmrs"
+
+reportingTables="/home/reporting/percona/dumps/reporing_tables.sql"
+reportingDumps="/home/reporting/percona/dumps"
+
 
 createDir () {
         mkdir -p /home/reporting/percona
@@ -50,9 +52,15 @@ perconaRestore () {
                 chown -R mysql:mysql ${dataDir}
 }
 
+deleteOpenMRSCacheFolders () {
+            rm -rf ${openmrsHomeDir}/configuration_checksums
+            rm -rf ${openmrsHomeDir}/lucene/indexes
+}
+
 deletePerconaDb () {
                 rm -rf ${backupDir}/*
 }
+
 
 reboot () {
                 sudo reboot
@@ -64,4 +72,5 @@ dumpReportingTable
 perconaRestore
 sleep 180
 deletePerconaDb
+deleteOpenMRSCacheFolders
 reboot
