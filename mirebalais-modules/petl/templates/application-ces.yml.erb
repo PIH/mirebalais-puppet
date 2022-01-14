@@ -27,6 +27,9 @@ spring:
   jpa:
     hibernate:
       dialect: "org.hibernate.dialect.SQLServer2012Dialect"
+  liquibase:
+    database-change-log-table: "petl_database_change_log"
+    database-change-log-lock-table: "petl_database_change_log_lock"
 
 datasources:
   mysql:
