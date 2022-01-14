@@ -136,7 +136,7 @@ class petl (
   }
 
   service { $petl:
-    ensure  => running,
+    ensure  => stopped,
     enable  => true,
     require => Exec["petl-startup-enable"]
   }
@@ -194,7 +194,7 @@ class petl (
 
     # just restart PETL every time the deploy runs
     exec { 'petl-restart':
-      command => "service $petl restart",
+      command => "service $petl start",
       user    => 'root',
       require => Service["$petl"],
     }
