@@ -142,12 +142,6 @@ class petl (
     require => Exec["petl-startup-enable"]
   }
 
-  # petl configuration
-  exec { "delete-petl-config-dir":
-      command => "rm -rf ${petl_home_dir}/${petl_config_dir}",
-      require => [Service["$petl"]],
-  }
-
   if $imb_etl  {
     vcsrepo { "${petl_home_dir}/${petl_config_dir}":
       ensure   => latest,
