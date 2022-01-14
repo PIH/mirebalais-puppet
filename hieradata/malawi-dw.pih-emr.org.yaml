@@ -18,6 +18,11 @@ petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLM
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 
+# PETL database for Apzu
+install_petl_warehouse_db: true
+petl_warehouse_db: openmrs_warehouse
+petl_mysql_user_ip: localhost
+
 # PETL Sql Service
 petl_sqlserver_host: 10.160.22.17
 petl_sqlserver_port: 1433
