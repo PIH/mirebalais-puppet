@@ -9,6 +9,8 @@ class openmrs::apzu (
   $openmrs_db_password          = decrypt(hiera('openmrs_db_password')),
   $openmrs_auto_update_database = hiera('openmrs_auto_update_database'),
   $repo_url                     = decrypt(hiera('repo_url')),
+  $petl_mysql_user             = decrypt(hiera("petl_mysql_user")),
+  $petl_mysql_password         = decrypt(hiera("petl_mysql_password")),
 
 ) {
 
@@ -19,6 +21,15 @@ class openmrs::apzu (
   file { "${tomcat_home_dir}/.OpenMRS/${webapp_name}-runtime.properties":
     ensure  => present,
     content => template('openmrs/openmrs-malawi-runtime.properties.erb'),
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0644',
+    require => File["${tomcat_home_dir}/.OpenMRS"]
+  }
+
+  file { "${tomcat_home_dir}/.OpenMRS/warehouse-connection.properties":
+    ensure  => present,
+    content => template('openmrs/warehouse-connection.properties.erb'),
     owner   => $tomcat,
     group   => $tomcat,
     mode    => '0644',
