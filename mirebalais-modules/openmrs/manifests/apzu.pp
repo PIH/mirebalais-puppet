@@ -11,6 +11,7 @@ class openmrs::apzu (
   $repo_url                     = decrypt(hiera('repo_url')),
   $petl_mysql_user             = decrypt(hiera("petl_mysql_user")),
   $petl_mysql_password         = decrypt(hiera("petl_mysql_password")),
+  $petl_warehouse_db = hiera("petl_warehouse_db"),
 
 ) {
 

@@ -1,3 +1,3 @@
-connection.url=jdbc:mysql://localhost:3306/openmrs_warehouse?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8
-connection.username="<%= @petl_mysql_user -%>"
-connection.password="<%= @petl_mysql_password -%>"
+connection.url=jdbc:mysql://localhost:3306/<%= @petl_warehouse_db -%>?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8
+connection.username=<%= @petl_mysql_user -%>
+connection.password=<%= @petl_mysql_password -%>
