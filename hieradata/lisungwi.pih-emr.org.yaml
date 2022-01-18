@@ -35,4 +35,8 @@ install_petl_warehouse_db: true
 petl_warehouse_db: openmrs_warehouse
 petl_mysql_user_ip: localhost
 
+install_petl_warehouse_db: true
+petl_warehouse_db: openmrs_warehouse
+petl_mysql_user_ip: localhost
+
 java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'

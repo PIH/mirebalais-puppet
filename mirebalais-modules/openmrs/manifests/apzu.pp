@@ -32,7 +32,7 @@ class openmrs::apzu (
     content => template('openmrs/warehouse-connection.properties.erb'),
     owner   => $tomcat,
     group   => $tomcat,
-    mode    => '0644',
+    mode    => '0600',
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
 
