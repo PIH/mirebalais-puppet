@@ -21,7 +21,7 @@ ssl_use_letsencrypt: true
 
 # PETL
 petl: petl
-petl_version: "3.1.0-SNAPSHOT"
+petl_version: "3.2.0-SNAPSHOT"
 petl_site: "ces"
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
 petl_server_port: 9110

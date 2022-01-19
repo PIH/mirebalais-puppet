@@ -92,7 +92,7 @@ pwa_filename: ''
 
 # PETL
 petl: "petl"
-petl_version: "3.1.0-SNAPSHOT"
+petl_version: "3.2.0"
 petl_site: ""
 petl_user: "petl"
 petl_home_dir: "/opt/petl"

@@ -72,12 +72,21 @@ class petl (
     require => File["$petl_home_dir"]
   }
 
+  if ('SNAPSHOT' in $petl_version) {
+    $petl_repo = "snapshots"
+    $perl_redownload = true
+  }
+  else {
+    $petl_repo = "releases"
+    $petl_redownload = false
+  }
+
   wget::fetch { "download-petl-jar":
-    source      => "http://bamboo.pih-emr.org/artifacts/petl-$petl_version.jar",
+    source      =>  "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih&a=petl&r=${petl_repo}&p=jar&v=${petl_version}",
     destination => "$petl_home_dir/bin/petl-$petl_version.jar",
     timeout     => 0,
     verbose     => false,
-    redownload => true,
+    redownload => $petl_redownload,
     require => File["$petl_home_dir/bin"]
   }
 

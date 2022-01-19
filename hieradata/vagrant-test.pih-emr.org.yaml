@@ -24,7 +24,7 @@ biometrics_enabled: true
 biometrics_webapp_name: biometrics
 
 # PETL
-petl_version: "3.1.0-SNAPSHOT"   # ues latest snapshot
+petl_version: "3.2.0-SNAPSHOT"   # ues latest snapshot
 
 # PETL MySQL
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
