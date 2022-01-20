@@ -74,11 +74,9 @@ class petl (
 
   if ('SNAPSHOT' in $petl_version) {
     $petl_repo = "snapshots"
-    $perl_redownload = true
   }
   else {
     $petl_repo = "releases"
-    $petl_redownload = false
   }
 
   wget::fetch { "download-petl-jar":
@@ -86,7 +84,7 @@ class petl (
     destination => "$petl_home_dir/bin/petl-$petl_version.jar",
     timeout     => 0,
     verbose     => false,
-    redownload => $petl_redownload,
+    redownload => ('SNAPSHOT' in $petl_version),
     require => File["$petl_home_dir/bin"]
   }
 
