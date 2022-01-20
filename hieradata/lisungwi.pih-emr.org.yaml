@@ -23,12 +23,16 @@ petl_config_version: 1.0.0-SNAPSHOT
 
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
 
-petl_server_port: 8181
-
-petl_cron_time: "0 0 2 ? * *"
-
 petl_mysql_user: openmrs
 petl_mysql_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Africa/Blantyre"
+
+petl_cron_time: "0 0 2 ? * *"
+petl_server_port: 8181
+
+# PETL database for Apzu lower neno
+install_petl_warehouse_db: true
+petl_warehouse_db: openmrs_warehouse
+petl_mysql_user_ip: localhost
 
 java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'

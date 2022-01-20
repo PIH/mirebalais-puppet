@@ -126,6 +126,9 @@ petl_check_errors_cron_hour: '*/6'
 petl_cron_time: "0 0 5 ? * *"
 petl_hiv_cron_time: "0 0 7 ? * *"
 
+# PETL database for Apzu
+install_petl_warehouse_db: false
+
 # this is used to download the imb etl repo
 imb_etl: false
 
