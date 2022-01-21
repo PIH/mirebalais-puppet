@@ -1,18 +1,19 @@
 class openmrs::backup (
-    $backup_user = decrypt(hiera('backup_db_user')),
-    $backup_password = decrypt(hiera('backup_db_password')),
-    $az_secret = decrypt(hiera('az_secret')),
-    $az_url = decrypt(hiera('az_url')),
-    $az_backup_folder_path = hiera('az_backup_folder_path'),
-    $remote_db_user = hiera('remote_db_user'),
-    $remote_db_server = hiera('remote_db_server'),
-    $remote_backup_dir = hiera('remote_backup_dir'),
-    $tomcat = hiera('tomcat'),
-    $sysadmin_email = hiera('sysadmin_email'),
-    $backup_file_prefix = hiera('backup_file_prefix'),
-    $backup_hour = hiera('backup_hour'),
-    $backup_delete_older_than_x_days = hiera('backup_delete_older_than_x_days'),
-    $archive_hour = hiera('archive_hour'),
+    $backup_user                      = decrypt(hiera('backup_db_user')),
+    $backup_password                  = decrypt(hiera('backup_db_password')),
+    $az_secret                        = decrypt(hiera('az_secret')),
+    $az_url                           = decrypt(hiera('az_url')),
+    $az_backup_folder_path            = hiera('az_backup_folder_path'),
+    $remote_db_user                   = hiera('remote_db_user'),
+    $remote_db_server                 = hiera('remote_db_server'),
+    $remote_backup_dir                = hiera('remote_backup_dir'),
+    $tomcat                           = hiera('tomcat'),
+    $sysadmin_email                   = hiera('sysadmin_email'),
+    $backup_file_prefix               = hiera('backup_file_prefix'),
+    $backup_hour                      = hiera('backup_hour'),
+    $backup_delete_older_than_x_days  = hiera('backup_delete_older_than_x_days'),
+    $archive_hour                     = hiera('archive_hour'),
+    $activitylog_enabled              = hiera('activitylog_enabled'),
   ){
 
   require openmrs
@@ -99,4 +100,26 @@ class openmrs::backup (
     group   => 'root',
     content => template('openmrs/mysqlarchive.sh.erb'),
   }
+
+  if $activitylog_enabled {
+    file { 'backupActivityLog.sh':
+      ensure  => present,
+      path    => '/usr/local/sbin/backupActivityLog.sh',
+      mode    => '0700',
+      owner   => 'root',
+      group   => 'root',
+      content => template('openmrs/backupActivityLog.sh.erb'),
+      require => File["/usr/local/sbin/azcopy"]
+    }
+
+    cron { 'backup-activitylog':
+      ensure      => present,
+      command     => '/usr/local/sbin/backupActivityLog.sh &> /dev/null',
+      user        => 'root',
+      hour        => 19,
+      minute      => 00,
+      require     => File['backupActivityLog.sh']
+    }
+  }
+
 }

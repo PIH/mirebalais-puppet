@@ -1,5 +1,6 @@
 webapp_name: mirebalais
 az_backup_folder_path: haiti/mirebalais
+az_activitylog_backup_folder_path: activitylog/haiti/mirebalais
 
 package_release: 'stable/'
 
@@ -74,3 +75,6 @@ ubuntu_14: true
 #
 smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
 smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]
+
+# Request logging for performance and usage tracking
+activitylog_enabled: true

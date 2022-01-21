@@ -2,6 +2,7 @@
 site_domain: jjdossen.pih-emr.org
 
 az_backup_folder_path: liberia/jjdossen
+az_activitylog_backup_folder_path: activitylog/liberia/jjdossen
 
 package_release: 'stable/'
 
