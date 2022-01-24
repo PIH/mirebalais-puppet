@@ -9,9 +9,10 @@ class openmrs::apzu (
   $openmrs_db_password          = decrypt(hiera('openmrs_db_password')),
   $openmrs_auto_update_database = hiera('openmrs_auto_update_database'),
   $repo_url                     = decrypt(hiera('repo_url')),
-  $petl_mysql_user             = decrypt(hiera("petl_mysql_user")),
-  $petl_mysql_password         = decrypt(hiera("petl_mysql_password")),
-  $petl_warehouse_db = hiera("petl_warehouse_db"),
+  $petl_mysql_user              = decrypt(hiera("petl_mysql_user")),
+  $petl_mysql_password          = decrypt(hiera("petl_mysql_password")),
+  $petl_warehouse_db            = hiera("petl_warehouse_db"),
+  $petl_openmrs_connection_url  = hiera("petl_apzu_openmrs_connection_url"),
 
 ) {
 
