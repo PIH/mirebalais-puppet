@@ -3,7 +3,7 @@ class openmrs::atomfeed (
         $atomfeed_version     = hiera('atomfeed_version'),
         $atomfeed_repo_url    = hiera('atomfeed_repo_url'),
         $tomcat               = hiera('tomcat'),
-        $package_name = hiera('package_name')
+        $package_name         = hiera('package_name')
 ) {
 
   exec {'download_atomfeed_omod':
