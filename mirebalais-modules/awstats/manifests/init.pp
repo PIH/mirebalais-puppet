@@ -23,7 +23,7 @@ class awstats(
     	 command => "/usr/lib/cgi-bin/awstats.pl -config=$site_domain -update > /dev/null",
 	 user => root,
 	 hour => 0,
-     environment => 'MAILTO=${sysadmin_email}',
+     environment => "MAILTO=$sysadmin_email",
     }
 
     exec { 'generate initial awstats':

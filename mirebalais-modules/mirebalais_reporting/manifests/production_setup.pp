@@ -24,7 +24,7 @@ class mirebalais_reporting::production_setup (
     user    => 'root',
     hour    => 0,
     minute  => 00,
-    environment => 'MAILTO=${sysadmin_email}',
+    environment => "MAILTO=$sysadmin_email",
     require => [ File['mirebalaisreportingdbdump.sh'], Package['p7zip-full'] ]
   }
 
@@ -43,7 +43,7 @@ class mirebalais_reporting::production_setup (
     user => 'root',
     hour =>	5,
     minute => 00,
-    environment => 'MAILTO=${sysadmin_email}',
+    environment => "MAILTO=$sysadmin_email",
     require => [ File['mirebalaisreportscleanup.sh'] ]
   }
 
@@ -71,7 +71,7 @@ class mirebalais_reporting::production_setup (
     user    => 'root',
     hour    => 21,
     minute  => 00,
-    environment => 'MAILTO=${sysadmin_email}',
+    environment => "MAILTO=$sysadmin_email",
     require => [ File['mirebalais-percona-backup.sh'] ]
   }
 
@@ -81,7 +81,7 @@ class mirebalais_reporting::production_setup (
     user    => 'root',
     hour    => 23,
     minute  => 00,
-    environment => 'MAILTO=${sysadmin_email}',
+    environment => "MAILTO=$sysadmin_email",
     require => [ File['mirebalais-percona-backup.sh'] ]
   }
 
@@ -91,7 +91,7 @@ class mirebalais_reporting::production_setup (
       user    => 'root',
       hour    => 02,
       minute  => 30,
-      environment => 'MAILTO=${sysadmin_email}',
+      environment => "MAILTO=$sysadmin_email",
       require => [ File['mirebalais-percona-delete-dir.sh'] ]
     }
 }

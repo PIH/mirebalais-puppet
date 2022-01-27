@@ -153,7 +153,7 @@ class apache2 (
     user    => "root",
     hour    => "$cert_cron_hour",
     minute  => "$cert_cron_min",
-    environment => "MAILTO=${sysadmin_email}",
+    environment => "MAILTO=$sysadmin_email",
     require => File["/var/acme"]
   }
 
@@ -163,7 +163,7 @@ class apache2 (
     user    => root,
     hour    => "$apache_cron_restart_hour",
     minute  => "$apache_cron_restart_min",
-    environment => "MAILTO=${sysadmin_email}",
+    environment => "MAILTO=$sysadmin_email",
     require => Cron["renew certificates using acme user"]
   }
 

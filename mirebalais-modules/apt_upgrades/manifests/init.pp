@@ -9,7 +9,7 @@ class apt_upgrades(
   	      download            => '1',
   	      upgrade             => '1',
   	      autoclean           => '7',
-  	      mail_to	            => '${sysadmin_email}',
+  	      mail_to	            => $sysadmin_email,
   	      auto_fix            => true,
   	      minimal_steps       => false,
   	      install_on_shutdown => false,

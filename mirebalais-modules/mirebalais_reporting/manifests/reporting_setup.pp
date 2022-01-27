@@ -69,7 +69,7 @@ class mirebalais_reporting::reporting_setup (
 		user    => 'root',
 		hour    => 18,
 		minute  => 00,
-		environment => 'MAILTO=${sysadmin_email}',
+		environment => "MAILTO=$sysadmin_email",
 		require => [ File['mirebalaisreportingdbsource.sh'], Package['p7zip-full'] ]
 	}
 
@@ -98,7 +98,7 @@ class mirebalais_reporting::reporting_setup (
 		user    => 'root',
 		hour    => 02,
 		minute  => 30,
-		environment => 'MAILTO=${sysadmin_email}',
+		environment => "MAILTO=$sysadmin_email",
 		require => [ File['mirebalais-percona-restore.sh'] ]
 	}
 
@@ -108,7 +108,7 @@ class mirebalais_reporting::reporting_setup (
 		user    => 'root',
 		hour    => 03,
 		minute  => 50,
-		environment => 'MAILTO=${sysadmin_email}',
+		environment => "MAILTO=$sysadmin_email",
 		require => [ File['mirebalais-warehouse-n-reporting-tables.sh'] ]
 	}
 
