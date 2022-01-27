@@ -4,13 +4,14 @@ class mirth(
   $mirth_db_password = decrypt(hiera('mirth_db_password')),
   $services_ensure = hiera('services_ensure'),
   $services_enable = hiera('services_enable'),
-  $openmrs_db = hiera('openmrs_db')
+  $openmrs_db = hiera('openmrs_db'),
+  $package_name = hiera('package_name')
 ){
 
   mysql_database { $mirth_db :
     ensure  => present,
     charset => 'utf8',
-    require => [Service['mysqld'], Package['pihemr']],
+    require => [Service['mysqld'], Package[$package_name]],
   }
 
   mysql_user { "${mirth_db_user}@localhost":
