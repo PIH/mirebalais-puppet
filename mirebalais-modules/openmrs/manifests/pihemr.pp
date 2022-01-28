@@ -6,6 +6,7 @@ class openmrs::pihemr (
   $cc_user_name                 = decrypt(hiera('commcare_user')),
   $cc_user_password             = decrypt(hiera('commcare_password')),
   $openmrs_auto_update_database = hiera('openmrs_auto_update_database'),
+  $package_name                 = hiera('package_name'),
   $package_release              = hiera('package_release'),
   $package_version              = hiera('package_version'),
   $webapp_name                  = hiera('webapp_name'),
@@ -50,18 +51,18 @@ class openmrs::pihemr (
   require openmrs
 
   if $ubuntu_14 {
-    apt::source { 'pihemr':
+    apt::source { $package_name:
       ensure      => present,
-      location    => "${repo_url}/pihemr-repo",
+      location    => "${repo_url}/${package_name}-repo",
       release     => $package_release,
       repos       => '',
       include_src => false,
     }
   }
   else {
-    apt::source { 'pihemr':
+    apt::source { $package_name:
       ensure      => present,
-      location    => "[trusted=yes] ${repo_url}:81/pihemr-repo",
+      location    => "[trusted=yes] ${repo_url}:81/${package_name}-repo",
       release     => $package_release,
       repos       => '',
       include_src => false,
@@ -83,19 +84,19 @@ class openmrs::pihemr (
     target  => "/home/${tomcat}/.OpenMRS"
   }
 
-  # remove any hold on pihemr package (if it exists) (grep -c returns line count, so mimics true/false)
-  exec { 'pihemr_unhold':
-    command => 'apt-mark unhold pihemr',
+  # remove any hold on package (if it exists) (grep -c returns line count, so mimics true/false)
+  exec { 'package_unhold':
+    command => "apt-mark unhold ${package_name}",
     user => 'root',
-    onlyif => 'apt-mark showhold | grep -c pihemr',
-    require => Apt::Source['pihemr'],
+    onlyif => "apt-mark showhold | grep -c ${package_name}",
+    require => Apt::Source[$package_name],
   }
 
-  # prevent inadvertent upgrade when manually running "apt-get upgrade" (without specifying pihemr)
-  exec { 'pihemr_hold':
-    command => 'apt-mark hold pihemr',
+  # prevent inadvertent upgrade when manually running "apt-get upgrade" (without specifying package name)
+  exec { 'package_hold':
+    command => "apt-mark hold ${package_name}",
     user => 'root',
-    require => Package['pihemr']
+    require => Package[$package_name]
   }
 
   file { "${tomcat_home_dir}/.OpenMRS/feature_toggles.properties":
@@ -116,16 +117,16 @@ class openmrs::pihemr (
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
 
-  package { 'pihemr':
+  package { $package_name:
     ensure  => $pihemr_version,
     install_options => [ '--allow-change-held-packages' ],
-    require => [ Package[$tomcat], Service[$tomcat], Service['mysqld'], Exec['pihemr_unhold'],
+    require => [ Package[$tomcat], Service[$tomcat], Service['mysqld'], Exec['package_unhold'],
       File["${tomcat_home_dir}/.OpenMRS/${webapp_name}-runtime.properties"] ],
   }
 
   # Adds session-timeout in the session-config block. If there's no existing session-config block, we're in trouble.
   exec { "web_xml_session_timeout_sed":
-    require =>  Package['pihemr'],
+    require =>  Package[$package_name],
     command => "sed -i 's/<session-config>.*$/<session-config><session-timeout>${session_timeout}<\/session-timeout>/' ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml",
     onlyif => "test -f ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml"
   }
@@ -196,7 +197,7 @@ class openmrs::pihemr (
   exec { 'make mirebalais metadata module not mandatory - error running this command can be ignored when provisioning new server':
     command     => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'update ${openmrs_db}.global_property set property_value=\"false\" where property=\"mirebalaismetadata.mandatory\"'",
     user        => 'root',
-    require => Package['pihemr'],
+    require => Package[$package_name],
     notify => [ Exec['tomcat-restart'] ]
   }
 

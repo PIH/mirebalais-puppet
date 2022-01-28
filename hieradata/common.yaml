@@ -9,6 +9,7 @@ ntp_server_4: 3.ubuntu.pool.ntp.org
 pih_config: default
 site_domain: foo.org
 
+package_name: pihemr
 package_release: 'unstable/'
 package_version: '1.0.6193-1'
 

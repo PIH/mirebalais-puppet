@@ -6,7 +6,8 @@ define openmrs::liquibase_migrate(
   $openmrs_db_user = decrypt(hiera('openmrs_db_user')),
   $openmrs_db_password = decrypt(hiera('openmrs_db_password')),
   $webapp_name = hiera('webapp_name'),
-  $tomcat = hiera('tomcat')
+  $tomcat = hiera('tomcat'),
+  $package_name = hiera('package_name')
 ) {
 
   require openmrs
@@ -17,7 +18,7 @@ define openmrs::liquibase_migrate(
     command     => "java -Dliquibase.databaseChangeLogTableName=liquibasechangelog -Dliquibase.databaseChangeLogLockTableName=liquibasechangeloglock -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/var/lib/${tomcat}/webapps/${webapp_name}.war --url=jdbc:mysql://localhost:3306/${openmrs_db} --changeLogFile=${dataset} --username=${openmrs_db_user} --password='${openmrs_db_password}' update",
     user        => 'root',
     unless      => $unless,
-    require     => [ File['/usr/local/liquibase.jar'], Package['pihemr'] ],
+    require     => [ File['/usr/local/liquibase.jar'], Package[$package_name] ],
     refreshonly => $refreshonly,
     timeout => 0,
   }

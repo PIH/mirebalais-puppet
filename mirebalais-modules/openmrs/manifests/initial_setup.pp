@@ -2,19 +2,20 @@ class openmrs::initial_setup(
   $openmrs_db = hiera('openmrs_db'),
   $openmrs_db_user = decrypt(hiera('openmrs_db_user')),
   $openmrs_db_password = decrypt(hiera('openmrs_db_password')),
-  $tomcat = hiera('tomcat')
+  $tomcat = hiera('tomcat'),
+  $package_name = hiera('package_name')
 ) {
 
   mysql_database { $openmrs_db :
     ensure  => present,
-    require => [Service['mysqld'],  Package['pihemr']],
+    require => [Service['mysqld'],  Package[$package_name]],
     charset => 'utf8',
   } ->
 
   mysql_user { "${openmrs_db_user}@localhost":
     ensure        => present,
     password_hash => mysql_password($openmrs_db_password),
-    require => [ Service['mysqld'], Package['pihemr']],
+    require => [ Service['mysqld'], Package[$package_name]],
   } ->
 
   mysql_grant { "${openmrs_db_user}@localhost/${openmrs_db}":
@@ -22,7 +23,7 @@ class openmrs::initial_setup(
     privileges => ['ALL'],
     table => '*.*',
     user => "${openmrs_db_user}@localhost",
-    require => [ Service['mysqld'],  Package['pihemr']],
+    require => [ Service['mysqld'],  Package[$package_name]],
   } ->
 
   mysql_grant { "root@localhost/${openmrs_db}":
@@ -30,7 +31,7 @@ class openmrs::initial_setup(
     privileges => ['ALL'],
     table => '*.*',
     user => "root@localhost",
-    require => [Service['mysqld'],  Package['pihemr']],
+    require => [Service['mysqld'],  Package[$package_name]],
     notify  => Openmrs::Liquibase_migrate['set up base schema'];
   }
 
