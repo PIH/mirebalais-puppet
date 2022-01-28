@@ -34,3 +34,6 @@ radiology_contrast_studies: true
 ssl_use_letsencrypt: true
 
 java_memory_parameters: '-Xmx2048m -Xms512m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+
+smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
+smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]
