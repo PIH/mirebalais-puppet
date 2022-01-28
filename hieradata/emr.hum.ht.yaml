@@ -4,6 +4,8 @@ az_activitylog_backup_folder_path: activitylog/haiti/mirebalais
 
 package_release: 'stable/'
 
+repo_url: ENC[aADqxhfrKRpTug52rCcj1HuHQnWQYEH6LDbNN7Huvp4=]
+
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
 config_version: 1.30.0
