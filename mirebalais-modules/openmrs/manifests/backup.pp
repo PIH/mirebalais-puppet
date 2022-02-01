@@ -118,6 +118,7 @@ class openmrs::backup (
       user        => 'root',
       hour        => 19,
       minute      => 00,
+      weekday     => 5,
       require     => File['backupActivityLog.sh']
     }
   }

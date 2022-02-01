@@ -35,11 +35,3 @@
   missingok
   maxage 7
 }
-
-/home/tomcat7/.OpenMRS/activitylog/activity.log {
-  daily
-  rotate 7
-  notifempty
-  missingok
-  maxage 7
-}
