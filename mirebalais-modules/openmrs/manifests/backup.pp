@@ -14,6 +14,7 @@ class openmrs::backup (
     $backup_delete_older_than_x_days  = hiera('backup_delete_older_than_x_days'),
     $archive_hour                     = hiera('archive_hour'),
     $activitylog_enabled              = hiera('activitylog_enabled'),
+    $az_activitylog_backup_folder_path  = hiera('az_activitylog_backup_folder_path'),
   ){
 
   require openmrs
