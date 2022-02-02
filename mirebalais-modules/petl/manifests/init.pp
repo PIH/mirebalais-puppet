@@ -165,35 +165,19 @@ class petl (
     else {
       $petl_config_repo = "releases"
     }
-    if ('apzu-etl' in $petl_config_name) {
-      wget::fetch { 'download-azpu-petl-config-dir':
-      source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${petl_config_name}&r=${petl_config_repo}&c=distribution&p=zip&v=${petl_config_version}",
+    wget::fetch { 'download-petl-config-dir':
+      source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${
+        petl_config_name}&r=${petl_config_repo}&c=distribution&p=zip&v=${petl_config_version}",
       destination => "/tmp/petl-${petl_config_name}.zip",
       timeout     => 0,
       verbose     => false,
       redownload  => true,
-      }
-      exec { 'install-apzu-petl-config-dir':
-      command => "rm -rf /tmp/petl_configuration && unzip -o /tmp/petl-${petl_config_name}.zip -d /tmp/petl_configuration && rm -rf ${petl_home_dir}/${petl_config_dir} && mkdir -p ${petl_home_dir}/${petl_config_dir} && cp -r /tmp/petl_configuration/* ${petl_home_dir}/${petl_config_dir} && chown -R ${petl}:${petl} ${petl_home_dir}",
-      require => [ Wget::Fetch['download-azpu-petl-config-dir'], Package['unzip'], Service["$petl"]],
-      notify  => Exec['petl-restart']
-      }
     }
-    else {
-      wget::fetch { 'download-petl-config-dir':
-      source => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${petl_config_name}&r=${petl_config_repo}&p=zip&v=${petl_config_version}",
-      destination => "/tmp/petl-${petl_config_name}.zip",
-      timeout    => 0,
-      verbose    => false,
-      redownload => true,
-        }
-      exec { 'install-petl-config-dir':
-      command => "rm -rf /tmp/petl_configuration && unzip -o /tmp/petl-${petl_config_name}.zip -d /tmp/petl_configuration && rm -rf ${petl_home_dir}/${petl_config_dir} && mkdir -p ${petl_home_dir}/${petl_config_dir} && cp -r /tmp/petl_configuration/pih/petl/* ${petl_home_dir}/${petl_config_dir} && chown -R ${petl}:${petl} ${petl_home_dir}",
+    exec { 'install-petl-config-dir':
+      command => "rm -rf /tmp/petl_configuration && unzip -o /tmp/petl-${petl_config_name}.zip -d /tmp/petl_configuration && rm -rf ${petl_home_dir}/${petl_config_dir} && mkdir -p ${petl_home_dir}/${petl_config_dir} && cp -r /tmp/petl_configuration/* ${petl_home_dir}/${petl_config_dir} && chown -R ${petl}:${petl} ${petl_home_dir}",
       require => [ Wget::Fetch['download-petl-config-dir'], Package['unzip'], Service["$petl"]],
       notify  => Exec['petl-restart']
-      }
     }
-  }
 
     # just restart PETL every time the deploy runs
     exec { 'petl-restart':
@@ -227,5 +211,5 @@ class petl (
       require => File["/usr/local/sbin/petl-${petl_site}-checkErrors.sh"]
 
     }
-
+  }
 }

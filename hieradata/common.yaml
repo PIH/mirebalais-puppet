@@ -121,6 +121,10 @@ petl_sqlserver_databaseName: openmrs_extractions
 petl_sqlserver_user: foo
 petl_sqlserver_password: bar
 
+##  for when petl::mysql is enabled (used for malawi or for creating a petl database user)
++petl_warehouse_db: openmrs_reporting
++petl_mysql_user_ip: localhost
+
 # PETL Crons
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
 petl_check_errors_cron_hour: '*/6'
