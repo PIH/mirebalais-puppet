@@ -14,8 +14,8 @@ petl_site: "zl-test"
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
 
 # PETL config
-petl_config_name: openmrs-config-zl
-petl_config_version: "%{hiera('config_version')}"   ### note this version goes hand in hand with the config_version
+petl_config_name: zl-etl
+petl_config_version: 1.0.0-SNAPSHOT
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
