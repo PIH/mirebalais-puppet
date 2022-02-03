@@ -104,6 +104,8 @@ petl_java_home: "/usr/lib/jvm/java-8-openjdk-amd64"
 petl_java_opts: ""
 
 # PETL Config
+petl_config_name: zl-etl
+petl_config_version: 1.0.0-SNAPSHOT
 petl_config_dir: "configurations"
 
 # PETL MySQL
