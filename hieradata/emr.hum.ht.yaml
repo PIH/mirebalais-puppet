@@ -10,6 +10,8 @@ pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
 config_version: 1.30.0
 
+frontend_version: 1.0.0
+
 server_timezone: America/New_York
 
 remote_db_user: backups
@@ -65,7 +67,7 @@ insurance_collection: false
 
 ssl_use_letsencrypt: true
 
-java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+java_memory_parameters: '-Xmx16G -Xms2048m -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
 # disk cleanup
 archive_folder: "/home/tomcat7/backups/archive/"

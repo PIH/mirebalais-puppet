@@ -29,9 +29,9 @@ petl_version: "3.2.0-SNAPSHOT"
 petl_site: "humci"
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
 
-# PETL Config
-petl_config_name: openmrs-config-zl
-petl_config_version: "%{hiera('config_version')}"
+# PETL config
+petl_config_name: zl-etl
+petl_config_version: 1.0.0-SNAPSHOT
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
@@ -57,3 +57,4 @@ appointmentscheduling_confidential: true
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 
 activitylog_enabled: true
+terms_and_conditions_enabled: true
