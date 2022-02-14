@@ -1,7 +1,7 @@
 ---
 site_domain: ci.pih-emr.org
 
-pih_config: haiti,haiti-hsn,haiti-hsn-ci
+pih_config: haiti,haiti-hinche,haiti-hinche-ci
 config_name: openmrs-config-zl
 config_version: 1.31.0-SNAPSHOT
 
@@ -15,5 +15,8 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 hiv: true
 vct: true
 chw_mgmt_app: true
+
+commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
+commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
