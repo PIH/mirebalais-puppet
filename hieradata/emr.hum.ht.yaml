@@ -10,7 +10,7 @@ pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
 config_version: 1.31.0
 
-frontend_version: 1.0.0
+frontend_version: 1.1.0-SNAPSHOT
 
 server_timezone: America/New_York
 
