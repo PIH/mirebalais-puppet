@@ -8,9 +8,7 @@ repo_url: ENC[aADqxhfrKRpTug52rCcj1HuHQnWQYEH6LDbNN7Huvp4=]
 
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
-config_version: 1.30.0
-
-frontend_version: 1.0.0
+config_version: 1.31.0
 
 server_timezone: America/New_York
 

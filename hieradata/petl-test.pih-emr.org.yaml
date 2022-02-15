@@ -4,7 +4,7 @@ server_timezone: America/New_York
 
 # config files
 config_name: openmrs-config-zl
-config_version: 1.31.0-SNAPSHOT
+config_version: 1.32.0-SNAPSHOT
 
 
 # PETL
