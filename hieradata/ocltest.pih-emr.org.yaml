@@ -1,0 +1,13 @@
+---
+webapp_name: mirebalais
+site_domain: ocltest.pih-emr.org
+
+pih_config: mirebalais,mirebalais-humci
+config_name: openmrs-config-zl
+config_version: 1.31.0-SNAPSHOT
+
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+mysql_bind_address: 127.0.0.1
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+
+
