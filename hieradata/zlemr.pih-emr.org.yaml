@@ -6,6 +6,9 @@ pih_config: haiti,haiti-hiv
 config_name: openmrs-config-zl
 config_version: 1.33.0
 
+frontend_name: "openmrs-frontend-zl"
+frontend_version: 1.1.0
+
 openmrs_auto_update_database: true
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
