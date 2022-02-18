@@ -7,6 +7,7 @@ node default {
   }
 
   include wget
+  include unzip
   include petl::java
   include petl
   include petl::mysql
