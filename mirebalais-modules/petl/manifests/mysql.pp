@@ -11,6 +11,14 @@ class petl::mysql (
       ensure  => present,
       require => [Service['mysqld']],
       charset => 'utf8',
+    } ->
+
+    mysql_grant { "${petl_mysql_user}@${petl_mysql_user_ip}/${petl_warehouse_db}.*":
+      options    => ['GRANT'],
+      privileges => ['ALL'],
+      table => '*.*',
+      user => "${petl_mysql_user}@${petl_mysql_user_ip}",
+      require => [Service['mysqld']],
     }
   }
 
@@ -20,7 +28,7 @@ class petl::mysql (
     require => [Service['mysqld']],
   } ->
 
-  mysql_grant { "${petl_mysql_user}@${petl_mysql_user_ip}/${petl_warehouse_db}.*":
+  mysql_grant { "${petl_mysql_user}@${petl_mysql_user_ip}/${openmrs_db}.*":
     options    => ['GRANT'],
     privileges => ['ALL'],
     table => '*.*',
