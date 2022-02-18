@@ -39,7 +39,7 @@ petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
 
 # PETL Config
 petl_config_name: openmrs-config-zl
-petl_config_version: "%{hiera('config_version')}"
+petl_config_version: 1.0.0-SNAPSHOT
 
 # PETL MySQL
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
