@@ -50,7 +50,12 @@ petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 
 # PETL Crons
 
-
+# PETL warehouse DB
+# This is used in malawi
+# when running ./puppet-apply.sh petl on humci or petl-test
+# ensure petl_warehouse_db is set to ""
+petl_warehouse_db: ""
+petl_mysql_user_ip: localhost
 
 # feature toggle settings
 reportingui_ad_hoc_analysis: true

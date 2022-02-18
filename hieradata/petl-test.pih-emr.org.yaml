@@ -6,7 +6,6 @@ server_timezone: America/New_York
 config_name: openmrs-config-zl
 config_version: 1.34.0-SNAPSHOT
 
-
 # PETL
 petl: petl
 petl_version: "3.2.0-SNAPSHOT"
@@ -33,6 +32,13 @@ petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
 petl_cron_time: "0 30 20 ? * *"
 petl_hiv_cron_time: "0 30 20 ? * *"
+
+# PETL warehouse DB
+# This is used in malawi
+# when running ./puppet-apply.sh petl on humci or petl-test
+# ensure petl_warehouse_db is set to ""
+petl_warehouse_db: ""
+petl_mysql_user_ip: localhost
 
 mysql_server_id: 3
 mysql_master_ip:
