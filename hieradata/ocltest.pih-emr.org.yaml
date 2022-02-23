@@ -1,5 +1,5 @@
 ---
-webapp_name: mirebalais
+webapp_name: openmrs
 site_domain: ocltest.pih-emr.org
 
 pih_config: mirebalais,mirebalais-humci
