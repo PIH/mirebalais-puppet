@@ -3,7 +3,7 @@ package_release: 'stable/'
 site_domain: ces.pih-emr.org
 pih_config: mexico,mexico-production
 config_name: openmrs-config-ces
-config_version: 1.18.0
+config_version: 1.19.0
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
