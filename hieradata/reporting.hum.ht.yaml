@@ -54,7 +54,6 @@ petl_sqlserver_user: openmrs
 petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
 
 # PETL Crons
-petl_hiv_cron_time: "0 30 21 ? * *"
 petl_error_subject: HUM Reporting PETL errors
 
 ssl_use_letsencrypt: true

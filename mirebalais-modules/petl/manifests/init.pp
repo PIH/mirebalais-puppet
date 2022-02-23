@@ -24,7 +24,6 @@ class petl (
   $petl_config_name                = hiera('petl_config_name'),
   $petl_config_version             = hiera('petl_config_version'),
   $petl_cron_time                  = hiera('petl_cron_time'),
-  $petl_hiv_cron_time              = hiera('petl_hiv_cron_time'),
   $imb_etl                         = hiera('imb_etl'),
   $repo_url                        = decrypt(hiera('repo_url')),
 ) {

@@ -31,7 +31,6 @@ petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 # PETL Crons
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
 petl_cron_time: "0 30 20 ? * *"
-petl_hiv_cron_time: "0 30 20 ? * *"
 
 # PETL warehouse DB
 # This is used in malawi

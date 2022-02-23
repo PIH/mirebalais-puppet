@@ -5,13 +5,10 @@ petl:
   startup:
     jobs:
       - "create-partitions.yml"
-      - "refresh-humci-data.yml"
-      - "refresh-hiv-data.yml"
+      - "refresh-humci-warehouse.yml"
 
 executeCron:
-  refreshOpenmrsData: ""
-  refreshHivData: "<%= @petl_cron_time -%>"
-  refreshHumciData: "<%= @petl_cron_time -%>"
+  refreshOpenmrsData: "<%= @petl_cron_time -%>"
 
 server:
   port: "<%= @petl_server_port -%>"
@@ -58,12 +55,6 @@ datasources:
       options: "${datasources.mysql.options}"
 
   warehouse:
-       host: "<%= @petl_sqlserver_host -%>"
-       port: "<%= @petl_sqlserver_port -%>"
-       databaseName: "<%= @petl_sqlserver_databaseName -%>"
-       user: "<%= @petl_sqlserver_user -%>"
-       password: "<%= @petl_sqlserver_password -%>"
-  warehouse-hiv:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
        databaseName: "<%= @petl_sqlserver_databaseName -%>"
