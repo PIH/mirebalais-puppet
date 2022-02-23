@@ -8,7 +8,8 @@ petl:
       - "refresh-humci-warehouse.yml"
 
 executeCron:
-  refreshOpenmrsData: "<%= @petl_cron_time -%>"
+  refreshZlWarehouse: ""
+  refreshHumciWarehouse: "<%= @petl_cron_time -%>"
 
 server:
   port: "<%= @petl_server_port -%>"
