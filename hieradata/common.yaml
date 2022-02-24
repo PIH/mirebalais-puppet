@@ -56,6 +56,7 @@ sysadmin_email: emrsysadmin@pih.org
 
 smtp_username: ENC[c7aCd9ntirLMUMSHySbdI42b3Uxdu45IeP1k1zMWtXw=:t8Ku94J6xhsGLIXpnbQhpg==:WDUxWld2d05na3lRQ0dJb2ZXdWhYdz09]
 smtp_userpassword: ENC[S6/9UffAD7ivo4VXNZEirw==:NBkEbRNVaqIJjI5uJsEmFg==:ZjNYZ0hsREdsVGpsZm1WTXRTbTIvdz09]
+openmrs_mail_user: ENC[M8A6hilrpxIxWt/a0PZQZYm92fbRlvmpwB7HKj7KecU=]
 
 mirth_db: mirthdb
 mirth_db_user: mirth
@@ -171,7 +172,7 @@ apache_cron_restart_min: 03
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
-java_memory_parameters: '-Xmx2048m -Xms1024m'
+java_memory_parameters: '-Xmx4096m -Xms1024m'
 #-XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC
 
 java_debug_parameters: ''

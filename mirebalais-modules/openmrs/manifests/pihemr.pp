@@ -46,7 +46,8 @@ class openmrs::pihemr (
 
   # e-mail config
   $smtp_username = decrypt(hiera('smtp_username')),
-  $smtp_userpassword = decrypt(hiera('smtp_userpassword'))
+  $smtp_userpassword = decrypt(hiera('smtp_userpassword')),
+  $openmrs_mail_user = decrypt(hiera('openmrs_mail_user')),
 
   # os version
   $ubuntu_14 = hiera('ubuntu_14'),
