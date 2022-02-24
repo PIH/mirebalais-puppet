@@ -44,6 +44,10 @@ class openmrs::pihemr (
   $lacolline_username           = decrypt(hiera('lacolline_username')),
   $lacolline_password           = decrypt(hiera('lacolline_password')),
 
+  # e-mail config
+  $smtp_username = decrypt(hiera('smtp_username')),
+  $smtp_userpassword = decrypt(hiera('smtp_userpassword'))
+
   # os version
   $ubuntu_14 = hiera('ubuntu_14'),
 
@@ -114,7 +118,16 @@ class openmrs::pihemr (
     content => template('openmrs/openmrs-runtime.properties.erb'),
     owner   => $tomcat,
     group   => $tomcat,
-    mode    => '0644',
+    mode    => '0600',
+    require => File["${tomcat_home_dir}/.OpenMRS"]
+  }
+
+  file { "${tomcat_home_dir}/.OpenMRS/mail.properties":
+    ensure  => present,
+    content => template('openmrs/mail.properties.erb'),
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0600',
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
 
@@ -192,14 +205,6 @@ class openmrs::pihemr (
       command => "ln -s ../configuration/frontend /home/${tomcat}/.OpenMRS/frontend/site",
       require => [ Exec['install-openmrs-frontend'], Exec['install-openmrs-configuration'] ]
     }
-  }
-
-  # hack to let us remote the mirebalais metadata module from the build; can be removed after it has been removed from all servers
-  exec { 'make mirebalais metadata module not mandatory - error running this command can be ignored when provisioning new server':
-    command     => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'update ${openmrs_db}.global_property set property_value=\"false\" where property=\"mirebalaismetadata.mandatory\"'",
-    user        => 'root',
-    require => Package[$package_name],
-    notify => [ Exec['tomcat-restart'] ]
   }
 
   # hack to change webapp name in the frontend application after it has already been built into the deb
