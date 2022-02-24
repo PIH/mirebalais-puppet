@@ -62,7 +62,6 @@ class openmrs::initial_setup(
     command     => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'update ${openmrs_db}.global_property set property_value=\"false\" where property=\"mirebalaismetadata.mandatory\"'",
     user        => 'root',
     require => Package[$package_name],
-    notify => [ Exec['tomcat-restart'] ]
   }
 
   exec { 'tomcat-start':
