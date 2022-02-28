@@ -123,15 +123,6 @@ class openmrs::pihemr (
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
 
-  file { "${tomcat_home_dir}/.OpenMRS/mail.properties":
-    ensure  => present,
-    content => template('openmrs/mail.properties.erb'),
-    owner   => $tomcat,
-    group   => $tomcat,
-    mode    => '0600',
-    require => File["${tomcat_home_dir}/.OpenMRS"]
-  }
-
   package { $package_name:
     ensure  => $pihemr_version,
     install_options => [ '--allow-change-held-packages' ],
