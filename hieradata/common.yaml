@@ -125,8 +125,8 @@ petl_sqlserver_user: foo
 petl_sqlserver_password: bar
 
 ##  for when petl::mysql is enabled (used for malawi or for creating a petl database user)
-+petl_warehouse_db: openmrs_reporting
-+petl_mysql_user_ip: localhost
+petl_warehouse_db: openmrs_reporting
+petl_mysql_user_ip: localhost
 
 # PETL Crons
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
@@ -172,7 +172,7 @@ apache_cron_restart_min: 03
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
-java_memory_parameters: '-Xmx4096m -Xms1024m'
+java_memory_parameters: '-Xmx2048m -Xms2048m'
 #-XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC
 
 java_debug_parameters: ''
