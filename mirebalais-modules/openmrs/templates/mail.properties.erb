@@ -1,0 +1,12 @@
+mail.debug=false
+mail.default_content_type=text/html
+mail.from=<%= @smtp_username %>
+mail.password=<%= @smtp_userpassword %>
+mail.smtp.auth=true
+mail.smtp.host=smtp.gmail.com
+mail.smtp.port=465
+mail.smtp.starttls.enable=true
+mail.smtp.ssl.protocols=TLSv1.2
+mail.transport.protocol=smtp
+mail.user=<%= @openmrs_mail_user %>
+mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory

@@ -62,6 +62,7 @@ reportingui_ad_hoc_analysis: true
 radiology_contrast_studies: true
 appointmentscheduling_confidential: true
 
+java_memory_parameters: '-Xmx4096m -Xms4096m'
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 
 activitylog_enabled: true
