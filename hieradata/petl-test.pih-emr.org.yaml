@@ -2,19 +2,15 @@
 site_domain: petl-test.pih-emr.org
 server_timezone: America/New_York
 
-# config files
-config_name: openmrs-config-zl
-config_version: 1.34.0-SNAPSHOT
-
 # PETL
 petl: petl
 petl_version: "3.2.0-SNAPSHOT"
-petl_site: "zl-test"
+petl_site: zl-test, ces-test
 petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
 
 # PETL config
-petl_config_name: zl-etl
-petl_config_version: 1.0.0-SNAPSHOT
+petl_config_name: zl-etl, openmrs-config-ces
+petl_config_version: 1.0.0-SNAPSHOT, 1.20.0-SNAPSHOT
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
