@@ -1,7 +1,7 @@
 petl:
-  homeDir: "<%= @petl_home_dir -%>"
-  datasourceDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/datasources"
-  jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
+  homeDir: "/opt/ces-petl-test"
+  datasourceDir: "/opt/ces-petl-test/configurations/datasources"
+  jobDir: "/opt/ces-petl-test/configurations/jobs"
   startup:
     jobs:
       - "create-partitions.yml"
@@ -10,7 +10,7 @@ executeCron:
   refreshOpenmrsData: "<%= @petl_cron_time -%>"
 
 server:
-  port: "<%= @petl_server_port -%>"
+  port: "9110"
 
 logging:
   level:

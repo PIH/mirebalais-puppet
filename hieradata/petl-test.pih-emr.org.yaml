@@ -3,14 +3,15 @@ site_domain: petl-test.pih-emr.org
 server_timezone: America/New_York
 
 # PETL
-petl: petl
+petl: petl,petl-ces
 petl_version: "3.2.0-SNAPSHOT"
-petl_site: zl-test, ces-test
-petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
+petl_site: zl-test,ces-test
+petl_home_dir: /opt/zl-test-petl,/opt/ces-test-petl
 
 # PETL config
-petl_config_name: zl-etl, openmrs-config-ces
-petl_config_version: 1.0.0-SNAPSHOT, 1.20.0-SNAPSHOT
+petl_config_dir: "configurations"
+petl_config_name: zl-etl,ces-etl
+petl_config_version: 1.0.0-SNAPSHOT,1.0.0-SNAPSHOT
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
@@ -45,6 +46,7 @@ mysql_net_write_timeout: 1800
 mysql_innodb_buffer_pool_size: 8G
 mysql_innodb_buffer_pool_instances: 8
 
+openmrs_db: openmrs
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 replication_db_password: ENC[92IfbImaUmA3wqYSG5kWWwexEU8HqCrqQzSXAMKRPz0=]
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
