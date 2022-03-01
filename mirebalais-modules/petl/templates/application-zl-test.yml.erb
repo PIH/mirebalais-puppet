@@ -1,7 +1,7 @@
 petl:
-  homeDir: "<%= @petl_home_dir -%>"
-  datasourceDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/datasources"
-  jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
+  homeDir: "/opt/zl-test-petl"
+  datasourceDir: "/opt/zl-test-petl/configurations/datasources"
+  jobDir: "/opt/zl-test-petl/configurations/jobs"
   startup:
     jobs:
       - "create-partitions.yml"
@@ -92,6 +92,6 @@ datasources:
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
-       databaseName: "<%= @petl_sqlserver_databaseName -%>"
+       databaseName: "openmrs_haiti_warehouse"
        user: "<%= @petl_sqlserver_user -%>"
        password: "<%= @petl_sqlserver_password -%>"
