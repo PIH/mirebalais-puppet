@@ -31,9 +31,10 @@ class petl (
   $array_list = [0, 1]
 
   each($array_list) |$index| {
-    notice($index)
+    ## if the value is true, then its an empty string do nothing
+    ## This is for supporting yaml files with array lists and those without array
+    unless empty($petl_site[$index]) == true {
 
-    if (petl_site[$index] != undef) {
       # Setup User, and Home Directory for PETL installation
       user { "${petl[$index]}":
         ensure => "present",
@@ -168,7 +169,7 @@ class petl (
         redownload  => true,
       }
       exec { "install-petl-config-dir for ${petl_site[$index]}":
-        command => "rm -rf /tmp/${petl_site[$index]}_configuration && unzip -o /tmp/petl-${petl_config_name[$index]}.zip -d /tmp/${petl_site[$index]}_configuration && rm -rf ${petl_home_dir[$index]}/${petl_config_dir} && mkdir -p ${petl_home_dir[$index]}/${petl_config_dir} && cp -r /tmp/${petl_site[$index]}_configuration/* ${petl_home_dir[$index]}/${petl_config_dir} && chown -R ${petl[$index]}:${petl[$index]} ${petl_home_dir[$index]}",
+        command => "rm -rf /tmp/${petl_site[$index]}* && rm -rf /tmp/${petl_site[$index]}_configuration && unzip -o /tmp/petl-${petl_config_name[$index]}.zip -d /tmp/${petl_site[$index]}_configuration && rm -rf ${petl_home_dir[$index]}/${petl_config_dir} && mkdir -p ${petl_home_dir[$index]}/${petl_config_dir} && cp -r /tmp/${petl_site[$index]}_configuration/* ${petl_home_dir[$index]}/${petl_config_dir} && chown -R ${petl[$index]}:${petl[$index]} ${petl_home_dir[$index]}",
         require => [ Wget::Fetch["download-petl-config-dir for ${petl_site[$index]}"], Package['unzip'], Service["${petl[$index]}"]],
         notify  => Exec["petl-restart for ${petl_site[$index]}"]
       }
