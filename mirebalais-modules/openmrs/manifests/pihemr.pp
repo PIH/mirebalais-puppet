@@ -22,9 +22,10 @@ class openmrs::pihemr (
   $session_timeout              = hiera('session_timeout'),
 
   # PIH EMR config
-  $config_name    = hiera('config_name'),
-  $config_version = hiera('config_version'),
-  $repo_url       = decrypt(hiera('repo_url')),
+  $config_name     = hiera('config_name'),
+  $config_version  = hiera('config_version'),
+  $repo_url        = decrypt(hiera('repo_url')),
+  $ocl_package_url = hiera('ocl_package_url'),
 
   # Frontend
   $frontend_name  = hiera('frontend_name'),
@@ -163,6 +164,29 @@ class openmrs::pihemr (
       notify => [ Exec['tomcat-restart'] ]
     }
 
+    # TODO This can be removed once we fully migrate to OCL.  This exists to allow testing OCL package installation as a replacement for MDS
+    if ($ocl_package_url != "") {
+
+        exec{'remove-existing-ocl-packages':
+          command => "rm -rf ${tomcat_home_dir}/.OpenMRS/configuration/ocl/*",
+          require => [ Exec['install-openmrs-configuration'], File["${tomcat_home_dir}/.OpenMRS"] ],
+          notify => [ Exec['tomcat-restart'] ]
+        }
+
+        wget::fetch { 'download-ocl-package-zip':
+          source      => "${ocl_package_url}",
+          destination => "{tomcat_home_dir}/.OpenMRS/configuration/ocl/",
+          timeout     => 0,
+          verbose     => false,
+          redownload  => true
+        }
+
+        exec{'remove-mds-concept-packages':
+          command => "rm -rf ${tomcat_home_dir}/.OpenMRS/configuration/pih/concepts/*",
+          require => [ Exec['install-openmrs-configuration'], File["${tomcat_home_dir}/.OpenMRS"] ],
+          notify => [ Exec['tomcat-restart'] ]
+        }
+    }
   }
 
   if ($frontend_name != "") {
