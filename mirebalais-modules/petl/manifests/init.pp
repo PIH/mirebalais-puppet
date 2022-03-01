@@ -116,7 +116,7 @@ class petl (
 
       file { "${petl_home_dir[$index]}/bin/petl.conf":
         ensure  => present,
-        content => template("petl/petl.conf.erb"),
+        content => template("petl/${petl_site[$index]}.conf.erb"),
         owner   => "${petl[$index]}",
         group   => "${petl[$index]}",
         mode    => "0755",
