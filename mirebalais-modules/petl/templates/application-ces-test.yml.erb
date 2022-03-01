@@ -21,7 +21,7 @@ spring:
   datasource:
     platform: "mssql"
     driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=<%= @petl_sqlserver_databaseName -%>"
+    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName==openmrs_ces_warehouse"
     username: "<%= @petl_sqlserver_user -%>"
     password: "<%= @petl_sqlserver_password -%>"
   jpa:
