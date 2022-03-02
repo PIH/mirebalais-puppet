@@ -183,7 +183,7 @@ class openmrs::pihemr (
 
         wget::fetch { 'download-ocl-package-zip':
           source      => "${ocl_package_url}",
-          destination => "{tomcat_home_dir}/.OpenMRS/configuration/ocl/PIH.zip",
+          destination => "${tomcat_home_dir}/.OpenMRS/configuration/ocl/",
           timeout     => 0,
           verbose     => false,
           redownload  => true,
