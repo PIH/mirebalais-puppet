@@ -58,6 +58,6 @@ datasources:
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
-       databaseName: "<%= @petl_sqlserver_databaseName -%>"
-       user: "openmrs_humci"
+       databaseName: "openmrs_humci"
+       user: "<%= @petl_sqlserver_user -%>"
        password: "<%= @petl_sqlserver_password -%>"

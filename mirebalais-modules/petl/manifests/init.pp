@@ -23,14 +23,19 @@ class petl (
   $petl_config_name                = split(hiera('petl_config_name'), ','),
   $petl_config_version             = split(hiera('petl_config_version'), ','),
   $petl_cron_time                  = hiera('petl_cron_time'),
-  $petl_array_list                 = hiera('petl_array_list'),
   $petl_startup_order              = split(hiera('petl_startup_order'), ','),
   $sysadmin_email                  = hiera("sysadmin_email"),
   $repo_url                        = decrypt(hiera('repo_url')),
 ) {
 
-  # iterate within the petl list
-  each($petl) |$index| {
+  # iterate within the petl list, note this number increases if the element increase
+  # usage [0,1] supports 2 elements, for 3 elements use [0,1,2]
+  $array_list = [0, 1]
+
+  each($array_list) |$index| {
+    ## if the value is true, then its an empty string do nothing
+    ## This is for supporting yaml files with array lists and those without array
+    unless empty($petl_site[$index]) == true {
 
       # Setup User, and Home Directory for PETL installation
       user { "${petl[$index]}":
@@ -83,7 +88,8 @@ class petl (
       }
 
       wget::fetch { "download-petl-jar for ${petl_site[$index]}":
-        source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih&a=petl&r=${petl_repo}&p=jar&v=${petl_version}",
+        source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih&a=petl&r=${petl_repo
+          }&p=jar&v=${petl_version}",
         destination => "${petl_home_dir[$index]}/bin/petl-${petl_version}.jar",
         timeout     => 0,
         verbose     => false,
@@ -107,7 +113,8 @@ class petl (
       }
 
       # remove any old versions of PETL
-      exec { "rm -f $(find ${petl_home_dir[$index]}/bin -maxdepth 1 -type f -name 'petl-*.jar' ! -name 'petl-${petl_version}.jar')":
+      exec { "rm -f $(find ${petl_home_dir[$index]}/bin -maxdepth 1 -type f -name 'petl-*.jar' ! -name 'petl-${
+        petl_version}.jar')":
         require => File["${petl_home_dir[$index]}/bin/petl.jar"]
       }
 
@@ -159,15 +166,21 @@ class petl (
         $petl_config_repo = "releases"
       }
       wget::fetch { "download-petl-config-dir for ${petl_site[$index]}":
-        source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${petl_config_name[$index]}&r=${petl_config_repo}&c=distribution&p=zip&v=${petl_config_version[$index]}",
+        source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${
+          petl_config_name[$index]}&r=${petl_config_repo}&c=distribution&p=zip&v=${petl_config_version[$index]}",
         destination => "/tmp/petl-${petl_config_name[$index]}.zip",
         timeout     => 0,
         verbose     => false,
         redownload  => true,
       }
       exec { "install-petl-config-dir for ${petl_site[$index]}":
-        command => "rm -rf /tmp/${petl_site[$index]}* && rm -rf /tmp/${petl_site[$index]}_configuration && unzip -o /tmp/petl-${petl_config_name[$index]}.zip -d /tmp/${petl_site[$index]}_configuration && rm -rf ${petl_home_dir[$index]}/${petl_config_dir} && mkdir -p ${petl_home_dir[$index]}/${petl_config_dir} && cp -r /tmp/${petl_site[$index]}_configuration/* ${petl_home_dir[$index]}/${petl_config_dir} && chown -R ${petl[$index]}:${petl[$index]} ${petl_home_dir[$index]}",
-        require => [ Wget::Fetch["download-petl-config-dir for ${petl_site[$index]}"], Package['unzip'], Service["${petl[$index]}"]],
+        command => "rm -rf /tmp/${petl_site[$index]}* && rm -rf /tmp/${petl_site[$index]}
+          _configuration && unzip -o /tmp/petl-${petl_config_name[$index]}.zip -d /tmp/${petl_site[$index]}
+          _configuration && rm -rf ${petl_home_dir[$index]}/${petl_config_dir} && mkdir -p ${petl_home_dir[$index]}/${
+          petl_config_dir} && cp -r /tmp/${petl_site[$index]}_configuration/* ${petl_home_dir[$index]}/${petl_config_dir
+          } && chown -R ${petl[$index]}:${petl[$index]} ${petl_home_dir[$index]}",
+        require => [ Wget::Fetch["download-petl-config-dir for ${petl_site[$index]}"], Package['unzip'], Service["${petl
+          [$index]}"]],
         notify  => Exec["petl-restart for ${petl_site[$index]}"]
       }
 
@@ -206,4 +219,5 @@ class petl (
         require => File["/usr/local/sbin/petl-${petl_site[$index]}-checkErrors.sh"]
       } */
     }
+  }
 }
