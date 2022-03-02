@@ -167,18 +167,17 @@ class openmrs::pihemr (
     # TODO This can be removed once we fully migrate to OCL.  This exists to allow testing OCL package installation as a replacement for MDS
     if ($ocl_package_url != "") {
 
-        exec{'remove-existing-ocl-packages':
-          command => "rm -rf ${tomcat_home_dir}/.OpenMRS/configuration/ocl/*",
-          require => [ Exec['install-openmrs-configuration'], File["${tomcat_home_dir}/.OpenMRS"] ],
-          notify => [ Exec['tomcat-restart'] ]
-        }
-
         file { "${tomcat_home_dir}/.OpenMRS/configuration/ocl/":
-            ensure  => present,
+            ensure  => directory,
             owner   => $tomcat,
             group   => $tomcat,
             mode    => '0644',
-            require => File["${tomcat_home_dir}/.OpenMRS"]
+            require => Exec['install-openmrs-configuration']
+        }
+
+        exec{'remove-existing-ocl-packages':
+          command => "rm -rf ${tomcat_home_dir}/.OpenMRS/configuration/ocl/*",
+          require => File["${tomcat_home_dir}/.OpenMRS/configuration/ocl/"]
         }
 
         wget::fetch { 'download-ocl-package-zip':
@@ -187,12 +186,12 @@ class openmrs::pihemr (
           timeout     => 0,
           verbose     => false,
           redownload  => true,
-          require     => File["${tomcat_home_dir}/.OpenMRS/configuration/ocl/"]
+          require     => Exec["remove-existing-ocl-packages"]
         }
 
         exec{'remove-mds-concept-packages':
           command => "rm -rf ${tomcat_home_dir}/.OpenMRS/configuration/pih/concepts/*",
-          require => [ Exec['install-openmrs-configuration'], File["${tomcat_home_dir}/.OpenMRS"] ],
+          require => Wget::fetch ["download-ocl-package-zip"],
           notify => [ Exec['tomcat-restart'] ]
         }
     }
