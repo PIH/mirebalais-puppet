@@ -20,20 +20,17 @@ class petl (
   $petl_sqlserver_password         = decrypt(hiera("petl_sqlserver_password")),
   $petl_check_errors_cron_hour     = hiera("petl_check_errors_cron_hour"),
   $petl_error_subject              = hiera("petl_error_subject"),
-  $sysadmin_email                  = hiera("sysadmin_email"),
   $petl_config_name                = split(hiera('petl_config_name'), ','),
   $petl_config_version             = split(hiera('petl_config_version'), ','),
   $petl_cron_time                  = hiera('petl_cron_time'),
-  $imb_etl                         = hiera('imb_etl'),
+  $petl_array_list                 = hiera('petl_array_list'),
+  $petl_startup_order              = split(hiera('petl_startup_order'), ','),
+  $sysadmin_email                  = hiera("sysadmin_email"),
   $repo_url                        = decrypt(hiera('repo_url')),
 ) {
 
-  $array_list = [0, 1]
-
-  each($array_list) |$index| {
-    ## if the value is true, then its an empty string do nothing
-    ## This is for supporting yaml files with array lists and those without array
-    unless empty($petl_site[$index]) == true {
+  # iterate within the list
+  each($petl_array_list) |$index| {
 
       # Setup User, and Home Directory for PETL installation
       user { "${petl[$index]}":
@@ -116,7 +113,7 @@ class petl (
 
       file { "${petl_home_dir[$index]}/bin/petl.conf":
         ensure  => present,
-        content => template("petl/${petl_site[$index]}.conf.erb"),
+        content => template("petl/petl.conf.erb"),
         owner   => "${petl[$index]}",
         group   => "${petl[$index]}",
         mode    => "0755",
@@ -143,7 +140,7 @@ class petl (
       }
 
       exec { "petl-startup-enable for ${petl_site[$index]}":
-        command => "/usr/sbin/update-rc.d -f ${petl[$index]} defaults 81",
+        command => "/usr/sbin/update-rc.d -f ${petl[$index]} defaults ${petl_startup_order[$index]}",
         user    => 'root',
         require => File["/etc/init.d/${petl[$index]}"]
       }
@@ -209,5 +206,4 @@ class petl (
         require => File["/usr/local/sbin/petl-${petl_site[$index]}-checkErrors.sh"]
       } */
     }
-  }
 }

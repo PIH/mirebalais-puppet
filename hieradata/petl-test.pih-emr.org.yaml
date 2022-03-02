@@ -8,6 +8,10 @@ petl_version: "3.2.0-SNAPSHOT"
 petl_site: zl-test,ces-test
 petl_home_dir: /opt/zl-test-petl,/opt/ces-test-petl
 
+#PETl Array
+petl_array_list: [0, 1]
+petl_startup_order: 81,83
+
 # PETL config
 petl_config_dir: "configurations"
 petl_config_name: zl-etl,ces-etl
