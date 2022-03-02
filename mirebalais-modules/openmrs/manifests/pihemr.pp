@@ -173,12 +173,21 @@ class openmrs::pihemr (
           notify => [ Exec['tomcat-restart'] ]
         }
 
+        file { "${tomcat_home_dir}/.OpenMRS/configuration/ocl/":
+            ensure  => present,
+            owner   => $tomcat,
+            group   => $tomcat,
+            mode    => '0644',
+            require => File["${tomcat_home_dir}/.OpenMRS"]
+        }
+
         wget::fetch { 'download-ocl-package-zip':
           source      => "${ocl_package_url}",
           destination => "{tomcat_home_dir}/.OpenMRS/configuration/ocl/",
           timeout     => 0,
           verbose     => false,
-          redownload  => true
+          redownload  => true,
+          require     => File["${tomcat_home_dir}/.OpenMRS/configuration/ocl/"]
         }
 
         exec{'remove-mds-concept-packages':
