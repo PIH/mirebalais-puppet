@@ -191,7 +191,7 @@ class openmrs::pihemr (
 
         exec{'remove-mds-concept-packages':
           command => "rm -rf ${tomcat_home_dir}/.OpenMRS/configuration/pih/concepts/*",
-          require => Wget::fetch ["download-ocl-package-zip"],
+          require => Wget::Fetch["download-ocl-package-zip"],
           notify => [ Exec['tomcat-restart'] ]
         }
     }
