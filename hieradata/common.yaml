@@ -185,6 +185,10 @@ az_activitylog_backup_folder_path: ""
 # Enforce acceptance of terms and conditions for usage
 terms_and_conditions_enabled: false
 
+# Indicates if a concept package should be downloaded from OCL rather than installing concepts from MDS
+# This should be empty for all servers except ocltest
+ocl_package_url: ""
+
 # atomfeed
 openmrs_modules_dir: /home/tomcat7/.OpenMRS/modules
 atomfeed_version: 1.0.13-SNAPSHOT
