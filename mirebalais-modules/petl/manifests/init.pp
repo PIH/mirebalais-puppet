@@ -29,8 +29,8 @@ class petl (
   $repo_url                        = decrypt(hiera('repo_url')),
 ) {
 
-  # iterate within the list
-  each($petl_array_list) |$index| {
+  # iterate within the petl list
+  each($petl) |$index| {
 
       # Setup User, and Home Directory for PETL installation
       user { "${petl[$index]}":
