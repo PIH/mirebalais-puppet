@@ -23,7 +23,6 @@ class petl (
   $petl_config_name                = split(hiera('petl_config_name'), ','),
   $petl_config_version             = split(hiera('petl_config_version'), ','),
   $petl_cron_time                  = hiera('petl_cron_time'),
-  $petl_startup_order              = split(hiera('petl_startup_order'), ','),
   $sysadmin_email                  = hiera("sysadmin_email"),
   $repo_url                        = decrypt(hiera('repo_url')),
 ) {
@@ -146,18 +145,34 @@ class petl (
         require => [ File["${petl_home_dir[$index]}/bin/petl.conf"], File["${petl_home_dir[$index]}/bin/petl.jar"] ]
       }
 
-      exec { "petl-startup-enable for ${petl_site[$index]}":
-        command => "/usr/sbin/update-rc.d -f ${petl[$index]} defaults ${petl_startup_order[$index]}",
-        user    => 'root',
-        require => File["/etc/init.d/${petl[$index]}"]
+      ## two petl instances on the same server should have different startup order
+      if ('petl-ces' == $petl_site[$index]) {
+        exec { "petl-startup-enable for ${petl_site[$index]}":
+          command => "/usr/sbin/update-rc.d -f ${petl[$index]} defaults 83",
+          user    => 'root',
+          require => File["/etc/init.d/${petl[$index]}"]
+        }
+        # make sure PETL is installed, but stopped... we will start it after we install the config
+        service { "${petl[$index]}":
+          ensure  => stopped,
+          enable  => true,
+          require => Exec["petl-startup-enable for ${petl_site[$index]}"]
+        }
+      } else {
+        exec { "petl-startup-enable for site ${petl_site[$index]}":
+          command => "/usr/sbin/update-rc.d -f ${petl[$index]} defaults 81",
+          user    => 'root',
+          require => File["/etc/init.d/${petl[$index]}"]
+        }
+        # make sure PETL is installed, but stopped... we will start it after we install the config
+        service { "${petl[$index]}":
+          ensure  => stopped,
+          enable  => true,
+          require => Exec["petl-startup-enable for site ${petl_site[$index]}"]
+        }
       }
 
-      # make sure PETL is installed, but stopped... we will start it after we install the config
-      service { "${petl[$index]}":
-        ensure  => stopped,
-        enable  => true,
-        require => Exec["petl-startup-enable for ${petl_site[$index]}"]
-      }
+
 
       if ('SNAPSHOT' in $petl_config_version[$index]) {
         $petl_config_repo = "snapshots"
@@ -174,13 +189,8 @@ class petl (
         redownload  => true,
       }
       exec { "install-petl-config-dir for ${petl_site[$index]}":
-        command => "rm -rf /tmp/${petl_site[$index]}* && rm -rf /tmp/${petl_site[$index]}
-          _configuration && unzip -o /tmp/petl-${petl_config_name[$index]}.zip -d /tmp/${petl_site[$index]}
-          _configuration && rm -rf ${petl_home_dir[$index]}/${petl_config_dir} && mkdir -p ${petl_home_dir[$index]}/${
-          petl_config_dir} && cp -r /tmp/${petl_site[$index]}_configuration/* ${petl_home_dir[$index]}/${petl_config_dir
-          } && chown -R ${petl[$index]}:${petl[$index]} ${petl_home_dir[$index]}",
-        require => [ Wget::Fetch["download-petl-config-dir for ${petl_site[$index]}"], Package['unzip'], Service["${petl
-          [$index]}"]],
+        command => "rm -rf /tmp/${petl_site[$index]}* && rm -rf /tmp/${petl_site[$index]}_configuration && unzip -o /tmp/petl-${petl_config_name[$index]}.zip -d /tmp/${petl_site[$index]}_configuration && rm -rf ${petl_home_dir[$index]}/${petl_config_dir} && mkdir -p ${petl_home_dir[$index]}/${petl_config_dir} && cp -r /tmp/${petl_site[$index]}_configuration/* ${petl_home_dir[$index]}/${petl_config_dir} && chown -R ${petl[$index]}:${petl[$index]} ${petl_home_dir[$index]}",
+        require => [ Wget::Fetch["download-petl-config-dir for ${petl_site[$index]}"], Package['unzip'], Service["${petl[$index]}"]],
         notify  => Exec["petl-restart for ${petl_site[$index]}"]
       }
 

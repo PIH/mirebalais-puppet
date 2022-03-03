@@ -35,7 +35,6 @@ petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
 # PETL config
 petl_config_name: zl-etl
 petl_config_version: 1.0.0-SNAPSHOT
-petl_startup_order: '81' # note that this/these value(s) should be strings thus put them in ''
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
