@@ -1,4 +1,4 @@
-/var/log/<%= @petl %>.log  {
+/var/log/petl-ces.log  {
   daily
   rotate 7
   size 10M
@@ -11,7 +11,7 @@
   endscript
 }
 
-/root/<%= @petl %>/logs/*.log {
+/root/petl-ces/logs/*.log {
   daily
   rotate 7
   notifempty
