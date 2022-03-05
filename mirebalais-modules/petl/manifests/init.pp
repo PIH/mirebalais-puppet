@@ -87,16 +87,14 @@ class petl (
       }
 
       wget::fetch { "download-petl-jar for ${petl_site[$index]}":
-        source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih&a=petl&r=${petl_repo
-          }&p=jar&v=${petl_version}",
-        destination => "${petl_home_dir[$index]}/bin/petl-${petl_version}.jar",
+        source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih&a=petl&r=${petl_repo}&p=jar&v=${petl_version}",
+        destination => "${petl_home_dir[$index]}/bin/${petl[$index]}-${petl_version}.jar",
         timeout     => 0,
         verbose     => false,
         redownload  => ('SNAPSHOT' in $petl_version),
-        require     => File["${petl_home_dir[$index]}/bin"]
       }
 
-      file { "${petl_home_dir[$index]}/bin/petl-${petl_version}.jar":
+      file { "${petl_home_dir[$index]}/bin/${petl[$index]}-${petl_version}.jar":
         ensure  => present,
         owner   => "${petl[$index]}",
         group   => "${petl[$index]}",
@@ -104,17 +102,11 @@ class petl (
         require => Wget::Fetch["download-petl-jar for ${petl_site[$index]}"]
       }
 
-      file { "${petl_home_dir[$index]}/bin/petl.jar":
-        ensure  => link,
-        target  => "${petl_home_dir[$index]}/bin/petl-${petl_version}.jar",
-        require => File["${petl_home_dir[$index]}/bin/petl-${petl_version}.jar"],
-        notify  => Exec["petl-restart for ${petl_site[$index]}"]
-      }
 
-      # remove any old versions of PETL
-      exec { "rm -f $(find ${petl_home_dir[$index]}/bin -maxdepth 1 -type f -name 'petl-*.jar' ! -name 'petl-${
-        petl_version}.jar')":
-        require => File["${petl_home_dir[$index]}/bin/petl.jar"]
+      file { "${petl_home_dir[$index]}/bin/${petl[$index]}.jar":
+        ensure  => link,
+        target  => "${petl_home_dir[$index]}/bin/${petl[$index]}-${petl_version}.jar",
+        require => File["${petl_home_dir[$index]}/bin/${petl[$index]}-${petl_version}.jar"],
       }
 
       file { "${petl_home_dir[$index]}/bin/petl.conf":
@@ -123,56 +115,22 @@ class petl (
         owner   => "${petl[$index]}",
         group   => "${petl[$index]}",
         mode    => "0755",
-        require => File["${petl_home_dir[$index]}/bin/petl.jar"]
+        require => File["${petl_home_dir[$index]}/bin/${petl[$index]}.jar"]
       }
+
       file { "${petl_home_dir[$index]}/bin/application.yml":
         ensure  => present,
         content => template("petl/application-${petl_site[$index]}.yml.erb"),
         owner   => "${petl[$index]}",
         group   => "${petl[$index]}",
         mode    => "0755",
-        require => File["${petl_home_dir[$index]}/bin/petl.jar"],
-        notify  => Exec["petl-restart for ${petl_site[$index]}"]
+        require => File["${petl_home_dir[$index]}/bin/${petl[$index]}.jar"],
       }
 
-      # Set up scripts and services to execute PETL
-
-      # TODO: This requires openjdk-8-jdk to be installed
-
-      file { "/etc/init.d/${petl[$index]}":
-        ensure  => 'link',
-        target  => "${petl_home_dir[$index]}/bin/petl.jar",
-        require => [ File["${petl_home_dir[$index]}/bin/petl.conf"], File["${petl_home_dir[$index]}/bin/petl.jar"] ]
+      # remove any old versions of PETL
+      exec { "rm -f $(find $petl_home_dir/bin -maxdepth 1 -type f -name 'petl-*.jar' ! -name '${petl[$index]}-$petl_version.jar')":
+        require => File["${petl_home_dir[$index]}/bin/${petl[$index]}-${petl_version}.jar"]
       }
-
-      ## two petl instances on the same server should have different startup order
-      if ('petl-ces' == $petl_site[$index]) {
-        exec { "petl-startup-enable for ${petl_site[$index]}":
-          command => "/usr/sbin/update-rc.d -f ${petl[$index]} defaults 83",
-          user    => 'root',
-          require => File["/etc/init.d/${petl[$index]}"]
-        }
-        # make sure PETL is installed, but stopped... we will start it after we install the config
-        service { "${petl[$index]}":
-          ensure  => stopped,
-          enable  => true,
-          require => Exec["petl-startup-enable for ${petl_site[$index]}"]
-        }
-      } else {
-        exec { "petl-startup-enable for site ${petl_site[$index]}":
-          command => "/usr/sbin/update-rc.d -f ${petl[$index]} defaults 81",
-          user    => 'root',
-          require => File["/etc/init.d/${petl[$index]}"]
-        }
-        # make sure PETL is installed, but stopped... we will start it after we install the config
-        service { "${petl[$index]}":
-          ensure  => stopped,
-          enable  => true,
-          require => Exec["petl-startup-enable for site ${petl_site[$index]}"]
-        }
-      }
-
-
 
       if ('SNAPSHOT' in $petl_config_version[$index]) {
         $petl_config_repo = "snapshots"
@@ -180,31 +138,94 @@ class petl (
       else {
         $petl_config_repo = "releases"
       }
+
       wget::fetch { "download-petl-config-dir for ${petl_site[$index]}":
-        source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${
-          petl_config_name[$index]}&r=${petl_config_repo}&c=distribution&p=zip&v=${petl_config_version[$index]}",
+        source      => "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${petl_config_name[$index]}&r=${petl_config_repo}&c=distribution&p=zip&v=${petl_config_version[$index]}",
         destination => "/tmp/petl-${petl_config_name[$index]}.zip",
         timeout     => 0,
         verbose     => false,
         redownload  => true,
       }
-      exec { "install-petl-config-dir for ${petl_site[$index]}":
-        command => "rm -rf /tmp/${petl_site[$index]}* && rm -rf /tmp/${petl_site[$index]}_configuration && unzip -o /tmp/petl-${petl_config_name[$index]}.zip -d /tmp/${petl_site[$index]}_configuration && rm -rf ${petl_home_dir[$index]}/${petl_config_dir} && mkdir -p ${petl_home_dir[$index]}/${petl_config_dir} && cp -r /tmp/${petl_site[$index]}_configuration/* ${petl_home_dir[$index]}/${petl_config_dir} && chown -R ${petl[$index]}:${petl[$index]} ${petl_home_dir[$index]}",
-        require => [ Wget::Fetch["download-petl-config-dir for ${petl_site[$index]}"], Package['unzip'], Service["${petl[$index]}"]],
-        notify  => Exec["petl-restart for ${petl_site[$index]}"]
+
+      # Set up scripts and services to execute PETL
+
+      # TODO: This requires openjdk-8-jdk to be installed
+      if ('petl-ces' == $petl[$index]) {
+
+        file { "/etc/init.d/petl-ces":
+          ensure  => 'link',
+          target  => "${petl_home_dir[$index]}/bin/${petl[$index]}-${petl_version}.jar",
+          require => [ File["${petl_home_dir[$index]}/bin/petl.conf"], File["${petl_home_dir[$index]}/bin/${petl[$index]}-${petl_version}.jar"] ]
+        }
+
+        # this is a hacky way of ensuring that petl-ces starts up since update-rc.d throw error for multiple instances.
+        # note this is only need for servers that can 2 instances of petl
+        # upon server restart, service petl-ces start/restart/stop should work
+        exec { "petl-startup-enable for petl-ces":
+          command => "/usr/bin/ln -s /etc/init.d/petl-ces /etc/rc0.d/K01petl-ces && /usr/bin/ln -s /etc/init.d/petl-ces /etc/rc1.d/K01petl-ces && /usr/bin/ln -s /etc/init.d/petl-ces /etc/rc2.d/S03petl-ces && /usr/bin/ln -s /etc/init.d/petl-ces /etc/rc3.d/S03petl-ces && /usr/bin/ln -s /etc/init.d/petl-ces /etc/rc4.d/S03petl-ces && /usr/bin/ln -s /etc/init.d/petl-ces /etc/rc5.d/S03petl-ces && /usr/bin/ln -s /etc/init.d/petl-ces /etc/rc6.d/K01petl-ces",
+          user    => 'root',
+          group   => 'root',
+          unless  => "/bin/ls -ap /etc/rc*.d | grep petl-ces | grep -v grep",
+          require => File["/etc/init.d/petl-ces"]
+        }
+
+        # make sure PETL is installed, but stopped... we will start it after we install the config
+        # there is a conflict when this is a service.
+        exec { "stop-petl-ces":
+          command  => "/etc/init.d/petl-ces stop",
+          require => Exec["petl-startup-enable for petl-ces"]
+        }
+
+        exec { "install-petl-config-dir for ${petl_site[$index]}":
+          command => "rm -rf /tmp/${petl_site[$index]}* && rm -rf /tmp/${petl_site[$index]}_configuration && unzip -o /tmp/petl-${petl_config_name[$index]}.zip -d /tmp/${petl_site[$index]}_configuration && rm -rf ${petl_home_dir[$index]}/${petl_config_dir} && mkdir -p ${petl_home_dir[$index]}/${petl_config_dir} && cp -r /tmp/${petl_site[$index]}_configuration/* ${petl_home_dir[$index]}/${petl_config_dir} && chown -R ${petl[$index]}:${petl[$index]} ${petl_home_dir[$index]}",
+          require => [ Wget::Fetch["download-petl-config-dir for ${petl_site[$index]}"], Package['unzip'], Exec["stop-petl-ces"]],
+        }
+
+        # just restart PETL every time the deploy runs
+        exec { "petl-restart for site petl-ces":
+          command => "/etc/init.d/petl-ces start",
+          user    => 'root',
+          require => File["/etc/init.d/petl-ces"]
+        }
       }
 
-      # just restart PETL every time the deploy runs
-      exec { "petl-restart for ${petl_site[$index]}":
-        command => "service ${petl[$index]} start",
-        user    => 'root',
-        require => Service["${petl[$index]}"],
+      if ('petl-ces' != $petl[$index]) {
+        file { "/etc/init.d/petl":
+          ensure  => 'link',
+          target  => "${petl_home_dir[$index]}/bin/${petl[$index]}-${petl_version}.jar",
+          require => [ File["${petl_home_dir[$index]}/bin/petl.conf"], File["${petl_home_dir[$index]}/bin/${petl[$index]}-${petl_version}.jar"] ]
+        }
+
+        exec { "petl-startup-enable":
+          command => "/usr/sbin/update-rc.d -f petl defaults 81",
+          user    => 'root',
+          require => File["/etc/init.d/petl"]
+        }
+
+        # make sure PETL is installed, but stopped... we will start it after we install the config
+        service { "petl":
+          ensure  => stopped,
+          enable  => true,
+          require => Exec["petl-startup-enable"]
+        }
+
+        exec { "install-petl-config-dir for ${petl_site[$index]}":
+          command => "rm -rf /tmp/${petl_site[$index]}* && rm -rf /tmp/${petl_site[$index]}_configuration && unzip -o /tmp/petl-${petl_config_name[$index]}.zip -d /tmp/${petl_site[$index]}_configuration && rm -rf ${petl_home_dir[$index]}/${petl_config_dir} && mkdir -p ${petl_home_dir[$index]}/${petl_config_dir} && cp -r /tmp/${petl_site[$index]}_configuration/* ${petl_home_dir[$index]}/${petl_config_dir} && chown -R ${petl[$index]}:${petl[$index]} ${petl_home_dir[$index]}",
+          require => [ Wget::Fetch["download-petl-config-dir for ${petl_site[$index]}"], Package['unzip'], Service["petl"]],
+        }
+
+        # just restart PETL every time the deploy runs
+        exec { "petl-restart for petl":
+          command => "service petl start",
+          user    => 'root',
+          require => Service["petl"],
+        }
       }
 
       ## logrotate
       file { "/etc/logrotate.d/petl-${petl_site[$index]}":
         ensure  => file,
-        content => template('petl/logrotate.erb')
+        content => template("petl/logrotate-${petl[$index]}.erb")
       }
 
       /* Now that we have petl execution tables, this may be unrequired.
