@@ -35,7 +35,7 @@ azure_dns_client_secret: ENC[Illfbs4LPZrUvdg3f/WH7cKUcUI+E9zbWzeGoFG2pOIJxa/0MNi
 # PETL
 petl: "petl"
 petl_site: "zl-report"
-petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
+petl_home_dir: "/opt/petl"
 
 # PETL Config
 petl_config_name: openmrs-config-zl
