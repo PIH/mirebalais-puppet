@@ -3,7 +3,8 @@ class petl::mysql (
   $petl_mysql_password = decrypt(hiera("petl_mysql_password")),
   $install_petl_warehouse_db = hiera("install_petl_warehouse_db"),
   $petl_warehouse_db = hiera("petl_warehouse_db"),
-  $petl_mysql_user_ip = hiera("petl_mysql_user_ip")
+  $petl_mysql_user_ip = hiera("petl_mysql_user_ip"),
+  $openmrs_db = hiera('openmrs_db'),
 ){
 
   if $install_petl_warehouse_db {
