@@ -41,7 +41,7 @@ remote_zlidentifier_url: 'https://zanmi.pih-emr.org/openmrs/module/idgen/exportI
 remote_zlidentifier_username: mirebalais
 remote_zlidentifier_password: ENC[IuAJgqs6Ci5Hw5xs/DYiZg==]
 
-java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
 # Use our old godaddy cert until we've tested the letsencrypt one for a few months
 ssl_cert_dir: '/etc/ssl/certs'

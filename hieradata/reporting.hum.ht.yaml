@@ -58,4 +58,4 @@ petl_error_subject: HUM Reporting PETL errors
 
 ssl_use_letsencrypt: true
 
-java_memory_parameters: '-Xmx10G -Xms1G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+java_memory_parameters: '-Xmx10G -Xms10G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
