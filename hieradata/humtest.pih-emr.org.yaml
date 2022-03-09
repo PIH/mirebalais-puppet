@@ -22,12 +22,6 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 percona_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 
-#letencrypt
-azure_dns_subscription_id: ENC[roYSeZU0cSjB6+P6aOWEXYVgCL64D33EQcfUd7L80970icq7M7LFmvlOSyYPI3bm]
-azure_dns_tenant_id: ENC[5LWTjj76sYS2kxC4FktrecjxHpznSDVezymGgwlCzdNGmdymse5ihQOOKFpAwCJa]
-azure_dns_app_id: ENC[NiY0+gdLyMzvHgzA34X8GV/dUjVLK+XaXz67Q9CzdJS7zqQUshiqA6J/2FgkD1pl]
-azure_dns_client_secret: ENC[Illfbs4LPZrUvdg3f/WH7cKUcUI+E9zbWzeGoFG2pOIJxa/0MNibYkymcRQefLGr]
-
 lacolline_server_url: 'https://zanmi.pih-emr.org/openmrs'
 lacolline_username: wsuser
 lacolline_password: ENC[OV3IH5U9urv6gEb76vnyYA==]
@@ -46,6 +40,5 @@ ssl_use_letsencrypt: true
 
 java_memory_parameters: '-Xmx16G -Xms16G -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
-#
 smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
 smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]
