@@ -1,5 +1,5 @@
 webapp_name: openmrs
-site_domain: humtest.pih-emr.org
+site_domain: humtest-tier.pih-emr.org
 
 package_release: 'stable/'
 
