@@ -29,7 +29,7 @@ class apache2 (
 ){
 
   # really ugly way to do string concat, ignoring empties
-  $worker_list = join(split("${webapp_name} ${pwa_webapp_name} ${biometrics_webapp_name}", '\s+'), ',')
+  $worker_list = join(split("${webapp_name} ${pwa_webapp_name} ${biometrics_webapp_name} ${apzu_ic3_dir}", '\s+'), ',')
 
   package { 'software-properties-common':
     ensure => present
