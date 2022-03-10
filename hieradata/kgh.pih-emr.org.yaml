@@ -19,7 +19,9 @@ backup_file_prefix: kgh
 backup_hour: 1
 archive_hour: 3
 
-# Use our old godaddy cert until we've tested the letsencrypt one for a few months
+# Increasing this, to facilite database dump
+mysql_net_read_timeout: 3600
+mysql_net_write_timeout: 3600
 
 #feature toggles
 

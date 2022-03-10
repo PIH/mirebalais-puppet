@@ -13,4 +13,7 @@ tomcat_enable_http_8080: true
 openmrs_auto_update_database: true
 session_timeout: 120
 
+# Increasing this, to facilite database dump
+mysql_net_read_timeout: 3600
+mysql_net_write_timeout: 3600
 
