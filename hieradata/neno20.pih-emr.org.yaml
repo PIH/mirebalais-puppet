@@ -15,6 +15,10 @@ mysql_innodb_buffer_pool_instances: 1
 openmrs_db_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
 openmrs_auto_update_database: false
 
+# POC ic3 configs for neno
+apzu_ic3_enabled: true
+apzu_ic3_dir: workflow
+
 ## backups
 backup_db_user: backup
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]

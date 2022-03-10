@@ -13,6 +13,8 @@ class apache2 (
   $biometrics_enabled = hiera('biometrics_enabled'),
   $biometrics_webapp_name = hiera('biometrics_webapp_name'),
   $biometrics_port = hiera('biometrics_port'),
+  $apzu_ic3_enabled = hiera('apzu_ic3_enabled'),
+  $apzu_ic3_dir = hiera('apzu_ic3_dir'),
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
   $sysadmin_email = hiera('sysadmin_email'),

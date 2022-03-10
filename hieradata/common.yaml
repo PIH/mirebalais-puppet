@@ -92,6 +92,10 @@ pwa_enabled: false
 pwa_webapp_name: ''
 pwa_filename: ''
 
+# POC ic3 configs for neno
+apzu_ic3_enabled: false
+apzu_ic3_dir: ''
+
 # PETL
 petl: "petl"
 petl_version: "3.1.0"
