@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Backup Script for backing up mysql openmrsdatabases
+# Backup Script for backing up mysql openmrs databases
 # and complex_obs dir
 # this script does not check if packages 7za is
 # installed. Ensure that 7za is installed
@@ -27,7 +27,7 @@ fi
 
 FILENAME=${PREFIX}_backup_${MODIFIER}.sql.7z
 CURRENT_FILENAME=${PREFIX}_current_backup.sql.7z
-LOGDIR='/home/<%= @tomcat %>/backups/logs'
+LOGDIR='${DIR}/logs'
 LOGFILE=${LOGDIR}/backup-log-${MODIFIER}.log
 
 exec > ${LOGFILE} 2>&1
@@ -40,7 +40,7 @@ mkdir -p ${LOGDIR}
 # Dump database, encrypt and compress
 if [ $? -eq 0 ]; then
     echo "backing up database and compressing started at `date`"
-    mysqldump -u${USER} -p${PASS} --opt --flush-logs --single-transaction openmrs | 7za a -p${PASS} -siy -t7z ${DIR}/sequences/${FILENAME} -mx9
+    mysqldump -u${USER} -p${PASS} --opt --flush-logs --single-transaction openmrs 2>/dev/null | 7za a -p${PASS} -siy -t7z ${DIR}/sequences/${FILENAME} -mx9 2>&1 >/dev/null
 fi
 
 if [ $? -eq 0 ]; then
@@ -65,8 +65,8 @@ fi
 
 ## backup complex obs directory
 #####################################
-COMPLEX_OBS_DIR='/home/tomcat7/.OpenMRS/complex_obs'
-COMPLEX_OBS_DIR1='${DIR}/sequences/complex_obs'
+COMPLEX_OBS_DIR='/home/<%= @tomcat %>/.OpenMRS/complex_obs'
+COMPLEX_OBS_BACKUP_DIR='${DIR}/sequences/complex_obs'
 ## check if file is not empty
 if ! [ -s "${COMPLEX_OBS_DIR}" ];
 then
@@ -83,11 +83,11 @@ fi
 
 echo "compressing complex_obs dir."
 ## should figure out how to do this incrementally
-7za a -p${PASS} -mx=9 -r "{PREFIX}_${COMPLEX_OBS_DIR}_${MODIFIER}.7z" "${COMPLEX_OBS_DIR1}"
+7za a -p${PASS} -mx=9 -r "{PREFIX}_${COMPLEX_OBS_DIR}_${MODIFIER}.7z" "${COMPLEX_OBS_BACKUP_DIR}"
 
 # remove this dir so that it is created next time
 if [ $? -eq 0 ]; then
-    rm -rf ${COMPLEX_OBS_DIR1}
+    rm -rf ${COMPLEX_OBS_BACKUP_DIR}
 else
     echo "Error compressing complex_obs dir"
     mail -s "${PREFIX}: error compressing complex_obs dir" "${MAIL_TO}" < ${LOGFILE}
