@@ -98,4 +98,4 @@ echo "Size for compressed complex obs dir $(/usr/bin/du -hs ${DIR}/sequences/{PR
 echo "Size for compressed DB dir $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
 echo "Success, db backups and complex_obs compression ended at `date`"
 
-mail -s "${PREFIX}: backup is successful" "${MAIL_TO}" < ${LOGFILE}
+mail -s "${PREFIX}: database and complex_obs backup is successful" "${MAIL_TO}" < ${LOGFILE}
