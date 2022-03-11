@@ -27,7 +27,7 @@ fi
 
 FILENAME=${PREFIX}_backup_${MODIFIER}.sql.7z
 CURRENT_FILENAME=${PREFIX}_current_backup.sql.7z
-LOGDIR='${DIR}/logs'
+LOGDIR=${DIR}/logs
 LOGFILE=${LOGDIR}/backup-log-${MODIFIER}.log
 
 exec > ${LOGFILE} 2>&1
