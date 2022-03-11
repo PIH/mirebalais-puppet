@@ -3,6 +3,7 @@ class apache2 (
   $services_ensure = hiera('services_ensure'),
   $services_enable = hiera('services_enable'),
   $site_domain = hiera('site_domain'),
+  $site_domain_zt = hiera('site_domain_zt'),
   $webapp_name = hiera('webapp_name'),
   $ssl_cert_file = hiera('ssl_cert_file'),
   $ssl_chain_file = hiera('ssl_chain_file'),

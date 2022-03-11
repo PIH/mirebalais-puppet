@@ -57,7 +57,6 @@ node 'emr.hum.ht' {
   include logging
 
   include openmrs::backup
-  include crashplan
   include mirebalais_reporting::production_setup
 
 }
@@ -222,7 +221,6 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   #include logging
 
   include openmrs::backup
-  include crashplan
 }
 
 node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr.org', 'lacolline.pih-emr.org', 'belladere.pih-emr.org', 'hsn.pih-emr.org', 'boucancarre.pih-emr.org', 'cange.pih-emr.org' {
@@ -296,7 +294,6 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org' {
   include logging
 
   include openmrs::backup
-  include crashplan
 }
 
 node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.org', 'ces-ci.pih-emr.org', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'hsn-ci.pih-emr.org', 'ocltest.pih-emr.org' {
