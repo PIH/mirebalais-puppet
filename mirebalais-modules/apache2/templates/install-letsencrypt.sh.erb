@@ -33,7 +33,7 @@ export AZUREDNS_CLIENTSECRET='<%= @azure_dns_client_secret %>'
 if [ -z "$SITE_DOMAIN_ZT" ]; then
     .acme.sh/acme.sh --issue --dns dns_azure -d "$SITE_DOMAIN" -w /etc/letsencrypt/live/"$SITE_DOMAIN" --force
 else
-    .acme.sh/acme.sh --issue -d example.com -d "$SITE_DOMAIN" -d "$SITE_DOMAIN_ZT"  -w /etc/letsencrypt/live/"$SITE_DOMAIN" --force
+    .acme.sh/acme.sh --issue --dns dns_azure -d "$SITE_DOMAIN" -d "$SITE_DOMAIN_ZT" -w /etc/letsencrypt/live/"$SITE_DOMAIN" --force
 fi
 
 .acme.sh/acme.sh --install-cert --domain "$SITE_DOMAIN" --cert-file /etc/letsencrypt/live/"$SITE_DOMAIN"/cert.pem --key-file /etc/letsencrypt/live/"$SITE_DOMAIN"/privkey.pem --fullchain-file /etc/letsencrypt/live/"$SITE_DOMAIN"/fullchain.pem --ca-file /etc/letsencrypt/live/"$SITE_DOMAIN"/chain.pem --reloadcmd "sudo /usr/sbin/service apache2 restart" --force
