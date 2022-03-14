@@ -4,7 +4,7 @@ server_timezone: America/New_York
 
 # PETL
 petl: petl,petl-ces
-petl_version: "3.2.0-SNAPSHOT"
+petl_version: "3.3.0-SNAPSHOT"
 petl_site: zl-test,ces-test
 petl_home_dir: /opt/petl,/opt/petl-ces
 

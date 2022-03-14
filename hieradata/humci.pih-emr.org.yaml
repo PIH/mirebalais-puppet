@@ -28,7 +28,7 @@ biometrics_webapp_name: biometrics
 
 # PETL
 petl: "petl"
-petl_version: "3.2.0-SNAPSHOT"
+petl_version: "3.3.0-SNAPSHOT"
 petl_site: "humci"
 petl_home_dir: "/opt/petl"
 
