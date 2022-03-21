@@ -38,7 +38,7 @@ petl_site: "zl-report"
 petl_home_dir: "/opt/petl"
 
 # PETL Config
-petl_config_name: openmrs-config-zl
+petl_config_name: zl-etl
 petl_config_version: 1.0.0
 
 # PETL MySQL
