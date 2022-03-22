@@ -66,7 +66,7 @@ fi
 ## backup complex obs directory
 #####################################
 COMPLEX_OBS_DIR='/home/<%= @tomcat %>/.OpenMRS/complex_obs'
-COMPLEX_OBS_BACKUP_DIR='${DIR}/sequences/complex_obs'
+COMPLEX_OBS_BACKUP_DIR="${DIR}/sequences/complex_obs"
 ## check if file is not empty
 if ! [ -s "${COMPLEX_OBS_DIR}" ];
 then
@@ -83,7 +83,7 @@ fi
 
 echo "compressing complex_obs dir."
 ## should figure out how to do this incrementally
-7za a -p${PASS} -mx=9 -r "{PREFIX}_${COMPLEX_OBS_DIR}_${MODIFIER}.7z" "${COMPLEX_OBS_BACKUP_DIR}"
+7za a -p${PASS} -mx=9 -r "${PREFIX}_${COMPLEX_OBS_DIR}_${MODIFIER}.7z" "${COMPLEX_OBS_BACKUP_DIR}" 2>&1 >/dev/null
 
 # remove this dir so that it is created next time
 if [ $? -eq 0 ]; then
@@ -94,7 +94,7 @@ else
     exit
 fi
 
-echo "Size for compressed complex obs dir $(/usr/bin/du -hs ${DIR}/sequences/{PREFIX}_${COMPLEX_OBS_DIR}_${MODIFIER}.7z)"
+echo "Size for compressed complex obs dir $(/usr/bin/du -hs ${DIR}/sequences/${PREFIX}_${COMPLEX_OBS_DIR}_${MODIFIER}.7z)"
 echo "Size for compressed DB dir $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
 echo "Success, db backups and complex_obs compression ended at `date`"
 
