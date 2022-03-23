@@ -15,6 +15,10 @@ mysql_innodb_buffer_pool_instances: 1
 openmrs_db_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
 openmrs_auto_update_database: false
 
+# POC ic3 configs for neno
+apzu_ic3_enabled: true
+apzu_ic3_dir: workflow
+
 ## backups
 backup_db_user: backup
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
@@ -32,7 +36,7 @@ petl_site: "apzu-upperneno-reports"
 petl_config_name: "apzu-etl"
 petl_config_version: 1.0.0-SNAPSHOT
 
-petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
+petl_home_dir: "/opt/petl"
 
 petl_mysql_user: openmrs
 petl_mysql_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
@@ -47,4 +51,4 @@ petl_warehouse_db: openmrs_warehouse
 petl_mysql_user_ip: localhost
 petl_openmrs_connection_url: jdbc:mysql://localhost:3306/%{hiera('petl_warehouse_db')}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8
 
-java_memory_parameters: '-Xmx8G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'

@@ -35,11 +35,11 @@ azure_dns_client_secret: ENC[Illfbs4LPZrUvdg3f/WH7cKUcUI+E9zbWzeGoFG2pOIJxa/0MNi
 # PETL
 petl: "petl"
 petl_site: "zl-report"
-petl_home_dir: "/opt/%{hiera('petl_site')}-petl"
+petl_home_dir: "/opt/petl"
 
 # PETL Config
-petl_config_name: openmrs-config-zl
-petl_config_version: 1.0.0-SNAPSHOT
+petl_config_name: zl-etl
+petl_config_version: 1.0.0
 
 # PETL MySQL
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
@@ -58,4 +58,4 @@ petl_error_subject: HUM Reporting PETL errors
 
 ssl_use_letsencrypt: true
 
-java_memory_parameters: '-Xmx10G -Xms1G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+java_memory_parameters: '-Xmx10G -Xms10G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'

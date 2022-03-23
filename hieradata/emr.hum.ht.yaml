@@ -68,7 +68,7 @@ insurance_collection: false
 
 ssl_use_letsencrypt: true
 
-java_memory_parameters: '-Xmx16G -Xms2048m -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+java_memory_parameters: '-Xmx26G -Xms26G -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
 # disk cleanup
 archive_folder: "/home/tomcat7/backups/archive/"

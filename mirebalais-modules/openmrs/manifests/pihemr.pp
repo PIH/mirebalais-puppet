@@ -22,9 +22,10 @@ class openmrs::pihemr (
   $session_timeout              = hiera('session_timeout'),
 
   # PIH EMR config
-  $config_name    = hiera('config_name'),
-  $config_version = hiera('config_version'),
-  $repo_url       = decrypt(hiera('repo_url')),
+  $config_name     = hiera('config_name'),
+  $config_version  = hiera('config_version'),
+  $repo_url        = decrypt(hiera('repo_url')),
+  $ocl_package_url = hiera('ocl_package_url'),
 
   # Frontend
   $frontend_name  = hiera('frontend_name'),
@@ -43,6 +44,11 @@ class openmrs::pihemr (
   $lacolline_server_url         = hiera('lacolline_server_url'),
   $lacolline_username           = decrypt(hiera('lacolline_username')),
   $lacolline_password           = decrypt(hiera('lacolline_password')),
+
+  # e-mail config
+  $smtp_username = decrypt(hiera('smtp_username')),
+  $smtp_userpassword = decrypt(hiera('smtp_userpassword')),
+  $openmrs_mail_user = decrypt(hiera('openmrs_mail_user')),
 
   # os version
   $ubuntu_14 = hiera('ubuntu_14'),
@@ -114,7 +120,7 @@ class openmrs::pihemr (
     content => template('openmrs/openmrs-runtime.properties.erb'),
     owner   => $tomcat,
     group   => $tomcat,
-    mode    => '0644',
+    mode    => '0600',
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
 
@@ -158,6 +164,37 @@ class openmrs::pihemr (
       notify => [ Exec['tomcat-restart'] ]
     }
 
+    # TODO This can be removed once we fully migrate to OCL.  This exists to allow testing OCL package installation as a replacement for MDS
+    if ($ocl_package_url != "") {
+
+        file { "${tomcat_home_dir}/.OpenMRS/configuration/ocl/":
+            ensure  => directory,
+            owner   => $tomcat,
+            group   => $tomcat,
+            mode    => '0644',
+            require => Exec['install-openmrs-configuration']
+        }
+
+        exec{'remove-existing-ocl-packages':
+          command => "rm -rf ${tomcat_home_dir}/.OpenMRS/configuration/ocl/*",
+          require => File["${tomcat_home_dir}/.OpenMRS/configuration/ocl/"]
+        }
+
+        wget::fetch { 'download-ocl-package-zip':
+          source      => "${ocl_package_url}",
+          destination => "${tomcat_home_dir}/.OpenMRS/configuration/ocl/PIH.zip",
+          timeout     => 0,
+          verbose     => false,
+          redownload  => true,
+          require     => Exec["remove-existing-ocl-packages"]
+        }
+
+        exec{'remove-mds-concept-packages':
+          command => "rm -rf ${tomcat_home_dir}/.OpenMRS/configuration/pih/concepts/*",
+          require => Wget::Fetch["download-ocl-package-zip"],
+          notify => [ Exec['tomcat-restart'] ]
+        }
+    }
   }
 
   if ($frontend_name != "") {
@@ -192,14 +229,6 @@ class openmrs::pihemr (
       command => "ln -s ../configuration/frontend /home/${tomcat}/.OpenMRS/frontend/site",
       require => [ Exec['install-openmrs-frontend'], Exec['install-openmrs-configuration'] ]
     }
-  }
-
-  # hack to let us remote the mirebalais metadata module from the build; can be removed after it has been removed from all servers
-  exec { 'make mirebalais metadata module not mandatory - error running this command can be ignored when provisioning new server':
-    command     => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'update ${openmrs_db}.global_property set property_value=\"false\" where property=\"mirebalaismetadata.mandatory\"'",
-    user        => 'root',
-    require => Package[$package_name],
-    notify => [ Exec['tomcat-restart'] ]
   }
 
   # hack to change webapp name in the frontend application after it has already been built into the deb

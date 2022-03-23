@@ -62,6 +62,31 @@ node 'emr.hum.ht' {
 
 }
 
+node 'humtest.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include apache2
+  include tomcat
+
+  include openmrs::pihemr
+  include openmrs::initial_setup
+
+  include percona
+
+}
+
 node 'zlemr.pih-emr.org' {
 
   class { 'apt':

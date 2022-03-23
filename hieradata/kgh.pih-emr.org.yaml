@@ -19,14 +19,16 @@ backup_file_prefix: kgh
 backup_hour: 1
 archive_hour: 3
 
-# Use our old godaddy cert until we've tested the letsencrypt one for a few months
+# Increasing this, to facilite database dump
+mysql_net_read_timeout: 3600
+mysql_net_write_timeout: 3600
 
 #feature toggles
 
 mysql_innodb_buffer_pool_size: 1G
 mysql_innodb_buffer_pool_instances: 1
 
-java_memory_parameters: '-Xmx4G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+java_memory_parameters: '-Xmx4G -Xms4G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
 #az copy
 az_backup_folder_path: sierraleone-kgh

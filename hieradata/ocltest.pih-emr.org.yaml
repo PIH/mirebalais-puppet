@@ -10,4 +10,5 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 127.0.0.1
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
-
+# Indicates if a concept package should be downloaded from OCL rather than installing concepts from MDS
+ocl_package_url: "https://ocl-staging-s3.s3.amazonaws.com/PIH/PIH_1.0.0.20220213180245.zip"

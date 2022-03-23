@@ -1,7 +1,8 @@
 petl:
-  homeDir: "<%= @petl_home_dir -%>"
-  datasourceDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/datasources"
-  jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
+  maxConcurrentJobs: 7
+  homeDir: "/opt/petl"
+  datasourceDir: "/opt/petl/configurations/datasources"
+  jobDir: "/opt/petl/configurations/jobs"
   startup:
     jobs:
       - "create-partitions.yml"
@@ -22,7 +23,7 @@ spring:
   datasource:
     platform: "mssql"
     driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=<%= @petl_sqlserver_databaseName -%>"
+    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=zl_omrs_dw"
     username: "<%= @petl_sqlserver_user -%>"
     password: "<%= @petl_sqlserver_password -%>"
   jpa:
@@ -93,6 +94,6 @@ datasources:
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
-       databaseName: "<%= @petl_sqlserver_databaseName -%>"
+       databaseName: "zl_omrs_dw"
        user: "<%= @petl_sqlserver_user -%>"
        password: "<%= @petl_sqlserver_password -%>"

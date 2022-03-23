@@ -56,6 +56,7 @@ sysadmin_email: emrsysadmin@pih.org
 
 smtp_username: ENC[c7aCd9ntirLMUMSHySbdI42b3Uxdu45IeP1k1zMWtXw=:t8Ku94J6xhsGLIXpnbQhpg==:WDUxWld2d05na3lRQ0dJb2ZXdWhYdz09]
 smtp_userpassword: ENC[S6/9UffAD7ivo4VXNZEirw==:NBkEbRNVaqIJjI5uJsEmFg==:ZjNYZ0hsREdsVGpsZm1WTXRTbTIvdz09]
+openmrs_mail_user: ENC[M8A6hilrpxIxWt/a0PZQZYm92fbRlvmpwB7HKj7KecU=]
 
 mirth_db: mirthdb
 mirth_db_user: mirth
@@ -91,9 +92,13 @@ pwa_enabled: false
 pwa_webapp_name: ''
 pwa_filename: ''
 
+# POC ic3 configs for neno
+apzu_ic3_enabled: false
+apzu_ic3_dir: ''
+
 # PETL
 petl: "petl"
-petl_version: "3.1.0"
+petl_version: "3.2.0"
 petl_site: ""
 petl_user: "petl"
 petl_home_dir: "/opt/petl"
@@ -105,7 +110,7 @@ petl_java_opts: ""
 
 # PETL Config
 petl_config_name: zl-etl
-petl_config_version: 1.0.0-SNAPSHOT
+petl_config_version: 1.1.0-SNAPSHOT
 petl_config_dir: "configurations"
 
 # PETL MySQL
@@ -124,8 +129,8 @@ petl_sqlserver_user: foo
 petl_sqlserver_password: bar
 
 ##  for when petl::mysql is enabled (used for malawi or for creating a petl database user)
-+petl_warehouse_db: openmrs_reporting
-+petl_mysql_user_ip: localhost
+petl_warehouse_db: openmrs_reporting
+petl_mysql_user_ip: localhost
 
 # PETL Crons
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
@@ -171,7 +176,7 @@ apache_cron_restart_min: 03
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
-java_memory_parameters: '-Xmx2048m -Xms1024m'
+java_memory_parameters: '-Xmx2048m -Xms2048m'
 #-XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC
 
 java_debug_parameters: ''
@@ -183,6 +188,10 @@ az_activitylog_backup_folder_path: ""
 
 # Enforce acceptance of terms and conditions for usage
 terms_and_conditions_enabled: false
+
+# Indicates if a concept package should be downloaded from OCL rather than installing concepts from MDS
+# This should be empty for all servers except ocltest
+ocl_package_url: ""
 
 # atomfeed
 openmrs_modules_dir: /home/tomcat7/.OpenMRS/modules

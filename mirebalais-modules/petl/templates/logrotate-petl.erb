@@ -1,0 +1,20 @@
+/var/log/petl.log  {
+  daily
+  rotate 7
+  size 10M
+  copytruncate
+  compress
+  notifempty
+  missingok
+  sharedscripts
+  maxage 7
+  endscript
+}
+
+/root/petl/logs/*.log {
+  daily
+  rotate 7
+  notifempty
+  missingok
+  maxage 7
+}

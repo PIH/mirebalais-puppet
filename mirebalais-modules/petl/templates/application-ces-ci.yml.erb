@@ -5,14 +5,13 @@ petl:
   startup:
     jobs:
       - "create-partitions.yml"
-      - "refresh-humci-warehouse.yml"
 
 executeCron:
-  refreshZlWarehouse: ""
-  refreshHumciWarehouse: "<%= @petl_cron_time -%>"
+  refreshCesCiData: "<%= @petl_cron_time -%>"
+  refreshOpenmrsData: ""
 
 server:
-  port: "<%= @petl_server_port -%>"
+  port: "9110"
 
 logging:
   level:
@@ -23,7 +22,7 @@ spring:
   datasource:
     platform: "mssql"
     driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=openmrs_humci"
+    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=openmrs_ces_ci"
     username: "<%= @petl_sqlserver_user -%>"
     password: "<%= @petl_sqlserver_password -%>"
   jpa:
@@ -40,24 +39,17 @@ datasources:
     options: " <%= @petl_mysql_options -%>"
 
   openmrs:
-    humci:
-      host: "<%= @petl_mysql_host -%>"
-      port: "<%= @petl_mysql_port -%>"
-      databaseName: "openmrs"
-      user: "${datasources.mysql.user}"
-      password: "${datasources.mysql.password}"
-      options: "${datasources.mysql.options}"
-    hiv:
-      host: "<%= @petl_mysql_host -%>"
-      port: "<%= @petl_mysql_port -%>"
-      databaseName: "openmrs"
-      user: "${datasources.mysql.user}"
-      password: "${datasources.mysql.password}"
-      options: "${datasources.mysql.options}"
+    cesci:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
 
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
-       databaseName: "openmrs_humci"
+       databaseName: "openmrs_ces_ci"
        user: "<%= @petl_sqlserver_user -%>"
        password: "<%= @petl_sqlserver_password -%>"

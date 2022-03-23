@@ -1,0 +1,31 @@
+webapp_name: openmrs
+site_domain: humtest.pih-emr.org
+
+package_release: 'stable/'
+
+repo_url: ENC[aADqxhfrKRpTug52rCcj1HuHQnWQYEH6LDbNN7Huvp4=]
+
+pih_config: mirebalais,mirebalais-production
+config_name: openmrs-config-zl
+config_version: 1.33.0
+
+frontend_name: "openmrs-frontend-zl"
+frontend_version: 1.1.0
+
+server_timezone: America/New_York
+
+mysql_server_id: 1
+mysql_innodb_buffer_pool_size: 16G
+mysql_innodb_buffer_pool_instances: 16
+
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+percona_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+
+# feature toggle settings
+ssl_use_letsencrypt: true
+
+java_memory_parameters: '-Xmx16G -Xms16G -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+
+smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
+smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]

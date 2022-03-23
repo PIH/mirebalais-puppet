@@ -1,18 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 #
-# Backup Script
+# Backup Script for backing up mysql openmrs databases
+# and complex_obs dir
+# this script does not check if packages 7za is
+# installed. Ensure that 7za is installed
 #
+
+#############################################
+# For Pleebo and other environments which can't locate this command
+MYSQLDUMP_DIR=/opt/mysql/server-5.6/bin
+export PATH=$PATH:${MYSQLDUMP_DIR}
+#####################################
 
 USER='<%= @backup_user %>'
 PASS='<%= @backup_password %>'
 DIR=/home/<%= @tomcat %>/backups
 PREFIX=<%= @backup_file_prefix %>
-REMOTE_DB_SERVER='<%= @remote_db_server %>'
-REMOTE_DB='<%= @remote_db_user %>@<%= @remote_db_server %>:<%= @remote_backup_dir %>'
-
-# For Pleebo and other environments which can't locate this command
-MYSQLDUMP_DIR=/opt/mysql/server-5.6/bin
-export PATH=$PATH:${MYSQLDUMP_DIR}
+MAIL_TO='<%= @sysadmin_email %>'
 
 if [ -n "$1" ]
 then
@@ -23,27 +27,78 @@ fi
 
 FILENAME=${PREFIX}_backup_${MODIFIER}.sql.7z
 CURRENT_FILENAME=${PREFIX}_current_backup.sql.7z
+LOGDIR=${DIR}/logs
+LOGFILE=${LOGDIR}/backup-log-${MODIFIER}.log
+
+exec > ${LOGFILE} 2>&1
 
 # create the needed directories
 mkdir -p ${DIR}/current
 mkdir -p ${DIR}/sequences
+mkdir -p ${LOGDIR}
 
 # Dump database, encrypt and compress
-mysqldump -u${USER} -p${PASS} --opt --flush-logs --single-transaction openmrs 2>/dev/null | 7za a -p${PASS} -siy -t7z ${DIR}/sequences/${FILENAME} -mx9 2>&1 >/dev/null
-
-if ! [ -s "${DIR}/sequences/${FILENAME}" ]
-then
-        >&2 echo "mysql backup DB dump file empty\n" 
+if [ $? -eq 0 ]; then
+    echo "backing up database and compressing started at `date`"
+    mysqldump -u${USER} -p${PASS} --opt --flush-logs --single-transaction openmrs 2>/dev/null | 7za a -p${PASS} -siy -t7z ${DIR}/sequences/${FILENAME} -mx9 2>&1 >/dev/null
 fi
 
-
-# link the current to the latest dump
-rm -f ${DIR}/current/${CURRENT_FILENAME}
-ln -s ${DIR}/sequences/${FILENAME} ${DIR}/current/${CURRENT_FILENAME}
-
-# Copy backup to remote location
-# (This is generally handled by crashplan in our newer implementations and not used)
-if [ "$REMOTE_DB_SERVER" != "foo" ]
-then
-	scp ${DIR}/current/${CURRENT_FILENAME} ${REMOTE_DB}/${FILENAME}
+if [ $? -eq 0 ]; then
+    echo "backup was a success"
+else
+    echo "There was a problem during backup"
+    mail -s "${PREFIX}: Error during backup" "${MAIL_TO}" < ${LOGFILE}
+    exit
 fi
+
+### check if backed up db size is not empty
+if ! [ -s "${DIR}/sequences/${FILENAME}" ];
+then
+        >&2 echo "mysql backup DB dump file empty\n"
+        mail -s "${PREFIX}: backup DB dump file empty" "${MAIL_TO}" < ${LOGFILE}
+        exit
+else
+        # link the current to the latest dump
+        rm -f ${DIR}/current/${CURRENT_FILENAME}
+        ln -s ${DIR}/sequences/${FILENAME} ${DIR}/current/${CURRENT_FILENAME}
+fi
+
+## backup complex obs directory
+#####################################
+COMPLEX_OBS_DIR='/home/<%= @tomcat %>/.OpenMRS/complex_obs'
+COMPLEX_OBS_BACKUP_DIR="${DIR}/sequences/complex_obs"
+COMPLEX_OBS_FILENAME=${PREFIX}_complex_obs_${MODIFIER}.7z
+
+## check if file is not empty
+if ! [ -s "${COMPLEX_OBS_DIR}" ];
+then
+        # note we exit here as a success since some sites don't have complex_obs dir
+        echo "complex_obs dir is empty"
+        echo "Size for compressed DB dir $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
+        echo "Success, backups without compressing complex_obs ended at `date`"
+        mail -s "${PREFIX}: backup is successful" "${MAIL_TO}" < ${LOGFILE}
+        exit
+else
+        echo "complex_obs dir empty not empty, copying it to sequences dir"
+        cp -r ${COMPLEX_OBS_DIR} ${DIR}/sequences
+fi
+
+echo "compressing complex_obs dir."
+## should figure out how to do this incrementally
+## /dev/null may affect the command after, figure out the best way for this
+7za a -p${PASS} -mx=9 -r "${COMPLEX_OBS_FILENAME}" "${COMPLEX_OBS_BACKUP_DIR}" 2>&1 >/dev/null
+
+# remove this dir so that it is created next time
+if [ $? -eq 0 ]; then
+    rm -rf ${COMPLEX_OBS_BACKUP_DIR}
+else
+    echo "Error compressing complex_obs dir"
+    mail -s "${PREFIX}: error compressing complex_obs dir" "${MAIL_TO}" < ${LOGFILE}
+    exit
+fi
+
+echo "Size for compressed complex obs dir $(/usr/bin/du -hs ${COMPLEX_OBS_FILENAME})"
+echo "Size for compressed DB dir $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
+echo "Success, db backups and complex_obs compression ended at `date`"
+
+mail -s "${PREFIX}: database and complex_obs backup is successful" "${MAIL_TO}" < ${LOGFILE}

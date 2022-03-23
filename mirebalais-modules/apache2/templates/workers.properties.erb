@@ -16,3 +16,9 @@ worker.<%= @pwa_webapp_name %>.port=8009
 worker.<%= @pwa_webapp_name %>.host=localhost
 worker.<%= @pwa_webapp_name %>.type=ajp13
 <% end %>
+
+<% if @apzu_ic3_enabled == true %>
+worker.<%= @apzu_ic3_dir %>.port=8009
+worker.<%= @apzu_ic3_dir %>.host=localhost
+worker.<%= @apzu_ic3_dir %>.type=ajp13
+<% end %>

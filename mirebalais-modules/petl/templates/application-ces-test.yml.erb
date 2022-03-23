@@ -1,16 +1,17 @@
 petl:
-  homeDir: "<%= @petl_home_dir -%>"
-  datasourceDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/datasources"
-  jobDir: "<%= @petl_home_dir -%>/<%= @petl_config_dir -%>/jobs"
+  homeDir: "/opt/petl-ces"
+  datasourceDir: "/opt/petl-ces/configurations/datasources"
+  jobDir: "/opt/petl-ces/configurations/jobs"
   startup:
     jobs:
       - "create-partitions.yml"
 
 executeCron:
   refreshOpenmrsData: "<%= @petl_cron_time -%>"
+  refreshCesCiData: ""
 
 server:
-  port: "<%= @petl_server_port -%>"
+  port: "9110"
 
 logging:
   level:
@@ -21,7 +22,7 @@ spring:
   datasource:
     platform: "mssql"
     driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=<%= @petl_sqlserver_databaseName -%>"
+    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=openmrs_ces_warehouse"
     username: "<%= @petl_sqlserver_user -%>"
     password: "<%= @petl_sqlserver_password -%>"
   jpa:
@@ -126,6 +127,6 @@ datasources:
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
-       databaseName: "<%= @petl_sqlserver_databaseName -%>"
+       databaseName: "openmrs_ces_warehouse"
        user: "<%= @petl_sqlserver_user -%>"
        password: "<%= @petl_sqlserver_password -%>"

@@ -26,9 +26,13 @@ remote_backup_dir: liberia/pleebo/db
 
 openmrs_auto_update_database: true
 
+# Increasing this, to facilite database dump
+mysql_net_read_timeout: 3600
+mysql_net_write_timeout: 3600
+
 #feature toggles
 
 mysql_innodb_buffer_pool_size: 1G
 mysql_innodb_buffer_pool_instances: 1
 
-java_memory_parameters: '-Xmx4G -Xms1024m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+java_memory_parameters: '-Xmx4G -Xms4G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
