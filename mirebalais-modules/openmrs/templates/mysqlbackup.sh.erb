@@ -86,7 +86,8 @@ fi
 echo "compressing complex_obs dir."
 ## should figure out how to do this incrementally
 ## /dev/null may affect the command after, figure out the best way for this
-7za a -p${PASS} -mx=9 -r "${COMPLEX_OBS_FILENAME}" "${COMPLEX_OBS_BACKUP_DIR}" 2>&1 >/dev/null
+cd ${DIR}/sequences
+7za a -p${PASS} -mx=9 -r "${PREFIX}_complex_obs_${MODIFIER}.7z" "complex_obs" 2>&1 >/dev/null
 
 # remove this dir so that it is created next time
 if [ $? -eq 0 ]; then
