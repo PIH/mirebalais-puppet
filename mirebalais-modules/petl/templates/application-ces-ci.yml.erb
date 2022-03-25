@@ -5,6 +5,7 @@ petl:
   startup:
     jobs:
       - "create-partitions.yml"
+      - "refresh-cesci-data.yml"
 
 executeCron:
   refreshCesCiData: "<%= @petl_cron_time -%>"
