@@ -1,7 +1,7 @@
 ---
 site_domain: peru-ci.pih-emr.org
 
-package_name: ses-cor
+package_name: sescor
 
 pih_config: peru
 config_name: openmrs-config-ses
