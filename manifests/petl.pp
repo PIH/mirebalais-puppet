@@ -26,6 +26,7 @@ node 'malawi-dw.pih-emr.org' {
   include mysql_setup
   include petl::mysql
   include petl::java
-  include petl::uninstall_service
+  include petl
+  include petl::disable_petl_startup_on_boot
 
 }
