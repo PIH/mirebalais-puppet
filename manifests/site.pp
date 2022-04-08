@@ -510,6 +510,7 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano',
 
   include openmrs::pihemr
   include openmrs::initial_setup
+  include openmrs::backup
 
   include cesemr_user_resources
 
@@ -578,7 +579,7 @@ node 'malawi-dw.pih-emr.org' {
 
   include java
 
-  include petl
+  include petl::uninstall_service
 
 }
 

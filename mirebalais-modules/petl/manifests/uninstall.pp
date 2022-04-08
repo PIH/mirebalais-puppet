@@ -1,5 +1,6 @@
 class petl::uninstall (
-  $petl = hiera("petl")
+  $petl = hiera("petl"),
+  $petl_home_dir = hiera("petl_home_dir")
 ) {
 
   service { $petl:
@@ -19,7 +20,7 @@ class petl::uninstall (
     require => File["/etc/init.d/$petl"]
   }
 
-  file { "/home/$petl":
+  file { $petl_home_dir:
     ensure  => absent,
     force   => true,
     require => Service[$petl]
@@ -27,7 +28,7 @@ class petl::uninstall (
 
   user { "$petl":
     ensure  => "absent",
-    require => File["/home/$petl"]
+    require => File[$petl_home_dir]
   }
 
   group { "$petl":
