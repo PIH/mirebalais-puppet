@@ -1,4 +1,4 @@
-class petl::uninstall_service (
+class petl::disable_petl_startup_on_boot (
   $petl                        = hiera("petl"),
   $petl_home_dir               = hiera("petl_home_dir")
 ) {
