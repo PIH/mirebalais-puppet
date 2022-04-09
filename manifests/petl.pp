@@ -23,8 +23,6 @@ node 'malawi-dw.pih-emr.org' {
 
   include wget
   include unzip
-  include mysql_setup
-  include petl::mysql
   include petl::java
   include petl
   include petl::disable_petl_startup_on_boot
