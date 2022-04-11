@@ -1,4 +1,4 @@
-namespace :deploy do
+namespace :deploy_petl do
   desc 'Deploys petl with puppet'
   task :default do
     run("cd /etc/puppet && git pull")
