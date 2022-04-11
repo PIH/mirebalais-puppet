@@ -1,4 +1,4 @@
 set :user, 'root'
-set :param, 'site'
+set :puppet_param, 'site'
 
 server 'humci.pih-emr.org', :test
