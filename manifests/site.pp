@@ -87,7 +87,7 @@ node 'humtest.pih-emr.org' {
 
 }
 
-node 'zl-cloud-inf-omrshiv' {
+node 'zl-cloud-inf-omrshiv-01' {
 
   class { 'apt':
     always_apt_update => true,
