@@ -5,7 +5,7 @@ package_release: 'stable/'
 
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
-config_version: 1.33.0
+config_version: 1.34.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.1.0
