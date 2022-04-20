@@ -62,7 +62,7 @@ node 'emr.hum.ht' {
 
 }
 
-node 'humtest.pih-emr.org' {
+node 'hai-hum-inf-humtest' {
 
   class { 'apt':
     always_apt_update => true,
@@ -83,7 +83,7 @@ node 'humtest.pih-emr.org' {
   include openmrs::pihemr
   include openmrs::initial_setup
 
-  include percona
+  #include percona
 
 }
 
