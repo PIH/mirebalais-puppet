@@ -1,7 +1,7 @@
 webapp_name: openmrs
 site_domain: humtest-zt.pih-emr.org
 
-package_release: 'stable/'
+package_release: 'unstable/'
 
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
