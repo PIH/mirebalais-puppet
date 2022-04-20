@@ -3,8 +3,6 @@ site_domain: humtest-zt.pih-emr.org
 
 package_release: 'stable/'
 
-repo_url: ENC[aADqxhfrKRpTug52rCcj1HuHQnWQYEH6LDbNN7Huvp4=]
-
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
 config_version: 1.33.0
