@@ -185,7 +185,7 @@ node 'reporting.hum.ht' {
   include tomcat
 
   include openmrs::pihemr
-  include openmrs::initial_setup
+  #include openmrs::initial_setup
 
   #include percona
 
@@ -194,7 +194,7 @@ node 'reporting.hum.ht' {
 
   include petl
 
-  include mirebalais_reporting::reporting_setup
+  #include mirebalais_reporting::reporting_setup
 }
 
 node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
