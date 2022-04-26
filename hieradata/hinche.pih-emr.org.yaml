@@ -39,6 +39,8 @@ remote_zlidentifier_url: 'https://zanmi.pih-emr.org/openmrs/module/idgen/exportI
 remote_zlidentifier_username: mirebalais
 remote_zlidentifier_password: ENC[IuAJgqs6Ci5Hw5xs/DYiZg==]
 
+haiti_hiv_emr_link_url: ENC[jMR1nUXTdoo+vig9fDoG9v3HIPSMaeRjWFPxaT0D9ewoER7YfHla8F9+ojg9OX0KrdnSPaShPR/AKZHhhEy9tA==]
+
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 

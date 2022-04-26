@@ -38,6 +38,8 @@ remote_zlidentifier_url: 'https://zanmi.pih-emr.org/openmrs/module/idgen/exportI
 remote_zlidentifier_username: mirebalais
 remote_zlidentifier_password: ENC[IuAJgqs6Ci5Hw5xs/DYiZg==]
 
+haiti_hiv_emr_link_url: ENC[jMR1nUXTdoo+vig9fDoG9v3HIPSMaeRjWFPxaT0D9ewoER7YfHla8F9+ojg9OX0KrdnSPaShPR/AKZHhhEy9tA==]
+
 java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
 #az copy

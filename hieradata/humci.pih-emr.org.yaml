@@ -17,6 +17,8 @@ mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 
+haiti_hiv_emr_link_url: ENC[L8Ms0nQ8V3a9Fog3aKg9kscA1HxnCkVwhUXE2LGTQiL6Wp5O5Fb08bKPEKsT/KGJDqtBfxKch/UCeWnvxduhoQ==]
+
 lacolline_server_url: 'http://boston.pih-emr.org:8080/openmrs'
 lacolline_username: wsuser
 lacolline_password: wsuser123
