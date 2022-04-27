@@ -2,6 +2,8 @@
 webapp_name: openmrs
 site_domain: zlemr.pih-emr.org
 
+package_release: 'stable/'
+
 pih_config: haiti,haiti-hiv
 config_name: openmrs-config-zl
 config_version: 1.34.0
