@@ -1,13 +1,11 @@
 webapp_name: openmrs
-site_domain: humtest.pih-emr.org
+site_domain: humtest-zt.pih-emr.org
 
-package_release: 'stable/'
-
-repo_url: ENC[aADqxhfrKRpTug52rCcj1HuHQnWQYEH6LDbNN7Huvp4=]
+package_release: 'unstable/'
 
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
-config_version: 1.33.0
+config_version: 1.35.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.1.0

@@ -1,11 +1,11 @@
 ---
-site_domain: hinche-server.pih-emr.org
+site_domain: hinche.pih-emr.org
 
 package_release: 'stable/'
 
 pih_config: haiti,haiti-hinche
 config_name: openmrs-config-zl
-config_version: 1.33.0
+config_version: 1.34.0
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.1.0
@@ -39,15 +39,12 @@ remote_zlidentifier_url: 'https://zanmi.pih-emr.org/openmrs/module/idgen/exportI
 remote_zlidentifier_username: mirebalais
 remote_zlidentifier_password: ENC[IuAJgqs6Ci5Hw5xs/DYiZg==]
 
-java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+haiti_hiv_emr_link_url: ENC[jMR1nUXTdoo+vig9fDoG9v3HIPSMaeRjWFPxaT0D9ewoER7YfHla8F9+ojg9OX0KrdnSPaShPR/AKZHhhEy9tA==]
 
-# Use our old godaddy cert until we've tested the letsencrypt one for a few months
-ssl_cert_dir: '/etc/ssl/certs'
-ssl_key_dir: '/etc/ssl/private'
-ssl_cert_file: '45554e4453e21fc.crt'
-ssl_chain_file: 'gd_bundle-g2-g1.crt'
-ssl_key_file: 'pih-emr.org.key'
-ssl_use_letsencrypt: false
+commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
+commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
+
+java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
 #az copy
 az_backup_folder_path: haiti/hinche

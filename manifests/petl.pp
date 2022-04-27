@@ -14,3 +14,17 @@ node default {
   include petl
 
 }
+
+node 'malawi-dw.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include wget
+  include unzip
+  include petl::java
+  include petl
+  include petl::disable_petl_startup_on_boot
+
+}

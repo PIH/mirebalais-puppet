@@ -5,7 +5,7 @@ package_release: 'stable/'
 
 pih_config: mirebalais,mirebalais-humdemo
 config_name: openmrs-config-zl
-config_version: 1.33.0
+config_version: 1.34.0
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.1.0
@@ -17,6 +17,8 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 lacolline_server_url: 'http://boston.pih-emr.org:8080/openmrs'
 lacolline_username: wsuser
 lacolline_password: ENC[OV3IH5U9urv6gEb76vnyYA==]
+
+haiti_hiv_emr_link_url: ENC[L8Ms0nQ8V3a9Fog3aKg9kscA1HxnCkVwhUXE2LGTQiL6Wp5O5Fb08bKPEKsT/KGJDqtBfxKch/UCeWnvxduhoQ==]
 
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]

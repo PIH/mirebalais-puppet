@@ -23,7 +23,7 @@ spring:
   datasource:
     platform: "mssql"
     driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=<%= @petl_sqlserver_databaseName -%>"
+    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=openmrs_reporting"
     username: "<%= @petl_sqlserver_user -%>"
     password: "<%= @petl_sqlserver_password -%>"
   jpa:
@@ -74,6 +74,6 @@ lowerNenoReporting:
 consolidatedReporting:
   host: "<%= @petl_sqlserver_host -%>"
   port: "<%= @petl_sqlserver_port -%>"
-  databaseName: "<%= @petl_sqlserver_databaseName -%>"
+  databaseName: "openmrs_reporting"
   user: "<%= @petl_sqlserver_user -%>"
   password: "<%= @petl_sqlserver_password -%>"

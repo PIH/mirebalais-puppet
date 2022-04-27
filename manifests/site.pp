@@ -48,7 +48,7 @@ node 'emr.hum.ht' {
   include openmrs::pihemr
   include openmrs::initial_setup
 
-  include percona
+  #include percona
 
   include mirth
   include mirth::channel_setup
@@ -57,12 +57,11 @@ node 'emr.hum.ht' {
   include logging
 
   include openmrs::backup
-  include crashplan
   include mirebalais_reporting::production_setup
 
 }
 
-node 'humtest.pih-emr.org' {
+node 'hai-hum-inf-humtest' {
 
   class { 'apt':
     always_apt_update => true,
@@ -83,11 +82,11 @@ node 'humtest.pih-emr.org' {
   include openmrs::pihemr
   include openmrs::initial_setup
 
-  include percona
+  #include percona
 
 }
 
-node 'zlemr.pih-emr.org' {
+node 'hai-cloud-inf-omrshiv' {
 
   class { 'apt':
     always_apt_update => true,
@@ -141,6 +140,7 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
 }
 
+
 node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
 
   class { 'apt':
@@ -185,16 +185,16 @@ node 'reporting.hum.ht' {
   include tomcat
 
   include openmrs::pihemr
-  include openmrs::initial_setup
+  #include openmrs::initial_setup
 
-  include percona
+  #include percona
 
   #include monitoring
   include logging
 
   include petl
 
-  include mirebalais_reporting::reporting_setup
+  #include mirebalais_reporting::reporting_setup
 }
 
 node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
@@ -222,10 +222,9 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   #include logging
 
   include openmrs::backup
-  include crashplan
 }
 
-node 'thomonde.pih-emr.org', 'hinche-server.pih-emr.org', 'cercalasource.pih-emr.org', 'lacolline.pih-emr.org', 'belladere.pih-emr.org', 'hsn.pih-emr.org', 'boucancarre.pih-emr.org', 'cange.pih-emr.org' {
+node 'thomonde.pih-emr.org', 'hinche.pih-emr.org', 'cercalasource.pih-emr.org', 'lacolline.pih-emr.org', 'belladere.pih-emr.org', 'hsn.pih-emr.org', 'boucancarre.pih-emr.org', 'cange.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
@@ -296,10 +295,9 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org' {
   include logging
 
   include openmrs::backup
-  include crashplan
 }
 
-node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.org', 'ces-ci.pih-emr.org', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'hsn-ci.pih-emr.org', 'ocltest.pih-emr.org' {
+node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.org', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'hsn-ci.pih-emr.org', 'ocltest.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
@@ -320,7 +318,30 @@ node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.or
   include openmrs::pihemr
   include openmrs::initial_setup
 
-  #include monitoring
+}
+
+node 'ces-ci.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include apache2
+  include tomcat
+
+  include openmrs::pihemr
+  include openmrs::initial_setup
+
+  include petl
 }
 
 
@@ -417,7 +438,6 @@ node 'haiti-test.pih-emr.org' {
   include openmrs::pihemr
   include openmrs::initial_setup
 
-  include percona
 }
 
 node 'haititest.pih-emr.org' {
@@ -443,7 +463,7 @@ node 'haititest.pih-emr.org' {
 
 }
 
-node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org', 'ces-laguna.pih-emr.org' {
+node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org'{
 
   class { 'apt':
     always_apt_update => true,
@@ -486,6 +506,7 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano',
 
   include openmrs::pihemr
   include openmrs::initial_setup
+  include openmrs::backup
 
   include cesemr_user_resources
 
@@ -555,6 +576,7 @@ node 'malawi-dw.pih-emr.org' {
   include java
 
   include petl
+  include petl::disable_petl_startup_on_boot
 
 }
 
