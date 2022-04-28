@@ -19,6 +19,10 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mysql_innodb_buffer_pool_size: 8G
 mysql_innodb_buffer_pool_instances: 8
 
+remote_zlidentifier_url: 'https://zanmi.pih-emr.org/openmrs/module/idgen/exportIdentifiers.form?source=1&comment=HIV'
+remote_zlidentifier_username: mirebalais
+remote_zlidentifier_password: ENC[IuAJgqs6Ci5Hw5xs/DYiZg==]
+
 # PETL
 
 # PETL MySQL
