@@ -83,13 +83,6 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
-    hiv:
-       host: "haititest.pih-emr.org"
-       port: "3306"
-       databaseName: "<%= @petl_mysql_databaseName -%>"
-       user: "${datasources.mysql.user}"
-       password: "${datasources.mysql.password}"
-       options: "${datasources.mysql.options}"
 
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"
