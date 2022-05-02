@@ -1,0 +1,57 @@
+petl:
+  maxConcurrentJobs: 7
+  homeDir: "/opt/petl"
+  datasourceDir: "/opt/petl/configurations/datasources"
+  jobDir: "/opt/petl/configurations/jobs"
+  startup:
+    jobs:
+      - "create-partitions.yml"
+
+executeCron:
+  refreshZlWarehouse: "<%= @petl_cron_time -%>"
+  refreshHumciWarehouse: ""
+
+server:
+  port: "<%= @petl_server_port -%>"
+
+logging:
+  level:
+    root: "WARN"
+    org.pih: "INFO"
+
+spring:
+  datasource:
+    platform: "mssql"
+    driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=zl_omrs_dw"
+    username: "<%= @petl_sqlserver_user -%>"
+    password: "<%= @petl_sqlserver_password -%>"
+  jpa:
+    hibernate:
+      dialect: "org.hibernate.dialect.SQLServer2012Dialect"
+  liquibase:
+    database-change-log-table: "petl_database_change_log"
+    database-change-log-lock-table: "petl_database_change_log_lock"
+
+# see: https://pihemr.atlassian.net/wiki/spaces/PIHEMR/pages/2397044737/ZL+Central+DataWarehouse+configuration+notes
+datasources:
+  mysql:
+    user: "<%= @petl_mysql_user -%>"
+    password: "<%= @petl_mysql_password -%>"
+    options: " <%= @petl_mysql_options -%>"
+
+  openmrs:
+    hiv:
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "<%= @petl_mysql_databaseName -%>"
+       user: "${datasources.mysql.user}"
+       password: "${datasources.mysql.password}"
+       options: "${datasources.mysql.options}"
+
+  warehouse:
+       host: "<%= @petl_sqlserver_host -%>"
+       port: "<%= @petl_sqlserver_port -%>"
+       databaseName: "zl_omrs_dw"
+       user: "<%= @petl_sqlserver_user -%>"
+       password: "<%= @petl_sqlserver_password -%>"

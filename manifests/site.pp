@@ -111,6 +111,28 @@ node 'hai-cloud-inf-omrshiv' {
 
 }
 
+node 'hai-cloud-inf-omrshivrpt' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+
+  include percona
+  include petl
+  include petl::mysql
+
+}
+
 node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
   class { 'apt':
