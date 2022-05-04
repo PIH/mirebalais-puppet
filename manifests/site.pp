@@ -111,7 +111,7 @@ node 'hai-cloud-inf-omrshiv' {
 
 }
 
-node 'hai-cloud-inf-omrshivrpt' {
+node 'hai-cloud-inf-omrshiv-report' {
 
   class { 'apt':
     always_apt_update => true,
