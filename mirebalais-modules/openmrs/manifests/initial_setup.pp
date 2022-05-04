@@ -69,7 +69,7 @@ class openmrs::initial_setup(
   exec { 'tomcat-start':
     command     => "service ${tomcat} start",
     user        => 'root',
-    subscribe   => Openmrs::Liquibase_migrate['set up core data'],
+ #   subscribe   => Openmrs::Liquibase_migrate['set up core data'],
     refreshonly => true
   }
 }
