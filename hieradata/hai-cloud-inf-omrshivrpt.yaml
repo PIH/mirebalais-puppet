@@ -20,21 +20,14 @@ petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
 # PETL SQL Server 2106
 petl_sqlserver_databaseName: zl_omrs_dw
-petl_sqlserver_host: 10.160.12.28
+petl_sqlserver_host: 10.160.12.27
 petl_sqlserver_port: 1433
-petl_sqlserver_user: ENC[v1pMAcFAh0ag0IlcLSYolQ==:WDaxbE1p9+iN7x8/aybOWA==:MWVZR2U5YlBXemlyVDNUVXdxSjB1dz09]
-petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
+petl_sqlserver_user: openmrs
+petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
 
 # PETL Crons
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
-petl_cron_time: "0 0 20 ? * *"
-
-# PETL warehouse DB
-# This is used in malawi
-# when running ./puppet-apply.sh petl on humci or petl-test
-# ensure petl_warehouse_db is set to ""
-petl_warehouse_db: ""
-petl_mysql_user_ip: localhost
+petl_cron_time: "0 15 20 ? * *"
 
 mysql_server_id: 3
 mysql_master_ip:
