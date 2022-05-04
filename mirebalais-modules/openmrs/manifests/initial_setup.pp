@@ -31,8 +31,8 @@ class openmrs::initial_setup(
     privileges => ['ALL'],
     table => '*.*',
     user => "root@localhost",
-    require => [Service['mysqld'],  Package[$package_name]] //,
-   // notify  => Openmrs::Liquibase_migrate['set up base schema'];
+    require => [Service['mysqld'],  Package[$package_name]] #,
+    # notify  => Openmrs::Liquibase_migrate['set up base schema'];
   }
 
 /*
