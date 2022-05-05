@@ -1,7 +1,7 @@
 
-site_domain: gladi.pih-emr.org
+site_domain: wellbody-ci.pih-emr.org
 
-pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-gladi
+pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-ci
 config_name: openmrs-config-pihsl
 config_version: 1.7.0-SNAPSHOT
 
