@@ -31,14 +31,16 @@ class openmrs::initial_setup(
     privileges => ['ALL'],
     table => '*.*',
     user => "root@localhost",
-    require => [Service['mysqld'],  Package[$package_name]],
-    notify  => Openmrs::Liquibase_migrate['set up base schema'];
+    require => [Service['mysqld'],  Package[$package_name]] #,
+    # notify  => Openmrs::Liquibase_migrate['set up base schema'];
   }
 
+/*
   file { '/usr/local/liquibase.jar':
     ensure => present,
     source => 'puppet:///modules/openmrs/liquibase.jar'
   }
+
 
   openmrs::liquibase_migrate { 'set up base schema':
     dataset => 'liquibase-schema-only.xml',
@@ -52,7 +54,7 @@ class openmrs::initial_setup(
     refreshonly => true
   }
 
- /* openmrs::liquibase_migrate { 'migrate update to latest':
+  openmrs::liquibase_migrate { 'migrate update to latest':
     dataset     => 'liquibase-update-to-latest.xml',
     refreshonly => true
   }*/
@@ -67,7 +69,7 @@ class openmrs::initial_setup(
   exec { 'tomcat-start':
     command     => "service ${tomcat} start",
     user        => 'root',
-    subscribe   => Openmrs::Liquibase_migrate['set up core data'],
+ #   subscribe   => Openmrs::Liquibase_migrate['set up core data'],
     refreshonly => true
   }
 }
