@@ -6,7 +6,7 @@ class mirebalais_reporting::reporting_setup (
 	$backup_db_password = decrypt(hiera('backup_db_password')),
 	$sysadmin_email = hiera('sysadmin_email')
 ) {
-	
+
 	# note that public/private key sharing needs to be set up manually between production and reporting
 	user {
 		backups:
@@ -120,8 +120,9 @@ class mirebalais_reporting::reporting_setup (
 		mode    => '0755'
 	}
 
+    # disable this job, set to "absent" for now
 	cron { 'restart-server.sh':
-		ensure  => present,
+		ensure  => absent,
 		command => '/usr/local/sbin/restart-server.sh &>/dev/null 2>&1',
 		user    => 'root',
 		hour    => 06,
