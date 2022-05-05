@@ -3,7 +3,7 @@ package_release: 'unstable/'
 site_domain: ces-ci.pih-emr.org
 pih_config: mexico,mexico-demo
 config_name: openmrs-config-ces
-config_version: 1.22.0-SNAPSHOT
+config_version: 1.23.0-SNAPSHOT
 
 frontend_version: 1.4.0-SNAPSHOT
 
