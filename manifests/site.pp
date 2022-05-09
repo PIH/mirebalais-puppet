@@ -188,7 +188,7 @@ node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
   include logging
 }
 
-node 'reporting.hum.ht' {
+node 'hai-hum-inf-omrs-report' {
 
   class { 'apt':
     always_apt_update => true,

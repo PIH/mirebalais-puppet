@@ -39,8 +39,8 @@ petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
 # PETL Cron
 petl_error_subject: Haiti Hiv (ZLEMR) petl errors
 
-mysql_net_read_timeout: 120
-mysql_net_write_timeout: 120
+mysql_net_read_timeout: 36000
+mysql_net_write_timeout: 3600
 mysql_wait_timeout: 28800
 mysql_interactive_timeout: 28800
 
