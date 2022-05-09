@@ -4,7 +4,18 @@ class mirebalais_reporting::reporting_setup (
 	$openmrs_db_password = decrypt(hiera('openmrs_db_password')),
 	$openmrs_warehouse_db = decrypt(hiera('openmrs_warehouse_db')),
 	$backup_db_password = decrypt(hiera('backup_db_password')),
-	$sysadmin_email = hiera('sysadmin_email')
+	$sysadmin_email = hiera('sysadmin_email'),
+  $perconaBackupDir = hiera('perconaBackupDir'),
+	$perconaLogs = hiera('perconaLogs'),
+	$perconaRestoreDir = hiera('perconaRestoreDir'),
+	$perconaSite = hiera('perconaSite'),
+
+	$mysqlDb = hiera('mysqlDb'),
+	$reportingTables = hiera('reportingTables'),
+	$reportingDumps = hiera('reportingDumps'),
+
+	$minPerconaDirSize = hiera('minPerconaDirSize')
+
 ) {
 
 	# note that public/private key sharing needs to be set up manually between production and reporting
@@ -12,10 +23,10 @@ class mirebalais_reporting::reporting_setup (
 		backups:
     		ensure => 'present',
     		home   => "/home/backups",
-    		shell  => '/bin/sh',
+    		shell  => '/bin/bash',
   	}
 
-	file { "/home/reporting":
+	file { "${perconaBackupDir}":
 		ensure  => directory,
 		owner   => root,
 		group   => root,
@@ -23,21 +34,13 @@ class mirebalais_reporting::reporting_setup (
 		require =>  Package['percona-xtrabackup']
 	}
 
-  	file { "/home/reporting/percona":
-        ensure  => directory,
-        owner   => root,
-        group   => root,
-        mode    => '0755',
-        require =>  Package['percona-xtrabackup']
-      }
-
-      file { "/home/reporting/percona/scripts":
-        ensure  => directory,
-        owner   => root,
-        group   => root,
-        mode    => '0755',
-        require =>  File["/home/reporting/percona"]
-      }
+	file { "${perconaBackupDir}/scripts":
+		ensure  => directory,
+		owner   => root,
+		group   => root,
+		mode    => '0755',
+		require =>  File["${perconaBackupDir}"]
+	}
 
 	file { 'mirebalaisreportingdbsource.sh':
 		ensure  => absent,
@@ -53,16 +56,6 @@ class mirebalais_reporting::reporting_setup (
 		path    => '/usr/local/sbin/mirebalaiswarehousedbdump.sh'
 	}
 
-	/*file { 'mirebalaiswarehousedbdump.sh':
-		ensure  => present,
-		path    => '/usr/local/sbin/mirebalaiswarehousedbdump.sh',
-		mode    => '0700',
-		owner   => 'root',
-		group   => 'root',
-		content => template('mirebalais_reporting/mirebalaiswarehousedbdump.sh.erb'),
-	}*/
-
-
 	cron { 'mirebalais-reporting-db-source':
 		ensure  => absent,
 		command => '/usr/local/sbin/mirebalaisreportingdbsource.sh >/dev/null 2>&1',
@@ -76,35 +69,35 @@ class mirebalais_reporting::reporting_setup (
 
 	file { 'mirebalais-warehouse-n-reporting-tables.sh':
 		ensure  => present,
-		path    => '/home/reporting/percona/scripts/mirebalais-warehouse-n-reporting-tables.sh',
+		path    => "${perconaBackupDir}/scripts/mirebalais-warehouse-n-reporting-tables.sh",
 		mode    => '0700',
 		owner   => 'root',
 		group   => 'root',
 		content => template('mirebalais_reporting/mirebalais-warehouse-n-reporting-tables.sh.erb'),
 	}
 
-	file { 'mirebalais-percona-restore.sh':
+	file { 'percona-openmrs-db-restore.sh':
 		ensure  => present,
-		path    => '/home/reporting/percona/scripts/mirebalais-percona-restore.sh',
+		path    => "${perconaBackupDir}/scripts/percona-openmrs-db-restore.sh",
 		mode    => '0700',
 		owner   => 'root',
 		group   => 'root',
-		content => template('mirebalais_reporting/mirebalais-percona-restore.sh.erb'),
+		content => template('mirebalais_reporting/percona-openmrs-db-restore.sh.erb'),
 	}
 
-	cron { 'mirebalais-percona-restore':
+	cron { 'percona-openmrs-db-restore':
 		ensure  => present,
-		command => '/home/reporting/percona/scripts/mirebalais-percona-restore.sh >/dev/null 2>&1',
+		command => "${perconaBackupDir}/percona/scripts/percona-openmrs-db-restore.sh >/dev/null 2>&1",
 		user    => 'root',
 		hour    => 02,
 		minute  => 30,
 		environment => "MAILTO=$sysadmin_email",
-		require => [ File['mirebalais-percona-restore.sh'] ]
+		require => [ File['percona-openmrs-db-restore.sh'] ]
 	}
 
 	cron { 'mirebalais-warehouse-n-reporting-tables.sh':
 		ensure  => present,
-		command => '/home/reporting/percona/scripts/mirebalais-warehouse-n-reporting-tables.sh >/dev/null 2>&1',
+		command => "${perconaBackupDir}/scripts/mirebalais-warehouse-n-reporting-tables.sh >/dev/null 2>&1",
 		user    => 'root',
 		hour    => 03,
 		minute  => 50,
