@@ -6,7 +6,7 @@ class mirebalais_reporting::reporting_setup (
 	$backup_db_password = decrypt(hiera('backup_db_password')),
 	$sysadmin_email = hiera('sysadmin_email'),
 	$perconaHomeDir = hiera('perconaHomeDir'),
-  $perconaBackupDir = hiera('perconaBackupDir'),
+	$perconaBackupDir = hiera('perconaBackupDir'),
 	$perconaLogs = hiera('perconaLogs'),
 	$perconaRestoreDir = hiera('perconaRestoreDir'),
 	$perconaSite = hiera('perconaSite'),
@@ -22,33 +22,18 @@ class mirebalais_reporting::reporting_setup (
 	# note that public/private key sharing needs to be set up manually between production and reporting
 	user {
 		backups:
-    		ensure => 'present',
-    		home   => "/home/backups",
-    		shell  => '/bin/bash',
-  	}
-
-	file { "${perconaHomeDir}":
-		ensure  => directory,
-		owner   => root,
-		group   => root,
-		mode    => '0755',
-		require =>  Package['percona-xtrabackup']
+			ensure => 'present',
+			home   => "/home/backups",
+			shell  => '/bin/bash',
 	}
 
-	file { "${perconaHomeDir}/scripts":
-		ensure  => directory,
-		owner   => root,
-		group   => root,
-		mode    => '0755',
-		require =>  File["${perconaHomeDir}"]
-	}
 
-	file { "${perconaBackupDir}"
+	file { "${perconaBackupDir}":
 		ensure  => directory,
 		owner   => root,
 		group   => root,
 		mode    => '0755',
-		require =>  File["${perconaHomeDir}"]
+		require => Package['percona-xtrabackup']
 	}
 
 	file { 'mirebalaisreportingdbsource.sh':
@@ -122,7 +107,7 @@ class mirebalais_reporting::reporting_setup (
 		mode    => '0755'
 	}
 
-    # disable this job, set to "absent" for now
+	# disable this job, set to "absent" for now
 	cron { 'restart-server.sh':
 		ensure  => absent,
 		command => '/usr/local/sbin/restart-server.sh &>/dev/null 2>&1',
