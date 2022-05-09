@@ -211,7 +211,7 @@ frontend_version: 1.3.0
 perconaHomeDir: "/home/percona"
 perconaBackupDir: "/home/percona/backups"
 perconaLogs: "/home/percona/logs"
-perconaLogFile: "foo" /home/percona/logs
+perconaLogFile: "foo"
 perconaRestoreDir: "/home/percona/backups/openmrs"
 perconaSite: "foo"
 mysqlDataDir: "/var/lib/mysql"
