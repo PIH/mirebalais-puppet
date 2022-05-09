@@ -60,4 +60,4 @@ ssl_use_letsencrypt: true
 
 # percona
 perconaSite: HUM Reporting
-minPerconaDirSize=10
+minPerconaDirSize: 41200000

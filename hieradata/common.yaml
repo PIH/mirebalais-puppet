@@ -220,7 +220,7 @@ reportingDumps="foo"
 mailTo=hiera(sysadmin_email)
 mailSubject="$perconaSite percona db restore success"
 logFile="/home/percona/logs/percoa-restore.log"
-minPerconaDirSize=10
+minPerconaDirSize: 10
 
 # old os version
 ubuntu_14: false
