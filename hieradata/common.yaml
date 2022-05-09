@@ -217,7 +217,7 @@ mysqlDb: "foo"
 openmrsHomeDir: "/home/tomcat7/.OpenMRS"
 reportingTables: "foo"
 reportingDumps: "foo"
-mailTo: %{hiera('sysadmin_email')}
+mailTo: "%{hiera('sysadmin_email')}"
 mailSubject: "${perconaSite} percona db restore success"
 logFile: "/home/percona/logs/percoa-restore.log"
 minPerconaDirSize: 10
