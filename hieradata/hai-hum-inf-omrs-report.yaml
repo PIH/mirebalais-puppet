@@ -57,3 +57,7 @@ petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
 petl_error_subject: HUM Reporting PETL errors
 
 ssl_use_letsencrypt: true
+
+# percona
+perconaSite: HUM Reporting
+minPerconaDirSize=10
