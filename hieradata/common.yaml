@@ -208,18 +208,18 @@ frontend_name: "openmrs-frontend-pihemr"
 frontend_version: 1.3.0
 
 # percona restore
-perconaBackupDir="/home/percona/backups"
-perconaLogs="/home/percona/logs"
-perconaRestoreDir="/home/percona/backups/openmrs"
-perconaSite="foo"
-mysqlDataDir="/var/lib/mysql"
-mysqlDb="foo"
-openmrsHomeDir="/home/tomcat7/.OpenMRS"
-reportingTables="foo"
-reportingDumps="foo"
-mailTo=hiera(sysadmin_email)
-mailSubject="$perconaSite percona db restore success"
-logFile="/home/percona/logs/percoa-restore.log"
+perconaBackupDir: "/home/percona/backups"
+perconaLogs: "/home/percona/logs"
+perconaRestoreDir: "/home/percona/backups/openmrs"
+perconaSite: "foo"
+mysqlDataDir: "/var/lib/mysql"
+mysqlDb: "foo"
+openmrsHomeDir: "/home/tomcat7/.OpenMRS"
+reportingTables: "foo"
+reportingDumps: "foo"
+mailTo: %{hiera('sysadmin_email')}
+mailSubject: "${perconaSite} percona db restore success"
+logFile: "/home/percona/logs/percoa-restore.log"
 minPerconaDirSize: 10
 
 # old os version
