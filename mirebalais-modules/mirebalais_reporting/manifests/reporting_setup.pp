@@ -8,6 +8,7 @@ class mirebalais_reporting::reporting_setup (
 	$perconaHomeDir = hiera('perconaHomeDir'),
 	$perconaBackupDir = hiera('perconaBackupDir'),
 	$perconaLogs = hiera('perconaLogs'),
+	$perconaLogFile = hiera('perconaLogFile'),
 	$perconaRestoreDir = hiera('perconaRestoreDir'),
 	$perconaSite = hiera('perconaSite'),
 
