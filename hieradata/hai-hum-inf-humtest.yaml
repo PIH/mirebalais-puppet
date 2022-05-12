@@ -8,7 +8,7 @@ config_name: openmrs-config-zl
 config_version: 1.36.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
-frontend_version: 1.1.0
+frontend_version: 1.2.0-SNAPSHOT
 
 server_timezone: America/New_York
 
