@@ -188,7 +188,7 @@ node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
   include logging
 }
 
-node 'reporting.hum.ht' {
+node 'hai-hum-inf-omrs-report' {
 
   class { 'apt':
     always_apt_update => true,
@@ -209,14 +209,14 @@ node 'reporting.hum.ht' {
   include openmrs::pihemr
   #include openmrs::initial_setup
 
-  #include percona
+  include percona
 
   #include monitoring
   include logging
 
   include petl
 
-  #include mirebalais_reporting::reporting_setup
+  include mirebalais_reporting::reporting_setup
 }
 
 node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {

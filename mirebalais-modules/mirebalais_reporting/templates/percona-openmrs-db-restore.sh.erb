@@ -1,0 +1,115 @@
+#!/bin/bash
+
+mailTo=<%= @sysadmin_email %>
+perconaBackupDir="<%= @perconaBackupDir %>"
+perconaLogs="<%= @perconaLogs %>"
+perconaRestoreDir="<%= @perconaRestoreDir %>"
+perconaSite="<%= @perconaSite %>"
+
+mysqlDataDir="/var/lib/mysql"
+mysqlDb="<%= @mysqlDb %>"
+openmrsHomeDir="/home/tomcat7/.OpenMRS"
+reportingTables="<%= @reportingTables %>"
+reportingDumps="<%= @reportingDumps %>"
+
+mailSubject="$perconaSite percona db restore success"
+perconaLogFile="<%= @perconaLogFile %>"
+minPerconaDirSize=<%= @minPerconaDirSize %>
+
+jobStartDate=`date +%Y%m%d-%H%M%S`
+
+exec > $perconaLogFile 2>&1
+
+echo cronjob started on $jobStartDate
+
+mkdir -p /home/percona
+mkdir -p ${perconaBackupDir}
+mkdir -p ${perconaLogs}
+
+## Ensure $perconaRestoreDir exists
+if [ -d "$perconaRestoreDir" ]; then
+        echo $perconaRestoreDir exist
+else
+        echo $perconaRestoreDir does not exist
+        mail -s "$perconaSite: Failure $perconaRestoreDir does not exist" "$mailTo" < $perconaLogFile
+        exit
+fi
+
+## Ensure the size is correct
+openmrsDirSize=$(du -s $perconaRestoreDir | cut -f1)
+
+if [ "$openmrsDirSize" -ge "$minPerconaDirSize" ]; then
+            echo file size is correct
+else
+            echo file size isnot correct
+            echo openmrsDirSize is $openmrsDirSize
+            echo minPerconaDirSize is $minPerconaDirSize
+            mail -s "$perconaSite: Failure $perconaRestoreDir dir size is small" "$mailTo" < $perconaLogFile
+            exit
+fi
+
+## stop mysql before percona restore executes
+/etc/init.d/mysql stop
+
+if [ $? -eq 0 ]; then
+        echo mysql stopped
+    else
+        echo mysql already not running
+fi
+
+rm -rf ${mysqlDataDir}/*
+if [ $? -eq 0 ]; then
+        echo $mysqlDataDir removed
+else
+    echo $mysqlDataDir wasnot available
+fi
+
+innobackupex --copy-back ${perconaRestoreDir}
+if [ $? -eq 0 ]; then
+        echo Percona DB was restored succesfully
+else
+        echo Problem restoring percona db
+        mail -s "$perconaSite: Failure restoring percona db" "$mailTo" < $perconaLogFile
+        exit
+fi
+
+sleep 30
+chown -R mysql:mysql ${mysqlDataDir}
+sleep 10
+/etc/init.d/mysql start
+
+if [ $? -eq 0 ]; then
+        sleep 10
+        echo mysql started succesfully
+else
+        echo mysql can not start
+        mail -s "$perconaSite: Failure starting mysql" "$mailTo" < $perconaLogFile
+        exit
+fi
+
+echo ensuring all tables are correct
+/usr/bin/mysqlcheck -u root --auto-repair --check --all-databases
+
+if [ $? -eq 0 ]; then
+        echo all tables are correct
+else
+        echo mysql tables are not correct
+        mail -s "$perconaSite: mysql proc table issues" "$mailTo" < $perconaLogFile
+        exit
+fi
+
+rm -rf ${perconaBackupDir}/*
+
+/etc/init.d/apache2 stop
+/etc/init.d/tomcat7 stop
+/etc/init.d/mysql stop
+rm -rf /home/tomcat7/.OpenMRS/configuration_checksums
+sleep 10
+
+jobEndDate=`date +%Y%m%d-%H%M%S`
+echo cronjob ended on $jobEndDate
+
+# Mail all outputs of this execution, they'll all be a success
+mail -s "$mailSubject" "$mailTo" < $perconaLogFile
+
+/sbin/reboot
