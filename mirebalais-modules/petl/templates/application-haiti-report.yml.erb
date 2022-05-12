@@ -41,13 +41,55 @@ datasources:
     options: " <%= @petl_mysql_options -%>"
 
   openmrs:
+    cange:
+      host: "127.0.0.1"
+      port: "3356"
+      databaseName: "cange_openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    hinche:
+      host: "127.0.0.1"
+      port: "3356"
+      databaseName: "hinche_openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    saint_marc_hsn:
+      host: "127.0.0.1"
+      port: "3356"
+      databaseName: "hsn_openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    lacolline:
+      host: "127.0.0.1"
+      port: "3356"
+      databaseName: "lacolline_openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    thomonde:
+      host: "127.0.0.1"
+      port: "3356"
+      databaseName: "thomonde_openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    mirebalais:
+      host: "<%= @petl_mysql_host -%>"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "hum_openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
     hiv:
-       host: "<%= @petl_mysql_host -%>"
-       port: "<%= @petl_mysql_port -%>"
-       databaseName: "<%= @petl_mysql_databaseName -%>"
-       user: "${datasources.mysql.user}"
-       password: "${datasources.mysql.password}"
-       options: "${datasources.mysql.options}"
+      host: "<%= @petl_mysql_host -%>"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "<%= @petl_mysql_databaseName -%>"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
 
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"
