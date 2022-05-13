@@ -15,6 +15,7 @@ server_timezone: America/New_York
 mysql_server_id: 1
 mysql_innodb_buffer_pool_size: 16G
 mysql_innodb_buffer_pool_instances: 16
+mysql_bind_address: 0.0.0.0
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
