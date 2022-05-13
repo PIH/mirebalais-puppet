@@ -1,4 +1,4 @@
-webapp_name: openmrs
+webapp_name: mirebalais
 site_domain: humtest-zt.pih-emr.org
 
 package_release: 'unstable/'
