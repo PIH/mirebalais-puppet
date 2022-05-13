@@ -439,52 +439,6 @@ node 'haitihivtest.pih-emr.org' {
 
 }
 
-node 'haiti-test.pih-emr.org' {
-
-  class { 'apt':
-    always_apt_update => true,
-  }
-
-  include security
-  include mail
-  include ntpdate
-  include apt_upgrades
-  include wget
-  include unzip
-
-  include java
-  include mysql_setup
-  include apache2
-  include tomcat
-
-  include openmrs::pihemr
-  include openmrs::initial_setup
-
-}
-
-node 'haititest.pih-emr.org' {
-
-  class { 'apt':
-    always_apt_update => true,
-  }
-
-  include security
-  include mail
-  include ntpdate
-  include apt_upgrades
-  include wget
-  include unzip
-
-  include java
-  include mysql_setup
-  include apache2
-  include tomcat
-
-  include openmrs::pihemr
-  include openmrs::initial_setup
-
-}
-
 node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org'{
 
   class { 'apt':
