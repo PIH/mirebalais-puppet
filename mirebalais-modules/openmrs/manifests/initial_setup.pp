@@ -31,14 +31,13 @@ class openmrs::initial_setup(
     privileges => ['ALL'],
     table => '*.*',
     user => "root@localhost",
-    require => [Service['mysqld'],  Package[$package_name]] #,
-    # notify  => Openmrs::Liquibase_migrate['set up base schema'];
+    require => [Service['mysqld'],  Package[$package_name]],
+    notify  => Openmrs::Liquibase_migrate['set up base schema'];
   }
 
-/*
   file { '/usr/local/liquibase.jar':
     ensure => present,
-    source => 'puppet:///modules/openmrs/liquibase.jar'
+    source => 'puppet:///modules/openmrs/liquibase-core-4.4.3.jar'
   }
 
 
@@ -57,7 +56,7 @@ class openmrs::initial_setup(
   openmrs::liquibase_migrate { 'migrate update to latest':
     dataset     => 'liquibase-update-to-latest.xml',
     refreshonly => true
-  }*/
+  }
 
   # hack to let us remote the mirebalais metadata module from the build; can be removed after it has been removed from all servers
   exec { 'make mirebalais metadata module not mandatory - error running this command can be ignored when provisioning new server':
@@ -69,7 +68,7 @@ class openmrs::initial_setup(
   exec { 'tomcat-start':
     command     => "service ${tomcat} start",
     user        => 'root',
- #   subscribe   => Openmrs::Liquibase_migrate['set up core data'],
+    subscribe   => Openmrs::Liquibase_migrate['set up core data'],
     refreshonly => true
   }
 }
