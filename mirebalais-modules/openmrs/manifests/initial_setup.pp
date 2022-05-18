@@ -53,10 +53,10 @@ class openmrs::initial_setup(
     refreshonly => true
   }
 
-  openmrs::liquibase_migrate { 'migrate update to latest':
+ /* openmrs::liquibase_migrate { 'migrate update to latest':
     dataset     => 'liquibase-update-to-latest.xml',
     refreshonly => true
-  }
+  }*/
 
   # hack to let us remote the mirebalais metadata module from the build; can be removed after it has been removed from all servers
   exec { 'make mirebalais metadata module not mandatory - error running this command can be ignored when provisioning new server':
