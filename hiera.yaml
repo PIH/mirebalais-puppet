@@ -1,10 +1,11 @@
 ---
-:backends:
-  - yaml
-:yaml:
-  :datadir: /etc/puppet/hieradata
-:hierarchy:
+version: 5
+default:
+  datadir: /etc/puppet/hieradata
+  data_hash: yaml_data
+hierarchy:
   - '%{::fqdn}'
   - '%{::hostname}'
   - 'env_%{::environment}'
-  - common
+  - name: 'common'
+    path: 'common.yaml'

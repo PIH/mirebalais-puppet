@@ -144,7 +144,7 @@ class apache2 (
 
   # the unless condition only allow this script to run once.
   exec { "download and run install letsencrypt":
-    unless  => "/bin/ls -ap /var/acme | grep '^\..*/$' | grep acme.sh | grep -v grep",
+    unless  => "/bin/ls -ap /var/acme | grep .acme.sh | grep -v grep",
     command => "/var/acme/install-letsencrypt.sh",
     require =>  Exec['download acme from the git repo']
   }

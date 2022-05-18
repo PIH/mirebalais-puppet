@@ -21,7 +21,6 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 percona_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 
-openmrs_auto_update_database: true
 # feature toggle settings
 ssl_use_letsencrypt: true
 

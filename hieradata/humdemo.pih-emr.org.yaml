@@ -10,7 +10,6 @@ config_version: 1.35.0
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.1.0
 
-openmrs_auto_update_database: true
 site_domain: humdemo.pih-emr.org
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]

@@ -30,7 +30,7 @@ openmrs_db: openmrs
 openmrs_db_user: openmrs
 openmrs_db_password: foo
 openmrs_warehouse_db: openmrs_warehouse
-openmrs_auto_update_database: false
+openmrs_auto_update_database: true
 replication_db_user: replication
 replication_db_password: foo
 backup_db_user: backup

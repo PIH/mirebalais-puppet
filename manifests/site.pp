@@ -136,7 +136,10 @@ node 'hai-cloud-inf-omrshiv-report' {
 node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
   class { 'apt':
-    always_apt_update => true,
+    update => {
+      frequency => 'daily',
+      loglevel  => 'debug',
+    },
   }
 
   include security

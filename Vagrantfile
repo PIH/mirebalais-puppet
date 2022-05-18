@@ -15,6 +15,8 @@ Vagrant.configure("2") do |config|
    end
   #
    config.vm.provision "shell", inline: "hostnamectl set-hostname vagrant-test.pih-emr.org"
-   config.vm.provision "shell", inline: "apt -y update"
-   config.vm.provision "shell", inline: "apt -y upgrade"
+   config.vm.provision "shell", inline: "apt-get -y update"
+   config.vm.provision "shell", inline: "apt-get -y upgrade"
+   config.vm.provision "shell", inline: "apt-get install -y git"
+   config.vm.provision "shell", inline: "git clone https://github.com/PIH/mirebalais-puppet.git /etc/puppet"
 end

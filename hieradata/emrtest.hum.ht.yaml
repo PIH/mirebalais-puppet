@@ -1,6 +1,5 @@
 ---
 webapp_name: mirebalais
-openmrs_auto_update_database: true
 site_domain: emrtest.hum.ht
 
 package_release: 'stable/'
