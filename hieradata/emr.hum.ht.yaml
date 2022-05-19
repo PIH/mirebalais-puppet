@@ -74,6 +74,7 @@ java_memory_parameters: '-Xmx26G -Xms26G -XX:PermSize=512m -XX:MaxPermSize=1024m
 # disk cleanup
 archive_folder: "/home/tomcat7/backups/archive/"
 sequence_folder: "/home/tomcat7/backups/sequences/"
+archive_hour: 17
 
 # old os version
 ubuntu_14: true
