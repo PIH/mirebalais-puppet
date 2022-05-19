@@ -8,7 +8,6 @@ class openmrs::backup (
     $remote_db_server                 = hiera('remote_db_server'),
     $remote_backup_dir                = hiera('remote_backup_dir'),
     $tomcat                           = hiera('tomcat'),
-    $sysadmin_email                   = hiera('sysadmin_email'),
     $backup_file_prefix               = hiera('backup_file_prefix'),
     $backup_hour                      = hiera('backup_hour'),
     $backup_delete_older_than_x_days  = hiera('backup_delete_older_than_x_days'),
@@ -34,11 +33,10 @@ class openmrs::backup (
 
   cron { 'mysql-backup':
     ensure  => present,
-    command => '/usr/local/sbin/mysqlbackup.sh > /dev/null',
+    command => '/usr/local/sbin/mysqlbackup.sh',
     user    => 'root',
     hour    => "${backup_hour}",
     minute  => 30,
-    environment => "MAILTO=$sysadmin_email",
     require => [ File['mysqlbackup.sh'], Package['p7zip-full'] ]
   }
 
@@ -76,21 +74,19 @@ class openmrs::backup (
 
   cron { 'backup-az':
     ensure  => present,
-    command => 'sh /usr/local/sbin/backupAzure.sh &> /dev/null',
+    command => 'sh /usr/local/sbin/backupAzure.sh',
     user    => 'root',
     hour    => '*/7',
     minute  => 20,
-    environment => "MAILTO=$sysadmin_email",
     require => File['backupAzure.sh']
   }
 
   cron { 'mysql-archive':
     ensure  => present,
-    command => '/usr/local/sbin/mysqlarchive.sh > /dev/null',
+    command => '/usr/local/sbin/mysqlarchive.sh',
     user     => 'root',
     minute => 30,
     hour => "${archive_hour}",
-    environment => "MAILTO=$sysadmin_email",
     require => [ File['mysqlarchive.sh'] ]
   }
 
@@ -116,7 +112,7 @@ class openmrs::backup (
 
     cron { 'backup-activitylog':
       ensure      => present,
-      command     => '/usr/local/sbin/backupActivityLog.sh &> /dev/null',
+      command     => '/usr/local/sbin/backupActivityLog.sh',
       user        => 'root',
       hour        => 19,
       minute      => 00,

@@ -1,27 +1,33 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Backup cleanup and archiving script
 # 
 
 DIR=/home/<%= @tomcat %>/backups
 PREFIX='<%= @backup_file_prefix %>'
+BACKUP_RETAIN_DAYS='<%= @backup_delete_older_than_x_days %>'
 
 YEAR=$(date +"%Y")
 MONTH=$(date +"%m")
+TODAYS_DATE=$(date)
+
 ARCHIVEFILE=${PREFIX}_backup_${YEAR}${MONTH}01-*.sql.7z
+COMPLEX_OBS_ARCHIVEFILE=${PREFIX}_complex_obs_${YEAR}${MONTH}01-*.7z
+
+LOGDIR=${DIR}/logs
+LOGFILE=${LOGDIR}/backup-archive.log
+
+exec > ${LOGFILE} 2>&1
 
 # Create the archive directory
 mkdir -p ${DIR}/archive
 mkdir -p ${DIR}/archive/${YEAR}
+mkdir -p ${LOGDIR}
 
-# Archive database on first day of month
+# Archive database and complex_obs on first day of month
 [ ! -f ${DIR}/sequences/${ARCHIVEFILE} ] || mv ${DIR}/sequences/${ARCHIVEFILE} ${DIR}/archive/${YEAR}
+[ ! -f ${DIR}/sequences/${COMPLEX_OBS_ARCHIVEFILE} ] || mv ${DIR}/sequences/${COMPLEX_OBS_ARCHIVEFILE} ${DIR}/archive/${YEAR}
 
-# Delete all backups (older than 30 days)
-find ${DIR}/sequences/ -name "*.7z" -type f -mtime +30 -exec rm -f {} \;
-
-# for referal
-# Delete all pre-release backups older than 15 days
-#FILENAME=${PREFIX}_backup_20*.sql.7z
-#RELEASENAME=${PREFIX}_backup_release_*.sql.7z
-#find ${DIR}/sequences/${RELEASENAME} -mtime +15 -exec rm {} \;
+# Delete all older backups
+echo "deleting older backups older than ${BACKUP_RETAIN_DAYS}, if the exist"
+find ${DIR}/sequences/ -name "*.7z" -type f -mtime +${BACKUP_RETAIN_DAYS} -exec rm -f {} \;
