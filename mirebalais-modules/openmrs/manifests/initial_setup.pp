@@ -50,7 +50,6 @@ class openmrs::initial_setup(
 
   openmrs::liquibase_migrate { 'set up core data':
     dataset     => 'liquibase-core-data.xml',
-    unless  => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'desc patient'",
     refreshonly => true
   }
 
@@ -67,7 +66,7 @@ class openmrs::initial_setup(
   }
 
   exec { 'tomcat-start':
-    command     => "service ${tomcat} start",
+    command     => "service ${tomcat} restart",
     user        => 'root',
     subscribe   => Openmrs::Liquibase_migrate['set up core data'],
     refreshonly => true
