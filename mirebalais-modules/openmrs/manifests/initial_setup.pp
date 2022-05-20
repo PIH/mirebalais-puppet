@@ -41,13 +41,31 @@ class openmrs::initial_setup(
     source => 'puppet:///modules/openmrs/liquibase-core-4.4.3.jar'
   }
 
+  file { "/usr/local/table-exists.sh":
+    ensure  => present,
+    content => template('openmrs/table-exists.sh.erb'),
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0700',
+    require => File["/usr/local/liquibase.jar"]
+  }
+
+  file { "/usr/local/table-has-data.sh":
+    ensure  => present,
+    content => template('openmrs/table-has-data.sh.erb'),
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0700',
+    require => File["/usr/local/liquibase.jar"]
+  }
+
   exec { 'set up base schema':
     cwd         =>  '/usr/local/',
     command     => "java -Dliquibase.databaseChangeLogTableName=liquibasechangelog -Dliquibase.databaseChangeLogLockTableName=liquibasechangeloglock -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/var/lib/${tomcat}/webapps/${webapp_name}.war --url=jdbc:mysql://localhost:3306/${openmrs_db} --changeLogFile=liquibase-schema-only.xml --username=${openmrs_db_user} --password='${openmrs_db_password}' update",
     user        => 'root',
-    unless      => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'desc patient'",
+    unless      => "/usr/local/table-exists.sh ${openmrs_db_user} ${openmrs_db_password} ${openmrs_db} patient",
     refreshonly => true,
-    require     => [ File['/usr/local/liquibase.jar'], Package[$package_name] ],
+    require     => [ File['/usr/local/liquibase.jar'], File['/usr/local/table-exists.sh'], Package[$package_name] ],
     timeout     => 0,
     notify      => Exec['set up core data']
   }
@@ -56,8 +74,9 @@ class openmrs::initial_setup(
     cwd         =>  '/usr/local/',
     command     => "java -Dliquibase.databaseChangeLogTableName=liquibasechangelog -Dliquibase.databaseChangeLogLockTableName=liquibasechangeloglock -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/var/lib/${tomcat}/webapps/${webapp_name}.war --url=jdbc:mysql://localhost:3306/${openmrs_db} --changeLogFile=liquibase-core-data.xml --username=${openmrs_db_user} --password='${openmrs_db_password}' update",
     user        => 'root',
+    unless      => "/usr/local/table-has-data.sh ${openmrs_db_user} ${openmrs_db_password} ${openmrs_db} patient",
     refreshonly => true,
-    require     => [ File['/usr/local/liquibase.jar'], Package[$package_name] ],
+    require     => [ File['/usr/local/liquibase.jar'], File['/usr/local/table-has-data.sh'], Package[$package_name] ],
     timeout     => 0,
     notify      => Exec['tomcat-restart']
   }
