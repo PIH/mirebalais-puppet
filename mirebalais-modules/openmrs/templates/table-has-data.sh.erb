@@ -9,15 +9,13 @@ RESULTS=$(mysql -u${USER} -p${PW} ${DB} -ssss -N -e "select count(*) from ${TABL
 NUM_ROWS=0
 
 RE='^[0-9]+$'
-if [[ $RESULTS =~ $RE ]]
-then
+if [[ $RESULTS =~ $RE ]]; then
     NUM_ROWS="$RESULTS"
-if
-
-echo "$NUM_ROWS rows"
-if [[ "$NUM_ROWS" == 0 ]]
-then
-    exit 1;
 fi
 
-exit 0;
+echo "$NUM_ROWS rows"
+if [[ "$NUM_ROWS" == 0 ]]; then
+    exit 1
+fi
+
+exit 0
