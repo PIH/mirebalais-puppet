@@ -219,6 +219,27 @@ node 'hai-hum-inf-omrs-report' {
   include mirebalais_reporting::reporting_setup
 }
 
+node 'inf-dakakind-omrs-test' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include tomcat
+
+  include openmrs::pihemr
+  include openmrs::initial_setup
+
+}
+
 node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
 
   class { 'apt':
