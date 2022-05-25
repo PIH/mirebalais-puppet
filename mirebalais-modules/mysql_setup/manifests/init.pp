@@ -12,7 +12,6 @@ class mysql_setup (
 
 ){
 
-
   user { 'mysql':
     ensure => 'present',
     shell  => '/bin/sh',
@@ -35,7 +34,7 @@ class mysql_setup (
   # which is in turn a sym link to /etc/mysql/my.cnf.fallback; so we just set this now as well
   # one we update fully to Ubuntu 16.04 and mysql, we should look into reworking this
   # see: https://askubuntu.com/questions/763774/mysql-istallation-problem-on-ubuntu-16-04-my-cnf-public-ip-problem
-  file { '/etc/mysql/my.cnf.fallback':
+   file { '/etc/mysql/my.cnf.fallback':
     ensure  => present,
     force => true,
     content => template('mysql_setup/my.cnf.erb'),

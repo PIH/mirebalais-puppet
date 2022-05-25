@@ -8,7 +8,6 @@ config_version: 1.35.0
 
 server_timezone: America/New_York
 
-openmrs_auto_update_database: true
 site_domain: reporting.hum.ht
 
 mysql_server_id: 3
@@ -58,4 +57,7 @@ petl_error_subject: HUM Reporting PETL errors
 
 ssl_use_letsencrypt: true
 
-java_memory_parameters: '-Xmx10G -Xms10G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+# percona
+perconaSite: HUM Reporting
+perconaLogFile: "/home/percona/logs/percona-db-restore.log"
+minPerconaDirSize: 41200000

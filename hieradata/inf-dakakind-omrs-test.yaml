@@ -1,0 +1,32 @@
+webapp_name: openmrs
+
+package_release: 'stable/'
+
+repo_url: ENC[aADqxhfrKRpTug52rCcj1HuHQnWQYEH6LDbNN7Huvp4=]
+
+pih_config: mirebalais,mirebalais-production
+config_name: openmrs-config-zl
+config_version: 1.35.0
+
+frontend_name: "openmrs-frontend-zl"
+frontend_version: 1.1.0
+
+server_timezone: America/New_York
+
+mysql_innodb_buffer_pool_size: 4G
+mysql_innodb_buffer_pool_instances: 16
+
+mysql_root_password: foo
+openmrs_db_password: foo
+
+sysadmin_email: foo
+
+tomcat_enable_http_8080: true
+
+# feature toggle settings
+insurance_collection: false
+
+java_memory_parameters: '-Xmx4G -Xms4G -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:NewSize=1G -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+
+# Request logging for performance and usage tracking
+activitylog_enabled: true

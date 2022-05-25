@@ -1,0 +1,21 @@
+#!/bin/bash
+
+USER=$1
+PW=$2
+DB=$3
+TABLE=$4
+
+RESULTS=$(mysql -u${USER} -p${PW} ${DB} -ssss -N -e "select count(*) from ${TABLE}" 2> /dev/null)
+NUM_ROWS=0
+
+RE='^[0-9]+$'
+if [[ $RESULTS =~ $RE ]]; then
+    NUM_ROWS="$RESULTS"
+fi
+
+echo "$NUM_ROWS rows"
+if [[ "$NUM_ROWS" == 0 ]]; then
+    exit 1
+fi
+
+exit 0

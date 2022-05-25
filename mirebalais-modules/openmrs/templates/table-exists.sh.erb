@@ -1,0 +1,17 @@
+#!/bin/bash
+
+USER=$1
+PW=$2
+DB=$3
+TABLE=$4
+
+mysql -u${USER} -p${PW} ${DB} -ssss -e "desc ${TABLE}" > /dev/null 2>$1
+
+if [ $? -eq 0 ]
+then
+    echo "Table ${TABLE} already exists"
+    exit 0
+else
+    echo "Table ${TABLE} does not exist."
+    exit 1
+fi

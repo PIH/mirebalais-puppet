@@ -20,7 +20,6 @@ remote_db_user: backups
 remote_backup_dir: haiti/mirebalais/db
 backup_file_prefix: mirebalais
 backup_delete_older_than_x_days: 15
-openmrs_auto_update_database: true
 site_domain: emr.hum.ht
 
 tomcat_restart_nightly: true
@@ -75,6 +74,7 @@ java_memory_parameters: '-Xmx26G -Xms26G -XX:PermSize=512m -XX:MaxPermSize=1024m
 # disk cleanup
 archive_folder: "/home/tomcat7/backups/archive/"
 sequence_folder: "/home/tomcat7/backups/sequences/"
+archive_hour: 17
 
 # old os version
 ubuntu_14: true

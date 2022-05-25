@@ -13,6 +13,9 @@ package_name: pihemr
 package_release: 'unstable/'
 package_version: '1.0.6392-1'
 
+config_name: ""
+config_version: ""
+
 repo_url: ENC[guOgejmsDLkHjo2iCrV9MAWEt/Y9usi32Rs4qPepBu0=]
 
 mysql_server_id: 1
@@ -30,7 +33,7 @@ openmrs_db: openmrs
 openmrs_db_user: openmrs
 openmrs_db_password: foo
 openmrs_warehouse_db: openmrs_warehouse
-openmrs_auto_update_database: false
+openmrs_auto_update_database: true
 replication_db_user: replication
 replication_db_password: foo
 backup_db_user: backup
@@ -47,6 +50,7 @@ backup_file_prefix: foo
 backup_hour: 1
 backup_delete_older_than_x_days: 90
 archive_hour: 3
+
 # For Amigo backups only
 remote_db_user: foo
 remote_db_server: foo
@@ -206,6 +210,23 @@ docker_compose_version: 1.27.4
 
 frontend_name: "openmrs-frontend-pihemr"
 frontend_version: 1.3.0
+
+# percona restore
+perconaHomeDir: "/home/percona"
+perconaBackupDir: "/home/percona/backups"
+perconaLogs: "/home/percona/logs"
+perconaLogFile: "foo"
+perconaRestoreDir: "/home/percona/backups/openmrs"
+perconaSite: "foo"
+mysqlDataDir: "/var/lib/mysql"
+mysqlDb: "foo"
+openmrsHomeDir: "/home/tomcat7/.OpenMRS"
+reportingTables: "foo"
+reportingDumps: "foo"
+mailTo: "%{hiera('sysadmin_email')}"
+mailSubject: "${perconaSite} percona db restore success"
+logFile: "/home/percona/logs/percoa-restore.log"
+minPerconaDirSize: 10
 
 # old os version
 ubuntu_14: false

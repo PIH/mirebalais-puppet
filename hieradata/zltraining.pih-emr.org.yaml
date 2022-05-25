@@ -1,6 +1,5 @@
 ---
 webapp_name: openmrs
-openmrs_auto_update_database: true
 site_domain: zltraining.pih-emr.org
 
 package_release: 'stable/'

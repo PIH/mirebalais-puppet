@@ -188,7 +188,7 @@ node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
   include logging
 }
 
-node 'reporting.hum.ht' {
+node 'hai-hum-inf-omrs-report' {
 
   class { 'apt':
     always_apt_update => true,
@@ -209,14 +209,35 @@ node 'reporting.hum.ht' {
   include openmrs::pihemr
   #include openmrs::initial_setup
 
-  #include percona
+  include percona
 
   #include monitoring
   include logging
 
   include petl
 
-  #include mirebalais_reporting::reporting_setup
+  include mirebalais_reporting::reporting_setup
+}
+
+node 'inf-dakakind-omrs-test' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include tomcat
+
+  include openmrs::pihemr
+  include openmrs::initial_setup
+
 }
 
 node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
@@ -417,52 +438,6 @@ node 'ses-cor.pih-emr.org' {
 
 
 node 'haitihivtest.pih-emr.org' {
-
-  class { 'apt':
-    always_apt_update => true,
-  }
-
-  include security
-  include mail
-  include ntpdate
-  include apt_upgrades
-  include wget
-  include unzip
-
-  include java
-  include mysql_setup
-  include apache2
-  include tomcat
-
-  include openmrs::pihemr
-  include openmrs::initial_setup
-
-}
-
-node 'haiti-test.pih-emr.org' {
-
-  class { 'apt':
-    always_apt_update => true,
-  }
-
-  include security
-  include mail
-  include ntpdate
-  include apt_upgrades
-  include wget
-  include unzip
-
-  include java
-  include mysql_setup
-  include apache2
-  include tomcat
-
-  include openmrs::pihemr
-  include openmrs::initial_setup
-
-}
-
-node 'haititest.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,

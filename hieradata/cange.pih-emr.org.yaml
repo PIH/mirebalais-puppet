@@ -24,8 +24,6 @@ backup_hour: 14
 archive_hour: 15
 backup_delete_older_than_x_days: 60
 
-openmrs_auto_update_database: true
-
 mysql_server_id: 1
 mysql_innodb_buffer_pool_size: 3G
 mysql_innodb_buffer_pool_instances: 3
