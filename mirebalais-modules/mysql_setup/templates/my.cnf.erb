@@ -108,7 +108,8 @@ max_binlog_size         = 100M
 
 innodb_buffer_pool_size= <%= @mysql_innodb_buffer_pool_size %>
 innodb_buffer_pool_instances= <%= @mysql_innodb_buffer_pool_instances %>
-
+key_buffer_size= <%= @mysql_key_buffer_size %>
+table_open_cache= <%= @mysql_table_open_cache %>
 
 # InnoDB is enabled by default with a 10MB datafile in /var/lib/mysql/.
 # Read the manual for more InnoDB related options. There are many!
@@ -141,7 +142,7 @@ interactive_timeout = <%= @mysql_interactive_timeout %>
 [mysqldump]
 quick
 quote-names
-max_allowed_packet  = 16M
+max_allowed_packet  = 1G
 default-character-set=utf8
 
 [mysql]

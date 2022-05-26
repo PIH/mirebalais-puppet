@@ -24,6 +24,8 @@ mysql_bind_address: 127.0.0.1
 mysql_expire_logs_days: 10
 mysql_innodb_buffer_pool_size: 1G
 mysql_innodb_buffer_pool_instances: 1
+mysql_key_buffer_size: 20M
+mysql_table_open_cache: 1500
 mysql_binary_logging: true
 mysql_net_read_timeout: 3600
 mysql_net_write_timeout: 3600
