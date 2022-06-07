@@ -27,7 +27,7 @@ petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
 
 # PETL Crons
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
-petl_cron_time: "0 0 22 ? * *"
+petl_cron_time: "0 0 0 ? * *"
 
 mysql_server_id: 3
 mysql_master_ip:
