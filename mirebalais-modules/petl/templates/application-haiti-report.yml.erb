@@ -92,8 +92,8 @@ datasources:
       options: "${datasources.mysql.options}"
 
   warehouse:
-       host: "<%= @petl_sqlserver_host -%>"
-       port: "<%= @petl_sqlserver_port -%>"
+       host: "<%= @prod_dw_petl_sqlserver_host -%>"
+       port: "<%= @prod_dw_petl_sqlserver_port -%>"
        databaseName: "zl_omrs_dw"
        user: "<%= @petl_sqlserver_user -%>"
        password: "<%= @petl_sqlserver_password -%>"
