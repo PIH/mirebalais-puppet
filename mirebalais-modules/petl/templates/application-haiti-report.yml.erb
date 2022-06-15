@@ -23,7 +23,7 @@ spring:
   datasource:
     platform: "mssql"
     driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=zl_omrs_dw"
+    url: "jdbc:sqlserver://<%= @prod_dw_petl_sqlserver_host -%>:<%= @prod_dw_petl_sqlserver_port -%>;databaseName=zl_omrs_dw"
     username: "<%= @petl_sqlserver_user -%>"
     password: "<%= @petl_sqlserver_password -%>"
   jpa:
