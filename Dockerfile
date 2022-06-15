@@ -8,8 +8,6 @@ RUN apt-get update
 RUN apt-get install -y git lsb-release wget software-properties-common
 
 ADD . /etc/puppet
-RUN sed -i 's/2.9.2/5.1.0/' /etc/puppet/Gemfile2004
-
 WORKDIR /etc/puppet
 
 RUN bash gem-update.sh
