@@ -1,7 +1,7 @@
 ---
 site_domain: hinche-ci.pih-emr.org
 
-pih_config: haiti,haiti-hinche,haiti-hinche-ci
+pih_config: haiti,haiti-hinche-ci
 config_name: openmrs-config-zl
 config_version: 1.36.0-SNAPSHOT
 
