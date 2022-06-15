@@ -116,7 +116,7 @@ if ! isPackageInstalled ruby2.5 ; then
   apt-get -y upgrade
 	apt-get -y dist-upgrade
 	
-	/usr/bin/apt install -y rake ruby-did-you-mean libruby2.5 ruby2.5
+	/usr/bin/apt install -y rake ruby-did-you-mean libruby2.5 ruby2.5 ruby2.5-dev
 
 	bundle update --bundler
 
