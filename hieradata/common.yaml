@@ -18,6 +18,9 @@ config_version: ""
 
 repo_url: ENC[guOgejmsDLkHjo2iCrV9MAWEt/Y9usi32Rs4qPepBu0=]
 
+prod_dw_petl_sqlserver_host: foo
+prod_dw_petl_sqlserver_port: foo
+
 mysql_server_id: 1
 mysql_root_password: foo
 mysql_bind_address: 127.0.0.1
