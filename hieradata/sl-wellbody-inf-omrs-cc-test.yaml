@@ -1,6 +1,9 @@
 
 site_domain: wellbody-test-zt.pih-emr.org
 
+package_release: 'unstable/'
+package_version: '1.0.6442-1'
+
 pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-gladi
 config_name: openmrs-config-pihsl
 config_version: 1.8.0-SNAPSHOT
