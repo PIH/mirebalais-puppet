@@ -4,14 +4,14 @@ server_timezone: America/New_York
 
 # PETL
 petl: petl
-petl_version: "3.3.0-SNAPSHOT"
+petl_version: "3.3.0"
 petl_site: haiti-report
 petl_home_dir: /opt/petl
 
 # PETL config
 petl_config_dir: "configurations"
 petl_config_name: zl-etl
-petl_config_version: 1.1.0-SNAPSHOT
+petl_config_version: 1.1.0
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"

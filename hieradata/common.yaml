@@ -109,7 +109,7 @@ apzu_ic3_dir: ''
 
 # PETL
 petl: "petl"
-petl_version: "3.2.0"
+petl_version: "3.4.0-SNAPSHOT"
 petl_site: ""
 petl_user: "petl"
 petl_home_dir: "/opt/petl"
@@ -121,7 +121,7 @@ petl_java_opts: ""
 
 # PETL Config
 petl_config_name: zl-etl
-petl_config_version: 1.1.0-SNAPSHOT
+petl_config_version: 1.2.0-SNAPSHOT
 petl_config_dir: "configurations"
 
 # PETL MySQL

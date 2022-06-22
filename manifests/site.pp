@@ -214,8 +214,6 @@ node 'hai-hum-inf-omrs-report' {
   #include monitoring
   include logging
 
-  include petl
-
   include mirebalais_reporting::reporting_setup
 }
 

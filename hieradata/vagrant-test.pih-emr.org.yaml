@@ -23,9 +23,6 @@ mirth_inbound_from_pacs_mirebalais_port: 6662
 biometrics_enabled: true
 biometrics_webapp_name: biometrics
 
-# PETL
-petl_version: "3.2.0-SNAPSHOT"   # ues latest snapshot
-
 # PETL MySQL
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
