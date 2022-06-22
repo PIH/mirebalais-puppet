@@ -28,6 +28,10 @@ mirth_inbound_from_pacs_mirebalais_port: 6662
 biometrics_enabled: true
 biometrics_webapp_name: biometrics
 
+# MySQL
+mysql_innodb_buffer_pool_size: 2G
+mysql_innodb_buffer_pool_instances: 2
+
 # PETL
 petl: "petl"
 petl_site: "humci"
@@ -59,7 +63,7 @@ reportingui_ad_hoc_analysis: true
 radiology_contrast_studies: true
 appointmentscheduling_confidential: true
 
-java_memory_parameters: '-Xmx4096m -Xms4096m'
+java_memory_parameters: '-Xmx6096m -Xms6096m'
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 
 activitylog_enabled: true
