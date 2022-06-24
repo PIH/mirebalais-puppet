@@ -15,6 +15,8 @@ class petl (
   $petl_mysql_password         = decrypt(hiera("petl_mysql_password")),
   $petl_sqlserver_host             = hiera("petl_sqlserver_host"),
   $petl_sqlserver_port             = hiera("petl_sqlserver_port"),
+  $prod_dw_petl_sqlserver_host     = decrypt(hiera("prod_dw_petl_sqlserver_host")),
+  $prod_dw_petl_sqlserver_port     = decrypt(hiera("prod_dw_petl_sqlserver_port")),
   $petl_sqlserver_databaseName     = split(hiera("petl_sqlserver_databaseName"), ','),
   $petl_sqlserver_user             = decrypt(hiera("petl_sqlserver_user")),
   $petl_sqlserver_password         = decrypt(hiera("petl_sqlserver_password")),

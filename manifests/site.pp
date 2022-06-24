@@ -214,8 +214,6 @@ node 'hai-hum-inf-omrs-report' {
   #include monitoring
   include logging
 
-  include petl
-
   include mirebalais_reporting::reporting_setup
 }
 
@@ -340,7 +338,7 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org' {
   include openmrs::backup
 }
 
-node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'ami.pih-emr.org', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'hsn-ci.pih-emr.org', 'ocltest.pih-emr.org' {
+node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'hsn-ci.pih-emr.org', 'ocltest.pih-emr.org', 'sl-wellbody-inf-omrs-cc-test' {
 
   class { 'apt':
     always_apt_update => true,

@@ -4,14 +4,14 @@ server_timezone: America/New_York
 
 # PETL
 petl: petl
-petl_version: "3.3.0-SNAPSHOT"
+petl_version: "3.3.0"
 petl_site: haiti-report
 petl_home_dir: /opt/petl
 
 # PETL config
 petl_config_dir: "configurations"
 petl_config_name: zl-etl
-petl_config_version: 1.1.0-SNAPSHOT
+petl_config_version: 1.1.0
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
@@ -20,24 +20,27 @@ petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
 # PETL SQL Server 2106
 petl_sqlserver_databaseName: zl_omrs_dw
-petl_sqlserver_host: 10.160.12.27
-petl_sqlserver_port: 1433
+prod_dw_petl_sqlserver_host: ENC[o8sl3djWO0QSYPa8ncWhLg==:k92xzFbFCcGC4y5OX5mUqg==:ZjhENE9CVFpELzIxbVE1M0IwK1AzZz09]
+prod_dw_petl_sqlserver_port: ENC[tZ2trExXsC/V5l4CN1uZSg==:4WViP3V+BjbJWdM1seL+cw==:SUNXOHJldkRBVWlUVEpGQkFKTDdpZz09]
 petl_sqlserver_user: openmrs
 petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
 
 # PETL Crons
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
-petl_cron_time: "0 15 20 ? * *"
+petl_cron_time: "0 0 0 ? * *"
 
 mysql_server_id: 3
 mysql_master_ip:
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_expire_logs_days: 1
 mysql_binary_logging: false
-mysql_net_read_timeout: 1800
-mysql_net_write_timeout: 1800
-mysql_innodb_buffer_pool_size: 8G
+mysql_net_read_timeout: 3600
+mysql_net_write_timeout: 3600
+mysql_wait_timeout: 2880000
+mysql_interactive_timeout: 2880000
+mysql_innodb_buffer_pool_size: 3G
 mysql_innodb_buffer_pool_instances: 8
+mysql_table_open_cache: 4500
 
 openmrs_db: openmrs
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]

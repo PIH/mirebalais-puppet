@@ -10,7 +10,7 @@ frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.2.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-mysql_bind_address: 127.0.0.1
+mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
@@ -28,15 +28,14 @@ mirth_inbound_from_pacs_mirebalais_port: 6662
 biometrics_enabled: true
 biometrics_webapp_name: biometrics
 
+# MySQL
+mysql_innodb_buffer_pool_size: 2G
+mysql_innodb_buffer_pool_instances: 2
+
 # PETL
 petl: "petl"
-petl_version: "3.3.0-SNAPSHOT"
 petl_site: "humci"
 petl_home_dir: "/opt/petl"
-
-# PETL config
-petl_config_name: zl-etl
-petl_config_version: 1.1.0-SNAPSHOT
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
@@ -64,7 +63,7 @@ reportingui_ad_hoc_analysis: true
 radiology_contrast_studies: true
 appointmentscheduling_confidential: true
 
-java_memory_parameters: '-Xmx4096m -Xms4096m'
+java_memory_parameters: '-Xmx6096m -Xms6096m'
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 
 activitylog_enabled: true

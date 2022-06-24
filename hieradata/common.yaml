@@ -18,12 +18,17 @@ config_version: ""
 
 repo_url: ENC[guOgejmsDLkHjo2iCrV9MAWEt/Y9usi32Rs4qPepBu0=]
 
+prod_dw_petl_sqlserver_host: foo
+prod_dw_petl_sqlserver_port: foo
+
 mysql_server_id: 1
 mysql_root_password: foo
 mysql_bind_address: 127.0.0.1
 mysql_expire_logs_days: 10
 mysql_innodb_buffer_pool_size: 1G
 mysql_innodb_buffer_pool_instances: 1
+mysql_key_buffer_size: 20M
+mysql_table_open_cache: 1500
 mysql_binary_logging: true
 mysql_net_read_timeout: 3600
 mysql_net_write_timeout: 3600
@@ -104,7 +109,7 @@ apzu_ic3_dir: ''
 
 # PETL
 petl: "petl"
-petl_version: "3.2.0"
+petl_version: "3.4.0-SNAPSHOT"
 petl_site: ""
 petl_user: "petl"
 petl_home_dir: "/opt/petl"
@@ -116,7 +121,7 @@ petl_java_opts: ""
 
 # PETL Config
 petl_config_name: zl-etl
-petl_config_version: 1.1.0-SNAPSHOT
+petl_config_version: 1.2.0-SNAPSHOT
 petl_config_dir: "configurations"
 
 # PETL MySQL

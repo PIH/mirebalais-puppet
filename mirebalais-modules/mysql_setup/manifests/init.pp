@@ -8,7 +8,9 @@ class mysql_setup (
   $mysql_net_read_timeout             = hiera('mysql_net_read_timeout'),
   $mysql_net_write_timeout            = hiera('mysql_net_write_timeout'),
   $mysql_wait_timeout                 = hiera('mysql_wait_timeout'),
-  $mysql_interactive_timeout          = hiera('mysql_interactive_timeout')
+  $mysql_interactive_timeout          = hiera('mysql_interactive_timeout'),
+  $mysql_key_buffer_size              = hiera('mysql_key_buffer_size'),
+  $mysql_table_open_cache             = hiera('mysql_table_open_cache')
 
 ){
 

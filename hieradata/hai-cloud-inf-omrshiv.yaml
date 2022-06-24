@@ -14,7 +14,7 @@ frontend_version: 1.1.0
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
-mysql_innodb_buffer_pool_size: 8G
+mysql_innodb_buffer_pool_size: 3G
 mysql_innodb_buffer_pool_instances: 8
 
 remote_zlidentifier_url: 'https://zanmi.pih-emr.org/openmrs/module/idgen/exportIdentifiers.form?source=1&comment=HIV'
