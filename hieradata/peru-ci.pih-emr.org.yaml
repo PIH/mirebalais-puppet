@@ -5,7 +5,7 @@ package_name: ses-cor
 
 pih_config: peru
 config_name: openmrs-config-ses
-config_version: 1.5.0-SNAPSHOT
+config_version: 1.6.0-SNAPSHOT
 
 frontend_version: 1.4.0-SNAPSHOT
 
