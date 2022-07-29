@@ -1,4 +1,4 @@
-set :user, 'medinfoadmin'
+set :user, 'root'
 set :puppet_param, 'site'
 
-server '10.160.24.22', :test
+server 'ami.pih-emr.org', :test

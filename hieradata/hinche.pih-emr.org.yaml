@@ -5,7 +5,7 @@ package_release: 'stable/'
 
 pih_config: haiti,haiti-hinche
 config_name: openmrs-config-zl
-config_version: 1.36.0-SNAPSHOT
+config_version: 1.37.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.1.0

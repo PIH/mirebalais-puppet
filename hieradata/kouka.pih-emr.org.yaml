@@ -3,9 +3,9 @@ site_domain: kouka.pih-emr.org
 pih_config: liberia,liberia-harper,liberia-harper-kouka
 
 config_name: openmrs-config-pihliberia
-config_version: 1.4.0-SNAPSHOT
+config_version: 1.5.0-SNAPSHOT
 
-frontend_version: 1.4.0-SNAPSHOT
+frontend_version: 1.5.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
