@@ -24,7 +24,7 @@ class openmrs::pihemr (
   # PIH EMR config
   $config_name     = hiera('config_name'),
   $config_version  = hiera('config_version'),
-  $repo_url        = decrypt(hiera('repo_url')),
+  $pihemr_repo_url        = hiera('pihemr_repo_url')),
   $ocl_package_url = hiera('ocl_package_url'),
 
   # Frontend
@@ -51,30 +51,17 @@ class openmrs::pihemr (
   $smtp_userpassword = decrypt(hiera('smtp_userpassword')),
   $openmrs_mail_user = decrypt(hiera('openmrs_mail_user')),
 
-  # os version
-  $ubuntu_14 = hiera('ubuntu_14'),
-
 ) {
 
   require openmrs
 
-  if $ubuntu_14 {
-    apt::source { $package_name:
-      ensure      => present,
-      location    => "${repo_url}/${package_name}-repo",
-      release     => $package_release,
-      repos       => '',
-      include_src => false,
-    }
-  }
-  else {
-    apt::source { $package_name:
-      ensure      => present,
-      location    => "[trusted=yes] ${repo_url}:81/${package_name}-repo",
-      release     => $package_release,
-      repos       => '',
-      include_src => false,
-    }
+
+  apt::source { $package_name:
+    ensure      => present,
+    location    => "[trusted=yes] ${pihemr_repo_url}/${package_name}-repo",
+    release     => $package_release,
+    repos       => '',
+    include_src => false,
   }
 
 
