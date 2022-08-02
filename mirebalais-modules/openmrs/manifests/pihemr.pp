@@ -24,7 +24,7 @@ class openmrs::pihemr (
   # PIH EMR config
   $config_name     = hiera('config_name'),
   $config_version  = hiera('config_version'),
-  $pihemr_debian_repo_url        = hiera('pihemr_debian_repo_url')),
+  $pihemr_debian_repo_url        = hiera('pihemr_debian_repo_url'),
   $ocl_package_url = hiera('ocl_package_url'),
 
   # Frontend
