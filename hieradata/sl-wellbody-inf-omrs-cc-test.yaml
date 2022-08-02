@@ -1,7 +1,7 @@
 
 site_domain: wellbody-test-zt.pih-emr.org
 
-package_release: 'unstable/'
+package_release: 'unstable'
 package_version: '1.0.6442-1'
 
 pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-gladi

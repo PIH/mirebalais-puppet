@@ -1,5 +1,5 @@
 ---
-package_release: 'stable/'
+package_release: 'stable'
 site_domain: ces.pih-emr.org
 pih_config: mexico,mexico-production
 config_name: openmrs-config-ces

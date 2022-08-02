@@ -60,7 +60,7 @@ class openmrs::pihemr (
     ensure      => present,
     location    => "[trusted=yes] ${pihemr_debian_repo_url}",
     release     => $package_release,
-    repos       => '',
+    repos       => 'main',
     include_src => false,
   }
 

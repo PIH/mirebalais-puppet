@@ -10,7 +10,7 @@ pih_config: default
 site_domain: foo.org
 
 package_name: pihemr
-package_release: 'unstable/'
+package_release: 'unstable'
 package_version: '1.0.20220802174134-1'
 
 config_name: ""

@@ -2,7 +2,7 @@ webapp_name: mirebalais
 az_backup_folder_path: haiti/mirebalais
 az_activitylog_backup_folder_path: activitylog/zl/mirebalais
 
-package_release: 'stable/'
+package_release: 'stable'
 
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl

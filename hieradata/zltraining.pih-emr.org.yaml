@@ -2,7 +2,7 @@
 webapp_name: openmrs
 site_domain: zltraining.pih-emr.org
 
-package_release: 'stable/'
+package_release: 'stable'
 
 pih_config: mirebalais,mirebalais-training
 config_name: openmrs-config-zl

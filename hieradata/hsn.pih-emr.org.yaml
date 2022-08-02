@@ -2,7 +2,7 @@
 webapp_name: openmrs
 site_domain: hsn.pih-emr.org
 
-package_release: 'stable/'
+package_release: 'stable'
 
 pih_config: haiti,haiti-hsn
 config_name: openmrs-config-zl
