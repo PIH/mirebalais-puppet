@@ -58,7 +58,7 @@ class openmrs::pihemr (
 
   apt::source { $package_name:
     ensure      => present,
-    location    => "[trusted=yes] ${pihemr_debian_repo_url}/${package_name}-repo",
+    location    => "[trusted=yes] ${pihemr_debian_repo_url}",
     release     => $package_release,
     repos       => '',
     include_src => false,
