@@ -24,7 +24,7 @@ class openmrs::pihemr (
   # PIH EMR config
   $config_name     = hiera('config_name'),
   $config_version  = hiera('config_version'),
-  $pihemr_repo_url        = hiera('pihemr_repo_url')),
+  $pihemr_debian_repo_url        = hiera('pihemr_debian_repo_url')),
   $ocl_package_url = hiera('ocl_package_url'),
 
   # Frontend
@@ -58,7 +58,7 @@ class openmrs::pihemr (
 
   apt::source { $package_name:
     ensure      => present,
-    location    => "[trusted=yes] ${pihemr_repo_url}/${package_name}-repo",
+    location    => "[trusted=yes] ${pihemr_debian_repo_url}/${package_name}-repo",
     release     => $package_release,
     repos       => '',
     include_src => false,
