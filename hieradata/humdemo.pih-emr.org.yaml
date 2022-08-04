@@ -7,6 +7,8 @@ pih_config: mirebalais,mirebalais-humdemo
 config_name: openmrs-config-zl
 config_version: 1.35.0
 
+package_version: '1.0.6392-1'
+
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.1.0
 
