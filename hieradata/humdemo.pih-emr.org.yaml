@@ -1,7 +1,7 @@
 ---
 webapp_name: mirebalais
 
-package_release: 'stable/'
+package_release: 'stable'
 
 pih_config: mirebalais,mirebalais-humdemo
 config_name: openmrs-config-zl

@@ -1,5 +1,5 @@
 ---
-package_release: 'stable/'
+package_release: 'stable'
 package_version: '1.0.6484-1'
 pih_config: mexico,mexico-reforma
 config_name: openmrs-config-ces

@@ -1,7 +1,7 @@
 ---
 site_domain: pleebo.pih-emr.org
 
-package_release: 'stable/'
+package_release: 'stable'
 
 az_backup_folder_path: liberia/pleebo
 
