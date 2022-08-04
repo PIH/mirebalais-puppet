@@ -1,4 +1,4 @@
 set :user, 'medinfoadmin'
 set :puppet_param, 'site'
 
-server 'haitihivtest.pih-emr.org', :test
+server '10.160.12.49', :test
