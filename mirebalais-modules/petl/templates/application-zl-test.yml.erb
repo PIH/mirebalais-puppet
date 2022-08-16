@@ -83,9 +83,9 @@ datasources:
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
     hiv:
-       host: "10.160.12.49"
-       port: "3306"
-       databaseName: "openmrs"
+       host: "<%= @petl_mysql_host -%>"
+       port: "<%= @petl_mysql_port -%>"
+       databaseName: "openmrs_haiti_hiv"
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
