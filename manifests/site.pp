@@ -338,7 +338,7 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org' {
   include openmrs::backup
 }
 
-node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'hsn-ci.pih-emr.org', 'ocltest.pih-emr.org', 'sl-wellbody-inf-omrs-cc-test' {
+node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'zt-cloud-sis-inf-omrs-mfa-test', 'ocltest.pih-emr.org', 'sl-wellbody-inf-omrs-cc-test' {
 
   class { 'apt':
     always_apt_update => true,
@@ -533,7 +533,7 @@ node 'pleebo-mirror.pih-emr.org' {
   include logging
 }
 
-node 'petl-test.pih-emr.org' {
+node 'zt-cloud-dw-petl-test' {
 
   class { 'apt':
     always_apt_update => true,
