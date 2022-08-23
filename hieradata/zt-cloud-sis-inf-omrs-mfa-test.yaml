@@ -1,6 +1,6 @@
 ---
 webapp_name: mirebalais
-site_domain: mfa-test.pih-emr.org
+site_domain: mfa-test-zt.pih-emr.org
 
 pih_config: mirebalais,mirebalais-humci
 config_name: openmrs-config-zl
