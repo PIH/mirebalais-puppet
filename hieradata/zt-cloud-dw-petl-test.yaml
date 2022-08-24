@@ -35,17 +35,16 @@ petl_cron_time: "0 0 19 ? * *"
 petl_warehouse_db: ""
 petl_mysql_user_ip: localhost
 
-mysql_server_id: 3
-mysql_master_ip:
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_expire_logs_days: 1
 mysql_binary_logging: false
-mysql_net_read_timeout: 1800
-mysql_net_write_timeout: 1800
-mysql_innodb_buffer_pool_size: 8G
-mysql_innodb_buffer_pool_instances: 8
+mysql_net_read_timeout: 6000
+mysql_net_write_timeout: 6000
+mysql_wait_timeout: 2880000
+mysql_interactive_timeout: 2880000
+mysql_innodb_buffer_pool_size: 5G
+mysql_innodb_buffer_pool_instances: 5
+mysql_key_buffer_size: 2G
 
 openmrs_db: openmrs
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
-replication_db_password: ENC[92IfbImaUmA3wqYSG5kWWwexEU8HqCrqQzSXAMKRPz0=]
-backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
