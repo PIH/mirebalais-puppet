@@ -4,7 +4,7 @@ site_domain: mfa-test-zt.pih-emr.org
 
 pih_config: mirebalais,mirebalais-humci
 config_name: openmrs-config-zl
-config_version: 1.39.0-SNAPSHOT
+config_version: 1.40.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.3.0-SNAPSHOT
