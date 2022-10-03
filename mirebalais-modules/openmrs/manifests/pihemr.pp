@@ -24,7 +24,7 @@ class openmrs::pihemr (
   # PIH EMR config
   $config_name     = hiera('config_name'),
   $config_version  = hiera('config_version'),
-  $repo_url        = decrypt(hiera('repo_url')),
+  $pihemr_debian_repo_url        = hiera('pihemr_debian_repo_url'),
   $ocl_package_url = hiera('ocl_package_url'),
 
   # Frontend
@@ -51,30 +51,17 @@ class openmrs::pihemr (
   $smtp_userpassword = decrypt(hiera('smtp_userpassword')),
   $openmrs_mail_user = decrypt(hiera('openmrs_mail_user')),
 
-  # os version
-  $ubuntu_14 = hiera('ubuntu_14'),
-
 ) {
 
   require openmrs
 
-  if $ubuntu_14 {
-    apt::source { $package_name:
-      ensure      => present,
-      location    => "${repo_url}/${package_name}-repo",
-      release     => $package_release,
-      repos       => '',
-      include_src => false,
-    }
-  }
-  else {
-    apt::source { $package_name:
-      ensure      => present,
-      location    => "[trusted=yes] ${repo_url}:81/${package_name}-repo",
-      release     => $package_release,
-      repos       => '',
-      include_src => false,
-    }
+
+  apt::source { $package_name:
+    ensure      => present,
+    location    => "[trusted=yes] ${pihemr_debian_repo_url}",
+    release     => $package_release,
+    repos       => 'main',
+    include_src => false,
   }
 
 
@@ -160,7 +147,7 @@ class openmrs::pihemr (
     }
 
     exec{'install-openmrs-configuration':
-      command => "rm -rf ${tomcat_home_dir}/.OpenMRS/configuration_checksums && rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf ${tomcat_home_dir}/.OpenMRS/configuration && mkdir ${tomcat_home_dir}/.OpenMRS/configuration && cp -r /tmp/configuration/* ${tomcat_home_dir}/.OpenMRS/configuration",
+      command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf ${tomcat_home_dir}/.OpenMRS/configuration && mkdir ${tomcat_home_dir}/.OpenMRS/configuration && cp -r /tmp/configuration/* ${tomcat_home_dir}/.OpenMRS/configuration",
       require => [ Wget::Fetch['download-openmrs-configuration'], Package['unzip'], File["${tomcat_home_dir}/.OpenMRS"] ],
       notify => [ Exec['tomcat-restart'] ]
     }

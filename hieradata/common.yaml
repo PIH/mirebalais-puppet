@@ -10,13 +10,15 @@ pih_config: default
 site_domain: foo.org
 
 package_name: pihemr
-package_release: 'unstable/'
-package_version: '1.0.6446-1'
+package_release: 'unstable'
+package_version: '1.0.20220831195902-1'
 
 config_name: ""
 config_version: ""
 
 repo_url: ENC[guOgejmsDLkHjo2iCrV9MAWEt/Y9usi32Rs4qPepBu0=]
+pihemr_debian_repo_url: https://openmrs.jfrog.io/artifactory/deb-pih/
+
 
 prod_dw_petl_sqlserver_host: foo
 prod_dw_petl_sqlserver_port: foo
@@ -121,7 +123,7 @@ petl_java_opts: ""
 
 # PETL Config
 petl_config_name: zl-etl
-petl_config_version: 1.2.0-SNAPSHOT
+petl_config_version: 1.3.0-SNAPSHOT
 petl_config_dir: "configurations"
 
 # PETL MySQL

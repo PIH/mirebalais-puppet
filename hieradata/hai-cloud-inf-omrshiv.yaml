@@ -2,17 +2,20 @@
 webapp_name: openmrs
 site_domain: haiti.pih-emr.org
 
-package_release: 'stable/'
+package_release: 'stable'
 
 pih_config: haiti,haiti-hiv
 config_name: openmrs-config-zl
-config_version: 1.35.0
+config_version: 1.39.0
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.1.0
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
+
+backup_file_prefix: haitihiv
 
 mysql_innodb_buffer_pool_size: 3G
 mysql_innodb_buffer_pool_instances: 8
@@ -22,20 +25,8 @@ remote_zlidentifier_username: mirebalais
 remote_zlidentifier_password: ENC[IuAJgqs6Ci5Hw5xs/DYiZg==]
 
 # PETL
-
 # PETL MySQL
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
-petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
-
-# PETL SQL Server
-petl_sqlserver_databaseName: openmrs_haitihiv
-petl_sqlserver_host: 10.160.12.27
-petl_sqlserver_port: 1433
-petl_sqlserver_user: openmrs
-petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
-
-# PETL Cron
-petl_error_subject: Haiti Hiv (ZLEMR) petl errors
 
 mysql_net_read_timeout: 3600
 mysql_net_write_timeout: 3600

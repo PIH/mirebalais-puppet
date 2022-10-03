@@ -8,7 +8,7 @@ class apt_upgrades(
   	      update              => '1',
   	      download            => '1',
   	      upgrade             => '1',
-  	      autoclean           => '7',
+  	      autoclean           => '1',
   	      mail_to	            => $sysadmin_email,
   	      auto_fix            => true,
   	      minimal_steps       => false,

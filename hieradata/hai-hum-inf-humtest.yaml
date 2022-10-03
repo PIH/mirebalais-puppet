@@ -1,11 +1,11 @@
 webapp_name: mirebalais
 site_domain: humtest-zt.pih-emr.org
 
-package_release: 'unstable/'
+package_release: 'unstable'
 
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
-config_version: 1.37.0-SNAPSHOT
+config_version: 1.38.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.3.0-SNAPSHOT
@@ -15,7 +15,7 @@ server_timezone: America/New_York
 mysql_server_id: 1
 mysql_innodb_buffer_pool_size: 16G
 mysql_innodb_buffer_pool_instances: 16
-mysql_bind_address: 0.0.0.0
+mysql_bind_address: 127.0.0.1
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]

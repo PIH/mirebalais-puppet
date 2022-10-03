@@ -1,11 +1,11 @@
 ---
 site_domain: cercalasource.pih-emr.org
 
-package_release: 'stable/'
+package_release: 'stable'
 
 pih_config: haiti,haiti-cerca
 config_name: openmrs-config-zl
-config_version: 1.35.0
+config_version: 1.39.0
 
 server_timezone: America/New_York
 

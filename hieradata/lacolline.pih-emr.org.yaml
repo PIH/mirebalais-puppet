@@ -1,11 +1,11 @@
 ---
 site_domain: lacolline.pih-emr.org
 
-package_release: 'stable/'
+package_release: 'stable'
 
 pih_config: haiti,haiti-lacolline
 config_name: openmrs-config-zl
-config_version: 1.35.0
+config_version: 1.39.0
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.1.0

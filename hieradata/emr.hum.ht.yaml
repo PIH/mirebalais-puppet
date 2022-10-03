@@ -2,13 +2,11 @@ webapp_name: mirebalais
 az_backup_folder_path: haiti/mirebalais
 az_activitylog_backup_folder_path: activitylog/zl/mirebalais
 
-package_release: 'stable/'
-
-repo_url: ENC[aADqxhfrKRpTug52rCcj1HuHQnWQYEH6LDbNN7Huvp4=]
+package_release: 'stable'
 
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
-config_version: 1.35.0
+config_version: 1.39.0
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.1.0
