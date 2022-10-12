@@ -4,48 +4,7 @@ class mirebalais_reporting::production_setup (
     $percona_password = decrypt(hiera('percona_password')),
     $sysadmin_email = hiera('sysadmin_email'),
     $tomcat = hiera('tomcat')
-  ){
-
-
-  file { 'mirebalaisreportingdbdump.sh':
-    ensure  => absent,    # disabling the old reporting dump solution in favor of the new one
-    path    => '/usr/local/sbin/mirebalaisreportingdbdump.sh',
-    mode    => '0700',
-    owner   => 'root',
-    group   => 'root',
-    content => template('mirebalais_reporting/mirebalaisreportingdbdump.sh.erb'),
-  }
-
-  # note that we don't install p7zip-full here because it is already installed as part of the openmrs main package
-
-  cron { 'mysql-reporting-db-dump':
-    ensure  => absent,    # disabling the old reporting dump solution in favor of the new one
-    command => '/usr/local/sbin/mirebalaisreportingdbdump.sh >/dev/null',
-    user    => 'root',
-    hour    => 0,
-    minute  => 00,
-    environment => "MAILTO=$sysadmin_email",
-    require => [ File['mirebalaisreportingdbdump.sh'], Package['p7zip-full'] ]
-  }
-
-  file { 'mirebalaisreportscleanup.sh':
-    ensure => absent,    # disabling the old reporting dump solution in favor of the new one
-    path => '/usr/local/sbin/mirebalaisreportscleanup.sh',
-    mode => '0700',
-    owner => 'root',
-    group => 'root',
-    content => template('mirebalais_reporting/mirebalaisreportscleanup.sh.erb')
-  }
-
-  cron { 'mirebalais-reports-cleanup':
-    ensure => absent,    # disabling the old reporting dump solution in favor of the new one
-    command => '/usr/local/sbin/mirebalaisreportscleanup.sh >/dev/null',
-    user => 'root',
-    hour =>	5,
-    minute => 00,
-    environment => "MAILTO=$sysadmin_email",
-    require => [ File['mirebalaisreportscleanup.sh'] ]
-  }
+){
 
   file { 'mirebalais-percona-backup.sh':
     ensure  => present,
@@ -54,15 +13,6 @@ class mirebalais_reporting::production_setup (
     owner   => 'root',
     group   => 'root',
     content => template('mirebalais_reporting/mirebalais-percona-backup.sh.erb'),
-  }
-
-  file { 'mirebalais-percona-delete-dir.sh':
-    ensure  => present,
-    path    => '/home/percona/scripts/mirebalais-percona-delete-dir.sh',
-    mode    => '0700',
-    owner   => 'root',
-    group   => 'root',
-    content => template('mirebalais_reporting/mirebalais-percona-delete-dir.sh.erb'),
   }
 
   cron { 'mirebalais-percona-backup':
@@ -75,23 +25,24 @@ class mirebalais_reporting::production_setup (
     require => [ File['mirebalais-percona-backup.sh'] ]
   }
 
-  cron { 'Copy percona backup over to reporting':
+  cron { 'mirebalais-percona-transfer-to-reporting-nightly':
     ensure  => present,
-    command => 'scp -r /home/percona/backups/openmrs root@192.168.1.217:/home/reporting/percona/backups > /tmp/scp.log',
+    command => 'scp -v -r /home/percona/backups/openmrs root@192.168.1.19:/home/percona/backups > /home/percona/logs/scp_humreporting.log',
     user    => 'root',
-    hour    => 23,
-    minute  => 00,
+    hour    => 22,
+    minute  => 10,
     environment => "MAILTO=$sysadmin_email",
     require => [ File['mirebalais-percona-backup.sh'] ]
   }
 
-  cron { 'mirebalais-percona-delete-dir':
-      ensure  => present,
-      command => '/home/percona/scripts/mirebalais-percona-delete-dir.sh >/dev/null 2>&1',
-      user    => 'root',
-      hour    => 02,
-      minute  => 30,
-      environment => "MAILTO=$sysadmin_email",
-      require => [ File['mirebalais-percona-delete-dir.sh'] ]
-    }
+  cron { 'mirebalais-percona-transfer-to-humtest-weekly':
+    ensure  => present,
+    command => 'scp -v -r /home/percona/backups/openmrs root@192.168.1.18:/home/reporting/percona/backups > /home/percona/logs/scp_humtest.log',
+    user    => 'root',
+    weekday => 6,
+    hour    => 0,
+    minute  => 5,
+    environment => "MAILTO=$sysadmin_email",
+    require => [ File['mirebalais-percona-backup.sh'] ]
+  }
 }

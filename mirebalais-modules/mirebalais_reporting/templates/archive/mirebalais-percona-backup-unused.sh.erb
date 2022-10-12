@@ -1,0 +1,13 @@
+
+createIncrementalBackup () {
+			innobackupex --incremental /home/percona/backups --incremental-basedir=openmrs --user=${perconaUser} --password=${perconaPassword} --no-timestamp --databases=${openmrsDB} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconaincrementalbackup.log
+}
+
+zip () {
+        cd /home/percona/backups
+        zip -r openmrs.zip openmrs &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconacompress.log
+        #cd ${backupDir}
+        #scp openmrs.zip ${remoteUser}@${remoteHost}:${remoteBackupDir} 
+	#scp -r /home/percona/backups/* reporting@192.168.1.271:/home/reporting/percona/backups
+
+}
