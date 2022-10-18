@@ -7,3 +7,7 @@ config_version: 1.9.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+
+# commcare
+commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
+commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
