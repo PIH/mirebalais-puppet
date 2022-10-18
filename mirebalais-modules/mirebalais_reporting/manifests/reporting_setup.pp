@@ -30,7 +30,6 @@ class mirebalais_reporting::reporting_setup (
 		owner   => root,
 		group   => root,
 		mode    => '0755',
-		require => Package['percona-xtrabackup']
 	}
 
     file { 'percona-openmrs-db-restore.sh':
