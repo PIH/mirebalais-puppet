@@ -83,13 +83,15 @@ class apache2 (
   }
 
   file { '/var/www/html/.htaccess':
-    ensure => file,
-    source => 'puppet:///modules/apache2/www/htaccess'
+  ensure => absent,
+  purge => true,
+  force => true,
   }
 
   file { '/var/www/html/index.html':
-    ensure => file,
-    content => template('apache2/index.html.erb')
+  ensure => absent,
+  purge => true,
+  force => true,
   }
 
   exec { 'enable and disable apache mods':
