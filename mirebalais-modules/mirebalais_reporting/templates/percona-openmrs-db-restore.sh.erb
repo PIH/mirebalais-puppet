@@ -16,6 +16,9 @@ mailSubject="$perconaSite percona db restore success"
 perconaLogFile="<%= @perconaLogFile %>"
 minPerconaDirSize=<%= @minPerconaDirSize %>
 
+dbUser='<%= @backup_user %>'
+dbPass='<%= @backup_password %>'
+
 jobStartDate=`date +%Y%m%d-%H%M%S`
 
 exec > $perconaLogFile 2>&1
@@ -25,6 +28,27 @@ echo cronjob started on $jobStartDate
 mkdir -p /home/percona
 mkdir -p ${perconaBackupDir}
 mkdir -p ${perconaLogs}
+mkdir -p ${perconaHomeDir}/reporting
+
+## removing old reporting dump file
+rm -rf ${perconaHomeDir}/reporting/*
+if [ $? -eq 0 ]; then
+        echo removing old reporting dump succesful
+    else
+        ## No hard exit here
+        echo failure removing old reporting dump
+        mail -s "$perconaSite: Failure removing old reporting dump" "$mailTo" < $perconaLogFile
+fi
+
+## creating new reporting dump file
+mysqldump -u${dbUser} -p${dbPass} openmrs reporting_report_request > ${perconaHomeDir}/reporting/reporting_report_request.sql
+if [ $? -eq 0 ]; then
+        echo reporting_report_request tables dumped successfully
+    else
+        ## No hard exit here
+        echo errors dumping the reporting_report_request table
+        mail -s "$perconaSite: Failure while dumping reporting_report_request table" "$mailTo" < $perconaLogFile
+fi
 
 ## Ensure $perconaRestoreDir exists
 if [ -d "$perconaRestoreDir" ]; then
@@ -66,7 +90,7 @@ fi
 
 innobackupex --copy-back ${perconaRestoreDir}
 if [ $? -eq 0 ]; then
-        echo Percona DB was restored succesfully
+        echo Percona DB was restored successfully
 else
         echo Problem restoring percona db
         mail -s "$perconaSite: Failure restoring percona db" "$mailTo" < $perconaLogFile
@@ -76,17 +100,29 @@ fi
 sleep 30
 chown -R mysql:mysql ${mysqlDataDir}
 sleep 10
-/etc/init.d/mysql start
 
+/etc/init.d/mysql start
 if [ $? -eq 0 ]; then
         sleep 10
-        echo mysql started succesfully
+        echo mysql started successfully
 else
         echo mysql can not start
         mail -s "$perconaSite: Failure starting mysql" "$mailTo" < $perconaLogFile
         exit
 fi
 
+# restore reporting tables
+sleep 20
+mysql -u${dbUser} -p${dbPass} -D openmrs -e "SOURCE ${perconaHomeDir}/reporting/reporting_report_request.sql;"
+if [ $? -eq 0 ]; then
+        echo reporting_report_request restored
+else
+        ## no hard exit
+        echo failure restoring reporting_report_request table
+        mail -s "$perconaSite: Failure restoring reporting_report_request table" "$mailTo" < $perconaLogFile
+fi
+
+sleep 20
 echo ensuring all tables are correct
 /usr/bin/mysqlcheck -u root --auto-repair --check --all-databases
 
