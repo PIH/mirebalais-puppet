@@ -37,4 +37,5 @@ ssl_use_letsencrypt: true
 # percona
 perconaSite: HUM Reporting
 perconaLogFile: "/home/percona/logs/percona-db-restore.log"
+perconaReportDir: "/home/percona/reporting"
 minPerconaDirSize: 41200000

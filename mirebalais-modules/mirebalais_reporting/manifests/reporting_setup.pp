@@ -6,6 +6,7 @@ class mirebalais_reporting::reporting_setup (
 	$backup_db_password = decrypt(hiera('backup_db_password')),
 	$sysadmin_email = hiera('sysadmin_email'),
 	$perconaHomeDir = hiera('perconaHomeDir'),
+	$perconaReportDir = hiera('perconaReportDir'),
 	$perconaBackupDir = hiera('perconaBackupDir'),
 	$perconaLogs = hiera('perconaLogs'),
 	$perconaLogFile = hiera('perconaLogFile'),

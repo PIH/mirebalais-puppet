@@ -1,9 +1,11 @@
 #!/bin/bash
 
 mailTo=<%= @sysadmin_email %>
+perconaHomeDir="<%= @perconaHomeDir %>"
 perconaBackupDir="<%= @perconaBackupDir %>"
 perconaLogs="<%= @perconaLogs %>"
 perconaRestoreDir="<%= @perconaRestoreDir %>"
+perconaReportDir="<%= @perconaReportDir %>"
 perconaSite="<%= @perconaSite %>"
 
 mysqlDataDir="/var/lib/mysql"
@@ -25,10 +27,10 @@ exec > $perconaLogFile 2>&1
 
 echo cronjob started on $jobStartDate
 
-mkdir -p /home/percona
+mkdir -p ${perconaHomeDir}
 mkdir -p ${perconaBackupDir}
 mkdir -p ${perconaLogs}
-mkdir -p ${perconaHomeDir}/reporting
+mkdir -p ${perconaReportDir}
 
 ## removing old reporting dump file
 rm -rf ${perconaHomeDir}/reporting/*
@@ -41,7 +43,7 @@ if [ $? -eq 0 ]; then
 fi
 
 ## creating new reporting dump file
-mysqldump -u${dbUser} -p${dbPass} openmrs reporting_report_request > ${perconaHomeDir}/reporting/reporting_report_request.sql
+mysqldump -u${dbUser} -p${dbPass} openmrs reporting_report_request > ${perconaReportDir}/reporting_report_request.sql
 if [ $? -eq 0 ]; then
         echo reporting_report_request tables dumped successfully
     else
@@ -113,7 +115,7 @@ fi
 
 # restore reporting tables
 sleep 20
-mysql -u${dbUser} -p${dbPass} -D openmrs -e "SOURCE ${perconaHomeDir}/reporting/reporting_report_request.sql;"
+mysql -u${dbUser} -p${dbPass} -D openmrs -e "SOURCE ${perconaReportDir}/reporting_report_request.sql;"
 if [ $? -eq 0 ]; then
         echo reporting_report_request restored
 else
