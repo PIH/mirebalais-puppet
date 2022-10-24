@@ -124,7 +124,7 @@ else
 fi
 
 # drop existing table
-mysql -u${dbUser} -p${dbPass} -D openmrs -e "DROP TABLE IF EXIST reporting_report_request;"
+mysql -u${dbUser} -p${dbPass} -D openmrs -e "DROP TABLE IF EXISTS reporting_report_request;"
 if [ $? -eq 0 ]; then
         echo reporting_report_request dropped
 else
