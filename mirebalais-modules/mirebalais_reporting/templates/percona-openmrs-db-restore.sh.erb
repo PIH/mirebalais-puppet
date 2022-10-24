@@ -18,8 +18,8 @@ mailSubject="$perconaSite percona db restore success"
 perconaLogFile="<%= @perconaLogFile %>"
 minPerconaDirSize=<%= @minPerconaDirSize %>
 
-dbUser='<%= @backup_user %>'
-dbPass='<%= @backup_password %>'
+dbUser='root'
+dbPass='<%= @mysql_root_password  %>'
 
 jobStartDate=`date +%Y%m%d-%H%M%S`
 
@@ -113,6 +113,26 @@ else
         exit
 fi
 
+# Disable foreign key constraints
+mysql -u${dbUser} -p${dbPass} -D openmrs -e "SET FOREIGN_KEY_CHECKS = 0;"
+if [ $? -eq 0 ]; then
+        echo foreign key check disabled
+else
+        ## no hard exit
+        echo failure disabling foreign key check
+        mail -s "$perconaSite: Failure disabling foreign key check" "$mailTo" < $perconaLogFile
+fi
+
+# drop existing table
+mysql -u${dbUser} -p${dbPass} -D openmrs -e "DROP TABLE IF EXIST reporting_report_request;"
+if [ $? -eq 0 ]; then
+        echo reporting_report_request dropped
+else
+        ## no hard exit
+        echo failure dropping reporting_report_request
+        mail -s "$perconaSite: Failure dropping reporting_report_request table" "$mailTo" < $perconaLogFile
+fi
+
 # restore reporting tables
 sleep 20
 mysql -u${dbUser} -p${dbPass} -D openmrs -e "SOURCE ${perconaReportDir}/reporting_report_request.sql;"
@@ -122,6 +142,16 @@ else
         ## no hard exit
         echo failure restoring reporting_report_request table
         mail -s "$perconaSite: Failure restoring reporting_report_request table" "$mailTo" < $perconaLogFile
+fi
+
+# enable foreign key check
+mysql -u${dbUser} -p${dbPass} -D openmrs -e "SET FOREIGN_KEY_CHECKS = 1;"
+if [ $? -eq 0 ]; then
+        echo foreign key check enabled
+else
+        ## no hard exit
+        echo failure enabling foreign key check
+        mail -s "$perconaSite: Failure enabling foreign key check" "$mailTo" < $perconaLogFile
 fi
 
 sleep 20
