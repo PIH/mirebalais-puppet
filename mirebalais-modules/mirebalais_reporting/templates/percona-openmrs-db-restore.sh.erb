@@ -18,8 +18,8 @@ mailSubject="$perconaSite percona db restore success"
 perconaLogFile="<%= @perconaLogFile %>"
 minPerconaDirSize=<%= @minPerconaDirSize %>
 
-dbUser='root'
-dbPass='<%= @mysql_root_password  %>'
+dbUser="root"
+dbPass="<%= @mysql_root_password %>"
 
 jobStartDate=`date +%Y%m%d-%H%M%S`
 
@@ -114,7 +114,7 @@ else
 fi
 
 # Disable foreign key constraints
-mysql -u${dbUser} -p${dbPass} -D openmrs -e "SET FOREIGN_KEY_CHECKS = 0;"
+mysql -u${dbUser} -p${dbPass} -e "SET FOREIGN_KEY_CHECKS = 0;"
 if [ $? -eq 0 ]; then
         echo foreign key check disabled
 else
@@ -145,7 +145,7 @@ else
 fi
 
 # enable foreign key check
-mysql -u${dbUser} -p${dbPass} -D openmrs -e "SET FOREIGN_KEY_CHECKS = 1;"
+mysql -u${dbUser} -p${dbPass} -e "SET FOREIGN_KEY_CHECKS = 1;"
 if [ $? -eq 0 ]; then
         echo foreign key check enabled
 else
