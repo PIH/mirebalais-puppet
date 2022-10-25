@@ -114,44 +114,18 @@ else
 fi
 
 # Disable foreign key constraints
-mysql -u${dbUser} -p${dbPass} -e "SET FOREIGN_KEY_CHECKS = 0;"
-if [ $? -eq 0 ]; then
-        echo foreign key check disabled
+if [ -f "${perconaReportDir}/reporting_report_request.sql" ];
+then
+    echo ${perconaReportDir}/reporting_report_request.sql exists
+    mysql -u${dbUser} -p${dbPass} -e "SET FOREIGN_KEY_CHECKS = 0;"
+    sleep 5
+    #mysql -u${dbUser} -p${dbPass} -D openmrs -e "DROP TABLE IF EXISTS reporting_report_request;"
+    mysql -u${dbUser} -p${dbPass} -D openmrs -e "SOURCE ${perconaReportDir}/reporting_report_request.sql;"
+    sleep 5
+    mysql -u${dbUser} -p${dbPass} -e "SET FOREIGN_KEY_CHECKS = 1;"
 else
-        ## no hard exit
-        echo failure disabling foreign key check
-        mail -s "$perconaSite: Failure disabling foreign key check" "$mailTo" < $perconaLogFile
-fi
-
-# drop existing table
-mysql -u${dbUser} -p${dbPass} -D openmrs -e "DROP TABLE IF EXISTS reporting_report_request;"
-if [ $? -eq 0 ]; then
-        echo reporting_report_request dropped
-else
-        ## no hard exit
-        echo failure dropping reporting_report_request
-        mail -s "$perconaSite: Failure dropping reporting_report_request table" "$mailTo" < $perconaLogFile
-fi
-
-# restore reporting tables
-sleep 20
-mysql -u${dbUser} -p${dbPass} -D openmrs -e "SOURCE ${perconaReportDir}/reporting_report_request.sql;"
-if [ $? -eq 0 ]; then
-        echo reporting_report_request restored
-else
-        ## no hard exit
-        echo failure restoring reporting_report_request table
-        mail -s "$perconaSite: Failure restoring reporting_report_request table" "$mailTo" < $perconaLogFile
-fi
-
-# enable foreign key check
-mysql -u${dbUser} -p${dbPass} -e "SET FOREIGN_KEY_CHECKS = 1;"
-if [ $? -eq 0 ]; then
-        echo foreign key check enabled
-else
-        ## no hard exit
-        echo failure enabling foreign key check
-        mail -s "$perconaSite: Failure enabling foreign key check" "$mailTo" < $perconaLogFile
+    echo ${perconaReportDir}/reporting_report_request.sql does not exist
+    mail -s "$perconaSite: ${perconaReportDir}/reporting_report_request.sql does not exist" "$mailTo" < $perconaLogFile
 fi
 
 : '
