@@ -209,12 +209,12 @@ node 'hai-hum-inf-omrs-report' {
   include openmrs::pihemr
   #include openmrs::initial_setup
 
-  include percona
+  #include percona
 
   #include monitoring
-  include logging
+  #include logging
 
-  include mirebalais_reporting::reporting_setup
+  #include mirebalais_reporting::reporting_setup
 }
 
 node 'inf-dakakind-omrs-test' {

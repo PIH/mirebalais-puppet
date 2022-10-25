@@ -154,6 +154,7 @@ else
         mail -s "$perconaSite: Failure enabling foreign key check" "$mailTo" < $perconaLogFile
 fi
 
+: '
 sleep 20
 echo ensuring all tables are correct
 /usr/bin/mysqlcheck -u root --auto-repair --check --all-databases
@@ -166,7 +167,18 @@ else
         exit
 fi
 
-rm -rf ${perconaBackupDir}/*
+rm -rf ${perconaBackupDir}/* '
+
+## rerunning puppet
+cd /etc/puppet
+./puppet-apply.sh site
+if [ $? -eq 0 ]; then
+        echo puppet ran successfully
+else
+        echo failure running puppet
+        mail -s "$perconaSite: Failure running puppet" "$mailTo" < $perconaLogFile
+        exit
+fi
 
 /etc/init.d/apache2 stop
 /etc/init.d/tomcat7 stop
