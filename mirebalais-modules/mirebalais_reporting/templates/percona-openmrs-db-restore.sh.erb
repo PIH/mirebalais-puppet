@@ -113,19 +113,19 @@ else
         exit
 fi
 
-# Disable foreign key constraints
-if [ -f "${perconaReportDir}/reporting_report_request.sql" ];
-then
-    echo ${perconaReportDir}/reporting_report_request.sql exists
-    mysql -u${dbUser} -p${dbPass} -e "SET FOREIGN_KEY_CHECKS = 0;"
+# Disable foreign key constraints, restore enable foreign key constraints
+STRING_COMPARE=$( tail -1 ${perconaReportDir}/reporting_report_request.sql)
+if [[ $STRING_COMPARE == *"-- Dump completed on"* ]]; then
+    echo ${STRING_COMPARE}
+    echo reporting_report_request dump file is complete
+    # this is hacky, it deletes the orphaned table (works without stoping mysql)
+    rm -rf /var/lib/mysql/openmrs/reporting_report_request*
     sleep 5
-    #mysql -u${dbUser} -p${dbPass} -D openmrs -e "DROP TABLE IF EXISTS reporting_report_request;"
-    mysql -u${dbUser} -p${dbPass} -D openmrs -e "SOURCE ${perconaReportDir}/reporting_report_request.sql;"
-    sleep 5
-    mysql -u${dbUser} -p${dbPass} -e "SET FOREIGN_KEY_CHECKS = 1;"
+    mysql -u${dbUser} -p${dbPass} -D openmrs -e "SOURCE /home/percona/reporting/reporting_report_request.sql;"
 else
-    echo ${perconaReportDir}/reporting_report_request.sql does not exist
-    mail -s "$perconaSite: ${perconaReportDir}/reporting_report_request.sql does not exist" "$mailTo" < $perconaLogFile
+    echo ${STRING_COMPARE}
+    echo reporting_report_request.sql dump file is not complete or is missing
+    mail -s "$perconaSite: ${perconaReportDir}/reporting_report_request.sql does not exist or is incomplete" "$mailTo" < $perconaLogFile
 fi
 
 : '
