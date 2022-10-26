@@ -51,6 +51,8 @@ mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
 
 # Authentication settings
 authentication.scheme=<%= @openmrs_authentication_scheme %>
+
+# The below indicates the supported authentication schemes.  The configured scheme is what is configured above.
 authentication.whiteList=/login.htm,/pihcore/login.page,/pihcore/loginSecret.page,/appui/session/getLoginLocations.action,/csrfguard,*.js,*.css,*.gif,*.jpg,*.png,*.ico,*.ttf,*.woff
 authentication.scheme.2fa.type=org.openmrs.module.authentication.web.TwoFactorAuthenticationScheme
 authentication.scheme.2fa.config.primaryOptions=basic
