@@ -48,3 +48,20 @@ mail.smtp.ssl.protocols=TLSv1.2
 mail.transport.protocol=smtp
 mail.user=<%= @openmrs_mail_user %>
 mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
+
+# Authentication settings
+
+# If this authentication scheme is left blank, the system will default to use the PihBasicAuthenticationScheme
+authentication.scheme=<%= @openmrs_authentication_scheme %>
+
+# The below indicates the supported authentication schemes.  The configured scheme is what is configured above.
+authentication.whiteList=/login.htm,/pihcore/login.page,/pihcore/loginSecret.page,/appui/session/getLoginLocations.action,/csrfguard,*.js,*.css,*.gif,*.jpg,*.png,*.ico,*.ttf,*.woff
+authentication.scheme.2fa.type=org.openmrs.module.authentication.web.TwoFactorAuthenticationScheme
+authentication.scheme.2fa.config.primaryOptions=basic
+authentication.scheme.2fa.config.secondaryOptions=secret
+authentication.scheme.basic.type=org.openmrs.module.pihcore.PihBasicAuthenticationScheme
+authentication.scheme.basic.config.loginPage=/login.htm
+authentication.scheme.basic.config.usernameParam=username
+authentication.scheme.basic.config.passwordParam=password
+authentication.scheme.secret.type=org.openmrs.module.authentication.web.SecretQuestionAuthenticationScheme
+authentication.scheme.secret.config.loginPage=/pihcore/loginSecret.page
