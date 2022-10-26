@@ -50,6 +50,8 @@ mail.user=<%= @openmrs_mail_user %>
 mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
 
 # Authentication settings
+
+# If this authentication scheme is left blank, the system will default to use the PihBasicAuthenticationScheme
 authentication.scheme=<%= @openmrs_authentication_scheme %>
 
 # The below indicates the supported authentication schemes.  The configured scheme is what is configured above.
