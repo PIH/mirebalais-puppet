@@ -48,3 +48,6 @@ mail.smtp.ssl.protocols=TLSv1.2
 mail.transport.protocol=smtp
 mail.user=<%= @openmrs_mail_user %>
 mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
+
+# If this authentication scheme is left blank, the system will default to use basic authentication
+authentication.scheme=<%= @openmrs_authentication_scheme %>

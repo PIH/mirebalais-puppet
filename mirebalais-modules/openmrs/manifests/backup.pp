@@ -14,6 +14,7 @@ class openmrs::backup (
     $archive_hour                     = hiera('archive_hour'),
     $activitylog_enabled              = hiera('activitylog_enabled'),
     $terms_and_conditions_enabled     = hiera('terms_and_conditions_enabled'),
+    $openmrs_authentication_scheme    = hiera('openmrs_authentication_scheme'),
     $az_activitylog_backup_folder_path  = hiera('az_activitylog_backup_folder_path'),
   ){
 
