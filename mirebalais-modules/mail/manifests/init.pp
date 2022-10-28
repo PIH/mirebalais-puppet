@@ -1,7 +1,8 @@
 class mail (
 	$smtp_username = decrypt(hiera('smtp_username')),
 	$smtp_userpassword = decrypt(hiera('smtp_userpassword')),
-	$smtp_mailhub = decrypt(hiera('smtp_mailhub'))
+	$smtp_mailhub = decrypt(hiera('smtp_mailhub')),
+	$site_domain = hiera('site_domain')
 ){
 
 	package { 'sendmail':
