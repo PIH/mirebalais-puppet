@@ -1,55 +1,36 @@
 class mail (
 	$smtp_username = decrypt(hiera('smtp_username')),
-	$smtp_userpassword = decrypt(hiera('smtp_userpassword'))
+	$smtp_userpassword = decrypt(hiera('smtp_userpassword')),
+	$smtp_mailhub = decrypt(hiera('smtp_mailhub'))
 ){
 
 	package { 'sendmail':
+		ensure => absent,
+	}
+
+	package { 'ssmtp':
 		ensure => installed,
 	}
 
 	package { 'mailutils':
 		ensure => installed,
-    		require => [ Package['sendmail'] ]
+		require => [ Package['ssmtp'] ]
 	}
 
-	file { "/etc/mail/authinfo":
+	file { "/etc/ssmtp":
 		ensure  => directory,
 		owner   => root,
-		group   => smmsp,
-		mode    => '0700',
-		require =>  Package['sendmail']
+		group   => mail,
+		mode    => '0750',
+		require =>  Package['ssmtp']
 	}
 
-	file { '/etc/mail/authinfo/smtp-auth':
+	file { '/etc/ssmtp/ssmtp.conf':
 		ensure  => file,
-		group   => smmsp,
-		mode    => '0644',
-		content => template('mail/smtp-auth.erb'),
-		require => Package['sendmail']
+		group   => mail,
+		mode    => '0640',
+		content => template('mail/ssmtp.conf.erb'),
+		require => [Package['ssmtp'], File['/etc/ssmtp']]
 	}
 
-	exec { 'authentication_hash_db_map':
-		command => "/bin/bash -c 'cd /etc/mail/authinfo; sudo makemap hash smtp-auth < smtp-auth'",
-		user => 'root',
-		require => Package['sendmail']
-	}
-
-	file { '/etc/mail/sendmail.mc':
-	    	ensure  => file,
-    		group   => smmsp,
-    		mode    => '0644',
-	    	content => template('mail/sendmail.mc.erb'),
-	    	require => Package['sendmail']
-	}
-
-	exec { 'rebuild_sendmail_config':
-		command => "/bin/bash -c 'cd /etc/mail; make'",
-		user => 'root',
-		require => Package['sendmail']
-	}
-
-	exec { 'sendmail-restart':
-		command     => "/etc/init.d/sendmail restart",
-		user        => 'root'
-	}
 }
