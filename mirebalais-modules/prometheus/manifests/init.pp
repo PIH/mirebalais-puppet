@@ -29,12 +29,13 @@ class prometheus(
     command => "mv /tmp/node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin/",
     user => node_exporter,
     refreshonly => true,
-    require => [ Exec['create-node-exporter-user'] ]
+    require => [ Exec['download-node-exporter'], Exec['extract-node-exporter'], Exec['create-node-exporter-user'] ]
   }
 
   file { '/etc/systemd/system/node_exporter.service':
     ensure  => file,
-    content  => template('node_exporter.service.erb')
+    content  => template('prometheus/node_exporter.service.erb'),
+    require => [ Exec['create-node-exporter-user'] ]
   }
 
   exec { 'node-exporter-service-reload':
