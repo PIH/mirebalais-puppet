@@ -5,28 +5,23 @@ class prometheus(
   $node_exporter_listen_port = decrypt(hiera('node_exporter_listen_port'))
 ) {
 
+  exec { 'create-node-exporter-user':
+    command => "useradd -r node_exporter",
+  }
+
   wget::fetch { 'download-node-exporter':
-    source      => '$node_exporter_download_url',
-    destination => '/tmp',
-    timeout     => 0,
-    verbose     => false,
-    before => Exec['extract-node-exporter']
+    source      => "$node_exporter_download_url",
+    destination => "/tmp/node_exporter$node_exporter_version"
   }
 
   exec { 'extract-node-exporter':
-    cwd     => "/tmp",
-    command => 'tar -xf node_exporter-1.4.0.linux-amd64.tar.gz',
-    refreshonly => true,
-    subscribe => [ Wget::Fetch['download-node-exporter'] ]
-  }
-
-  exec { 'create-node-exporter-user':
-    command => "useradd -r node_exporter",
-    require => [ Wget::Fetch['download-node-exporter'], Exec['extract-node-exporter'] ]
+    command => "tar -xvf /tmp/node_exporter$node_exporter_version",
+    unless  => "/bin/ls -ap /tmp | grep node_exporter$node_exporter_version | grep -v grep",
+    require => [ Wget::Fetch['download-node-exporter'] ]
   }
 
   exec { 'move-node-exporter':
-    command => "mv /tmp/node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin/",
+    command => "mv /tmp/node_exporter-$node_exporter_version.linux-amd64/node_exporter /usr/local/bin/",
     user => node_exporter,
     refreshonly => true,
     require => [  Exec['create-node-exporter-user'] ]
