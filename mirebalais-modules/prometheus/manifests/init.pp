@@ -6,7 +6,7 @@ class prometheus(
 ) {
 
   exec { 'create-node-exporter-user':
-    command => "useradd -r node_exporter",
+    command => "useradd -r node_exporter || true",
   }
 
   wget::fetch { 'download-node-exporter':
