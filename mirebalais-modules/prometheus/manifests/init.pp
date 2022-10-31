@@ -6,7 +6,7 @@ class prometheus(
 ) {
 
   wget::fetch { 'download-node-exporter':
-    source      => 'https://repo.percona.com/apt/percona-release_0.1-4.xenial_all.deb',
+    source      => '$node_exporter_download_url',
     destination => '/tmp',
     timeout     => 0,
     verbose     => false,
