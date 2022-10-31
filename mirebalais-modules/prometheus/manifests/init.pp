@@ -20,9 +20,8 @@ class prometheus(
   }
 
   exec { 'move-node-exporter':
-    command => "mv /tmp/node_exporter-$node_exporter_version.linux-amd64/node_exporter /usr/local/bin/",
-    user => node_exporter,
-    refreshonly => true,
+    command => "mv /tmp/node_exporter-${node_exporter_version}.linux-amd64/node_exporter /usr/local/bin/",
+    user        => 'root',
     require => [  Exec['create-node-exporter-user'] ]
   }
 
