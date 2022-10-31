@@ -22,20 +22,20 @@ class prometheus(
 
   exec { 'create-node-exporter-user':
     command => "useradd -r node_exporter",
-    require => [ Exec['download-node-exporter'], Exec['extract-node-exporter'] ]
+    require => [ Wget::Fetch['download-node-exporter'], Exec['extract-node-exporter'] ]
   }
 
   exec { 'move-node-exporter':
     command => "mv /tmp/node_exporter-1.0.1.linux-amd64/node_exporter /usr/local/bin/",
     user => node_exporter,
     refreshonly => true,
-    require => [ Exec['download-node-exporter'], Exec['extract-node-exporter'], Exec['create-node-exporter-user'] ]
+    require => [  Exec['create-node-exporter-user'] ]
   }
 
   file { '/etc/systemd/system/node_exporter.service':
     ensure  => file,
     content  => template('prometheus/node_exporter.service.erb'),
-    require => [ Exec['create-node-exporter-user'] ]
+    require => [ Wget::Fetch['download-node-exporter'], Exec['extract-node-exporter'], Exec['create-node-exporter-user'] ]
   }
 
   exec { 'node-exporter-service-reload':
