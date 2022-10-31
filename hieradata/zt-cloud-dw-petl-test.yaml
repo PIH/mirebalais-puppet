@@ -48,3 +48,7 @@ mysql_key_buffer_size: 2G
 
 openmrs_db: openmrs
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[7UKw1KmRszr7v4wY2RxlqQ==:MOSRONq5aUBrTbB5pNHd+A==:Z0lZNG1HSXliZDBLS3cxZ2srY1NaUT09]
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]

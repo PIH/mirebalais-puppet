@@ -22,3 +22,7 @@ commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[W4Zbawrp9PVjxsi+6cvi1w==:4RMB2CoRCtKbJnnqSTy94g==:Q280M1lINmdhc3NmRUQySEFGM09LQT09
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
