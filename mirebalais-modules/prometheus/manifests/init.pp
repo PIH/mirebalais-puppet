@@ -16,7 +16,6 @@ class prometheus(
 
   exec { 'extract-node-exporter':
     command => "tar -xvf /tmp/node_exporter$node_exporter_version",
-    unless  => "/bin/ls -ap /tmp | grep node_exporter$node_exporter_version | grep -v grep",
     require => [ Wget::Fetch['download-node-exporter'] ]
   }
 
