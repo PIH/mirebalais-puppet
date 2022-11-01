@@ -23,8 +23,9 @@ mysql_interactive_timeout: 28800
 
 ssl_use_letsencrypt: true
 
-smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
-smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]
+smtp_username: ENC[Z56UpsG1H0AWZ5Heg20uxdYJver+pqaPO1XqvLaeEao=]
+smtp_userpassword: ENC[MIL89jVL61pgNySX0N2JvzqAyLjC8O/j6AjzXIPkp1E=]
+smtp_mailhub: ENC[Br1+9DHXrCo7T8Ra8xGm6MeqOjJiIwzKABPhxe9/Lj0=]
 
 # prometheus node exporter
 node_exporter_listen_ip: ENC[gOxEv2RGXiQuNudWIvVdXw==]
