@@ -10,9 +10,6 @@ perconaSite="<%= @perconaSite %>"
 
 mysqlDataDir="/var/lib/mysql"
 mysqlDb="<%= @mysqlDb %>"
-openmrsHomeDir="/home/tomcat7/.OpenMRS"
-reportingTables="<%= @reportingTables %>"
-reportingDumps="<%= @reportingDumps %>"
 
 mailSubject="$perconaSite percona db restore success"
 perconaLogFile="<%= @perconaLogFile %>"
@@ -21,10 +18,9 @@ minPerconaDirSize=<%= @minPerconaDirSize %>
 dbUser="root"
 dbPass="<%= @mysql_root_password %>"
 
-jobStartDate=`date +%Y%m%d-%H%M%S`
-
 exec > $perconaLogFile 2>&1
 
+jobStartDate=`date +%Y%m%d-%H%M%S`
 echo cronjob started on $jobStartDate
 
 mkdir -p ${perconaHomeDir}
@@ -110,48 +106,6 @@ if [ $? -eq 0 ]; then
 else
         echo mysql can not start
         mail -s "$perconaSite: Failure starting mysql" "$mailTo" < $perconaLogFile
-        exit
-fi
-
-# file content comparison
-# if the file if complete then restore the reporting_report_request data
-STRING_COMPARE=$(tail -1 ${perconaReportDir}/reporting_report_request.sql)
-if [[ $STRING_COMPARE == *"-- Dump completed on"* ]]; then
-    echo ${STRING_COMPARE}
-    echo reporting_report_request dump file is complete
-    sleep 5
-    mysql -u${dbUser} -p${dbPass} -D openmrs -e "DELETE FROM reporting_report_request;"
-    mysql -u${dbUser} -p${dbPass} -D openmrs -e "COMMIT;"
-    mysql -u${dbUser} -p${dbPass} openmrs < ${perconaReportDir}/reporting_report_request.sql
-else
-    echo ${STRING_COMPARE}
-    echo reporting_report_request.sql dump file is not complete or is missing
-    mail -s "$perconaSite: ${perconaReportDir}/reporting_report_request.sql does not exist or is incomplete" "$mailTo" < $perconaLogFile
-fi
-
-: '
-sleep 20
-echo ensuring all tables are correct
-/usr/bin/mysqlcheck -u root --auto-repair --check --all-databases
-
-if [ $? -eq 0 ]; then
-        echo all tables are correct
-else
-        echo mysql tables are not correct
-        mail -s "$perconaSite: mysql proc table issues" "$mailTo" < $perconaLogFile
-        exit
-fi
-
-rm -rf ${perconaBackupDir}/* '
-
-## rerunning puppet
-cd /etc/puppet
-./puppet-apply.sh site
-if [ $? -eq 0 ]; then
-        echo puppet ran successfully
-else
-        echo failure running puppet
-        mail -s "$perconaSite: Failure running puppet" "$mailTo" < $perconaLogFile
         exit
 fi
 
