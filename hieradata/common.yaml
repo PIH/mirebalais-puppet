@@ -201,7 +201,7 @@ activitylog_enabled: false
 az_activitylog_backup_folder_path: ""
 
 # Enforce acceptance of terms and conditions for usage
-terms_and_conditions_enabled: false
+terms_and_conditions_enabled: true
 
 # Authentication Scheme
 openmrs_authentication_scheme: ""

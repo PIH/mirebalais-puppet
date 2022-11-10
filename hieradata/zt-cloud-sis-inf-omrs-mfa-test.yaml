@@ -29,7 +29,5 @@ appointmentscheduling_confidential: true
 java_memory_parameters: '-Xmx2094m -Xms2094m'
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 
-terms_and_conditions_enabled: true
-
 # Authentication Scheme
 openmrs_authentication_scheme: "2fa"
