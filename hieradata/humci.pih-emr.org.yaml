@@ -68,9 +68,6 @@ java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y
 
 activitylog_enabled: true
 
-# Authentication Scheme
-openmrs_authentication_scheme: "2fa"
-
 # prometheus node exporter
 node_exporter_listen_ip: ENC[r/6a4rPBdr93KPc/oekg4w==:CtezxOxc2hosGJNW2veL7Q==:RTZGR2xHSW8wa3dlYkFta3BBU0RPdz09]
 node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
