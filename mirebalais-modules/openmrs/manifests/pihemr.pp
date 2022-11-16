@@ -19,7 +19,6 @@ class openmrs::pihemr (
   $config_dir                    = hiera('config_dir', undef),
   $activitylog_enabled           = hiera('activitylog_enabled'),
   $terms_and_conditions_enabled  = hiera('terms_and_conditions_enabled'),
-  $openmrs_authentication_scheme = hiera('openmrs_authentication_scheme'),
   $session_timeout               = hiera('session_timeout'),
 
   # PIH EMR config
