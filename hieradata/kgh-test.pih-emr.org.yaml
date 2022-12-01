@@ -12,6 +12,11 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 
+# PETL MySQL
+petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
+petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+petl_mysql_user_ip: 10.160.16.25
+
 # prometheus node exporter
 node_exporter_listen_ip: ENC[1Q2GORtLtL3IidLfw4mxKA==:NHpGiVWrgq1fGTjoJ7ybIA==:UVp0cDBUd1NRc0QwaDQvQWhLWDBoZz09]
 node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
