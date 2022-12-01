@@ -5,7 +5,7 @@ tomcat_enable_http_8080: true
 
 pih_config: mirebalais,mirebalais-humci
 config_name: openmrs-config-zl
-config_version: 1.41.0-SNAPSHOT
+config_version: 1.42.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
