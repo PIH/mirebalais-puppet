@@ -11,6 +11,30 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mysql_bind_address: 0.0.0.0
 
+# PETL
+petl: "petl"
+petl_site: "glaid"
+petl_home_dir: "/opt/petl"
+
+# PETL MySQL
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
+petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
+petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+
+# PETL SQL Server 2016
+petl_sqlserver_host: 10.160.12.28
+petl_sqlserver_port: 1433
+petl_sqlserver_databaseName: openmrs_sl_warehouse
+petl_sqlserver_user: medinfoadmin
+petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
+
+# PETL warehouse DB
+# This is used in malawi
+# when running ./puppet-apply.sh petl on humci or petl-test or gladi
+# ensure petl_warehouse_db is set to ""
+petl_warehouse_db: ""
+petl_mysql_user_ip: localhost
+
 #feature toggles
 
 mysql_innodb_buffer_pool_size: 1G
