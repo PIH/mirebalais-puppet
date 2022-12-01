@@ -19,7 +19,7 @@ spring:
   datasource:
     platform: "mssql"
     driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=openmrs_humci"
+    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=<%= @petl_sqlserver_databaseName -%>"
     username: "<%= @petl_sqlserver_user -%>"
     password: "<%= @petl_sqlserver_password -%>"
   jpa:
@@ -37,14 +37,14 @@ datasources:
 
   openmrs:
     gladi:
-      host: "<%= @petl_mysql_host -%>"
+      host: "<%= @petl_mysql_user_ip -%>"
       port: "<%= @petl_mysql_port -%>"
       databaseName: "openmrs"
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
     kgh_test:
-      host: "10.160.16.24"
+      host: "<%= @petl_mysql_host -%>"
       port: "<%= @petl_mysql_port -%>"
       databaseName: "openmrs"
       user: "${datasources.mysql.user}"
@@ -54,6 +54,6 @@ datasources:
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"
        port: "<%= @petl_sqlserver_port -%>"
-       databaseName: "openmrs_sl_warehouse"
+       databaseName: "<%= @petl_sqlserver_databaseName -%>"
        user: "<%= @petl_sqlserver_user -%>"
        password: "<%= @petl_sqlserver_password -%>"
