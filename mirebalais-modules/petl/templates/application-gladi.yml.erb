@@ -7,6 +7,9 @@ petl:
       - "create-partitions.yml"
       - "refresh-ci-warehouse.yml"
 
+executeCron:
+  refreshCiDW: "<%= @petl_cron_time -%>"
+
 server:
   port: "<%= @petl_server_port -%>"
 
