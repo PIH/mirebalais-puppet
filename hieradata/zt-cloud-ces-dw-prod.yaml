@@ -1,0 +1,54 @@
+---
+site_domain: zt-cloud-ces-dw-prod
+server_timezone: America/New_York
+
+# PETL
+petl: petl
+petl_site: ces-prod
+petl_home_dir: /opt/petl
+
+# PETL config
+petl_config_dir: "configurations"
+petl_config_name: ces-etl
+petl_config_version: 1.4.0
+
+# PETL MySQL
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
+petl_mysql_user: ENC[wpuWO7nraIOnPNAFO9qVag==:v3polnZyZ206+BQ3y2I7TQ==:V0Y3WlJtOHZESVNUL3lSUDRLK2V1UT09]
+petl_mysql_password: ENC[QWOD/TWnJbN+jk+Lg4AVqA==:eHSLn0ZzaiOjvVS+9NPzvg==:a3VMWkprZ0dZZTU0YjVOd2JHemJFZz09]
+
+# PETL SQL Server 2106
+petl_sqlserver_databaseName: ces_omrs_dw
+petl_sqlserver_host: 10.160.10.27
+petl_sqlserver_port: 1433
+petl_sqlserver_user: ENC[v1pMAcFAh0ag0IlcLSYolQ==:WDaxbE1p9+iN7x8/aybOWA==:MWVZR2U5YlBXemlyVDNUVXdxSjB1dz09]
+petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
+
+# PETL Crons
+petl_error_subject: "CES Prod PETL Errors"
+petl_cron_time: "0 0 22 ? * *"
+
+# PETL warehouse DB
+# This is used in malawi
+# when running ./puppet-apply.sh petl on humci or petl-test
+# ensure petl_warehouse_db is set to ""
+petl_warehouse_db: ""
+petl_mysql_user_ip: localhost
+
+mysql_root_password: ENC[DI05Oc0rST80JWl7lTkQTA==:5xrqTCu7aGCsQ/sseVINkA==:V3BxR20wcnJWSlV2UldoZnl6UGM3UT09]
+mysql_expire_logs_days: 1
+mysql_binary_logging: false
+mysql_net_read_timeout: 6000
+mysql_net_write_timeout: 6000
+mysql_wait_timeout: 2880000
+mysql_interactive_timeout: 2880000
+mysql_innodb_buffer_pool_size: 5G
+mysql_innodb_buffer_pool_instances: 5
+mysql_key_buffer_size: 2G
+
+openmrs_db: openmrs
+openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[7UKw1KmRszr7v4wY2RxlqQ==:MOSRONq5aUBrTbB5pNHd+A==:Z0lZNG1HSXliZDBLS3cxZ2srY1NaUT09]
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
