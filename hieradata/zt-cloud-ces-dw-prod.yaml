@@ -40,13 +40,13 @@ petl_mysql_user_ip: localhost
 mysql_root_password: ENC[DI05Oc0rST80JWl7lTkQTA==:5xrqTCu7aGCsQ/sseVINkA==:V3BxR20wcnJWSlV2UldoZnl6UGM3UT09]
 mysql_expire_logs_days: 1
 mysql_binary_logging: false
-mysql_net_read_timeout: 6000
-mysql_net_write_timeout: 6000
-mysql_wait_timeout: 2880000
-mysql_interactive_timeout: 2880000
-mysql_innodb_buffer_pool_size: 5G
+mysql_net_read_timeout: 6
+mysql_net_write_timeout: 6
+mysql_wait_timeout: 2
+mysql_interactive_timeout: 2
+mysql_innodb_buffer_pool_size: 1M
 mysql_innodb_buffer_pool_instances: 5
-mysql_key_buffer_size: 2G
+mysql_key_buffer_size: 1M
 
 openmrs_db: openmrs
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
