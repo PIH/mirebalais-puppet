@@ -17,12 +17,12 @@ petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%
 petl_mysql_user: ENC[IBlRIdqGjvycAUCjkG64Ww==:MxZnmS3BIAHsjnyijQn8uA==:ZzQ3amRESUh3V3hhUDlJbkpha0xzQT09]
 petl_mysql_password: ENC[dKzUAiMhzQ+kTK6OnGt48Q==:ExasiXbXq8pFiNfe1u63lQ==:cFZieHQwcjBPOHArdnlIcUdvVUNGZz09]
 petl_mysql_host: 127.0.0.1
-petl_mysql_host: 3356
+petl_mysql_port: 3356
 
 # PETL SQL Server 2106
 petl_sqlserver_databaseName: ces_omrs_dw
 petl_sqlserver_host: 10.160.10.27
-petl_sqlserver_port: 1444
+petl_sqlserver_port: 1433
 petl_sqlserver_user: ENC[oZyLOf9hRltDRTDLuI/iDQ==:g4wkH88i5unyB9rwxJbIpg==:VWs5NHRwN2dJazllQjY5S1dFM3NWZz09]
 petl_sqlserver_password: ENC[F0sWjKoZadh47wFnQlmi4g==:a1lRgWXXyj1ogbATPFNMSQ==:TzlkM2x3eGp4T1VHN3Fvd3Z2RU9ydz09]
 
