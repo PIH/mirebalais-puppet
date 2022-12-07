@@ -10,7 +10,7 @@ petl_home_dir: /opt/petl
 # PETL config
 petl_config_dir: "configurations"
 petl_config_name: ces-etl
-petl_config_version: 1.4.0
+petl_config_version: 1.5.0-SNAPSHOT
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
@@ -26,7 +26,7 @@ petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 
 # PETL Crons
 petl_error_subject: "CES Prod PETL Errors"
-petl_cron_time: "0 0 22 ? * *"
+petl_cron_time: "0 0 20 ? * *"
 
 # PETL warehouse DB
 # This is used in malawi
