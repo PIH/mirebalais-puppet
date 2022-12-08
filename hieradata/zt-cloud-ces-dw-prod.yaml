@@ -1,6 +1,6 @@
 ---
 site_domain: zt-cloud-ces-dw-prod
-server_timezone: America/New_York
+server_timezone: America/Mexico_City
 
 # PETL
 petl: petl
