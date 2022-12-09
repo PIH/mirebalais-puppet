@@ -68,7 +68,6 @@ sysadmin_email: emrsysadmin@pih.org
 smtp_username: ENC[LhaBIAFkVOz/j+iAUzdIcZ4q8tHNzhyA+xMWx9zUkqI=:lbnhfiuIeHS4VMdI8DMV+A==:WjhNUkM0Q1FuVk05WFhUeGowVTE2dz09]
 smtp_userpassword: ENC[VP7yvNiPEkclvmqxRxMc/MvEyAMcBG3ugJEwthDU0+0=:bZZy9YRqN4FEUJViJBIIpQ==:RjFzQW9qc2xVSU96cWNyOVQ2MUZUUT09]
 smtp_mailhub: ENC[JdOD1O0xNt2gbxIpWb46BuifyaBN7fMs1crRUQ6MdL0=:ytHcoon6PuRkflRbfujubQ==:RkpZVk4rMm1iQm9DQlJpU013WE90dz09]
-openmrs_mail_user: ENC[M8A6hilrpxIxWt/a0PZQZYm92fbRlvmpwB7HKj7KecU=]
 
 mirth_db: mirthdb
 mirth_db_user: mirth
