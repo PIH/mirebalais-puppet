@@ -41,8 +41,8 @@ mail.default_content_type=text/html
 mail.from=<%= @smtp_username %>
 mail.password=<%= @smtp_userpassword %>
 mail.smtp.auth=true
-mail.smtp.host=smtp.gmail.com
-mail.smtp.port=465
+mail.smtp.host=<%= @smtp_mailhub %>
+mail.smtp.port=587
 mail.smtp.starttls.enable=true
 mail.smtp.ssl.protocols=TLSv1.2
 mail.transport.protocol=smtp

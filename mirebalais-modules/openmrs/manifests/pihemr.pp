@@ -50,7 +50,7 @@ class openmrs::pihemr (
   $smtp_username = decrypt(hiera('smtp_username')),
   $smtp_userpassword = decrypt(hiera('smtp_userpassword')),
   $openmrs_mail_user = decrypt(hiera('openmrs_mail_user')),
-
+  $smtp_mailhub = decrypt(hiera('smtp_mailhub')),
 ) {
 
   require openmrs
