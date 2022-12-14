@@ -67,7 +67,7 @@ insurance_collection: false
 
 # SSL certificates--use letencrypt by default
 ssl_cert_dir: "/var/acme/.acme.sh/%{hiera('site_domain')}"
-ssl_cert_file: :q!%{hiera('site_domain')}.cer"
+ssl_cert_file: %{hiera('site_domain')}.cer"
 ssl_chain_file: 'fullchain.cer'
 ssl_key_dir: "/var/acme/.acme.sh/%{hiera('site_domain')}"
 ssl_key_file: "%{hiera('site_domain')}.key"
