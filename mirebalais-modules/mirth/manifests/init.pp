@@ -87,27 +87,15 @@ class mirth(
     require => Exec['mirth-unzip']
   }
 
-  file { '/etc/init/mcservice.conf':
+  file { '/etc/systemd/system/mcservice.service':
     ensure  => file,
     source  => 'puppet:///modules/mirth/etc/init/mcservice.conf',
   }
 
-  if $services_enable {
-    $require = [ File['/etc/init.d/mcservice'], File['/usr/local/mirthconnect/conf/mirth.properties'], File['/usr/local/mirthconnect/appdata'], Mysql_database[$mirth_db] 
-]
-  } else {
-    $require = []
-
-    file { '/etc/init/mcservice.override':
-      ensure  => file,
-      source  => 'puppet:///modules/mirth/etc/init/mcservice.override',
-    }
-  }
-
   service { 'mcservice':
-    ensure   => $services_ensure,
-    enable   => $services_enable,
+    ensure   => true,
+    enable   => true,
     provider => upstart,
-    require  => $require
+    require  => [ File['/etc/init.d/mcservice'], File['/usr/local/mirthconnect/conf/mirth.properties'], File['/usr/local/mirthconnect/appdata'], Mysql_database[$mirth_db] ]
   }
 }
