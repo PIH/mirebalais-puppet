@@ -50,6 +50,7 @@ class openmrs::pihemr (
   $smtp_username = decrypt(hiera('smtp_username')),
   $smtp_userpassword = decrypt(hiera('smtp_userpassword')),
   $smtp_mailhub = decrypt(hiera('smtp_mailhub')),
+
 ) {
 
   require openmrs
@@ -229,6 +230,18 @@ class openmrs::pihemr (
   file { "${tomcat_home_dir}/.OpenMRS/appframework-config.json":
     ensure => absent
   }
+
+  # hack to enable activity log
+  if ($activitylog_enabled == true)  {
+    file { "${tomcat_home_dir}/.OpenMRS/configuration/log4j2.xml":
+        ensure  => present,
+        content => template('openmrs/log4j2.xml.erb'),
+        owner   => root,
+        group   => root,
+        mode    => '0644',
+        require => File["${tomcat_home_dir}/.OpenMRS"]
+      }
+    }
 
   exec { 'tomcat-restart':
     command     => "service ${tomcat} restart",

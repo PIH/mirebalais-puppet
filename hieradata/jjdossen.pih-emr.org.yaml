@@ -33,6 +33,3 @@ mysql_net_read_timeout: 3600
 mysql_net_write_timeout: 3600
 
 java_memory_parameters: '-Xmx4G -Xms4G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
-
-# enable activity logging
-activitylog_enabled: true
