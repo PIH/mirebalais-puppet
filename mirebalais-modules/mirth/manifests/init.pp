@@ -89,13 +89,12 @@ class mirth(
 
   file { '/etc/systemd/system/mcservice.service':
     ensure  => file,
-    source  => 'puppet:///modules/mirth/etc/init/mcservice.conf',
+    source  => 'puppet:///modules/mirth/etc/systemd/system/mcservice.conf',
   }
 
   service { 'mcservice':
     ensure   => true,
     enable   => true,
-    provider => upstart,
     require  => [ File['/etc/init.d/mcservice'], File['/usr/local/mirthconnect/conf/mirth.properties'], File['/usr/local/mirthconnect/appdata'], Mysql_database[$mirth_db] ]
   }
 }
