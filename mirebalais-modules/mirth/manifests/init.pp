@@ -89,7 +89,7 @@ class mirth(
 
   file { '/etc/systemd/system/mcservice.service':
     ensure  => file,
-    source  => 'puppet:///modules/mirth/etc/systemd/system/mcservice.conf',
+    source  => 'puppet:///modules/mirth/etc/systemd/system/mcservice.service',
   }
 
   service { 'mcservice':
