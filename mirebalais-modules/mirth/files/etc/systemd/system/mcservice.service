@@ -1,0 +1,11 @@
+# /etc/systemd/system/mcservice.service
+[Unit]
+Description=Mirth Service
+
+[Service]
+ExecStart=/etc/init.d/mcservice start
+ExecStop=/etc/init.d/mcservice stop
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
