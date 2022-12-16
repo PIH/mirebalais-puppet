@@ -95,6 +95,6 @@ class mirth(
   service { 'mcservice':
     ensure   => true,
     enable   => true,
-    require  => [ File['/etc/init.d/mcservice'], File['/usr/local/mirthconnect/conf/mirth.properties'], File['/usr/local/mirthconnect/appdata'], Mysql_database[$mirth_db] ]
+    require  => [ File['/etc/init.d/mcservice'], File['/usr/local/mirthconnect/conf/mirth.properties'], File['/usr/local/mirthconnect/appdata'], File['/etc/systemd/system/mcservice.service'], Mysql_database[$mirth_db] ]
   }
 }
