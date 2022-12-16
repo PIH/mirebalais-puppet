@@ -10,7 +10,7 @@ petl_home_dir: /opt/petl
 # PETL config
 petl_config_dir: "configurations"
 petl_config_name: ces-etl
-petl_config_version: 1.5.0-SNAPSHOT
+petl_config_version: 1.5.0
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8"
