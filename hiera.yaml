@@ -6,5 +6,4 @@
 :hierarchy:
   - '%{::fqdn}'
   - '%{::hostname}'
-  - 'env_%{::environment}'
   - common
