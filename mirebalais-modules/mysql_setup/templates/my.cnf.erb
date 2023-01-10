@@ -91,18 +91,15 @@ log_error=/var/log/mysql/error.log
 #log-queries-not-using-indexes
 #
 # The following can be used as easy to replay backup logs or for replication.
-# note: if you are setting up a replication slave, see README.Debian about
-#       other settings you may need to change.
-#server-id    = 1
-#log_bin      = /var/log/mysql/mysql-bin.log
-<% if @mysql_binary_logging && @environment != 'test' %>
+# note: if you are setting up a replication slave, see README.Debian about other settings you may need to change.
+<% if @mysql_binary_logging %>
 log-bin=mysql-bin
+binlog_format=row
+binlog_row_image=full
 server-id=<%= @mysql_server_id %>
+expire_logs_days=<%= @mysql_expire_logs_days %>
+max_binlog_size=100M
 <% end %>
-expire_logs_days  = <%= @mysql_expire_logs_days %>
-max_binlog_size         = 100M
-#binlog_do_db    = include_database_name
-#binlog_ignore_db  = include_database_name
 #
 # * InnoDB
 
