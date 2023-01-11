@@ -147,7 +147,8 @@ fi
 
 apt-get autoremove -y
 
-gem install bundler --no-ri --no-rdoc
+#gem install bundler --no-ri --no-rdoc
+gem install bundler  -v 2.3.26 --no-ri --no-rdoc
 
 bundle
 bundle update
