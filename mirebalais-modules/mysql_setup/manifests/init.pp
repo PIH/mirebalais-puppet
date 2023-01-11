@@ -25,7 +25,7 @@ class mysql_setup (
   }
 
   file { '/etc/mysql/my.cnf':
-    ensure  => present,
+    ensure  => file,
     force => true,
     content => template('mysql_setup/my.cnf.erb'),
     require => File['/etc/mysql'],
