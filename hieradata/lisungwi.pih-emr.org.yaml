@@ -19,15 +19,15 @@ az_backup_folder_path: malawi/lower-neno
 # petl for reports
 petl_site: "apzu-lowerneno-reports"
 petl_config_name: "apzu-etl"
-petl_config_version: 1.0.0-SNAPSHOT
+petl_config_version: 1.4.0
 
 petl_home_dir: "/opt/petl"
 
-petl_mysql_user: openmrs
-petl_mysql_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
+petl_mysql_user: ENC[pYo67qcIYjFlPyoNWGU9Ew==:BloX9YCss1ftIqM3AT8V+w==:cko3VU5GTGNXRFVTL3hqblViMG5WUT09]
+petl_mysql_password: ENC[1Sq/uVWzEhp/ZG8WUuC31w==:WMH9Mwui8DCVbomZ1/Gi2w==:eE9LUWNhVk9QSXNyL3UxSWpsSVU4Zz09]
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Africa/Blantyre"
 
-petl_cron_time: "0 0 2 ? * *"
+petl_cron_time: "0 30 22 ? * *"
 petl_server_port: 8181
 
 # PETL database for Apzu lower neno
