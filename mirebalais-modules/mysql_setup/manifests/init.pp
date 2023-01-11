@@ -1,10 +1,11 @@
 class mysql_setup (
-	$root_password                      = decrypt(hiera('mysql_root_password')),
-	$mysql_bind_address                 = hiera('mysql_bind_address'),
+  $root_password                      = decrypt(hiera('mysql_root_password')),
+  $mysql_bind_address                 = hiera('mysql_bind_address'),
   $mysql_expire_logs_days             = hiera('mysql_expire_logs_days'),
   $mysql_innodb_buffer_pool_size      = hiera('mysql_innodb_buffer_pool_size'),
   $mysql_innodb_buffer_pool_instances = hiera('mysql_innodb_buffer_pool_instances'),
   $mysql_binary_logging               = hiera('mysql_binary_logging'),
+  $mysql_server_id                    = hiera('mysql_server_id'),
   $mysql_net_read_timeout             = hiera('mysql_net_read_timeout'),
   $mysql_net_write_timeout            = hiera('mysql_net_write_timeout'),
   $mysql_wait_timeout                 = hiera('mysql_wait_timeout'),
@@ -25,7 +26,7 @@ class mysql_setup (
   }
 
   file { '/etc/mysql/my.cnf':
-    ensure  => present,
+    ensure  => file,
     force => true,
     content => template('mysql_setup/my.cnf.erb'),
     require => File['/etc/mysql'],
