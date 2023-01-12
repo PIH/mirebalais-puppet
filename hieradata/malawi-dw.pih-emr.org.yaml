@@ -11,7 +11,7 @@ petl_server_port: 9110
 petl_version: 3.3.0
 # PETL Config
 petl_config_name: "apzu-etl"
-petl_config_version: 1.4.0-SNAPSHOT
+petl_config_version: 1.5.0-SNAPSHOT
 
 # petl MySQL
 petl_mysql_host: 10.160.22.17
