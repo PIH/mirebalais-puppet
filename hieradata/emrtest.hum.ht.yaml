@@ -13,10 +13,6 @@ server_timezone: America/New_York
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
-lacolline_server_url: 'http://boston.pih-emr.org:8080/openmrs'
-lacolline_username: wsuser
-lacolline_password: ENC[OV3IH5U9urv6gEb76vnyYA==]
-
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 

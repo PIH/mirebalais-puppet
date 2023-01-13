@@ -89,9 +89,7 @@ remote_zlidentifier_username:
 remote_zlidentifier_password:
 
 haiti_hiv_emr_link_url:
-lacolline_server_url: ''
-lacolline_username: foo
-lacolline_password: foo
+
 services_ensure: running
 services_enable: true
 

@@ -13,9 +13,6 @@ frontend_version: 1.3.0
 site_domain: humdemo.pih-emr.org
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-lacolline_server_url: 'http://boston.pih-emr.org:8080/openmrs'
-lacolline_username: wsuser
-lacolline_password: ENC[OV3IH5U9urv6gEb76vnyYA==]
 
 haiti_hiv_emr_link_url: ENC[L8Ms0nQ8V3a9Fog3aKg9kscA1HxnCkVwhUXE2LGTQiL6Wp5O5Fb08bKPEKsT/KGJDqtBfxKch/UCeWnvxduhoQ==]
 
