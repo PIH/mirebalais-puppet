@@ -4,7 +4,7 @@ site_domain: haitihivtest.pih-emr.org
 
 pih_config: haiti,haiti-hiv,haiti-hiv-ci
 config_name: openmrs-config-zl
-config_version: 1.43.0-SNAPSHOT
+config_version: 1.44.0-SNAPSHOT
 
 package_release: 'stable' # note this should be removed after reg testing
 

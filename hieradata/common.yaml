@@ -11,7 +11,7 @@ site_domain: foo.org
 
 package_name: pihemr
 package_release: 'unstable'
-package_version: '1.0.20221201210023-1'
+package_version: '1.0.20230118141622-1'
 
 config_name: ""
 config_version: ""
