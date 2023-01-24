@@ -32,10 +32,6 @@ mysql_server_id: 1
 mysql_innodb_buffer_pool_size: 3G
 mysql_innodb_buffer_pool_instances: 3
 
-lacolline_server_url: 'https://zanmi.pih-emr.org/openmrs'
-lacolline_username: wsuser
-lacolline_password: ENC[OV3IH5U9urv6gEb76vnyYA==]
-
 remote_zlidentifier_url: 'https://zanmi.pih-emr.org/openmrs/module/idgen/exportIdentifiers.form?source=1&comment=Lacolline'
 remote_zlidentifier_username: mirebalais
 remote_zlidentifier_password: ENC[IuAJgqs6Ci5Hw5xs/DYiZg==]

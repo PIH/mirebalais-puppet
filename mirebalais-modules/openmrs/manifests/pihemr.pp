@@ -42,9 +42,6 @@ class openmrs::pihemr (
   $remote_zlidentifier_username = decrypt(hiera('remote_zlidentifier_username')),
   $remote_zlidentifier_password = decrypt(hiera('remote_zlidentifier_password')),
   $haiti_hiv_emr_link_url       = decrypt(hiera('haiti_hiv_emr_link_url')),
-  $lacolline_server_url         = hiera('lacolline_server_url'),
-  $lacolline_username           = decrypt(hiera('lacolline_username')),
-  $lacolline_password           = decrypt(hiera('lacolline_password')),
 
   # e-mail config
   $smtp_username = decrypt(hiera('smtp_username')),
