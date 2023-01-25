@@ -22,7 +22,7 @@ if [ -n "$1" ]
 then
   MODIFIER=release_$1
 else
-  MODIFIER=`date +%Y%m%d-%H%M%S`
+  MODIFIER=`<%= @backup_time %>`
 fi
 
 FILENAME=${PREFIX}_backup_${MODIFIER}.sql.7z

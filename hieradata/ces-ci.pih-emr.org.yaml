@@ -3,7 +3,11 @@ package_release: 'unstable'
 site_domain: ces-ci.pih-emr.org
 pih_config: mexico,mexico-demo
 config_name: openmrs-config-ces
+<<<<<<< HEAD
 config_version: 1.28.0-SNAPSHOT
+=======
+config_version: 1.29.0-SNAPSHOT
+>>>>>>> master
 
 frontend_version: 1.5.0-SNAPSHOT
 
@@ -19,7 +23,7 @@ petl_home_dir: "/opt/petl"
 
 # PETL config
 petl_config_name: ces-etl
-petl_config_version: 1.0.0-SNAPSHOT
+petl_config_version: 1.5.0-SNAPSHOT
 
 # PETL MySQL
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
@@ -43,3 +47,7 @@ petl_mysql_user_ip: localhost
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 
 session_timeout: 120
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[pFJvoEZ7OqMTpVZuAQZ+4A==:vvx0YAku+/XovCo6c5MzAA==:cW5JNnl1SmhPM0hTWm5ZMW9VTG1CUT09]
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]

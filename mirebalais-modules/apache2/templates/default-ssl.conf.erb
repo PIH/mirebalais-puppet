@@ -1,8 +1,6 @@
 <VirtualHost *:443>
 	ServerAdmin <%= @sysadmin_email %>
 
-	DocumentRoot /var/www/html/
-
 	JkMount /<%= @webapp_name %> 	<%= @webapp_name %>
 	JkMount /<%= @webapp_name %>/	<%= @webapp_name %>
 	JkMount /<%= @webapp_name %>/*	<%= @webapp_name %>
@@ -25,24 +23,15 @@
 	JkMount /<%= @apzu_ic3_dir %>/*   <%= @apzu_ic3_dir %>
 <% end %>
 
-	<Directory />
-		Options FollowSymLinks
-		AllowOverride None
-	</Directory>
-	<Directory /var/www/html/>
-		Options Indexes FollowSymLinks MultiViews
-		AllowOverride None
-		Order allow,deny
-		allow from all
-	</Directory>
+    RewriteEngine   on
+    RewriteRule "^/$" /<%= @webapp_name %>/  [R]
 
-	ErrorLog ${APACHE_LOG_DIR}/error.log
+    ErrorLog ${APACHE_LOG_DIR}/error.log
 
-	# Possible values include: debug, info, notice, warn, error, crit,
-	# alert, emerg.
-	LogLevel warn
-
-	CustomLog ${APACHE_LOG_DIR}/ssl_access.log combined
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/ssl_access.log combined
 
   	SSLEngine on
   	SSLOptions +StrictRequire

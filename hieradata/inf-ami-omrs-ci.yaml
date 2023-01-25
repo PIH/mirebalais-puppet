@@ -4,14 +4,18 @@ site_domain: ami.pih-emr.org
 pih_config: haiti-mentalhealth
 config_name: openmrs-config-zl
 
-config_version: 1.40.0-SNAPSHOT
+config_version: 1.44.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
-frontend_version: 1.1.0
+frontend_version: 1.4.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 0.0.0.0
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[7JH9x3k+GOHGIb7Po2i9Dw==:y2c8UcOEDzIRoFHXl7KHPQ==:NFRFTjNmVlZwWE00VVphM1VsV25PQT09]
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
 
 # feature toggles
 

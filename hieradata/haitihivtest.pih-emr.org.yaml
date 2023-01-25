@@ -4,10 +4,12 @@ site_domain: haitihivtest.pih-emr.org
 
 pih_config: haiti,haiti-hiv,haiti-hiv-ci
 config_name: openmrs-config-zl
-config_version: 1.40.0-SNAPSHOT
+config_version: 1.44.0-SNAPSHOT
+
+package_release: 'stable' # note this should be removed after reg testing
 
 frontend_name: "openmrs-frontend-zl"
-frontend_version: 1.1.0
+frontend_version: 1.4.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
@@ -23,7 +25,12 @@ mysql_interactive_timeout: 28800
 
 ssl_use_letsencrypt: true
 
-smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
-smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]
+smtp_username: ENC[Z56UpsG1H0AWZ5Heg20uxdYJver+pqaPO1XqvLaeEao=]
+smtp_userpassword: ENC[MIL89jVL61pgNySX0N2JvzqAyLjC8O/j6AjzXIPkp1E=]
+smtp_mailhub: ENC[Br1+9DHXrCo7T8Ra8xGm6MeqOjJiIwzKABPhxe9/Lj0=]
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[gOxEv2RGXiQuNudWIvVdXw==]
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
 
 # java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'

@@ -1,4 +1,5 @@
 petl:
+  maxConcurrentJobs: 7
   homeDir: "/opt/petl-ces"
   datasourceDir: "/opt/petl-ces/configurations/datasources"
   jobDir: "/opt/petl-ces/configurations/jobs"
@@ -40,17 +41,17 @@ datasources:
     options: " <%= @petl_mysql_options -%>"
 
   openmrs:
-    cesProd:
+    jaltenango:
        host: "<%= @petl_mysql_host -%>"
        port: "<%= @petl_mysql_port -%>"
        databaseName: "openmrs_ces_prod"
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
-    plan:
+    planBaja:
        host: "<%= @petl_mysql_host -%>"
        port: "<%= @petl_mysql_port -%>"
-       databaseName: "openmrs_ces_plan"
+       databaseName: "openmrs_ces_plan_baja"
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"

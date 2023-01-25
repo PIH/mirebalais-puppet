@@ -4,7 +4,7 @@ package_release: 'stable'
 
 pih_config: mirebalais,mirebalais-reporting
 config_name: openmrs-config-zl
-config_version: 1.39.0
+config_version: 1.43.0
 
 server_timezone: America/New_York
 
@@ -37,4 +37,5 @@ ssl_use_letsencrypt: true
 # percona
 perconaSite: HUM Reporting
 perconaLogFile: "/home/percona/logs/percona-db-restore.log"
+perconaReportDir: "/home/percona/reporting"
 minPerconaDirSize: 41200000

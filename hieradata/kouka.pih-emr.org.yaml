@@ -3,7 +3,7 @@ site_domain: kouka.pih-emr.org
 pih_config: liberia,liberia-harper,liberia-harper-kouka
 
 config_name: openmrs-config-pihliberia
-config_version: 1.5.0-SNAPSHOT
+config_version: 1.6.0-SNAPSHOT
 
 frontend_version: 1.5.0-SNAPSHOT
 
@@ -17,6 +17,10 @@ pwa_filename: openmrs-pwa-pih-liberia.tar.gz
 
 # feature toggles
 htmlformentryui_simpleform_navbuttons: true
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[xGn1ZRsGGdvXN6SWGl+IKQ==:/WFV2V1/Bf77bO/e8Eisow==:UDJXRkduNzRpMmxkL0JPYmxKS2JFZz09]
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
 
 #java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 

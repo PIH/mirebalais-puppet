@@ -1,25 +1,25 @@
 class openmrs::pihemr (
 
-  $openmrs_db                   = hiera('openmrs_db'),
-  $openmrs_db_user              = decrypt(hiera('openmrs_db_user')),
-  $openmrs_db_password          = decrypt(hiera('openmrs_db_password')),
-  $cc_user_name                 = decrypt(hiera('commcare_user')),
-  $cc_user_password             = decrypt(hiera('commcare_password')),
-  $openmrs_auto_update_database = hiera('openmrs_auto_update_database'),
-  $package_name                 = hiera('package_name'),
-  $package_release              = hiera('package_release'),
-  $package_version              = hiera('package_version'),
-  $webapp_name                  = hiera('webapp_name'),
-  $tomcat                       = hiera('tomcat'),
-  $tomcat_home_dir              = hiera('tomcat_home_dir'),
-  $tomcat_webapp_dir            = hiera('tomcat_webapp_dir'),
-  $junit_username               = hiera('junit_username'),
-  $junit_password               = decrypt(hiera('junit_password')),
-  $pih_config                   = hiera('pih_config'),
-  $config_dir                   = hiera('config_dir', undef),
-  $activitylog_enabled          = hiera('activitylog_enabled'),
-  $terms_and_conditions_enabled = hiera('terms_and_conditions_enabled'),
-  $session_timeout              = hiera('session_timeout'),
+  $openmrs_db                    = hiera('openmrs_db'),
+  $openmrs_db_user               = decrypt(hiera('openmrs_db_user')),
+  $openmrs_db_password           = decrypt(hiera('openmrs_db_password')),
+  $cc_user_name                  = decrypt(hiera('commcare_user')),
+  $cc_user_password              = decrypt(hiera('commcare_password')),
+  $openmrs_auto_update_database  = hiera('openmrs_auto_update_database'),
+  $package_name                  = hiera('package_name'),
+  $package_release               = hiera('package_release'),
+  $package_version               = hiera('package_version'),
+  $webapp_name                   = hiera('webapp_name'),
+  $tomcat                        = hiera('tomcat'),
+  $tomcat_home_dir               = hiera('tomcat_home_dir'),
+  $tomcat_webapp_dir             = hiera('tomcat_webapp_dir'),
+  $junit_username                = hiera('junit_username'),
+  $junit_password                = decrypt(hiera('junit_password')),
+  $pih_config                    = hiera('pih_config'),
+  $config_dir                    = hiera('config_dir', undef),
+  $activitylog_enabled           = hiera('activitylog_enabled'),
+  $terms_and_conditions_enabled  = hiera('terms_and_conditions_enabled'),
+  $session_timeout               = hiera('session_timeout'),
 
   # PIH EMR config
   $config_name     = hiera('config_name'),
@@ -42,14 +42,11 @@ class openmrs::pihemr (
   $remote_zlidentifier_username = decrypt(hiera('remote_zlidentifier_username')),
   $remote_zlidentifier_password = decrypt(hiera('remote_zlidentifier_password')),
   $haiti_hiv_emr_link_url       = decrypt(hiera('haiti_hiv_emr_link_url')),
-  $lacolline_server_url         = hiera('lacolline_server_url'),
-  $lacolline_username           = decrypt(hiera('lacolline_username')),
-  $lacolline_password           = decrypt(hiera('lacolline_password')),
 
   # e-mail config
   $smtp_username = decrypt(hiera('smtp_username')),
   $smtp_userpassword = decrypt(hiera('smtp_userpassword')),
-  $openmrs_mail_user = decrypt(hiera('openmrs_mail_user')),
+  $smtp_mailhub = decrypt(hiera('smtp_mailhub')),
 
 ) {
 
@@ -230,6 +227,18 @@ class openmrs::pihemr (
   file { "${tomcat_home_dir}/.OpenMRS/appframework-config.json":
     ensure => absent
   }
+
+  # hack to enable activity log
+  if ($activitylog_enabled == true)  {
+    file { "${tomcat_home_dir}/.OpenMRS/configuration/log4j2.xml":
+        ensure  => present,
+        content => template('openmrs/log4j2.xml.erb'),
+        owner   => root,
+        group   => root,
+        mode    => '0644',
+        require => File["${tomcat_home_dir}/.OpenMRS"]
+      }
+    }
 
   exec { 'tomcat-restart':
     command     => "service ${tomcat} restart",

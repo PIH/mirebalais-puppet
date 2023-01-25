@@ -1,0 +1,62 @@
+petl:
+  homeDir: "/opt/petl"
+  datasourceDir: "/opt/petl/configurations/datasources"
+  jobDir: "/opt/petl/configurations/jobs"
+  startup:
+    jobs:
+      - "create-partitions.yml"
+      - "refresh-ci-warehouse.yml"
+
+executeCron:
+  refreshCiDW: "<%= @petl_cron_time -%>"
+
+server:
+  port: "<%= @petl_server_port -%>"
+
+logging:
+  level:
+    root: "WARN"
+    org.pih: "INFO"
+
+spring:
+  datasource:
+    platform: "mssql"
+    driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    url: "jdbc:sqlserver://<%= @petl_sqlserver_host -%>:<%= @petl_sqlserver_port -%>;databaseName=openmrs_sl_warehouse"
+    username: "<%= @petl_sqlserver_user -%>"
+    password: "<%= @petl_sqlserver_password -%>"
+  jpa:
+    hibernate:
+      dialect: "org.hibernate.dialect.SQLServer2012Dialect"
+  liquibase:
+    database-change-log-table: "petl_database_change_log"
+    database-change-log-lock-table: "petl_database_change_log_lock"
+
+datasources:
+  mysql:
+    user: "<%= @petl_mysql_user -%>"
+    password: "<%= @petl_mysql_password -%>"
+    options: " <%= @petl_mysql_options -%>"
+
+  openmrs:
+    gladi:
+      host: "localhost"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+    kgh_test:
+      host: "<%= @petl_mysql_host -%>"
+      port: "<%= @petl_mysql_port -%>"
+      databaseName: "openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+
+  warehouse:
+       host: "<%= @petl_sqlserver_host -%>"
+       port: "<%= @petl_sqlserver_port -%>"
+       databaseName: "openmrs_sl_warehouse"
+       user: "<%= @petl_sqlserver_user -%>"
+       password: "<%= @petl_sqlserver_password -%>"

@@ -8,3 +8,7 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 openmrs_auto_update_database: false
 
 java_memory_parameters: '-Xmx2048m -Xms2048m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[Bi/0nj04y0fpID/SpF8gsw==:QrR3hHBHo3fl5irmSP1+4Q==:a211Um1sTGwrSTVBRm9pUEthSG5PZz09]
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]

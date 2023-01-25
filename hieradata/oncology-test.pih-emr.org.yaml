@@ -9,10 +9,6 @@ mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 
 openmrs_auto_update_database: false
 
-lacolline_server_url: 'http://boston.pih-emr.org:8080/openmrs'
-lacolline_username: wsuser
-lacolline_password: wsuser123
-
 mirth_inbound_from_pacs_mirebalais_port: 6662
 
 biometrics_enabled: true

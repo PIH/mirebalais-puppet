@@ -11,7 +11,7 @@ site_domain: foo.org
 
 package_name: pihemr
 package_release: 'unstable'
-package_version: '1.0.20220831195902-1'
+package_version: '1.0.20230118141622-1'
 
 config_name: ""
 config_version: ""
@@ -45,6 +45,7 @@ replication_db_user: replication
 replication_db_password: foo
 backup_db_user: backup
 backup_db_password: foo
+backup_time: date +%Y%m%d-%H%M%S
 tomcat: tomcat7
 tomcat_home_dir: /home/tomcat7
 tomcat_webapp_dir: /var/lib/tomcat7/webapps
@@ -65,9 +66,9 @@ remote_backup_dir: foo
 
 sysadmin_email: emrsysadmin@pih.org
 
-smtp_username: ENC[c7aCd9ntirLMUMSHySbdI42b3Uxdu45IeP1k1zMWtXw=:t8Ku94J6xhsGLIXpnbQhpg==:WDUxWld2d05na3lRQ0dJb2ZXdWhYdz09]
-smtp_userpassword: ENC[S6/9UffAD7ivo4VXNZEirw==:NBkEbRNVaqIJjI5uJsEmFg==:ZjNYZ0hsREdsVGpsZm1WTXRTbTIvdz09]
-openmrs_mail_user: ENC[M8A6hilrpxIxWt/a0PZQZYm92fbRlvmpwB7HKj7KecU=]
+smtp_username: ENC[LhaBIAFkVOz/j+iAUzdIcZ4q8tHNzhyA+xMWx9zUkqI=:lbnhfiuIeHS4VMdI8DMV+A==:WjhNUkM0Q1FuVk05WFhUeGowVTE2dz09]
+smtp_userpassword: ENC[VP7yvNiPEkclvmqxRxMc/MvEyAMcBG3ugJEwthDU0+0=:bZZy9YRqN4FEUJViJBIIpQ==:RjFzQW9qc2xVSU96cWNyOVQ2MUZUUT09]
+smtp_mailhub: ENC[JdOD1O0xNt2gbxIpWb46BuifyaBN7fMs1crRUQ6MdL0=:ytHcoon6PuRkflRbfujubQ==:RkpZVk4rMm1iQm9DQlJpU013WE90dz09]
 
 mirth_db: mirthdb
 mirth_db_user: mirth
@@ -88,9 +89,7 @@ remote_zlidentifier_username:
 remote_zlidentifier_password:
 
 haiti_hiv_emr_link_url:
-lacolline_server_url: ''
-lacolline_username: foo
-lacolline_password: foo
+
 services_ensure: running
 services_enable: true
 
@@ -123,7 +122,7 @@ petl_java_opts: ""
 
 # PETL Config
 petl_config_name: zl-etl
-petl_config_version: 1.3.0-SNAPSHOT
+petl_config_version: 1.6.0-SNAPSHOT
 petl_config_dir: "configurations"
 
 # PETL MySQL
@@ -131,7 +130,7 @@ petl_mysql_host: localhost
 petl_mysql_port: 3306
 petl_mysql_databaseName: openmrs
 petl_mysql_options: ""
-petl_mysql_user: openmrs
+petl_mysql_user: foo
 petl_mysql_password: foo
 
 # PETL SQL Server
@@ -216,7 +215,7 @@ docker_repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal st
 docker_compose_version: 1.27.4
 
 frontend_name: "openmrs-frontend-pihemr"
-frontend_version: 1.3.0
+frontend_version: 1.4.0
 
 # percona restore
 perconaHomeDir: "/home/percona"
@@ -234,6 +233,12 @@ mailTo: "%{hiera('sysadmin_email')}"
 mailSubject: "${perconaSite} percona db restore success"
 logFile: "/home/percona/logs/percoa-restore.log"
 minPerconaDirSize: 10
+
+# prometheus node exporter
+node_exporter_version: 1.4.0
+node_exporter_download_url: https://github.com/prometheus/node_exporter/releases/download/v%{hiera('node_exporter_version')}/node_exporter-%{hiera('node_exporter_version')}.linux-amd64.tar.gz
+node_exporter_listen_ip: localhost
+node_exporter_listen_port: 9999
 
 # old os version
 ubuntu_14: false

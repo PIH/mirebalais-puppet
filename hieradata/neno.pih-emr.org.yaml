@@ -13,8 +13,27 @@ mysql_bind_address: 127.0.0.1
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 openmrs_auto_update_database: false
 
-
 # backup azure
 az_backup_folder_path: malawi/upper-neno
+
+# petl for reports
+petl_site: "apzu-upperneno-reports"
+petl_config_name: "apzu-etl"
+petl_config_version: 1.4.0
+
+petl_home_dir: "/opt/petl"
+
+petl_mysql_user: ENC[pYo67qcIYjFlPyoNWGU9Ew==:BloX9YCss1ftIqM3AT8V+w==:cko3VU5GTGNXRFVTL3hqblViMG5WUT09]
+petl_mysql_password: ENC[1Sq/uVWzEhp/ZG8WUuC31w==:WMH9Mwui8DCVbomZ1/Gi2w==:eE9LUWNhVk9QSXNyL3UxSWpsSVU4Zz09]
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Africa/Blantyre"
+
+petl_cron_time: "0 30 22 ? * *"
+petl_server_port: 8181
+
+# PETL database for Apzu upper neno
+install_petl_warehouse_db: true
+petl_warehouse_db: openmrs_warehouse
+petl_mysql_user_ip: localhost
+petl_openmrs_connection_url: jdbc:mysql://localhost:3306/%{hiera('petl_warehouse_db')}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8
 
 java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'

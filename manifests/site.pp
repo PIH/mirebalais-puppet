@@ -209,12 +209,12 @@ node 'hai-hum-inf-omrs-report' {
   include openmrs::pihemr
   #include openmrs::initial_setup
 
-  include percona
+  #include percona
 
   #include monitoring
-  include logging
+  #include logging
 
-  include mirebalais_reporting::reporting_setup
+  #include mirebalais_reporting::reporting_setup
 }
 
 node 'inf-dakakind-omrs-test' {
@@ -338,7 +338,7 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org' {
   include openmrs::backup
 }
 
-node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'zt-cloud-sis-inf-omrs-mfa-test', 'ocltest.pih-emr.org', 'sl-wellbody-inf-omrs-cc-test' {
+node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'zt-cloud-sis-inf-omrs-mfa-test', 'ocltest.pih-emr.org', 'sl-wellbody-inf-omrs-cc-test' {
 
   class { 'apt':
     always_apt_update => true,
@@ -358,6 +358,31 @@ node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'ci.pih-emr.org', 'inf-ami-omrs-c
 
   include openmrs::pihemr
   include openmrs::initial_setup
+
+}
+
+
+node 'ci.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include apache2
+  include tomcat
+
+  include openmrs::pihemr
+  include openmrs::initial_setup
+  include openmrs::core_2_6_snapshot
 
 }
 

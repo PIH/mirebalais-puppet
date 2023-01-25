@@ -1,30 +1,52 @@
 #!/bin/bash
 
 mailTo=<%= @sysadmin_email %>
+perconaHomeDir="<%= @perconaHomeDir %>"
 perconaBackupDir="<%= @perconaBackupDir %>"
 perconaLogs="<%= @perconaLogs %>"
 perconaRestoreDir="<%= @perconaRestoreDir %>"
+perconaReportDir="<%= @perconaReportDir %>"
 perconaSite="<%= @perconaSite %>"
 
 mysqlDataDir="/var/lib/mysql"
 mysqlDb="<%= @mysqlDb %>"
-openmrsHomeDir="/home/tomcat7/.OpenMRS"
-reportingTables="<%= @reportingTables %>"
-reportingDumps="<%= @reportingDumps %>"
 
 mailSubject="$perconaSite percona db restore success"
 perconaLogFile="<%= @perconaLogFile %>"
 minPerconaDirSize=<%= @minPerconaDirSize %>
 
-jobStartDate=`date +%Y%m%d-%H%M%S`
+dbUser="root"
+dbPass="<%= @mysql_root_password %>"
 
 exec > $perconaLogFile 2>&1
 
+jobStartDate=`date +%Y%m%d-%H%M%S`
 echo cronjob started on $jobStartDate
 
-mkdir -p /home/percona
+mkdir -p ${perconaHomeDir}
 mkdir -p ${perconaBackupDir}
 mkdir -p ${perconaLogs}
+mkdir -p ${perconaReportDir}
+
+## removing old reporting dump file
+rm -rf ${perconaHomeDir}/reporting/*
+if [ $? -eq 0 ]; then
+        echo removing old reporting dump succesful
+    else
+        ## No hard exit here
+        echo failure removing old reporting dump
+        mail -s "$perconaSite: Failure removing old reporting dump" "$mailTo" < $perconaLogFile
+fi
+
+## creating new reporting data only dump
+mysqldump -u${dbUser} -p${dbPass} --no-create-info --skip-triggers --extended-insert --lock-tables --quick openmrs reporting_report_request > ${perconaReportDir}/reporting_report_request.sql
+if [ $? -eq 0 ]; then
+        echo reporting_report_request data dumped successfully
+    else
+        ## No hard exit here
+        echo errors dumping the reporting_report_request data
+        mail -s "$perconaSite: Failure while dumping reporting_report_request data" "$mailTo" < $perconaLogFile
+fi
 
 ## Ensure $perconaRestoreDir exists
 if [ -d "$perconaRestoreDir" ]; then
@@ -61,12 +83,12 @@ rm -rf ${mysqlDataDir}/*
 if [ $? -eq 0 ]; then
         echo $mysqlDataDir removed
 else
-    echo $mysqlDataDir wasnot available
+        echo $mysqlDataDir wasnot available
 fi
 
 innobackupex --copy-back ${perconaRestoreDir}
 if [ $? -eq 0 ]; then
-        echo Percona DB was restored succesfully
+        echo Percona DB was restored successfully
 else
         echo Problem restoring percona db
         mail -s "$perconaSite: Failure restoring percona db" "$mailTo" < $perconaLogFile
@@ -76,29 +98,16 @@ fi
 sleep 30
 chown -R mysql:mysql ${mysqlDataDir}
 sleep 10
-/etc/init.d/mysql start
 
+/etc/init.d/mysql start
 if [ $? -eq 0 ]; then
         sleep 10
-        echo mysql started succesfully
+        echo mysql started successfully
 else
         echo mysql can not start
         mail -s "$perconaSite: Failure starting mysql" "$mailTo" < $perconaLogFile
         exit
 fi
-
-echo ensuring all tables are correct
-/usr/bin/mysqlcheck -u root --auto-repair --check --all-databases
-
-if [ $? -eq 0 ]; then
-        echo all tables are correct
-else
-        echo mysql tables are not correct
-        mail -s "$perconaSite: mysql proc table issues" "$mailTo" < $perconaLogFile
-        exit
-fi
-
-rm -rf ${perconaBackupDir}/*
 
 /etc/init.d/apache2 stop
 /etc/init.d/tomcat7 stop
