@@ -11,7 +11,8 @@ class mysql_setup (
   $mysql_wait_timeout                 = hiera('mysql_wait_timeout'),
   $mysql_interactive_timeout          = hiera('mysql_interactive_timeout'),
   $mysql_key_buffer_size              = hiera('mysql_key_buffer_size'),
-  $mysql_table_open_cache             = hiera('mysql_table_open_cache')
+  $mysql_table_open_cache             = hiera('mysql_table_open_cache').
+  $mysql_sort_buffer_size            = hiera('mysql_sort_buffer_size)
 
 ){
 

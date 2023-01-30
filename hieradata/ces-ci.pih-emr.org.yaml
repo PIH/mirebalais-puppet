@@ -11,6 +11,7 @@ openmrs_db: openmrs
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 127.0.0.1
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+mysql_sort_buffer_size: 2621440
 
 # PETL
 petl: "petl"
@@ -25,6 +26,7 @@ petl_config_version: 1.5.0-SNAPSHOT
 petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Eastern"
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+
 
 # PETL SQL Server 2016
 petl_sqlserver_host: 10.160.12.28
