@@ -5,7 +5,7 @@ PW=$2
 DB=$3
 TABLE=$4
 
-mysql -u${USER} -p${PW} ${DB} -ssss -e "desc ${TABLE}" > /dev/null 2>$1
+mysql -u${USER} -p'${PW}' ${DB} -ssss -e "desc ${TABLE}" > /dev/null 2>$1
 
 if [ $? -eq 0 ]
 then
