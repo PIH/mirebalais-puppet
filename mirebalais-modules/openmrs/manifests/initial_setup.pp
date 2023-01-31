@@ -74,7 +74,7 @@ class openmrs::initial_setup(
     cwd         =>  '/usr/local/',
     command     => "java -Dliquibase.databaseChangeLogTableName=liquibasechangelog -Dliquibase.databaseChangeLogLockTableName=liquibasechangeloglock -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/var/lib/${tomcat}/webapps/${webapp_name}.war --url=jdbc:mysql://localhost:3306/${openmrs_db} --changeLogFile=liquibase-core-data.xml --username=${openmrs_db_user} --password='${openmrs_db_password}' update",
     user        => 'root',
-    unless      => "/usr/local/table-has-data.sh ${openmrs_db_user} ${openmrs_db_password} ${openmrs_db} users",
+    unless      => "/usr/local/table-has-data.sh ${openmrs_db_user} '${openmrs_db_password}' ${openmrs_db} users",
     refreshonly => true,
     require     => [ File['/usr/local/liquibase.jar'], File['/usr/local/table-has-data.sh'], Package[$package_name] ],
     timeout     => 0,
