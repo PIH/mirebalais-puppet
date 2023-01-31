@@ -45,6 +45,7 @@ mysql_interactive_timeout: 2880000
 mysql_innodb_buffer_pool_size: 5G
 mysql_innodb_buffer_pool_instances: 5
 mysql_key_buffer_size: 2G
+mysql_sort_buffer_size: 2621440
 
 openmrs_db: openmrs
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
