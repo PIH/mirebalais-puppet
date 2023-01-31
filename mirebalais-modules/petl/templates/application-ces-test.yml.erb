@@ -118,13 +118,6 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
-    monterrey:
-       host: "<%= @petl_mysql_host -%>"
-       port: "<%= @petl_mysql_port -%>"
-       databaseName: "openmrs_ces_monterrey"
-       user: "${datasources.mysql.user}"
-       password: "${datasources.mysql.password}"
-       options: "${datasources.mysql.options}"
 
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"
