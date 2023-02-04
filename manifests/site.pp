@@ -600,7 +600,7 @@ node 'malawi-dw.pih-emr.org' {
 
 }
 
-node 'neno.pih-emr.org', 'lisungwi.pih-emr.org', 'neno20.pih-emr.org'  {
+node 'neno.pih-emr.org', 'lisungwi.pih-emr.org'  {
 
   class { 'apt':
     always_apt_update => true,
@@ -624,4 +624,25 @@ node 'neno.pih-emr.org', 'lisungwi.pih-emr.org', 'neno20.pih-emr.org'  {
   include petl
   include petl::mysql
 
+}
+
+node 'neno-ci.pih-emr.org'  {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include java
+  include mysql_setup
+  include apache2
+  include tomcat
+
+  include openmrs::apzu
 }
