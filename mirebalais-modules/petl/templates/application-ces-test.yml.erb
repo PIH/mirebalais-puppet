@@ -6,10 +6,9 @@ petl:
   startup:
     jobs:
       - "create-partitions.yml"
-      - "refresh-openmrs-data.yml"
 
 executeCron:
-  refreshOpenmrsData: ""
+  refreshOpenmrsData: "<%= @petl_ces_cron_time -%>"
   refreshCesCiData: ""
 
 server:

@@ -25,6 +25,7 @@ class petl (
   $petl_config_name                = split(hiera('petl_config_name'), ','),
   $petl_config_version             = split(hiera('petl_config_version'), ','),
   $petl_cron_time                  = hiera('petl_cron_time'),
+  $petl_ces_cron_time              = hiera('petl_ces_cron_time'),
   $sysadmin_email                  = hiera("sysadmin_email"),
   $repo_url                        = decrypt(hiera('repo_url')),
 ) {
