@@ -50,13 +50,27 @@ class openmrs::apzu (
     command => "rm -rf /tmp/malawi-openmrs-distribution && rm -rf /tmp/malawi-distro && rm -rf /tmp/malawi-distribution"
   }
 
+  file { "/usr/local/malawi" :
+    ensure => present
+    owner   => root,
+    group   => root,
+  }
+
+  file { "/usr/local/malawi/scripts" :
+    ensure => present
+    owner   => root,
+    group   => root,
+    require     => File['/usr/local/malawi']
+  }
+
+  wget::fetch { 'build-malawi-openmrs-distribution':
+    command    => "mvn dependency:get -U -Dartifact=$pih_malawi_distribution_version -s /usr/local/malawi/scripts/maven-settings.xml",
+    require    => File['/usr/local/malawi/scripts']
+  }
+
   wget::fetch { 'download-malawi-openmrs-distribution':
-    source      => "${repo_url}:81/malawi-repo/pihmalawi-${pih_malawi_distribution_version}.zip",
-    destination => "/tmp/malawi-openmrs-distribution",
-    timeout     => 0,
-    verbose     => false,
-    redownload  => true,
-    require     => Exec['cleanup-malawi-openmrs-distribution-dir']
+    command    => "mvn dependency:copy -Dartifact=$pih_malawi_distribution_version -DoutputDirectory=/tmp/distro -Dmdep.useBaseVersion=true -s /usr/local/malawi/scripts/maven-settings.xml",
+    require    => [File['/usr/local/malawi/scripts'], Wget::Fetch['build-malawi-openmrs-distribution']]
   }
 
   exec { 'extract-malawi-openmrs-distribution':
