@@ -17,7 +17,7 @@ remote_db_user: backups
 
 remote_backup_dir: haiti/mirebalais/db
 backup_file_prefix: mirebalais
-backup_delete_older_than_x_days: 15
+backup_delete_older_than_x_days: 4
 site_domain: emr.hum.ht
 
 tomcat_restart_nightly: true
