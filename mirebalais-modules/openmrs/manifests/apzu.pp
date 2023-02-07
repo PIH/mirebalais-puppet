@@ -46,10 +46,6 @@ class openmrs::apzu (
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
 
-  exec { 'cleanup-malawi-openmrs-distribution-dir':
-    command => "rm -rf /tmp/malawi-openmrs-distribution && rm -rf /tmp/malawi-distro && rm -rf /tmp/malawi-distribution"
-  }
-
   file { "/usr/local/malawi" :
     ensure => present
     owner   => root,
@@ -61,6 +57,15 @@ class openmrs::apzu (
     owner   => root,
     group   => root,
     require     => File['/usr/local/malawi']
+  }
+
+  file { '/usr/local/malawi/scripts/maven-setting.xml':
+        content => template('openmrs/maven-setting.xml.erb'),
+        require => [ File['/usr/local/malawi'], File['/usr/local/malawi/scripts'] ]
+  }
+
+  exec { 'cleanup-malawi-openmrs-distribution-dir':
+    command => "rm -rf /tmp/malawi-openmrs-distribution && rm -rf /tmp/malawi-distro && rm -rf /tmp/malawi-distribution"
   }
 
   wget::fetch { 'build-malawi-openmrs-distribution':
