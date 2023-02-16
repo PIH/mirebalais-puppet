@@ -1,0 +1,144 @@
+#!/bin/bash -eu
+
+GROUP_ID=""
+ARTIFACT_ID=""
+VERSION=""
+CLASSIFIER=""
+TYPE=""
+TARGET_DIR=""
+
+function usage() {
+  echo "USAGE:"
+  echo "Download a Maven Artifact"
+  echo ""
+  echo "Input Options"
+  echo " --groupId : Used to specify the group ID (eg. --groupId=org.openmrs.distro)"
+  echo " --artifactId : Used to specify the artifact ID (eg. --artifactId=pihmalawi)"
+  echo " --version : Used to specify the version (eg. --version=7.0.0-SNAPSHOT)"
+  echo " --classifier : Used to specify the classifier (eg. --classifier=distribution)"
+  echo " --type : Used to specify the type (eg. --type=zip)"
+  echo " --targetDir : Used to specify an existing directory into which the artifact should be downloaded."
+  echo " --help : prints this usage information"
+  echo ""
+  echo "Example"
+  echo "  ./download-mvn-artifact.sh -groupId=org.openmrs.distro -artifactId=pihmalawi --version=7.0.0-SNAPSHOT --type=zip --targetDir=/tmp"
+  echo ""
+}
+
+PROMPT_FOR_CLASSIFIER="true"
+
+# Input arguments are retrieved as options to the command
+# This is the preferred way to invoke this without requiring user prompts, and only accepts artifact syntax
+for i in "$@"
+do
+case $i in
+    --groupId=*)
+      GROUP_ID="${i#*=}"
+      shift # past argument=value
+    ;;
+    --artifactId=*)
+      ARTIFACT_ID="${i#*=}"
+      shift # past argument=value
+    ;;
+    --version=*)
+      VERSION="${i#*=}"
+      shift # past argument=value
+    ;;
+    --classifier=*)
+      CLASSIFIER="${i#*=}"
+      PROMPT_FOR_CLASSIFIER="false"
+      shift # past argument=value
+    ;;
+    --type=*)
+      TYPE="${i#*=}"
+      shift # past argument=value
+    ;;
+    --targetDir=*)
+      TARGET_DIR="${i#*=}"
+      shift # past argument=value
+    ;;
+    --help)
+      usage
+      exit 0
+    ;;
+    *)
+      usage    # unknown option
+      exit 1
+    ;;
+esac
+done
+
+# If no input arguments are supplied, then prompt the user for input values.
+# Since this is interactive with the user, break the artifact prompt up into components for easier user
+# Add sensible default values to add to ease of use and consistency
+
+if [ -z "$GROUP_ID" ]; then
+  read -e -p 'Group ID: ' GROUP_ID
+fi
+if [ -z "$ARTIFACT_ID" ]; then
+  read -e -p 'Artifact ID: ' ARTIFACT_ID
+fi
+if [ -z "$VERSION" ]; then
+  read -e -p 'Version: ' VERSION
+fi
+if [ "$PROMPT_FOR_CLASSIFIER" == "true" ]; then
+  read -e -p 'Classifier: ' CLASSIFIER
+fi
+if [ -z "$TYPE" ]; then
+  read -e -p 'Type: ' TYPE
+fi
+if [ -z "$TARGET_DIR" ]; then
+  read -e -p 'Target Directory: ' TARGET_DIR
+fi
+
+ARTIFACT="$GROUP_ID:$ARTIFACT_ID:$VERSION:$TYPE:$CLASSIFIER"
+ARTIFACT_NAME="$ARTIFACT_ID-$VERSION-$CLASSIFIER.$TYPE"
+
+echo "DOWNLOADING ARTIFACT: $ARTIFACT"
+echo "INTO TARGET DIRECTORY: $TARGET_DIR"
+echo "AS FILE NAMED: $ARTIFACT_NAME"
+
+# Writing this into a maven settings file tells this script to use the OpenMRS Maven repository as a source of artifacts
+
+MAVEN_SETTINGS_FILE="$TARGET_DIR/maven-settings.xml"
+
+cat > $MAVEN_SETTINGS_FILE << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <profiles>
+    <profile>
+      <repositories>
+        <repository>
+          <id>openmrs-repo</id>
+          <name>OpenMRS Nexus Repository</name>
+          <url>https://openmrs.jfrog.io/artifactory/public</url>
+        </repository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/public</url>
+        </repository>
+        <repository>
+            <id>mks-repo</id>
+            <name>Mekom Solutions Maven repository</name>
+            <url>https://nexus.mekomsolutions.net/repository/maven-public</url>
+        </repository>
+      </repositories>
+      <id>openmrs</id>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>openmrs</activeProfile>
+  </activeProfiles>
+</settings>
+EOF
+
+# These Maven commands first download the requested artifact to the local Maven repository (.m2)
+# Then copies this artifact from that local repository to the directory of choice
+# The -Dmdep.useBaseVersion=true specifies to copy snapshot artifacts with the SNAPSHOT suffix, not the timestamp suffix
+
+mvn dependency:get -U -Dartifact=$ARTIFACT -s $MAVEN_SETTINGS_FILE
+mvn dependency:copy -Dartifact=$ARTIFACT -DoutputDirectory=$TARGET_DIR -Dmdep.useBaseVersion=true
+
+# Clean up the generated maven settings file
+
+rm $MAVEN_SETTINGS_FILE
