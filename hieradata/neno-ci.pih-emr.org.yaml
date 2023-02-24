@@ -20,8 +20,6 @@ apzu_ic3_enabled: true
 apzu_ic3_dir: workflow
 pwa_config_name: pwa-apzu-ic3
 pwa_config_version: 2.0.0-SNAPSHOT
-            https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=pwa-apzu-ic3&v=2.0.0-SNAPSHOT&p=tar.gz&r=snapshots
-config_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${pwa_config_name}&r=${config_repo}&p=zip&v=${pwa_config_version}
 
 ## backups
 backup_db_user: backup
