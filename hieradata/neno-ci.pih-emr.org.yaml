@@ -18,6 +18,10 @@ openmrs_auto_update_database: false
 # POC ic3 configs for neno
 apzu_ic3_enabled: true
 apzu_ic3_dir: workflow
+pwa_config_name: pwa-apzu-ic3
+pwa_config_version: 2.0.0-SNAPSHOT
+            https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=pwa-apzu-ic3&v=2.0.0-SNAPSHOT&p=tar.gz&r=snapshots
+config_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${pwa_config_name}&r=${config_repo}&p=zip&v=${pwa_config_version}
 
 ## backups
 backup_db_user: backup
@@ -51,4 +55,4 @@ petl_warehouse_db: openmrs_warehouse
 petl_mysql_user_ip: localhost
 petl_openmrs_connection_url: jdbc:mysql://localhost:3306/%{hiera('petl_warehouse_db')}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8
 
-java_memory_parameters: '-Xmx4G -Xms4G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+java_memory_parameters: '-Xmx6096m -Xms6096m'
