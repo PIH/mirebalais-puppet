@@ -1,10 +1,5 @@
-class openmrs::openmrs_config_files (
-
-  $webapp_name                          = hiera('webapp_name')
-
-) {
-
-  require openmrs
+class openmrs::openmrs_config_files inherits openmrs
+{
 
   file { "${tomcat_home_dir}/.OpenMRS/${webapp_name}-runtime.properties":
     ensure  => present,

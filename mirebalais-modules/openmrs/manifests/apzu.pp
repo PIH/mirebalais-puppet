@@ -1,22 +1,4 @@
-class openmrs::apzu (
-
-  $tomcat                               = hiera('tomcat'),
-  $tomcat_home_dir                      = hiera('tomcat_home_dir'),
-  $webapp_name                          = hiera('webapp_name'),
-  $pih_malawi_distribution_version      = hiera('pih_malawi_distribution_version'),
-  $openmrs_db                   = hiera('openmrs_db'),
-  $openmrs_db_user              = decrypt(hiera('openmrs_db_user')),
-  $openmrs_db_password          = decrypt(hiera('openmrs_db_password')),
-  $openmrs_auto_update_database = hiera('openmrs_auto_update_database'),
-  $repo_url                     = decrypt(hiera('repo_url')),
-  $petl_mysql_user              = decrypt(hiera("petl_mysql_user")),
-  $petl_mysql_password          = decrypt(hiera("petl_mysql_password")),
-  $petl_warehouse_db            = hiera("petl_warehouse_db"),
-  $petl_openmrs_connection_url  = hiera("petl_openmrs_connection_url"),
-
-) {
-
-  require openmrs
+class openmrs::apzu inherits openmrs {
 
   include openmrs::pwa
 

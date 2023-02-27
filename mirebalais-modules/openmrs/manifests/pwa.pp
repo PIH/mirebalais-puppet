@@ -1,12 +1,6 @@
-class openmrs::pwa (
-  $tomcat             = hiera('tomcat'),
-  $tomcat_webapp_dir  = hiera('tomcat_webapp_dir'),
-  $package_release    = hiera('package_release'),
-  $pwa_enabled        = hiera('pwa_enabled'),
-  $pwa_filename       = hiera('pwa_filename'),
-  $pwa_webapp_name    = hiera('pwa_webapp_name'),
-  $repo_url           = decrypt(hiera('repo_url')),
-) {
+class openmrs::pwa inherits openmrs
+
+  {
 
   # currently supports only a single PWA per site, we will need update this long-term
 
