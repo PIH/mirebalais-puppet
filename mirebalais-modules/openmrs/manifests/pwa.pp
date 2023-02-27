@@ -3,6 +3,7 @@ class openmrs::pwa (
   $pwa_enabled        = hiera('pwa_enabled'),
   $pwa_filename       = hiera('pwa_filename'),
   $pwa_webapp_name    = hiera('pwa_webapp_name'),
+  $repo_url        = decrypt(hiera('repo_url')),
   $tomcat          = hiera('tomcat'),
   $tomcat_home_dir = hiera('tomcat_home_dir'),
 
@@ -13,17 +14,20 @@ class openmrs::pwa (
   # TODO: once we upgrade to Puppet 4.4+ we can just specific the file as as source (and therefore may not need exec wget and download every run)
   # TODO: come up with a more streamlined way to do this & handle versioning and whether we are installing a "stable" version or not, whether to switch Adds On and Bamboo, etc
 
-    # install PWA
+  # we need pwa enabled because we use this in apache default-ssl conf file
+  if ($pwa_enabled) {
+    # install PWA from bamboo
     exec { 'retrieve_pwa':
-      command => "/usr/bin/wget -q ${repo_url}:81/pwa-repo/${package_release}${pwa_filename} -O ${tomcat_webapp_dir}/${pwa_filename}",
+      command => "/usr/bin/wget -q ${repo_url}:81/pwa-repo/${package_release}${pwa_filename} -O ${tomcat_webapp_dir}/${
+        pwa_filename}",
       require => Service["$tomcat"]
     }
 
     # remove old directory
     file { "${tomcat_webapp_dir}/${pwa_webapp_name}":
-      ensure   => absent,
+      ensure  => absent,
       recurse => true,
-      force => true,
+      force   => true,
       require => Exec['retrieve_pwa']
     }
 
@@ -35,12 +39,13 @@ class openmrs::pwa (
       require => File["${tomcat_webapp_dir}/${pwa_webapp_name}"],
     }
 
-    exec { 'extract pwa' :
+    exec { 'extract pwa':
       command => "tar -xvf ${tomcat_webapp_dir}/${pwa_filename}",
-      cwd => "${tomcat_webapp_dir}",
-      user   => $tomcat,
+      cwd     => "${tomcat_webapp_dir}",
+      user    => $tomcat,
       group   => $tomcat,
       require => File["${tomcat_webapp_dir}/${pwa_filename}"],
       notify  => Exec['tomcat-restart']
     }
   }
+}
