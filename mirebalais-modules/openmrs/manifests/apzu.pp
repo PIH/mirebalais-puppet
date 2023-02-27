@@ -1,9 +1,13 @@
 class openmrs::apzu (
 
-  $pih_malawi_distribution_version      = hiera('pih_malawi_distribution_version')
+  $pih_malawi_distribution_version      = hiera('pih_malawi_distribution_version'),
+  $repo_url        = decrypt(hiera('repo_url')),
+  $tomcat          = hiera('tomcat'),
+  $tomcat_home_dir = hiera('tomcat_home_dir')
 
 ) {
 
+  require openmrs
   require openmrs::openmrs_config_files
   require openmrs::pwa
 
