@@ -1,5 +1,11 @@
-class openmrs::openmrs_config_files inherits openmrs
-{
+class openmrs_config_files {
+
+  file { "${tomcat_home_dir}/.OpenMRS":
+    ensure => directory,
+    owner  => $tomcat,
+    group  => $tomcat,
+    require => File["${tomcat_home_dir}"]
+  }
 
   file { "${tomcat_home_dir}/.OpenMRS/${webapp_name}-runtime.properties":
     ensure  => present,

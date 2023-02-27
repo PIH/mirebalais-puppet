@@ -1,6 +1,12 @@
-class openmrs::pwa inherits openmrs
+require openmrs
 
-  {
+class openmrs::pwa (
+
+  $pwa_enabled        = hiera('pwa_enabled'),
+  $pwa_filename       = hiera('pwa_filename'),
+  $pwa_webapp_name    = hiera('pwa_webapp_name'),
+
+) {
 
   # currently supports only a single PWA per site, we will need update this long-term
 
@@ -41,4 +47,3 @@ class openmrs::pwa inherits openmrs
   }
 
 }
-

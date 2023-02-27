@@ -1,9 +1,10 @@
-class openmrs::apzu inherits openmrs {
+require openmrs::pwa
 
-  include openmrs::pwa
+class apzu (
 
-  include openmrs::openmrs_config_files
+  $pih_malawi_distribution_version      = hiera('pih_malawi_distribution_version')
 
+) {
 
   exec { 'cleanup-malawi-openmrs-distribution-dir':
     command => "rm -rf /tmp/malawi-openmrs-distribution && rm -rf /tmp/malawi-distro && rm -rf /tmp/malawi-distribution"
