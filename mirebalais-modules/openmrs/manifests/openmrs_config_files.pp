@@ -6,7 +6,6 @@ class openmrs::openmrs_config_files (
 )
 {
 
-
   file { "${tomcat_home_dir}/.OpenMRS":
     ensure => directory,
     owner  => $tomcat,

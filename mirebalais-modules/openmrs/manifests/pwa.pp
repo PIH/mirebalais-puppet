@@ -3,6 +3,8 @@ class openmrs::pwa (
   $pwa_enabled        = hiera('pwa_enabled'),
   $pwa_filename       = hiera('pwa_filename'),
   $pwa_webapp_name    = hiera('pwa_webapp_name'),
+  $tomcat          = hiera('tomcat'),
+  $tomcat_home_dir = hiera('tomcat_home_dir'),
 
 ) {
 
@@ -11,8 +13,7 @@ class openmrs::pwa (
   # TODO: once we upgrade to Puppet 4.4+ we can just specific the file as as source (and therefore may not need exec wget and download every run)
   # TODO: come up with a more streamlined way to do this & handle versioning and whether we are installing a "stable" version or not, whether to switch Adds On and Bamboo, etc
 
-  if ($pwa_enabled) {
-    # install PWA from bamboo
+    # install PWA
     exec { 'retrieve_pwa':
       command => "/usr/bin/wget -q ${repo_url}:81/pwa-repo/${package_release}${pwa_filename} -O ${tomcat_webapp_dir}/${pwa_filename}",
       require => Service["$tomcat"]
@@ -43,5 +44,3 @@ class openmrs::pwa (
       notify  => Exec['tomcat-restart']
     }
   }
-
-}
