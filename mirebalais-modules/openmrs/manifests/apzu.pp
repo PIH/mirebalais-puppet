@@ -1,10 +1,11 @@
-require openmrs::pwa
-
-class apzu (
+class openmrs::apzu (
 
   $pih_malawi_distribution_version      = hiera('pih_malawi_distribution_version')
 
 ) {
+
+  require openmrs::openmrs_config_files
+  require openmrs::pwa
 
   exec { 'cleanup-malawi-openmrs-distribution-dir':
     command => "rm -rf /tmp/malawi-openmrs-distribution && rm -rf /tmp/malawi-distro && rm -rf /tmp/malawi-distribution"

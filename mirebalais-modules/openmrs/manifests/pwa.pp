@@ -1,5 +1,3 @@
-require openmrs
-
 class openmrs::pwa (
 
   $pwa_enabled        = hiera('pwa_enabled'),
