@@ -3,7 +3,7 @@ webapp_name: openmrs
 site_domain: neno-ci.pih-emr.org
 server_timezone: Africa/Blantyre
 
-pih_malawi_distribution_version: 7.0.0-SNAPSHOT
+pih_malawi_distribution_version: 6.9.0-SNAPSHOT
 
 # mysql
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
