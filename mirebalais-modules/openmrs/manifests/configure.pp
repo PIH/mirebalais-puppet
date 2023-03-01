@@ -1,4 +1,4 @@
-class openmrs::openmrs_config_files (
+class openmrs::configure (
 
   $tomcat          = hiera('tomcat'),
   $tomcat_home_dir = hiera('tomcat_home_dir'),
@@ -37,4 +37,5 @@ class openmrs::openmrs_config_files (
     mode    => '0644',
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
+
 }
