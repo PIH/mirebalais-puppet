@@ -52,6 +52,16 @@ class openmrs::pihemr (
 
   require openmrs
 
+  ## we should move these base packages class
+  file { '/etc/apt/apt.conf.d/99auth':
+    ensure  => present,
+    owner   => root,
+    group   => root,
+    content => 'APT::Get::AllowUnauthenticated yes;',
+    mode    => '0644'
+  }
+
+
 
   apt::source { $package_name:
     ensure      => present,
