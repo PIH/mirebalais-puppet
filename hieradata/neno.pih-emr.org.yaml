@@ -19,7 +19,7 @@ az_backup_folder_path: malawi/upper-neno
 # petl for reports
 petl_site: "apzu-upperneno-reports"
 petl_config_name: "apzu-etl"
-petl_config_version: 1.4.0
+petl_config_version: 1.5.0-SNAPSHOT
 
 petl_home_dir: "/opt/petl"
 

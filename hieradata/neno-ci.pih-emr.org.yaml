@@ -54,6 +54,8 @@ petl_openmrs_connection_url: jdbc:mysql://localhost:3306/%{hiera('petl_warehouse
 
 java_memory_parameters: '-Xmx6096m -Xms6096m'
 
-pwa_enabled: true
+pwa_config_name: pwa-apzu-ic3
+pwa_config_version: 2.0.0-SNAPSHOT
 pwa_config_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('pwa_config_name')}&v=%{hiera('pwa_config_version')}&p=tar.gz&r=snapshots
+pwa_enabled: true
 pwa_webapp_name: workflow
