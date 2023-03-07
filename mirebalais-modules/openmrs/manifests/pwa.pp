@@ -1,11 +1,12 @@
 class openmrs::pwa (
 
+  $pwa_config_name =  hiera('pwa_config_name'),
+  $pwa_config_url =  hiera('pwa_config_url'),
+  $pwa_config_version       = hiera('pwa_config_version'),
+  $pwa_webapp_name       = hiera('pwa_webapp_name'),
   $pwa_enabled        = hiera('pwa_enabled'),
-  $pwa_filename       = hiera('pwa_filename'),
-  $pwa_webapp_name    = hiera('pwa_webapp_name'),
-  $repo_url        = decrypt(hiera('repo_url')),
   $tomcat          = hiera('tomcat'),
-  $tomcat_home_dir = hiera('tomcat_home_dir'),
+  $tomcat_webapp_dir = hiera('tomcat_webapp_dir'),
 
 ) {
 
@@ -14,38 +15,49 @@ class openmrs::pwa (
   # TODO: once we upgrade to Puppet 4.4+ we can just specific the file as as source (and therefore may not need exec wget and download every run)
   # TODO: come up with a more streamlined way to do this & handle versioning and whether we are installing a "stable" version or not, whether to switch Adds On and Bamboo, etc
 
-  # we need pwa enabled because we use this in apache default-ssl conf file
-  if ($pwa_enabled) {
-    # install PWA from bamboo
-    exec { 'retrieve_pwa':
-      command => "/usr/bin/wget -q ${repo_url}:81/pwa-repo/${package_release}${pwa_filename} -O ${tomcat_webapp_dir}/${
-        pwa_filename}",
-      require => Service["$tomcat"]
+  # remove old pwa.tar.gz directory
+  exec { 'remove old pwa dir':
+    command => "rm -rf /tmp/${pwa_config_name}.tar.gz && rm -rf /tmp/${pwa_config_name}.tar",
+  }
+
+  # remove old pwa directory in the webapp folder
+  exec {  'remove old pwa directory in the webapp folder':
+    command  => "rm -rf ${tomcat_webapp_dir}/${pwa_webapp_name}",
+  }
+
+  # download new pwa.tar.gz directory
+  wget::fetch { 'download-pwa-configuration-dir':
+      source      => "${pwa_config_url}",
+      destination => "/tmp/${pwa_config_name}.tar.gz",
+      timeout     => 0,
+      verbose     => false,
+      redownload => true,
+      require => [Exec['remove old pwa dir'], Exec['remove old pwa directory in the webapp folder']]
     }
 
-    # remove old directory
-    file { "${tomcat_webapp_dir}/${pwa_webapp_name}":
-      ensure  => absent,
-      recurse => true,
-      force   => true,
-      require => Exec['retrieve_pwa']
-    }
+  # extract pwa.tar.gz
+  exec { 'extract pwa using gunzip':
+    command => "gunzip /tmp/${pwa_config_name}.tar.gz",
+    cwd     => "/tmp",
+    user    => root,
+    group   => root,
+    require => Wget::Fetch['download-pwa-configuration-dir']
+  }
 
-    # set owner to Tomcat
-    file { "${tomcat_webapp_dir}/${pwa_filename}":
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
-      require => File["${tomcat_webapp_dir}/${pwa_webapp_name}"],
-    }
+  # extract the new pwa folder into the webapp folder
+  exec { 'extract pwa using tar':
+    command => "tar -xvf /tmp/${pwa_config_name}.tar",
+    cwd     => "${tomcat_webapp_dir}",
+    user    => $tomcat,
+    group   => $tomcat,
+    require => Exec['extract pwa using gunzip'],
+  }
 
-    exec { 'extract pwa':
-      command => "tar -xvf ${tomcat_webapp_dir}/${pwa_filename}",
-      cwd     => "${tomcat_webapp_dir}",
-      user    => $tomcat,
-      group   => $tomcat,
-      require => File["${tomcat_webapp_dir}/${pwa_filename}"],
-      notify  => Exec['tomcat-restart']
-    }
+  # set owner to Tomcat
+  file { "${tomcat_webapp_dir}/${pwa_webapp_name} ":
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0644',
+    require => Exec['extract pwa using tar'],
   }
 }

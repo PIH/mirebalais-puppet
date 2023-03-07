@@ -612,6 +612,7 @@ node 'neno.pih-emr.org', 'lisungwi.pih-emr.org'  {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -638,6 +639,7 @@ node 'neno-ci.pih-emr.org'  {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup

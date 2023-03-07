@@ -101,9 +101,11 @@ commcare_user: ''
 commcare_password: ''
 
 # pwa_configuration--currently supports only a single PWA per site, we will need update this long-term
+pwa_config_name: ''
+pwa_config_url: ''
+pwa_config_version: ''
 pwa_enabled: false
 pwa_webapp_name: ''
-pwa_filename: ''
 
 # POC ic3 configs for neno
 apzu_ic3_enabled: false
