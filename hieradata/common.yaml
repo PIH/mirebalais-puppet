@@ -13,6 +13,10 @@ package_name: pihemr
 package_release: 'unstable'
 package_version: '1.0.20230118141622-1'
 
+maven_download_repo: ''
+maven_download_repo_config_group_id: ''
+maven_download_repo_package_group_id: ''
+
 config_name: ""
 config_version: ""
 
