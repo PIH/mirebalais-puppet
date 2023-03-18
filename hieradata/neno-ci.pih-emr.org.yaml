@@ -22,6 +22,8 @@ mysql_innodb_buffer_pool_instances: 2
 ## openmrs
 openmrs_db_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
 openmrs_auto_update_database: false
+openmrs_modules_temp_location: "/tmp/%{hiera('package_name')}-%{hiera('package_version')}/openmrs_modules"
+openmrs_warfile_temp_location: "/tmp/%{hiera('package_name')}-%{hiera('package_version')}/openmrs_webapps"
 
 # POC ic3 configs for neno
 apzu_ic3_enabled: true

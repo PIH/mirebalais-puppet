@@ -58,6 +58,10 @@ tomcat_restart_nightly: false
 tomcat_enable_http_8080: false
 session_timeout: 30
 
+#
+openmrs_modules_temp_location: ''
+openmrs_warfile_temp_location: ''
+
 # For both Azure & Amigo backups
 backup_file_prefix: foo
 backup_hour: 1
