@@ -25,9 +25,6 @@ openmrs_auto_update_database: false
 openmrs_modules_temp_location: "/tmp/%{hiera('package_name')}-%{hiera('package_version')}/openmrs_modules"
 openmrs_warfile_temp_location: "/tmp/%{hiera('package_name')}-%{hiera('package_version')}/openmrs_webapps"
 
-# POC ic3 configs for neno
-apzu_ic3_enabled: true
-apzu_ic3_dir: workflow
 
 ## backups
 backup_db_user: backup
