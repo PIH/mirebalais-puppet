@@ -1,12 +1,23 @@
 class openmrs (
 
-  $tomcat          = hiera('tomcat'),
-  $tomcat_home_dir = hiera('tomcat_home_dir'),
-  $webapp_name     = hiera('webapp_name')
+  $package_name     = hiera('package_name')
+
 ) {
 
-  package { 'p7zip-full' :
-    ensure => 'installed'
+  if ($package_name == 'pihemr') {
+
+    require openmrs::pihemr
+
+  }
+
+  if ($package_name == 'pihmalawi') {
+
+    require openmrs::install_distribution_from_maven
+    require openmrs::install_config_from_maven
+    require openmrs::config_files
+    require openmrs::install_configuration
+    require openmrs::pwa
+
   }
 
 }

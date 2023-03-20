@@ -34,7 +34,8 @@ class openmrs::install_configuration (
   exec { 'ensure-modules-dir-have-tomcat-user-as-owner':
     command  => "chown -R $tomcat:$tomcat ${tomcat_home_dir}/.OpenMRS/modules",
     path    => ['/bin', '/usr/bin'],
-    require => Exec['move-modules-to-openmrs-modules-dir']
+    require => Exec['move-modules-to-openmrs-modules-dir'],
+    notify => [ Exec['tomcat-restart'] ]
   }
 
   exec { 'move-war-file-to-tomcat-webapp-dir':
@@ -46,7 +47,9 @@ class openmrs::install_configuration (
   exec { 'ensure-war-file-has-tomcat-user-as-owner':
     command  => "chown -R $tomcat:$tomcat $tomcat_webapp_dir",
     path    => ['/bin', '/usr/bin'],
-    require => Exec['move-war-file-to-tomcat-webapp-dir']
+    require => Exec['move-war-file-to-tomcat-webapp-dir'],
+    notify => [ Exec['tomcat-restart'] ]
+
   }
 
 }

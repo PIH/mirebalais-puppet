@@ -56,5 +56,13 @@ class openmrs::pwa (
     group   => $tomcat,
     mode    => '0644',
     require => Exec['extract-pwa-using-tar'],
+    notify => [ Exec['tomcat-restart'] ]
+
+  }
+
+  exec { 'tomcat-restart':
+    command     => "service ${tomcat} restart",
+    user        => 'root',
+    refreshonly => true
   }
 }
