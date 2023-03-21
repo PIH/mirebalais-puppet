@@ -224,6 +224,8 @@ docker_compose_version: 1.27.4
 
 frontend_name: "openmrs-frontend-pihemr"
 frontend_version: 1.4.0
+frontend_repo: snapshots
+frontend_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('frontend_name')}&r=%{hiera('frontend_repo')}&p=zip&v=%{hiera('frontend_version')}
 
 # percona restore
 perconaHomeDir: "/home/percona"

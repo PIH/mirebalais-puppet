@@ -53,6 +53,11 @@ class openmrs::config_files (
       require => File["${tomcat_home_dir}/.OpenMRS"]
     }
 
+    file { "/home/${tomcat}/.OpenMRS/frontend":
+      ensure => directory,
+      require => [  File["/home/${tomcat}/.OpenMRS"] ]
+    }
+
     # needed for malawi
     file { "${tomcat_home_dir}/.OpenMRS/images":
       ensure  => directory,

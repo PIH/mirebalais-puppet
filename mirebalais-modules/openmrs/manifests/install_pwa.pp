@@ -1,4 +1,4 @@
-class openmrs::pwa (
+class openmrs::install_pwa (
 
   $pwa_config_name =  hiera('pwa_config_name'),
   $pwa_config_url =  hiera('pwa_config_url'),
