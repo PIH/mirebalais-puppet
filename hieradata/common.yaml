@@ -13,6 +13,10 @@ package_name: pihemr
 package_release: 'unstable'
 package_version: '1.0.20230118141622-1'
 
+maven_download_repo: ''
+maven_download_repo_config_group_id: ''
+maven_download_repo_package_group_id: ''
+
 config_name: ""
 config_version: ""
 
@@ -53,6 +57,10 @@ tomcat_webapp_dir: /var/lib/tomcat7/webapps
 tomcat_restart_nightly: false
 tomcat_enable_http_8080: false
 session_timeout: 30
+
+#
+openmrs_modules_temp_location: ''
+openmrs_warfile_temp_location: ''
 
 # For both Azure & Amigo backups
 backup_file_prefix: foo
@@ -101,13 +109,11 @@ commcare_user: ''
 commcare_password: ''
 
 # pwa_configuration--currently supports only a single PWA per site, we will need update this long-term
+pwa_config_name: ''
+pwa_config_url: ''
+pwa_config_version: ''
 pwa_enabled: false
 pwa_webapp_name: ''
-pwa_filename: ''
-
-# POC ic3 configs for neno
-apzu_ic3_enabled: false
-apzu_ic3_dir: ''
 
 # PETL
 petl: "petl"
@@ -218,6 +224,8 @@ docker_compose_version: 1.27.4
 
 frontend_name: "openmrs-frontend-pihemr"
 frontend_version: 1.4.0
+frontend_repo: snapshots
+frontend_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('frontend_name')}&r=%{hiera('frontend_repo')}&p=zip&v=%{hiera('frontend_version')}
 
 # percona restore
 perconaHomeDir: "/home/percona"
