@@ -50,18 +50,6 @@ class openmrs::pihemr (
 
 ) {
 
-  require openmrs
-
-  ## we should move these base packages class
-  file { '/etc/apt/apt.conf.d/99auth':
-    ensure  => present,
-    owner   => root,
-    group   => root,
-    content => 'APT::Get::AllowUnauthenticated yes;',
-    mode    => '0644'
-  }
-
-
 
   apt::source { $package_name:
     ensure      => present,
@@ -76,6 +64,22 @@ class openmrs::pihemr (
   $pihemr_version = $package_release ? {
     /unstable/ => 'latest',
     default    =>  $package_version,
+  }
+
+  file { "${tomcat_home_dir}/.OpenMRS":
+    ensure  => directory,
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0644'
+  }
+
+
+  file { "${tomcat_home_dir}/.OpenMRS/modules":
+    ensure  => directory,
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0644',
+    require => File["${tomcat_home_dir}/.OpenMRS"]
   }
 
   # added this to handle reworking of application data directory in Core 2.x
