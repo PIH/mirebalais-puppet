@@ -502,7 +502,7 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org'{
   include apache2
 
   include openmrs
-  include openmrs::initial_setup
+  #include openmrs::initial_setup
   include openmrs::backup
 }
 
@@ -525,7 +525,7 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano',
   include tomcat
 
   include openmrs
-  include openmrs::initial_setup
+  #include openmrs::initial_setup
   include openmrs::backup
 
   include cesemr_user_resources
