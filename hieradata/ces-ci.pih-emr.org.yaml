@@ -5,6 +5,7 @@ pih_config: mexico,mexico-demo
 config_name: openmrs-config-ces
 config_version: 1.32.0-SNAPSHOT
 
+frontend_name: "openmrs-frontend-pihemr"
 frontend_version: 1.5.0-SNAPSHOT
 
 openmrs_db: openmrs
