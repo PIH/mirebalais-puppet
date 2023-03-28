@@ -13,6 +13,10 @@ mysql_bind_address: 127.0.0.1
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 openmrs_auto_update_database: false
 
+frontend_name: ""
+frontend_version: ""
+frontend_repo: releases
+
 # backup azure
 az_backup_folder_path: malawi/upper-neno
 

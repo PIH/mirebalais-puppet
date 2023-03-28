@@ -11,6 +11,8 @@ class openmrs::install_frontend(
 
 ) {
 
+  if ($frontend_name != "") {
+
     exec { 'delete-old-frontend-packages':
       command => "rm -rf /tmp/frontend*"
     }
@@ -25,7 +27,7 @@ class openmrs::install_frontend(
       timeout     => 0,
       verbose     => false,
       redownload  => true,
-      require => Exec['delete-old-frontend-packages']
+      require     => Exec['delete-old-frontend-packages']
     }
 
     exec { 'extract-openmrs-frontend':
@@ -46,7 +48,8 @@ class openmrs::install_frontend(
     ### I'm not sure if the below blocks are needed, but we should have them for now
     exec { 'link-configuration-into-frontend':
       command => "ln -s ${tomcat_home_dir}}/.OpenMRS/configuration/frontend ${tomcat_home_dir}/.OpenMRS/frontend/site",
-      onlyif => "test -f ${tomcat_home_dir}/.OpenMRS/configuration/frontend", # this folder doesn't exist for malawi so first test if the dir exist, if it does then do the ln
+      onlyif  => "test -f ${tomcat_home_dir}/.OpenMRS/configuration/frontend",
+      # this folder doesn't exist for malawi so first test if the dir exist, if it does then do the ln
       require => Exec['move-openmrs-frontend-contents-to-config-dir']
     }
 
@@ -63,3 +66,4 @@ class openmrs::install_frontend(
     }
 
   }
+}

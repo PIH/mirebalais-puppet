@@ -222,8 +222,8 @@ atomfeed_repo_url: https://openmrs.jfrog.io/artifactory/snapshots
 docker_repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 docker_compose_version: 1.27.4
 
-frontend_name: "openmrs-frontend-pihemr"
-frontend_version: 1.4.0
+frontend_name: ""
+frontend_version: ""
 frontend_repo: snapshots
 frontend_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('frontend_name')}&r=%{hiera('frontend_repo')}&p=zip&v=%{hiera('frontend_version')}
 
