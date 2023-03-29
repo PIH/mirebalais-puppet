@@ -24,7 +24,7 @@ petl_config_name: ces-etl
 petl_config_version: 1.7.0-SNAPSHOT
 
 # PETL MySQL
-petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8"
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=America/New_York"
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
