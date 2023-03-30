@@ -1,9 +1,10 @@
 
 site_domain: kgh-test.pih-emr.org
 
-pih_config: sierraLeone,sierraLeone-kgh,sierraLeone-kgh-test
+pih_config: sierraLeone,sierraLeone-kgh #,sierraLeone-kgh-test
+package_release: 'stable' # remove after
 config_name: openmrs-config-pihsl
-config_version: 1.12.0-SNAPSHOT
+config_version: 1.12.0
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
