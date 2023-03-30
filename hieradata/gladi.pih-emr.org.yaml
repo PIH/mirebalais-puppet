@@ -1,9 +1,10 @@
 
 site_domain: gladi.pih-emr.org
 
-pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-gladi
+pih_config: sierraLeone,sierraLeone-wellbody #,sierraLeone-wellbody-gladi
+package_release: 'stable' # remove after
 config_name: openmrs-config-pihsl
-config_version: 1.12.0-SNAPSHOT
+config_version: 1.12.0
 
 frontend_name: "openmrs-frontend-pihemr"
 frontend_version: 1.5.0-SNAPSHOT
