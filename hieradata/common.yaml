@@ -136,7 +136,7 @@ petl_config_dir: "configurations"
 petl_mysql_host: localhost
 petl_mysql_port: 3306
 petl_mysql_databaseName: openmrs
-petl_mysql_options: ""
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=${user.timezone}"
 petl_mysql_user: foo
 petl_mysql_password: foo
 
