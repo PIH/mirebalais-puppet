@@ -1,27 +1,24 @@
 class openmrs (
 
-  $tomcat          = hiera('tomcat'),
-  $tomcat_home_dir = hiera('tomcat_home_dir'),
+  $package_name     = hiera('package_name')
 
-){
+) {
 
-  file { '/etc/apt/apt.conf.d/99auth':
-    ensure  => present,
-    owner   => root,
-    group   => root,
-    content => 'APT::Get::AllowUnauthenticated yes;',
-    mode    => '0644'
+  if ($package_name == 'pihemr') {
+
+    require openmrs::pihemr
+
   }
 
-  package { 'p7zip-full' :
-    ensure => 'installed'
-  }
+  if ($package_name == 'pihmalawi') {
 
-  file { "${tomcat_home_dir}/.OpenMRS":
-    ensure => directory,
-    owner  => $tomcat,
-    group  => $tomcat,
-    require => File["${tomcat_home_dir}"]
+    require openmrs::install_distribution_from_maven
+    require openmrs::install_config_from_maven
+    require openmrs::config_files
+    require openmrs::install_frontend
+    require openmrs::install_configuration
+    require openmrs::install_pwa
+
   }
 
 }

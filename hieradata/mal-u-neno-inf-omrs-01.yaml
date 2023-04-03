@@ -1,6 +1,6 @@
 ---
 webapp_name: openmrs
-site_domain: neno-ci.pih-emr.org
+site_domain: neno.pih-emr.org
 server_timezone: Africa/Blantyre
 
 package_name: pihmalawi
@@ -16,8 +16,8 @@ maven_download_repo_package_group_id: org.openmrs.distro
 # mysql
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: 127.0.0.1
-mysql_innodb_buffer_pool_size: 2G
-mysql_innodb_buffer_pool_instances: 2
+mysql_innodb_buffer_pool_size: 4G
+mysql_innodb_buffer_pool_instances: 4
 
 ## openmrs
 openmrs_db_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
@@ -29,12 +29,12 @@ openmrs_warfile_temp_location: "/tmp/%{hiera('package_name')}-%{hiera('package_v
 ## backups
 backup_db_user: backup
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
-backup_file_prefix: neno-ci
+backup_file_prefix: neno
 backup_hour: 1
 archive_hour: 3
 
 # backup to azure
-az_backup_folder_path: malawi/neno-ci
+az_backup_folder_path: malawi/neno
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
@@ -47,6 +47,7 @@ petl_home_dir: "/opt/petl"
 
 petl_mysql_user: openmrs
 petl_mysql_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
+petl_mysql_options: "autoReconnect=true&sessionVariables=default_storage_engine%3DInnoDB&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Africa/Blantyre"
 
 petl_cron_time: "0 0 2 ? * *"
 petl_server_port: 8181
@@ -57,11 +58,12 @@ petl_warehouse_db: openmrs_warehouse
 petl_mysql_user_ip: localhost
 petl_openmrs_connection_url: jdbc:mysql://localhost:3306/%{hiera('petl_warehouse_db')}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8
 
-java_memory_parameters: '-Xmx6096m -Xms6096m'
+java_memory_parameters: '-Xmx8092m -Xms8092m'
 
 # frontend
 frontend_name: "openmrs-frontend-pihemr"
 frontend_version: 1.5.0-SNAPSHOT
+frontend_repo: snapshots
 
 #ic3
 pwa_config_name: pwa-apzu-ic3

@@ -22,7 +22,7 @@ fully-qualifed-domain-name properly configured; when testing on a VM, you can un
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
 }*/
@@ -45,7 +45,7 @@ node 'emr.hum.ht' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
   #include percona
@@ -79,7 +79,7 @@ node 'hai-hum-inf-humtest' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
   #include percona
@@ -104,7 +104,7 @@ node 'hai-cloud-inf-omrshiv' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
   include openmrs::backup
@@ -151,7 +151,7 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
   include tomcat
   include apache2
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
   include percona
@@ -181,7 +181,7 @@ node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
   #include monitoring
@@ -206,7 +206,7 @@ node 'hai-hum-inf-omrs-report' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   #include openmrs::initial_setup
 
   #include percona
@@ -233,7 +233,7 @@ node 'inf-dakakind-omrs-test' {
   include mysql_setup
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
 }
@@ -256,7 +256,7 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
   #include monitoring
@@ -283,7 +283,7 @@ node 'thomonde.pih-emr.org', 'hinche.pih-emr.org', 'cercalasource.pih-emr.org', 
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
   include openmrs::backup
 
@@ -307,7 +307,7 @@ node 'zltraining.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 }
 
@@ -329,7 +329,7 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
   #include monitoring
@@ -356,7 +356,7 @@ node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
 }
@@ -380,7 +380,7 @@ node 'ci.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
   include openmrs::core_2_6_snapshot
 
@@ -404,7 +404,7 @@ node 'ces-ci.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
   include petl
@@ -429,7 +429,7 @@ node 'peru-ci.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
 }
@@ -452,7 +452,7 @@ node 'ses-cor.pih-emr.org' {
   include tomcat
   include apache2
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
   include openmrs::backup
 
@@ -478,7 +478,7 @@ node 'haitihivtest.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
 }
@@ -501,8 +501,8 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org'{
   include tomcat
   include apache2
 
-  include openmrs::pihemr
-  include openmrs::initial_setup
+  include openmrs
+  #include openmrs::initial_setup
   include openmrs::backup
 }
 
@@ -524,8 +524,8 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano',
   include mysql_setup
   include tomcat
 
-  include openmrs::pihemr
-  include openmrs::initial_setup
+  include openmrs
+  #include openmrs::initial_setup
   include openmrs::backup
 
   include cesemr_user_resources
@@ -551,7 +551,7 @@ node 'pleebo-mirror.pih-emr.org' {
   include apache2
   include tomcat
 
-  include openmrs::pihemr
+  include openmrs
   include openmrs::initial_setup
 
   include monitoring
@@ -600,7 +600,7 @@ node 'malawi-dw.pih-emr.org' {
 
 }
 
-node 'neno.pih-emr.org', 'lisungwi.pih-emr.org'  {
+node 'neno.pih-emr.org', 'lisungwi.pih-emr.org', 'mal-u-neno-inf-omrs-01'  {
 
   class { 'apt':
     always_apt_update => true,
@@ -612,14 +612,15 @@ node 'neno.pih-emr.org', 'lisungwi.pih-emr.org'  {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
   include apache2
   include tomcat
 
-  include openmrs::apzu
-  include openmrs::backup
+  include openmrs
+  #include openmrs::backup
 
   include petl
   include petl::mysql
@@ -638,11 +639,12 @@ node 'neno-ci.pih-emr.org'  {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
   include apache2
   include tomcat
 
-  include openmrs::apzu
+  include openmrs
 }
