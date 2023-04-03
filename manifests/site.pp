@@ -600,7 +600,7 @@ node 'malawi-dw.pih-emr.org' {
 
 }
 
-node 'neno.pih-emr.org', 'lisungwi.pih-emr.org'  {
+node 'neno.pih-emr.org', 'lisungwi.pih-emr.org', 'mal-u-neno-inf-omrs-01'  {
 
   class { 'apt':
     always_apt_update => true,
