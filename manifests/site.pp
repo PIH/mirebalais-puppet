@@ -620,7 +620,7 @@ node 'neno.pih-emr.org', 'lisungwi.pih-emr.org', 'mal-u-neno-inf-omrs-01'  {
   include tomcat
 
   include openmrs
-  include openmrs::backup
+  #include openmrs::backup
 
   include petl
   include petl::mysql
