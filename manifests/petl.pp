@@ -28,3 +28,16 @@ node 'malawi-dw.pih-emr.org' {
   include petl::disable_petl_startup_on_boot
 
 }
+
+node 'zt-sl-kgh-inf-dw-prod' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include wget
+  include unzip
+  include petl::java
+  include petl
+
+}
