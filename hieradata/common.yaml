@@ -117,7 +117,7 @@ pwa_webapp_name: ''
 
 # PETL
 petl: "petl"
-petl_version: "3.4.0-SNAPSHOT"
+petl_version: "3.5.0-SNAPSHOT"
 petl_site: ""
 petl_user: "petl"
 petl_home_dir: "/opt/petl"
