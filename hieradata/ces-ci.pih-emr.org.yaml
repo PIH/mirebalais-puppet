@@ -1,6 +1,8 @@
 ---
-package_release: 'unstable'
 site_domain: ces-ci.pih-emr.org
+server_timezone: America/Mexico_City
+
+package_release: 'unstable'
 pih_config: mexico,mexico-demo
 config_name: openmrs-config-ces
 config_version: 1.32.0-SNAPSHOT
