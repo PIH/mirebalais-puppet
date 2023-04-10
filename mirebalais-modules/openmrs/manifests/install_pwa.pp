@@ -27,7 +27,7 @@ class openmrs::install_pwa (
     source      => "${pwa_config_url}",
     destination => "/tmp/${pwa_config_name}.tar.gz",
     timeout     => 0,
-    verbose     => false,
+    verbose     => true,
     redownload => true,
     require => [Exec['remove-old-pwa-dir'], Exec['remove-old-pwa-directory-in-webapp-dir']]
   }

@@ -25,7 +25,7 @@ class openmrs::install_frontend(
       source      => $frontend_url,
       destination => "/tmp/${frontend_name}.zip",
       timeout     => 0,
-      verbose     => false,
+      verbose     => true,
       redownload  => true,
       require     => Exec['delete-old-frontend-packages']
     }
