@@ -131,7 +131,7 @@ class petl (
       }
 
       # remove any old versions of PETL
-      exec { "rm -f $(find ${petl_home_dir[$index]}/bin -maxdepth 1 -type f -name 'petl-*.jar' ! -name '${petl_version}.jar')":
+      exec { "rm -f $(find ${petl_home_dir[$index]}/bin -maxdepth 1 -type f -name 'petl-*.jar' ! -name '${petl[$index]}-$petl_version.jar')":
         require => File["${petl_home_dir[$index]}/bin/${petl[$index]}-${petl_version}.jar"]
       }
 
