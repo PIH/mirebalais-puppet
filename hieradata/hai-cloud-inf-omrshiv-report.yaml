@@ -19,7 +19,7 @@ petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
 # PETL SQL Server 2106
 petl_sqlserver_databaseName: zl_omrs_dw
-prod_dw_petl_sqlserver_host: ENC[o8sl3djWO0QSYPa8ncWhLg==:k92xzFbFCcGC4y5OX5mUqg==:ZjhENE9CVFpELzIxbVE1M0IwK1AzZz09]
+prod_dw_petl_sqlserver_host: ENC[zSk/FqCqoYJQUEKpA6QjPQ==:gY+Lna2E+DuCArfUI+QMyA==:WEZ6QjBnVGlTcysxUWF4TUptdU11Zz09]
 prod_dw_petl_sqlserver_port: ENC[tZ2trExXsC/V5l4CN1uZSg==:4WViP3V+BjbJWdM1seL+cw==:SUNXOHJldkRBVWlUVEpGQkFKTDdpZz09]
 petl_sqlserver_user: openmrs
 petl_sqlserver_password: ENC[PDyFWKfhNyWYT0/NFUksiw==]
