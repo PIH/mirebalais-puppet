@@ -6,7 +6,7 @@ config_name: openmrs-config-ces
 config_version: 1.31.0
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-mysql_bind_address: 127.0.0.1
+mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 

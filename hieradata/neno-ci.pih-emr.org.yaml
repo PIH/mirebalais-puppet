@@ -15,7 +15,7 @@ maven_download_repo_package_group_id: org.openmrs.distro
 
 # mysql
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-mysql_bind_address: 127.0.0.1
+mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
 mysql_innodb_buffer_pool_size: 2G
 mysql_innodb_buffer_pool_instances: 2
 
