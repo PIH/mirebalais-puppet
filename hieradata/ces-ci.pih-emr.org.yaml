@@ -12,7 +12,7 @@ frontend_version: 1.5.0-SNAPSHOT
 
 openmrs_db: openmrs
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-mysql_bind_address: 0.0.0.0
+mysql_bind_address: ENC[q/IrbhThPxSAsELZ1pA9fA==:FiTeRLnrYO171+KKiSA+oQ==:RHN4QXdNV3dzbVVxemY1c0hkNjk5UT09]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mysql_sort_buffer_size: 2621440
 

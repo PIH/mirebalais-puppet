@@ -1,6 +1,6 @@
 class mysql_setup (
   $root_password                      = decrypt(hiera('mysql_root_password')),
-  $mysql_bind_address                 = hiera('mysql_bind_address'),
+  $mysql_bind_address                 = decrypt(hiera('mysql_bind_address')),
   $mysql_expire_logs_days             = hiera('mysql_expire_logs_days'),
   $mysql_innodb_buffer_pool_size      = hiera('mysql_innodb_buffer_pool_size'),
   $mysql_innodb_buffer_pool_instances = hiera('mysql_innodb_buffer_pool_instances'),
