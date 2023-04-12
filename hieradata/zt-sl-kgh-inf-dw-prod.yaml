@@ -28,7 +28,7 @@ petl_sqlserver_password: ENC[abxBHcUehobP6Aid8J5ICg==:tHDwb3EtDzu+oXH88Xf9PQ==:d
 
 # PETL Crons
 petl_error_subject: "SL Prod PETL Errors"
-petl_cron_time: "0 0 8 ? * *"
+petl_cron_time: "0 0 3 ? * *"
 
 # prometheus node exporter
 node_exporter_listen_ip: ENC[7UKw1KmRszr7v4wY2RxlqQ==:MOSRONq5aUBrTbB5pNHd+A==:Z0lZNG1HSXliZDBLS3cxZ2srY1NaUT09]
