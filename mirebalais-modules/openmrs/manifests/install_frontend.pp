@@ -22,7 +22,7 @@ class openmrs::install_frontend(
       require     => Exec['delete-old-frontend-packages']
     }
 
-    maven { "/tmp/${frontend_name}-${frontend_version}.zip":
+    maven { "/tmp/${frontend_name}.zip":
       groupid => "${maven_frontend_group_id}",
       artifactid => "${frontend_name}",
       version => "${frontend_version}",
@@ -34,12 +34,12 @@ class openmrs::install_frontend(
 
     exec { 'extract-openmrs-frontend':
       command => "unzip -o /tmp/${frontend_name}.zip -d /tmp/frontend",
-      require => [ Maven["/tmp/${frontend_name}-${frontend_version}.zip"], Package['unzip']]
+      require => [ Maven["/tmp/${frontend_name}.zip"], Package['unzip']]
     }
 
     exec { 'move-openmrs-frontend-contents-to-config-dir':
       command => "mv /tmp/frontend/*/* ${tomcat_home_dir}/.OpenMRS/frontend",
-      require => [Maven["/tmp/${frontend_name}-${frontend_version}.zip"], Exec['delete-old-openmrs-frontend-contents']]
+      require => [Maven["/tmp/${frontend_name}.zip"], Exec['delete-old-openmrs-frontend-contents']]
     }
 
     exec { 'change-openmrs-frontend-owner-to-tomcat':
