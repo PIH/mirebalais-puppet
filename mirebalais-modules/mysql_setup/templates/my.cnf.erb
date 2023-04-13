@@ -100,6 +100,9 @@ server-id=<%= @mysql_server_id %>
 expire_logs_days=<%= @mysql_expire_logs_days %>
 max_binlog_size=100M
 <% end %>
+# this is required for
+# users to create petl functions
+log_bin_trust_function_creators = 1
 #
 # * InnoDB
 
