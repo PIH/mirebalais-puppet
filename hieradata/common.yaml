@@ -13,9 +13,10 @@ package_name: pihemr
 package_release: 'unstable'
 package_version: '1.0.20230411135520-1'
 
-maven_download_repo: ''
+maven_download_repo: http://mavenrepo.openmrs.org/nexus/content/repositories/public
 maven_download_repo_config_group_id: ''
 maven_download_repo_package_group_id: ''
+maven_frontend_group_id: org.pih.openmrs
 
 config_name: ""
 config_version: ""
@@ -227,6 +228,9 @@ frontend_name: ''
 frontend_version: ''
 frontend_repo: ''
 frontend_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('frontend_name')}&r=%{hiera('frontend_repo')}&p=zip&v=%{hiera('frontend_version')}
+
+
+
 
 # percona restore
 perconaHomeDir: "/home/percona"

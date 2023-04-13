@@ -1,9 +1,9 @@
 class openmrs::install_frontend(
 
   $frontend_name    = hiera('frontend_name'),
-  $frontend_repo    = hiera('frontend_repo'),
-  $frontend_url     = hiera('frontend_url'),
   $frontend_version = hiera('frontend_version'),
+
+  $maven_frontend_group_id = hiera('maven_frontend_group_id'),
 
   $tomcat           = hiera('tomcat'),
   $tomcat_home_dir  = hiera('tomcat_home_dir'),
@@ -18,15 +18,17 @@ class openmrs::install_frontend(
     }
 
     exec { 'delete-old-openmrs-frontend-contents':
-      command => "rm -rf ${tomcat_home_dir}/.OpenMRS/frontend/*"
+      command => "rm -rf ${tomcat_home_dir}/.OpenMRS/frontend/*",
+      require     => Exec['delete-old-frontend-packages']
     }
 
-    wget::fetch { 'download-openmrs-frontend':
-      source      => $frontend_url,
-      destination => "/tmp/${frontend_name}.zip",
-      timeout     => 0,
-      verbose     => true,
-      redownload  => true,
+    maven { "/tmp/${frontend_name}-${frontend_version}.zip":
+      groupid => "${maven_frontend_group_id}",
+      artifactid => "${frontend_name}",
+      version => "${frontend_version}",
+      ensure => latest,
+      packaging => zip,
+      repos => "${maven_download_repo}",
       require     => Exec['delete-old-frontend-packages']
     }
 
