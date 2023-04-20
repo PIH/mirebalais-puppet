@@ -1,0 +1,54 @@
+---
+site_domain: zt-imb-his-omrs-dw
+server_timezone:  Africa/Kigali
+
+# PETL
+petl: petl,petl-test
+petl_site: imb-prod,imb-test
+petl_home_dir: /opt/petl,/opt/petl-test
+
+# PETL config
+petl_config_dir: "configurations"
+petl_config_name: imb-etl,imb-etl
+petl_config_version: 1.0.0-SNAPSHOT,1.0.0-SNAPSHOT
+
+# PETL MySQL
+petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
+petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+
+# PETL SQL Server 2106
+petl_sqlserver_databaseName: imb_omrs_dw,openmrs_imb_warehouse
+petl_sqlserver_host: 10.160.20.93
+petl_sqlserver_port: 1433
+petl_sqlserver_user: ENC[v1pMAcFAh0ag0IlcLSYolQ==:WDaxbE1p9+iN7x8/aybOWA==:MWVZR2U5YlBXemlyVDNUVXdxSjB1dz09]
+petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
+
+# PETL warehouse DB
+# This is used in malawi
+# when running ./puppet-apply.sh petl on humci or petl-test
+# ensure petl_warehouse_db is set to ""
+petl_warehouse_db: ""
+petl_mysql_user_ip: localhost
+
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+mysql_expire_logs_days: 1
+mysql_binary_logging: false
+mysql_net_read_timeout: 6000
+mysql_net_write_timeout: 6000
+mysql_wait_timeout: 2880000
+mysql_interactive_timeout: 2880000
+mysql_innodb_buffer_pool_size: 5G
+mysql_innodb_buffer_pool_instances: 5
+mysql_key_buffer_size: 2G
+mysql_sort_buffer_size: 2621440
+
+openmrs_db: openmrs
+openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[7UKw1KmRszr7v4wY2RxlqQ==:MOSRONq5aUBrTbB5pNHd+A==:Z0lZNG1HSXliZDBLS3cxZ2srY1NaUT09]
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
+
+# docker and docker-compose
+docker_mssql_container_name: imb-dw
+docker_mssql_user_password: ENC[ONOcq0Zrrkpg5OfyM0Vr8A==:LC1VUcWaPvUCWxgmW5/xAg==:UlFuMDE0OGtTUHNHdmF3azJIRmp5Zz09]
