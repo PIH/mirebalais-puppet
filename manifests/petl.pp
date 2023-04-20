@@ -15,6 +15,21 @@ node default {
 
 }
 
+ node 'zt-imb-his-omrs-dw'{
+
+   class { 'apt':
+     always_apt_update => true,
+   }
+
+   include wget
+   include unzip
+   include docker
+   include docker::install_container
+   include petl::java
+   include petl
+
+ }
+
 node 'malawi-dw.pih-emr.org' {
 
   class { 'apt':
