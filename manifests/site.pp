@@ -51,7 +51,7 @@ node 'emr.hum.ht' {
   #include percona
 
   include mirth
-  include mirth::channel_setup
+#  include mirth::channel_setup
 
   #include monitoring
   include logging
