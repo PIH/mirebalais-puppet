@@ -11,7 +11,7 @@ site_domain: foo.org
 
 package_name: pihemr
 package_release: 'unstable'
-package_version: '1.0.20230411135520-1'
+package_version: '1.0.20230425132709-1'
 
 maven_download_repo: http://mavenrepo.openmrs.org/nexus/content/repositories/public
 maven_download_repo_config_group_id: ''
