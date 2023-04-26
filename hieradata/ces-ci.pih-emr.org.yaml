@@ -23,7 +23,7 @@ petl_home_dir: "/opt/petl"
 
 # PETL config
 petl_config_name: ces-etl
-petl_config_version: 1.7.0-SNAPSHOT
+petl_config_version: 1.8.0-SNAPSHOT
 
 # PETL MySQL
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
