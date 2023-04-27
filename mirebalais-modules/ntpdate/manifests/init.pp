@@ -76,3 +76,4 @@ class ntpdate(
     require => [ Package['ntp'], Package['ntpdate'], Exec['initialize resolvconf'] ]
   }
 }
+
