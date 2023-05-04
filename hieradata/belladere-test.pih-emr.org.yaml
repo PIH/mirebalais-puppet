@@ -1,0 +1,31 @@
+---
+webapp_name: openmrs
+site_domain: belladere-test.pih-emr.org
+
+pih_config: haiti,haiti-belladere
+config_name: openmrs-config-zl
+config_version: 1.45.0-SNAPSHOT
+
+frontend_name: "openmrs-frontend-zl"
+frontend_version: 1.4.0-SNAPSHOT
+
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+mysql_bind_address: ENC[q/IrbhThPxSAsELZ1pA9fA==:FiTeRLnrYO171+KKiSA+oQ==:RHN4QXdNV3dzbVVxemY1c0hkNjk5UT09]
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+
+mysql_innodb_buffer_pool_size: 2G
+mysql_innodb_buffer_pool_instances: 2
+
+# feature toggle settings
+reportingui_ad_hoc_analysis: true
+radiology_contrast_studies: true
+appointmentscheduling_confidential: true
+
+java_memory_parameters: '-Xmx6096m -Xms6096m'
+java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
+
+terms_and_conditions_enabled: true
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[r/6a4rPBdr93KPc/oekg4w==:CtezxOxc2hosGJNW2veL7Q==:RTZGR2xHSW8wa3dlYkFta3BBU0RPdz09]
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
