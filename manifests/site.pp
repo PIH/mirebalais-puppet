@@ -338,7 +338,8 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org', 'zt-sl-kgh-inf-omrs-prod' {
   include openmrs::backup
 }
 
-node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'zt-cloud-sis-inf-omrs-mfa-test', 'ocltest.pih-emr.org', 'sl-wellbody-inf-omrs-cc-test' {
+node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-emr.org', 'hinche-ci.pih-emr.org', 'zt-cloud-sis-inf-omrs-mfa-test', 'ocltest.pih-emr.org', 'sl-wellbody-inf-omrs-cc-test',
+'belladere-test.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
