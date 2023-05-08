@@ -2,7 +2,7 @@
 webapp_name: openmrs
 site_domain: belladere-test.pih-emr.org
 
-pih_config: haiti,haiti-belladere
+pih_config: haiti,haiti-belladere,haiti-belladere-test
 config_name: openmrs-config-zl
 config_version: 1.45.0-SNAPSHOT
 
