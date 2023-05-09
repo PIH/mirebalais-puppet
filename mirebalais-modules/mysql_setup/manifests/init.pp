@@ -141,5 +141,25 @@ class mysql_setup (
     enable  => true,
     require => [ File['/etc/mysql/my.cnf'], File['/etc/mysql/my.cnf.fallback'], File['root_user_my.cnf'], Package['mysql-server-5.6'] ],
   }
+
+  ## these next blocks configures timezone in mysql
+  exec { 'configure-timezone':
+    command => "/usr/bin/mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -uroot -p${root_password} mysql",
+    user => root,
+    require => [Exec['set-root-password'], Exec['confirm-root-password'], Package['mysql-client-5.6'], Service[mysqld]]
+  }
+
+  # this is only added once and only if the variable doesn't exist
+  exec { 'add-timezone-if-not-exist':
+    command => "/bin/bash -c \"if ! grep -q 'default-time-zone=${timezone}' /etc/mysql/my.cnf; then sed -i '/^#timezone/a default-time-zone=${timezone}' /etc/mysql/my.cnf; fi\"",
+    require => [ File['/etc/mysql/my.cnf'], Service[mysqld], Exec['configure-timezone']],
+  }
+
+  # restart mysql
+  exec { 'mysql-restart':
+    command     => "service mysql restart",
+    user        => 'root',
+    require     =>  [Service[mysqld], Exec['configure-timezone']]
+  }
   
 }
