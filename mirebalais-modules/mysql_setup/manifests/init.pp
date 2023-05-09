@@ -12,7 +12,8 @@ class mysql_setup (
   $mysql_interactive_timeout          = hiera('mysql_interactive_timeout'),
   $mysql_key_buffer_size              = hiera('mysql_key_buffer_size'),
   $mysql_table_open_cache             = hiera('mysql_table_open_cache'),
-  $mysql_sort_buffer_size            = hiera('mysql_sort_buffer_size')
+  $mysql_sort_buffer_size             = hiera('mysql_sort_buffer_size'),
+  $timezone                           = hiera('server_timezone'),
 
 ){
 
@@ -126,6 +127,12 @@ class mysql_setup (
     path        => "${root_home}/.my.cnf",
     content     => template('mysql_setup/my.cnf.pass.erb'),
     require     => Exec['confirm-root-password'],
+  }
+
+  exec { 'configure-timezone':
+      command => "/usr/bin/mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -D mysql",
+      user => root,
+      require => [Exec['set-root-password'], Exec['confirm-root-password'], Package['mysql-client-5.6']]
   }
 
   service { 'mysqld':
