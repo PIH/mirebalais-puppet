@@ -129,12 +129,6 @@ class mysql_setup (
     require     => Exec['confirm-root-password'],
   }
 
-  exec { 'configure-timezone':
-      command => "/usr/bin/mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -D mysql",
-      user => root,
-      require => [Exec['set-root-password'], Exec['confirm-root-password'], Package['mysql-client-5.6']]
-  }
-
   service { 'mysqld':
     ensure  => running,
     name    => 'mysql',
@@ -142,7 +136,7 @@ class mysql_setup (
     require => [ File['/etc/mysql/my.cnf'], File['/etc/mysql/my.cnf.fallback'], File['root_user_my.cnf'], Package['mysql-server-5.6'] ],
   }
 
-  ## these next blocks configures timezone in mysql
+  ## these next blocks configures the timezone in mysql
   exec { 'configure-timezone':
     command => "/usr/bin/mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -uroot -p${root_password} mysql",
     user => root,
