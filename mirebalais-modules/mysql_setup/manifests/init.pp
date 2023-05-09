@@ -153,7 +153,7 @@ class mysql_setup (
   exec { 'mysql-restart':
     command     => "service mysql restart",
     user        => 'root',
-    require     =>  [Service[mysqld], Exec['configure-timezone']]
+    require     =>  [Service[mysqld], Exec['configure-timezone'], Exec['add-timezone-if-not-exist']]
   }
   
 }
