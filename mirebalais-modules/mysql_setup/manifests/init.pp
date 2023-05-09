@@ -12,7 +12,8 @@ class mysql_setup (
   $mysql_interactive_timeout          = hiera('mysql_interactive_timeout'),
   $mysql_key_buffer_size              = hiera('mysql_key_buffer_size'),
   $mysql_table_open_cache             = hiera('mysql_table_open_cache'),
-  $mysql_sort_buffer_size            = hiera('mysql_sort_buffer_size')
+  $mysql_sort_buffer_size             = hiera('mysql_sort_buffer_size'),
+  $timezone                           = hiera('server_timezone'),
 
 ){
 
@@ -133,6 +134,26 @@ class mysql_setup (
     name    => 'mysql',
     enable  => true,
     require => [ File['/etc/mysql/my.cnf'], File['/etc/mysql/my.cnf.fallback'], File['root_user_my.cnf'], Package['mysql-server-5.6'] ],
+  }
+
+  ## these next blocks configures the timezone in mysql
+  exec { 'configure-timezone':
+    command => "/usr/bin/mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -uroot -p${root_password} mysql",
+    user => root,
+    require => [Exec['set-root-password'], Exec['confirm-root-password'], Package['mysql-client-5.6'], Service[mysqld]]
+  }
+
+  # this is only added once and only if the variable doesn't exist
+  exec { 'add-timezone-if-not-exist':
+    command => "/bin/bash -c \"if ! grep -q 'default-time-zone=${timezone}' /etc/mysql/my.cnf; then sed -i '/^#timezone/a default-time-zone=${timezone}' /etc/mysql/my.cnf; fi\"",
+    require => [ File['/etc/mysql/my.cnf'], Service[mysqld], Exec['configure-timezone']],
+  }
+
+  # restart mysql
+  exec { 'mysql-restart':
+    command     => "service mysql restart",
+    user        => 'root',
+    require     =>  [Service[mysqld], Exec['configure-timezone'], Exec['add-timezone-if-not-exist']]
   }
   
 }
