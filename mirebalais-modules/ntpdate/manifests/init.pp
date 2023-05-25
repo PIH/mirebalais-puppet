@@ -36,7 +36,7 @@ class ntpdate(
 
   exec { "initialize resolvconf":
     command => "resolvconf -u",
-      require => [ File["/run/resolvconf/resolv.conf"], File["/etc/resolvconf/resolv.conf.d/base"], File["/etc/resolvconf/resolv.conf.d/head"], Exec["create a symolic link for resolvconf"]]
+      require => [ File["/run/resolvconf/resolv.conf"], File["/etc/resolvconf/resolv.conf.d/base"], File["/etc/resolvconf/resolv.conf.d/head"], Exec["create a symbolic link for resolvconf"]]
   }
 
   file { '/etc/systemd/timesyncd.conf':
