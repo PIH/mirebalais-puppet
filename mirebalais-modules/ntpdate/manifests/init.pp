@@ -29,7 +29,7 @@ class ntpdate(
     require => Package['resolvconf']
   }
 
-  exec { "create a symolic link for resolvconf":
+  exec { "create a symbolic link for resolvconf":
     command => "ln -sf /run/resolvconf/resolv.conf /etc/resolv.conf",
     require => [ File["/run/resolvconf/resolv.conf"], File["/etc/resolvconf/resolv.conf.d/base"], File["/etc/resolvconf/resolv.conf.d/head"] ]
   }
