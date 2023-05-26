@@ -17,6 +17,7 @@ minPerconaDirSize=<%= @minPerconaDirSize %>
 
 dbUser="root"
 dbPass="<%= @mysql_root_password %>"
+dbeventDir="<%= @openmrsHomeDir %>/dbevent"
 
 exec > $perconaLogFile 2>&1
 
@@ -112,6 +113,17 @@ fi
 /etc/init.d/apache2 stop
 /etc/init.d/tomcat7 stop
 /etc/init.d/mysql stop
+
+## this deletes the contents of the dbevent dir, if it exists
+## some servers are dw servers thus they don't have
+## .OpenMRS/dbevent dir
+if [ -d "${dbeventDir}" ]; then
+    rm -rf "${dbeventDir}/*"
+    echo "${dbeventDir} deleted."
+else
+    echo "${dbeventDir} directory does not exist."
+fi
+
 rm -rf /home/tomcat7/.OpenMRS/configuration_checksums
 sleep 10
 
