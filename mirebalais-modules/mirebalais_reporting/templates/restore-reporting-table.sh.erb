@@ -9,7 +9,7 @@ perconaLogFile="<%= @perconaLogFile %>"
 perconaSite="<%= @perconaSite %>"
 mailSubject="$perconaSite percona db restore success"
 
-exec > $perconaLogFile 2>&1
+exec >> $perconaLogFile 2>&1
 
 jobStartDate=`date +%Y%m%d-%H%M%S`
 echo cronjob started on $jobStartDate

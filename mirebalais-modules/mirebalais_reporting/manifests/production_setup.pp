@@ -29,8 +29,8 @@ class mirebalais_reporting::production_setup (
     ensure  => present,
     command => 'scp -v -r /home/percona/backups/openmrs root@192.168.1.19:/home/percona/backups > /home/percona/logs/scp_humreporting.log',
     user    => 'root',
-    hour    => 22,
-    minute  => 10,
+    hour    => 00,
+    minute  => 00,
     environment => "MAILTO=$sysadmin_email",
     require => [ File['mirebalais-percona-backup.sh'] ]
   }
