@@ -2,6 +2,9 @@ webapp_name: mirebalais
 
 package_release: 'stable'
 
+# **holding on latest release to HUM Production, remove this after next HUM Producton release**
+package_version: '1.0.20230425132709-1'
+
 pih_config: mirebalais,mirebalais-reporting
 config_name: openmrs-config-zl
 config_version: 1.44.0
@@ -18,8 +21,8 @@ mysql_binary_logging: false
 mysql_net_read_timeout: 1800
 mysql_net_write_timeout: 1800
 
-mysql_innodb_buffer_pool_size: 8G
-mysql_innodb_buffer_pool_instances: 8
+mysql_innodb_buffer_pool_size: 16G
+mysql_innodb_buffer_pool_instances: 6
 
 openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 replication_db_password: ENC[92IfbImaUmA3wqYSG5kWWwexEU8HqCrqQzSXAMKRPz0=]
@@ -39,3 +42,5 @@ perconaSite: HUM Reporting
 perconaLogFile: "/home/percona/logs/percona-db-restore.log"
 perconaReportDir: "/home/percona/reporting"
 minPerconaDirSize: 41200000
+
+java_memory_parameters: '-Xmx16G -Xms16G'
