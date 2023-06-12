@@ -214,7 +214,7 @@ node 'hai-hum-inf-omrs-report' {
   #include monitoring
   #include logging
 
-  #include mirebalais_reporting::reporting_setup
+  include mirebalais_reporting::reporting_setup
 }
 
 node 'inf-dakakind-omrs-test' {

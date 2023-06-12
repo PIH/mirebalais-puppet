@@ -4,7 +4,7 @@ class mirebalais_reporting::reporting_setup (
 	$openmrs_db_password = decrypt(hiera('openmrs_db_password')),
   $openmrsHomeDir = hiera('openmrsHomeDir'),
 	$openmrs_warehouse_db = decrypt(hiera('openmrs_warehouse_db')),
-	$mysql_root_password = decrypt(hiera('backup_db_password')),
+	$mysql_root_password = decrypt(hiera('mysql_root_password')),
 	$sysadmin_email = hiera('sysadmin_email'),
 	$perconaHomeDir = hiera('perconaHomeDir'),
 	$perconaReportDir = hiera('perconaReportDir'),
