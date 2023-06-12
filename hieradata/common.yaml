@@ -264,30 +264,3 @@ node_exporter_listen_port: 9999
 
 # old os version
 ubuntu_14: false
-
-
-# percona restore
-perconaHomeDir: "/home/percona"
-perconaBackupDir: "/home/percona/backups"
-perconaLogs: "/home/percona/logs"
-perconaLogFile: "foo"
-perconaRestoreDir: "/home/percona/backups/openmrs"
-perconaSite: "foo"
-mysqlDataDir: "/var/lib/mysql"
-mysqlDb: "foo"
-openmrsHomeDir: "/home/tomcat7/.OpenMRS"
-reportingTables: "foo"
-reportingDumps: "foo"
-mailTo: "%{hiera('sysadmin_email')}"
-mailSubject: "${perconaSite} percona db restore success"
-logFile: "/home/percona/logs/percoa-restore.log"
-minPerconaDirSize: 10
-
-# prometheus node exporter
-node_exporter_version: 1.4.0
-node_exporter_download_url: https://github.com/prometheus/node_exporter/releases/download/v%{hiera('node_exporter_version')}/node_exporter-%{hiera('node_exporter_version')}.linux-amd64.tar.gz
-node_exporter_listen_ip: localhost
-node_exporter_listen_port: 9999
-
-# old os version
-ubuntu_14: false
