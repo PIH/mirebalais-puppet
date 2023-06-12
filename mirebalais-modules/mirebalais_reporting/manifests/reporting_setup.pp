@@ -41,16 +41,7 @@ class mirebalais_reporting::reporting_setup (
      group   => 'root',
      content => template('mirebalais_reporting/percona-openmrs-db-restore.sh.erb'),
    }
-   
-   file { 'restore-reporting-table.sh':
-     ensure  => present,
-     path    => "${perconaHomeDir}/scripts/restore-reporting-table.sh",
-     mode    => '0700',
-     owner   => 'root',
-     group   => 'root',
-     content => template('mirebalais_reporting/restore-reporting-table.sh.erb'),
-   }
-   
+
    cron { 'percona-openmrs-db-restore':
      ensure  => present,
      command => "${perconaHomeDir}/scripts/percona-openmrs-db-restore.sh >/dev/null 2>&1",
@@ -60,14 +51,13 @@ class mirebalais_reporting::reporting_setup (
      environment => "MAILTO=$sysadmin_email",
      require => [ File['percona-openmrs-db-restore.sh'] ]
    }
-   
-   cron { 'restore-reporting-table':
-     ensure  => present,
-     command => "${perconaHomeDir}/scripts/restore-reporting-table.sh >/dev/null 2>&1",
-     user    => 'root',
-     hour    => 05,
-     minute  => 00,
-     environment => "MAILTO=$sysadmin_email",
-     require => [ File['restore-reporting-table.sh'] ]
+
+
+  file { 'restore-reporting-table.sh':
+    ensure  => absent
+  }
+
+  cron { 'restore-reporting-table':
+     ensure  => absent
    }
 }

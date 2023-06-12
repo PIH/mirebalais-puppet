@@ -4,6 +4,9 @@ az_activitylog_backup_folder_path: activitylog/zl/mirebalais
 
 package_release: 'stable'
 
+# **holding on latest release to HUM Production, remove when doing the next HUM Production release**
+package_version: '1.0.20230425132709-1'
+
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
 config_version: 1.44.0
