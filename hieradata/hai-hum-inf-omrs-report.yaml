@@ -13,6 +13,8 @@ server_timezone: America/New_York
 
 site_domain: reporting.hum.ht
 
+dbevent_enabled: false
+
 mysql_server_id: 3
 mysql_master_ip:
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]

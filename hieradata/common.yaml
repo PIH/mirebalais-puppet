@@ -116,6 +116,9 @@ pwa_config_version: ''
 pwa_enabled: false
 pwa_webapp_name: ''
 
+#dbevent
+dbevent_enabled: true
+
 # PETL
 petl: "petl"
 petl_version: "3.5.0-SNAPSHOT"

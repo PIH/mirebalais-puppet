@@ -31,7 +31,13 @@ prepareBackup() {
     innobackupex --apply-log ${backupDir}/${openmrsDB} &>> ${perconaLogs}/`date +%y%m%d%H%M%S`_perconapreparebackup.log
 }
 
+copyToReporting() {
+  scp -v -r /home/percona/backups/openmrs root@192.168.1.19:/home/percona/backups > /home/percona/logs/scp_humreporting.log 2>&1
+}
+
 createDirectories
 deletePreviousBackups
 createFullBackup
 prepareBackup
+copyToReporting
+

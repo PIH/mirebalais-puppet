@@ -20,6 +20,7 @@ class openmrs::pihemr (
   $activitylog_enabled           = hiera('activitylog_enabled'),
   $terms_and_conditions_enabled  = hiera('terms_and_conditions_enabled'),
   $session_timeout               = hiera('session_timeout'),
+  $dbevent_enabled               = hiera('dbevent_enabled'),
 
   # PIH EMR config
   $config_name     = hiera('config_name'),
