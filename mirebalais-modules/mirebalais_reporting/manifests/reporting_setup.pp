@@ -52,11 +52,6 @@ class mirebalais_reporting::reporting_setup (
      require => [ File['percona-openmrs-db-restore.sh'] ]
    }
 
-
-  file { 'restore-reporting-table.sh':
-    ensure  => absent
-  }
-
   cron { 'restore-reporting-table':
      ensure  => absent
    }
