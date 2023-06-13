@@ -51,8 +51,4 @@ class mirebalais_reporting::reporting_setup (
      environment => "MAILTO=$sysadmin_email",
      require => [ File['percona-openmrs-db-restore.sh'] ]
    }
-
-  cron { 'restore-reporting-table':
-     ensure  => absent
-   }
 }
