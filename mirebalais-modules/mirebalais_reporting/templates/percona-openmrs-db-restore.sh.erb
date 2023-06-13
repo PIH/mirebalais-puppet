@@ -28,6 +28,10 @@ mkdir -p ${perconaBackupDir}
 mkdir -p ${perconaLogs}
 mkdir -p ${perconaReportDir}
 
+# stop tomcat and apache
+service apache2 stop
+service tomcat7 stop
+
 ## removing old reporting dump file
 rm -rf ${perconaHomeDir}/reporting/*
 if [ $? -eq 0 ]; then
@@ -101,7 +105,7 @@ sleep 10
 
 service mysql start
 if [ $? -eq 0 ]; then
-        sleep 10
+        sleep 60
         echo mysql started successfully
 else
         echo mysql can not start
@@ -125,8 +129,6 @@ else
     mail -s "$perconaSite: ${perconaReportDir}/reporting_report_request.sql does not exist or is incomplete" "$mailTo" < $perconaLogFile
 fi
 
-service apache2 stop
-service tomcat7 stop
 service mysql stop
 
 rm -rf /home/tomcat7/.OpenMRS/configuration_checksums
