@@ -230,9 +230,13 @@ docker_mssql_image: mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
 docker_mssql_volume_dir: /opt/docker-container/mssql/data
 docker_mssql_user_password: ''
 docker_mysql_container_name: ''
-docker_mysql_image: mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
+docker_mysql_image: library/mysql:5.6
 docker_mysql_volume_dir: ''
-docker_mysql_user_password: ''
+docker_mysql_root_password: ''
+docker_mysql_server_id: 1
+docker_mysql_binlog_enabled: false
+docker_mysql_max_allowed_packet: '1G'
+docker_mysql_innodb_buffer_pool_size: '2G'
 docker_group: ENC[h2rLm+7MduiV0n6kphuvHw==:fnzJi5CZcS03vAQDCjaF1Q==:Rmczclg4eVBLNDgvSGJrVGRVSWxpZz09]
 docker_user: ENC[h2rLm+7MduiV0n6kphuvHw==:fnzJi5CZcS03vAQDCjaF1Q==:Rmczclg4eVBLNDgvSGJrVGRVSWxpZz09]
 
