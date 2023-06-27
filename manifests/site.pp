@@ -153,6 +153,7 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
   include openmrs
   include openmrs::initial_setup
+  include openmrs::backup
 
   include percona
 
