@@ -29,13 +29,15 @@ FILENAME=${PREFIX}_backup_${MODIFIER}.sql.7z
 CURRENT_FILENAME=${PREFIX}_current_backup.sql.7z
 LOGDIR=${DIR}/logs
 LOGFILE=${LOGDIR}/backup-log-${MODIFIER}.log
-
-exec > ${LOGFILE} 2>&1
+ERRORS_DURING_BACKUP=0
 
 # create the needed directories
 mkdir -p ${DIR}/current
 mkdir -p ${DIR}/sequences
 mkdir -p ${LOGDIR}
+
+# set up logging to file
+exec > ${LOGFILE} 2>&1
 
 # Dump database, encrypt and compress
 if [ $? -eq 0 ]; then
@@ -45,24 +47,25 @@ fi
 
 if [ $? -eq 0 ]; then
     echo "backup was a success"
-else
-    echo "There was a problem during backup"
-    mail -s "${PREFIX}: Error during backup" "${MAIL_TO}" < ${LOGFILE}
-    exit
-fi
 
-### check if backed up db size is not empty
-if ! [ -s "${DIR}/sequences/${FILENAME}" ];
-then
+    ### check if backed up db size is not empty
+    if ! [ -s "${DIR}/sequences/${FILENAME}" ];
+    then
         >&2 echo "mysql backup DB dump file empty\n"
-        mail -s "${PREFIX}: backup DB dump file empty" "${MAIL_TO}" < ${LOGFILE}
-        exit
-else
+        ERRORS_DURING_BACKUP=1
+    else
+        echo "Size for compressed DB: $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
         # link the current to the latest dump
         rm -f ${DIR}/current/${CURRENT_FILENAME}
         ln -s ${DIR}/sequences/${FILENAME} ${DIR}/current/${CURRENT_FILENAME}
+    fi
+
+else
+    echo "There was a problem during backup"
+    ERRORS_DURING_BACKUP=1
 fi
 
+#####################################
 ## backup complex obs directory
 #####################################
 COMPLEX_OBS_DIR='/home/<%= @tomcat %>/.OpenMRS/complex_obs'
@@ -76,30 +79,139 @@ then
         echo "complex_obs dir is empty"
         echo "Size for compressed DB dir $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
         echo "Success, backups without compressing complex_obs ended at `date`"
-        mail -s "${PREFIX}: backup is successful" "${MAIL_TO}" < ${LOGFILE}
-        exit
+
 else
         echo "complex_obs dir empty not empty, copying it to sequences dir"
         cp -r ${COMPLEX_OBS_DIR} ${DIR}/sequences
+
+        echo "compressing complex_obs dir."
+        ## should figure out how to do this incrementally
+        ## /dev/null may affect the command after, figure out the best way for this
+        cd ${DIR}/sequences
+        7za a -p${PASS} -mx=9 -r "${PREFIX}_complex_obs_${MODIFIER}.7z" "complex_obs" 2>&1 >/dev/null
+
+        # remove this dir so that it is created next time
+        if [ $? -eq 0 ]; then
+            rm -rf ${COMPLEX_OBS_BACKUP_DIR}
+        else
+            echo "Error compressing complex_obs dir"
+            ERRORS_DURING_BACKUP=1
+        fi
 fi
 
-echo "compressing complex_obs dir."
-## should figure out how to do this incrementally
-## /dev/null may affect the command after, figure out the best way for this
-cd ${DIR}/sequences
-7za a -p${PASS} -mx=9 -r "${PREFIX}_complex_obs_${MODIFIER}.7z" "complex_obs" 2>&1 >/dev/null
+##############################################
+### backup with percona if configured to do so
+### if backing up with native percona install, you must ensure the percona dependency is installed, this will not do so
+### alternatively, you can back up with a dockerized percona install.  see below.
+##############################################
 
-# remove this dir so that it is created next time
-if [ $? -eq 0 ]; then
-    rm -rf ${COMPLEX_OBS_BACKUP_DIR}
+PERCONA_BACKUP_ENABLED='<%= @openmrs_percona_backup_enabled %>'
+PERCONA_INSTALL_MODE='<%= @openmrs_percona_install_mode %>'
+
+if [ "$PERCONA_BACKUP_ENABLED" == "true" ]; then
+
+    PERCONA_BACKUP_STATUS=1
+    PERCONA_BACKUP_DATE=$(date '+%Y-%m-%d-%H-%M-%S')
+    echo "Percona Backup configured.  Using percona install mode: $PERCONA_INSTALL_MODE on $PERCONA_BACKUP_DATE"
+
+    # The PERCONA_DATA_DIR is where the MySQL data directory is backed up and prepared
+    PERCONA_DATA_DIR=${DIR}/percona_data_dir
+    rm -rf ${PERCONA_DATA_DIR}/
+    echo "Removed any existing directory at: ${PERCONA_DATA_DIR}"
+
+    # The PERCONA_ARCHIVE_DIR is where the PERCONA_DATA_DIR is zipped and metadata files are created
+    PERCONA_ARCHIVE_DIR=${DIR}/percona_archive_dir
+    rm -rf ${PERCONA_ARCHIVE_DIR}/
+    mkdir -p ${PERCONA_ARCHIVE_DIR}
+    echo "Recreated: ${PERCONA_ARCHIVE_DIR}"
+
+    # The PERCONA_BACKUP_DIR is where successfully completed backups are copied for upload
+    PERCONA_BACKUP_DIR=${DIR}/percona
+    mkdir -p ${PERCONA_BACKUP_DIR}
+    echo "Ensured: ${PERCONA_BACKUP_DIR}"
+
+    echo "Executing Percona Backup"
+    if [ "$PERCONA_INSTALL_MODE" == "docker" ]; then
+        docker run --name percona --rm \
+          -v /var/lib/mysql:/var/lib/mysql -v /run/mysqld:/run/mysqld -v ${PERCONA_DATA_DIR}:/opt/backup \
+          partnersinhealth/percona-0.1-4 \
+          innobackupex --user=<%= @backup_user %> --password=<%= @backup_password %> --no-timestamp /opt/backup
+    else
+        innobackupex --user=<%= @backup_user %> --password=<%= @backup_password %> --no-timestamp ${PERCONA_DATA_DIR}
+    fi
+
+    if [ $? -eq 0 ]; then
+        echo "Percona backup succeeded, now preparing"
+        if [ "$PERCONA_INSTALL_MODE" == "docker" ]; then
+            docker run --name percona --rm -v $PERCONA_DATA_DIR:/opt/backup partnersinhealth/percona-0.1-4 innobackupex --apply-log  /opt/backup
+        else
+            innobackupex --apply-log ${PERCONA_DATA_DIR}
+        fi
+
+        if [ $? -eq 0 ]; then
+            PERCONA_BACKUP_STATUS=0
+            echo "Percona prepare succeeded"
+        else
+            echo "Percona prepare failed"
+        fi
+    else
+        echo "Percona backup failed"
+    fi
+
+    if [ $PERCONA_BACKUP_STATUS -eq 0 ]; then
+
+        echo "Creating 7z archive of Percona backup"
+        7za a ${PERCONA_ARCHIVE_DIR}/percona.7z -p${PASS} -y -w${PERCONA_DATA_DIR} ${PERCONA_DATA_DIR}/*
+
+        if [ $? -eq 0 ]; then
+            echo "Archive created successfully"
+            echo "Creating checksum file"
+            PERCONA_ARCHIVE_MD5=($(md5sum ${PERCONA_ARCHIVE_DIR}/percona.7z))
+            echo $PERCONA_ARCHIVE_MD5 > ${PERCONA_ARCHIVE_DIR}/percona.7z.md5
+            if [ $? -ne 0 ]; then
+                PERCONA_BACKUP_STATUS=1
+                echo "Creating checksum failed"
+            fi
+            echo "Creating date file"
+            echo "$PERCONA_BACKUP_DATE" > ${PERCONA_ARCHIVE_DIR}/percona.7z.date
+            if [ $? -ne 0 ]; then
+                PERCONA_BACKUP_STATUS=1
+                echo "Creating date file failed"
+            fi
+        else
+            PERCONA_BACKUP_STATUS=1
+            echo "Archive creation failed"
+        fi
+
+        if [ $PERCONA_BACKUP_STATUS -eq 0 ]; then
+            echo "Backup and archive successful, replacing latest files for backup"
+            rm -fR ${PERCONA_BACKUP_DIR}/*
+            mv ${PERCONA_ARCHIVE_DIR}/* ${PERCONA_BACKUP_DIR}
+            if [ $? -eq 0 ]; then
+                echo "Backup moved successfully, removing directories"
+                rm -rf ${PERCONA_DATA_DIR}/
+                rm -rf ${PERCONA_ARCHIVE_DIR}/
+            else
+                PERCONA_BACKUP_STATUS=1
+                echo "Backup move failed"
+            fi
+        fi
+    fi
+
+    if [ $PERCONA_BACKUP_STATUS -ne 0 ]; then
+        ERRORS_DURING_BACKUP=1
+    fi
 else
-    echo "Error compressing complex_obs dir"
-    mail -s "${PREFIX}: error compressing complex_obs dir" "${MAIL_TO}" < ${LOGFILE}
-    exit
+    echo "Percona Backup not configured"
 fi
 
-echo "Size for compressed complex obs dir $(/usr/bin/du -hs ${COMPLEX_OBS_FILENAME})"
-echo "Size for compressed DB dir $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
-echo "Success, db backups and complex_obs compression ended at `date`"
-
-mail -s "${PREFIX}: database and complex_obs backup is successful" "${MAIL_TO}" < ${LOGFILE}
+if [ $ERRORS_DURING_BACKUP -eq 0 ]; then
+    echo "Success, backups ended at `date`"
+    if [ ! -z "$MAIL_TO" ]; then
+        mail -s "${PREFIX}: backup is successful" "${MAIL_TO}" < ${LOGFILE}
+    fi
+else
+    if [ ! -z "$MAIL_TO" ]; then
+        mail -s "${PREFIX}: Error during backup" "${MAIL_TO}" < ${LOGFILE}
+    fi
+fi
