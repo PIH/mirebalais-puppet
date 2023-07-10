@@ -26,12 +26,10 @@ class apache2 (
   $apache_cron_restart_min = hiera('apache_cron_restart_min'),
 ){
 
+  include base_packages
+
   # really ugly way to do string concat, ignoring empties
   $worker_list = join(split("${webapp_name} ${pwa_webapp_name} ${biometrics_webapp_name}", '\s+'), ',')
-
-  package { 'software-properties-common':
-    ensure => present
-  }
 
   package { 'apache2':
     ensure => installed,

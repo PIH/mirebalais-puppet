@@ -3,33 +3,7 @@ class docker (
   $docker_compose_version = hiera('docker_compose_version')
 ) {
 
-  exec { "apt_update":
-    command    => "/usr/bin/apt -y update"
-  }
-
-  exec { "apt_upgrade":
-    command    => "/usr/bin/apt -y upgrade"
-  }
-
-  exec { "apt_dist_upgrade":
-    command    => "/usr/bin/apt -y dist-upgrade"
-  }
-
-  package { 'apt-transport-https':
-    ensure => installed,
-  }
-
-  package { 'ca-certificates':
-    ensure => installed,
-  }
-
-  package { 'curl':
-    ensure => installed,
-  }
-
-  package { 'software-properties-common':
-    ensure => installed,
-  }
+  include base_packages
 
   exec { "docker_key":
     command      => "/usr/bin/curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
@@ -41,10 +15,15 @@ class docker (
     require       => Exec['docker_key']
   }
 
+  exec { "docker_cache_policy":
+    command      => "/usr/bin/apt-cache policy docker-ce",
+    require       => Exec['docker_repo']
+  }
+
+  # Dependent packages are installed in base_packages module
   package { 'docker-ce':
     ensure => installed,
-    notify => [ Exec['apt_update'], Exec['apt_upgrade'], Exec['apt_dist_upgrade'] ],
-    require => [ Package['apt-transport-https'], Package['curl'], Package['software-properties-common'], Package['ca-certificates'], Exec['docker_repo'] ]
+    require => [ Package['apt-transport-https'], Package['curl'], Package['software-properties-common'], Package['ca-certificates'], Exec['docker_cache_policy'] ]
   }
 
   ##### docker-compose
