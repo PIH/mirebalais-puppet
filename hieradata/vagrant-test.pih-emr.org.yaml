@@ -38,6 +38,10 @@ petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 
 # PETL Cron
 
+# Percona backup
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: ''
+sysadmin_email: ''
 
 # feature toggle settings
 reportingui_ad_hoc_analysis: true

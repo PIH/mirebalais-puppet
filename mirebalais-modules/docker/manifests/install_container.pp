@@ -9,8 +9,11 @@ class docker::install_container (
   $docker_mysql_container_name = hiera('docker_mysql_container_name'),
   $docker_mysql_image = hiera('docker_mysql_image'),
   $docker_mysql_volume_dir = hiera('docker_mysql_volume_dir'),
-  $docker_mysql_sa_password = hiera('docker_mysql_sa_password'),
-  $docker_mysql_user_password = hiera('docker_mysql_user_password'),
+  $docker_mysql_max_allowed_packet = hiera('docker_mysql_max_allowed_packet'),
+  $docker_mysql_innodb_buffer_pool_size = hiera('docker_mysql_innodb_buffer_pool_size'),
+  $docker_mysql_root_password = hiera('docker_mysql_root_password'),
+  $docker_mysql_server_id = hiera('docker_mysql_server_id')
+  $docker_mysql_binlog_enabled = hiera('docker_mysql_binlog_enabled')
   $docker_group = hiera('docker_group'),
   $docker_user = hiera('docker_user'),
 

@@ -51,6 +51,8 @@ replication_db_user: replication
 replication_db_password: foo
 backup_db_user: backup
 backup_db_password: foo
+openmrs_percona_backup_enabled: false
+openmrs_percona_install_mode: ''
 backup_time: date +%Y%m%d-%H%M%S
 tomcat: tomcat7
 tomcat_home_dir: /home/tomcat7
@@ -199,6 +201,7 @@ apache_cron_restart_min: 03
 #Azcopy
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
+az_backup_folder_path: ''
 
 java_memory_parameters: '-Xmx2048m -Xms2048m'
 #-XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC
@@ -230,9 +233,13 @@ docker_mssql_image: mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
 docker_mssql_volume_dir: /opt/docker-container/mssql/data
 docker_mssql_user_password: ''
 docker_mysql_container_name: ''
-docker_mysql_image: mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
+docker_mysql_image: library/mysql:5.6
 docker_mysql_volume_dir: ''
-docker_mysql_user_password: ''
+docker_mysql_root_password: ''
+docker_mysql_server_id: 1
+docker_mysql_binlog_enabled: false
+docker_mysql_max_allowed_packet: '1G'
+docker_mysql_innodb_buffer_pool_size: '2G'
 docker_group: ENC[h2rLm+7MduiV0n6kphuvHw==:fnzJi5CZcS03vAQDCjaF1Q==:Rmczclg4eVBLNDgvSGJrVGRVSWxpZz09]
 docker_user: ENC[h2rLm+7MduiV0n6kphuvHw==:fnzJi5CZcS03vAQDCjaF1Q==:Rmczclg4eVBLNDgvSGJrVGRVSWxpZz09]
 

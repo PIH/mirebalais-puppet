@@ -2,6 +2,8 @@ class openmrs::backup (
     $backup_user                      = decrypt(hiera('backup_db_user')),
     $backup_password                  = decrypt(hiera('backup_db_password')),
     $backup_time                      = hiera('backup_time'),
+    $openmrs_percona_backup_enabled   = hiera('openmrs_percona_backup_enabled'),
+    $openmrs_percona_install_mode     = hiera('openmrs_percona_install_mode'),
     $az_secret                        = decrypt(hiera('az_secret')),
     $az_url                           = decrypt(hiera('az_url')),
     $az_backup_folder_path            = hiera('az_backup_folder_path'),
@@ -16,6 +18,7 @@ class openmrs::backup (
     $activitylog_enabled              = hiera('activitylog_enabled'),
     $terms_and_conditions_enabled     = hiera('terms_and_conditions_enabled'),
     $az_activitylog_backup_folder_path  = hiera('az_activitylog_backup_folder_path'),
+    $sysadmin_email                   = hiera('sysadmin_email')
   ){
 
   require openmrs
@@ -28,7 +31,7 @@ class openmrs::backup (
   }
 
   database_grant { "${backup_user}@localhost":
-    privileges => [ 'Select_priv', 'Reload_priv', 'Lock_tables_priv', 'Repl_client_priv', 'Repl_slave_priv', 'Show_view_priv' ],
+    privileges => [ 'Select_priv', 'Reload_priv', 'Lock_tables_priv', 'Repl_client_priv', 'Repl_slave_priv', 'Show_view_priv', 'Process_priv' ],
     require    => Database_user["${backup_user}@localhost"],
   }
 
@@ -51,16 +54,25 @@ class openmrs::backup (
   }
 
   wget::fetch { 'azcopy-download':
-    source      => 'http://bamboo.pih-emr.org/azcopy/azcopy',
-    destination => '/usr/local/sbin/azcopy',
+    source      => 'https://aka.ms/downloadazcopy-v10-linux',
+    destination => '/usr/local/azcopy.tar.gz',
+    timeout     => 0,
+    verbose     => false,
   }
 
-  file { 'azcopy':
+  exec { 'azcopy-extract':
+    cwd     => '/usr/local',
+    command => 'tar -xf azcopy.tar.gz --strip-components=1',
+    require => [ Wget::Fetch['azcopy-download'] ],
+  }
+
+  file { '/usr/local/sbin/azcopy':
+    source  => '/usr/local/azcopy',
     path    => '/usr/local/sbin/azcopy',
     mode    => '0755',
     owner   => 'root',
     group   => 'root',
-    require => [ Wget::Fetch['azcopy-download'] ]
+    require => [ Exec['azcopy-extract'] ]
   }
 
   file { 'backupAzure.sh':
