@@ -135,9 +135,9 @@ if [ "$PERCONA_BACKUP_ENABLED" == "true" ]; then
         docker run --name percona --rm \
           -v /var/lib/mysql:/var/lib/mysql -v /run/mysqld:/run/mysqld -v ${PERCONA_DATA_DIR}:/opt/backup \
           partnersinhealth/percona-0.1-4 \
-          innobackupex --user=<%= @backup_user %> --password=<%= @backup_password %> --no-timestamp /opt/backup
+          innobackupex --user=<%= @backup_user %> --password="<%= @backup_password %>" --no-timestamp /opt/backup
     else
-        innobackupex --user=<%= @backup_user %> --password=<%= @backup_password %> --no-timestamp ${PERCONA_DATA_DIR}
+        innobackupex --user=<%= @backup_user %> --password="<%= @backup_password %>" --no-timestamp ${PERCONA_DATA_DIR}
     fi
 
     if [ $? -eq 0 ]; then
