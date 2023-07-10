@@ -155,6 +155,7 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
   include openmrs::initial_setup
   include openmrs::backup
 
+  include docker
   include percona
 
   include openmrs::atomfeed
