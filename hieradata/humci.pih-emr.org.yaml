@@ -18,6 +18,7 @@ az_backup_folder_path: 'test/humci'
 backup_file_prefix: humci
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
 
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]

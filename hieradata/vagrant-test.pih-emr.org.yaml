@@ -40,8 +40,8 @@ petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 
 # Percona backup
 openmrs_percona_backup_enabled: true
-openmrs_percona_install_mode: ''
-sysadmin_email: ''
+openmrs_percona_install_mode: 'docker'
+sysadmin_email: 'noone'
 
 # feature toggle settings
 reportingui_ad_hoc_analysis: true
