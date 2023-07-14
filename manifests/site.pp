@@ -103,6 +103,7 @@ node 'hai-cloud-inf-omrshiv' {
   include mysql_setup
   include apache2
   include tomcat
+  include docker
 
   include openmrs
   include openmrs::initial_setup
