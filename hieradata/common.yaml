@@ -68,7 +68,7 @@ openmrs_warfile_temp_location: ''
 # For both Azure & Amigo backups
 backup_file_prefix: foo
 backup_hour: 1
-backup_delete_older_than_x_days: 90
+backup_delete_older_than_x_days: 15
 archive_hour: 3
 
 # For Amigo backups only

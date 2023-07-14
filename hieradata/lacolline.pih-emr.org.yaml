@@ -24,7 +24,6 @@ backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 # Confirm uptime of server
 backup_hour: 15
 archive_hour: 16
-backup_delete_older_than_x_days: 60
 
 openmrs_auto_update_database: true
 

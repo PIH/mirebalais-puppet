@@ -25,7 +25,6 @@ backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 # Confirm uptime of server
 backup_hour: 14
 archive_hour: 15
-backup_delete_older_than_x_days: 60
 
 mysql_server_id: 1
 mysql_innodb_buffer_pool_size: 3G
