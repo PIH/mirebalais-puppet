@@ -12,7 +12,7 @@ mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 tomcat_enable_http_8080: true
 session_timeout: 120
 
-az_backup_folder_path: mexico/ces-salavador
+az_backup_folder_path: mexico/ces-salvador
 backup_file_prefix: ces-salvador
 backup_time: date +%Y%m%d
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
