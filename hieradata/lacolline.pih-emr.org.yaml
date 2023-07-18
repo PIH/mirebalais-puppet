@@ -2,6 +2,7 @@
 site_domain: lacolline.pih-emr.org
 
 package_release: 'stable'
+package_version: '1.0.20230523205816-1'
 
 pih_config: haiti,haiti-lacolline
 config_name: openmrs-config-zl
@@ -17,6 +18,9 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 remote_db_user: backups
 remote_backup_dir: haiti/lacolline/db
+
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
 
 backup_file_prefix: lacolline
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]

@@ -3,6 +3,7 @@ webapp_name: openmrs
 site_domain: boucancarre.pih-emr.org
 
 package_release: 'stable'
+package_version: '1.0.20230425132709-1'
 
 pih_config: haiti,haiti-boucancarre
 config_name: openmrs-config-zl
@@ -15,6 +16,9 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 remote_db_user: backups
 remote_backup_dir: haiti/boucancarre/db
+
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
 
 backup_file_prefix: boucancarre
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]

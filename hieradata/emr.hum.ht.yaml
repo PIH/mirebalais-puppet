@@ -1,10 +1,6 @@
 webapp_name: mirebalais
-az_backup_folder_path: haiti/mirebalais
-az_activitylog_backup_folder_path: activitylog/zl/mirebalais
 
 package_release: 'stable'
-
-# **holding on latest release to HUM Production, remove when doing the next HUM Production release**
 package_version: '1.0.20230425132709-1'
 
 pih_config: mirebalais,mirebalais-production
@@ -17,8 +13,10 @@ frontend_version: 1.3.0
 server_timezone: America/New_York
 
 remote_db_user: backups
-
 remote_backup_dir: haiti/mirebalais/db
+
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
 backup_file_prefix: mirebalais
 backup_delete_older_than_x_days: 4
 site_domain: emr.hum.ht
@@ -37,6 +35,9 @@ replication_db_password: ENC[92IfbImaUmA3wqYSG5kWWwexEU8HqCrqQzSXAMKRPz0=]
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 mirth_db_password: ENC[pAmIyUYupu8RnrQvgH+XCHXR8DEbwO1UZYBT/0q0gIE=]
 mirth_password: ENC[xTn2ILoq1ik8jxllAn7pHz5qD+0apCTmRRtCZRMcjfk=]
+
+az_backup_folder_path: haiti/mirebalais
+az_activitylog_backup_folder_path: activitylog/zl/mirebalais
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 percona_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]

@@ -2,6 +2,7 @@
 webapp_name: mirebalais
 
 package_release: 'stable'
+package_version: '1.0.20230425132709-1'
 
 pih_config: mirebalais,mirebalais-humdemo
 config_name: openmrs-config-zl

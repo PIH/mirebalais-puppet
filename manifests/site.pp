@@ -44,6 +44,7 @@ node 'emr.hum.ht' {
   include mysql_setup
   include apache2
   include tomcat
+  include docker
 
   include openmrs
   include openmrs::initial_setup
@@ -285,6 +286,7 @@ node 'thomonde.pih-emr.org', 'hinche.pih-emr.org', 'cercalasource.pih-emr.org', 
   include mysql_setup
   include apache2
   include tomcat
+  include docker
 
   include openmrs
   include openmrs::initial_setup

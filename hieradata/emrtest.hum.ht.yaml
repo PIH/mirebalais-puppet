@@ -3,6 +3,7 @@ webapp_name: mirebalais
 site_domain: emrtest.hum.ht
 
 package_release: 'stable'
+package_version: '1.0.20230425132709-1'
 
 pih_config: mirebalais,mirebalais-training
 config_name: openmrs-config-zl

@@ -2,6 +2,7 @@
 site_domain: cercalasource.pih-emr.org
 
 package_release: 'stable'
+package_version: '1.0.20230425132709-1'
 
 pih_config: haiti,haiti-cerca
 config_name: openmrs-config-zl
@@ -14,6 +15,9 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 remote_db_user: backups
 remote_backup_dir: haiti/cerca/db
+
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
 
 backup_file_prefix: cerca
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
