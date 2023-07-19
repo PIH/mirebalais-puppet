@@ -23,7 +23,7 @@ fi
 echo "Starting restoration of OpenMRS DB from $SITE_TO_RESTORE"
 
 RESTORE_DATE=$(date '+%Y-%m-%d-%H-%M-%S')
-LOG_DIR=${PERCONA_RESTORE_DIR}/logs
+LOG_DIR=${PERCONA_RESTORE_DIR}/${SITE_TO_RESTORE}/logs
 LOG_FILE="${LOG_DIR}/restore-log-${RESTORE_DATE}.log"
 mkdir -p ${LOG_DIR}
 exec > ${LOG_FILE} 2>&1
