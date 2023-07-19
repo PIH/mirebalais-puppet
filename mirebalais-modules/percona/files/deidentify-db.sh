@@ -18,10 +18,10 @@ fi
 MYSQL_DOCKER_CONTAINER="${1}"
 if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
     echo "De-identifying the native MySQL installation"
-    mysql -ubackup -p'${PERCONA_BACKUP_PW}' openmrs < ${PERCONA_RESTORE_DIR}/deidentify-db.sql
+    mysql -ubackup -p${PERCONA_BACKUP_PW} openmrs < ${PERCONA_RESTORE_DIR}/deidentify-db.sql
 else
     echo "De-identifying dockerized MySQL installation, container: $MYSQL_DOCKER_CONTAINER"
-    docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -ubackup -p'${PERCONA_BACKUP_PW}' openmrs < ${PERCONA_RESTORE_DIR}/deidentify-db.sql
+    docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -ubackup -p${PERCONA_BACKUP_PW} openmrs < ${PERCONA_RESTORE_DIR}/deidentify-db.sql
 fi
 
 if [ $? -eq 0 ]; then
