@@ -3,7 +3,7 @@ class percona::setup_cron_to_refresh_openmrs_db (
     $site_name                         = ''
   ) {
 
-    require percona::restore_setup
+    require percona::install_restore_scripts
 
     if ($site_name != '') {
         file { '${percona_restore_dir}/restore-and-deidentify-openmrs-db.sh':
