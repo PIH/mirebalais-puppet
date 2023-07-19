@@ -4,7 +4,7 @@
 
 # The following variables are expected to be present as environment variables
 # If a file exists in the user's home directory named .percona.env, source this in for these variables
-if [ -d "~/.percona.env" ]; then
+if [ -f "~/.percona.env" ]; then
   echo "Found a .percona.env file, sourcing"
   source ~/.percona.env
 fi
