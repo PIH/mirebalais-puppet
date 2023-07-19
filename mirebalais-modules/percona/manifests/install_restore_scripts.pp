@@ -7,9 +7,9 @@ class percona::install_restore_scripts (
     $tomcat_home_dir                   = decrypt(hiera('tomcat_home_dir')),
     $sysadmin_email                    = hiera('sysadmin_email')
   ) {
-    file { '/home/root/.percona.env':
+    file { '/root/.percona.env':
       ensure  => present,
-      path    => '/home/root/.percona.env',
+      path    => '/root/.percona.env',
       mode    => '0700',
       owner   => 'root',
       group   => 'root',
@@ -17,7 +17,7 @@ class percona::install_restore_scripts (
     }
     file { '${percona_restore_dir}':
       ensure => directory,
-      require => File["/home/root/.percona.env"]
+      require => File["/root/.percona.env"]
     }
     file { '${percona_restore_dir}/percona-restore.sh':
       ensure => present,
