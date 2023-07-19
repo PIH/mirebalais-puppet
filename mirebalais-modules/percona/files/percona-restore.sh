@@ -137,7 +137,7 @@ if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
     /etc/init.d/mysql start
     sleep 10
     echo "Running mysql check"
-    /usr/bin/mysqlcheck --auto-repair --check --all-databases -ubackup -p'${PERCONA_BACKUP_PW}'
+    /usr/bin/mysqlcheck --auto-repair --check --all-databases -ubackup -p${PERCONA_BACKUP_PW}
 else
     echo "Changing permissions of data directory"
     chown -R 999:999 ${MYSQL_DATA_DIR}
@@ -145,7 +145,7 @@ else
     docker start $MYSQL_DOCKER_CONTAINER
     sleep 10
     echo "Running mysql check"
-    docker exec -i $MYSQL_DOCKER_CONTAINER sh -c "exec mysqlcheck --auto-repair --check --all-databases -ubackup -p'${PERCONA_BACKUP_PW}'"
+    docker exec -i $MYSQL_DOCKER_CONTAINER sh -c "exec mysqlcheck --auto-repair --check --all-databases -ubackup -p${PERCONA_BACKUP_PW}"
 fi
 
 if [ $? -eq 0 ]; then
