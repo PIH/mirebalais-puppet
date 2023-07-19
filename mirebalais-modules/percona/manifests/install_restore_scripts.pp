@@ -5,7 +5,7 @@ class percona::install_restore_scripts (
     $az_secret                         = decrypt(hiera('az_secret')),
     $tomcat_user                       = decrypt(hiera('tomcat')),
     $tomcat_home_dir                   = decrypt(hiera('tomcat_home_dir')),
-    $sysadmin_email                    = hiera('sysadmin_email'),
+    $sysadmin_email                    = hiera('sysadmin_email')
   ) {
     file { '/home/root/.percona.env':
         ensure  => present,
