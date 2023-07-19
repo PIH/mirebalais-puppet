@@ -20,13 +20,14 @@ if [ -z "$SITE_TO_RESTORE" ]; then
     echo "You must specify the site to restore as the 1st argument.  eg. haiti/haitihiv"
     exit 1
 fi
-echo "Starting restoration of OpenMRS DB from $SITE_TO_RESTORE"
 
 RESTORE_DATE=$(date '+%Y-%m-%d-%H-%M-%S')
 LOG_DIR=${PERCONA_RESTORE_DIR}/${SITE_TO_RESTORE}/logs
 LOG_FILE="${LOG_DIR}/restore-log-${RESTORE_DATE}.log"
 mkdir -p ${LOG_DIR}
 exec > ${LOG_FILE} 2>&1
+
+echo "Starting restoration of OpenMRS DB from $SITE_TO_RESTORE"
 
 echo "Stopping Tomcat"
 /etc/init.d/${TOMCAT_USER} stop
@@ -36,11 +37,11 @@ rm -rf ${TOMCAT_HOME_DIR}/.OpenMRS/.openmrs-lib-cache
 rm -rf ${TOMCAT_HOME_DIR}/.OpenMRS/configuration_checksums
 
 echo "Restoring Database for ${SITE_TO_RESTORE}"
-exec ${PERCONA_RESTORE_DIR}/percona-restore.sh "${SITE_TO_RESTORE}"
+source ${PERCONA_RESTORE_DIR}/percona-restore.sh "${SITE_TO_RESTORE}"
 RESTORE_STATUS=$?
 
 echo "De-identifying Database"
-exec ${PERCONA_RESTORE_DIR}/deidentify-db.sh
+source ${PERCONA_RESTORE_DIR}/deidentify-db.sh
 DEIDENTIFY_STATUS=$?
 
 echo "Starting Tomcat"
