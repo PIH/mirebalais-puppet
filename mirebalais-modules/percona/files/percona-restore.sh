@@ -5,7 +5,7 @@
 
 # The following variables are expected to be present as environment variables
 # If a file exists in the user's home directory named .percona.env, source this in for these variables
-if [ -a "~/.percona.env" ]; then
+if [ -a ~/.percona.env ]; then
   echo "Found a .percona.env file, sourcing"
   source ~/.percona.env
 fi
@@ -33,7 +33,7 @@ else
     echo "Restoring into dockerized MySQL installation, container: $MYSQL_DOCKER_CONTAINER"
 fi
 
-if [ ! -d "$MYSQL_DATA_DIR" ]; then
+if [ ! -d $MYSQL_DATA_DIR ]; then
     echo "You must specify the MySQL data directory if you specify the MySQL Docker container.  This must exist."
     exit 1
 fi
@@ -59,26 +59,26 @@ copy_from_azure_percona() {
 # Download backup files from Azure and compare to previously downloaded and restored files, and ensure backup is complete
 
 copy_from_azure_percona "percona.7z.md5"
-if [ ! -f "${DOWNLOAD_DIR}/percona.7z.md5" ]; then
+if [ ! -f ${DOWNLOAD_DIR}/percona.7z.md5 ]; then
     echo "Missing percona.7z.md5, exiting"
     exit 1
 fi
 BACKUP_MD5=$(cat ${DOWNLOAD_DIR}/percona.7z.md5)
 
 copy_from_azure_percona "percona.7z.date"
-if [ ! -f "${DOWNLOAD_DIR}/percona.7z.date" ]; then
+if [ ! -f ${DOWNLOAD_DIR}/percona.7z.date ]; then
     echo "Missing percona.7z.date, exiting"
     exit 1
 fi
 BACKUP_DATE=$(cat ${DOWNLOAD_DIR}/percona.7z.date)
 
 LAST_BACKUP_MD5=
-if [ -f "${STATUS_DATA_DIR}/percona.7z.md5" ]; then
+if [ -f ${STATUS_DATA_DIR}/percona.7z.md5 ]; then
     LAST_BACKUP_MD5=$(cat ${STATUS_DATA_DIR}/percona.7z.md5)
 fi
 
 LAST_BACKUP_DATE=
-if [ -f "${STATUS_DATA_DIR}/percona.7z.date" ]; then
+if [ -f ${STATUS_DATA_DIR}/percona.7z.date ]; then
     LAST_BACKUP_DATE=$(cat ${STATUS_DATA_DIR}/percona.7z.date)
 fi
 
