@@ -15,7 +15,7 @@ class percona::install_restore_scripts (
       group   => 'root',
       content => template('percona/percona.env.erb'),
     }
-    file { "${percona_restore_dir}":
+    file { '${percona_restore_dir}':
       ensure => directory,
       require => File["/home/root/.percona.env"]
     }
