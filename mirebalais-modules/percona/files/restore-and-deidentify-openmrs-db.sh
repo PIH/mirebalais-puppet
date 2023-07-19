@@ -10,7 +10,7 @@ if [ -d "~/.percona.env" ]; then
   source ~/.percona.env
 fi
 
-if [[ -z "${PERCONA_RESTORE_DIR}" ] || [ -z "${TOMCAT_USER}" ] || [ -z "${TOMCAT_HOME_DIR}" ]]; then
+if [ -z "${PERCONA_RESTORE_DIR}" ] || [ -z "${TOMCAT_USER}" ] || [ -z "${TOMCAT_HOME_DIR}" ]; then
   echo "You must have PERCONA_RESTORE_DIR, TOMCAT_USER, and TOMCAT_HOME_DIR environment variables defined to execute this script"
   exit 1
 fi

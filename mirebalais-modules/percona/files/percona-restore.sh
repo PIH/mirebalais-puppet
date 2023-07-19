@@ -10,7 +10,7 @@ if [ -d "~/.percona.env" ]; then
   source ~/.percona.env
 fi
 
-if [[ -z "${PERCONA_RESTORE_DIR}" ] || [ -z "${PERCONA_BACKUP_PW}" ] || [ -z "${AZ_URL}" ] || [ -z "${AZ_SECRET}" ]]; then
+if [ -z "${PERCONA_RESTORE_DIR}" ] || [ -z "${PERCONA_BACKUP_PW}" ] || [ -z "${AZ_URL}" ] || [ -z "${AZ_SECRET}" ]; then
   echo "You must have PERCONA_RESTORE_DIR, PERCONA_BACKUP_PW, AZ_URL, and AZ_SECRET environment variables defined to execute this script"
   exit 1
 fi

@@ -9,7 +9,7 @@ if [ -d "~/.percona.env" ]; then
   source ~/.percona.env
 fi
 
-if [[ -z "${PERCONA_RESTORE_DIR}" ] || [ -z "${PERCONA_BACKUP_PW}" ] ]; then
+if [ -z "${PERCONA_RESTORE_DIR}" ] || [ -z "${PERCONA_BACKUP_PW}" ]; then
   echo "You must have PERCONA_RESTORE_DIR and PERCONA_BACKUP_PW variables defined to execute this script"
   exit 1
 fi
