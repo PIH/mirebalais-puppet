@@ -37,7 +37,7 @@ rm -rf ${TOMCAT_HOME_DIR}/.OpenMRS/.openmrs-lib-cache
 rm -rf ${TOMCAT_HOME_DIR}/.OpenMRS/configuration_checksums
 
 echo "Restoring Database for ${SITE_TO_RESTORE}"
-#/bin/bash ${PERCONA_RESTORE_DIR}/percona-restore.sh "${SITE_TO_RESTORE}"
+/bin/bash ${PERCONA_RESTORE_DIR}/percona-restore.sh "${SITE_TO_RESTORE}"
 RESTORE_STATUS=$?
 sleep 10
 echo "De-identifying Database"
