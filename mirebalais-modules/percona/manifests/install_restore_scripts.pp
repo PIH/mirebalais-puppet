@@ -17,7 +17,6 @@ class percona::install_restore_scripts (
     }
     file { '${percona_restore_dir}':
       ensure => directory,
-      require => File["/root/.percona.env"]
     }
     file { '${percona_restore_dir}/percona-restore.sh':
       ensure => present,
