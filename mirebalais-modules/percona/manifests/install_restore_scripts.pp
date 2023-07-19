@@ -18,13 +18,25 @@ class percona::install_restore_scripts (
     file { '${percona_restore_dir}/percona-restore.sh':
       ensure => present,
       source => 'puppet:///modules/percona/percona-restore.sh',
+      path    => "${percona_restore_dir}/percona-restore.sh",
+      mode    => '0700',
+      owner   => 'root',
+      group   => 'root',
     }
     file { '${percona_restore_dir}/deidentify-db.sql':
       ensure => present,
       source => 'puppet:///modules/percona/deidentify-db.sql',
+      path    => "${percona_restore_dir}/deidentify-db.sql",
+      mode    => '0700',
+      owner   => 'root',
+      group   => 'root',
     }
     file { '${percona_restore_dir}/deidentify-db.sh':
       ensure => present,
       source => 'puppet:///modules/percona/deidentify-db.sh',
+      path    => "${percona_restore_dir}/deidentify-db.sh",
+      mode    => '0700',
+      owner   => 'root',
+      group   => 'root',
     }
 }
