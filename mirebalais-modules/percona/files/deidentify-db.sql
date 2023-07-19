@@ -77,6 +77,7 @@ update person_name set family_name = 'Virunga' where person_id % 41 = 0;
 
 -- Set all given names to 21 different common names for males and females
 update person_name set given_name = 'Alex';
+update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Steven' where p.gender = 'M';
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Paul' where p.gender = 'M' and p.person_id % 2 = 0;
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Tom' where p.gender = 'M' and p.person_id % 3 = 0;
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Ted' where p.gender = 'M' and p.person_id % 4 = 0;
@@ -96,8 +97,8 @@ update person_name pn inner join person p on pn.person_id = p.person_id set pn.g
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Howard' where p.gender = 'M' and p.person_id % 18 = 0;
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Adam' where p.gender = 'M' and p.person_id % 19 = 0;
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Joshua' where p.gender = 'M' and p.person_id % 20 = 0;
-update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Steven' where p.gender = 'M' and p.person_id % 21 = 0;
 
+update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Amanda' where p.gender != 'M';
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Mary' where p.gender != 'M' and p.person_id % 2 = 0;
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Ophelia' where p.gender != 'M' and p.person_id % 3 = 0;
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Kathryn' where p.gender != 'M' and p.person_id % 4 = 0;
@@ -117,7 +118,6 @@ update person_name pn inner join person p on pn.person_id = p.person_id set pn.g
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Jill' where p.gender != 'M' and p.person_id % 18 = 0;
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Susan' where p.gender != 'M' and p.person_id % 19 = 0;
 update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Megan' where p.gender != 'M' and p.person_id % 20 = 0;
-update person_name pn inner join person p on pn.person_id = p.person_id set pn.given_name = 'Amanda' where p.gender != 'M' and p.person_id % 21 = 0;
 
 update idgen_remote_source set url = 'https://humci.pih-emr.org:8080/mirebalais/module/idgen/exportIdentifiers.form?source=5&comment=MirebalaisDemo' where id = 1;
 update idgen_remote_source set user = 'testidgen' where id = 1;
