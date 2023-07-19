@@ -15,6 +15,13 @@ class percona::install_restore_scripts (
       group   => 'root',
       content => template('percona/percona.env.erb'),
     }
+    file { "${percona_restore_dir}":
+      ensure  => directory,
+      owner   => root,
+      group   => root,
+      mode    => '0755',
+      require     => File["/root/.percona.env"]
+    }
     file { '${percona_restore_dir}/percona-restore.sh':
       ensure => present,
       source => 'puppet:///modules/percona/percona-restore.sh',
@@ -22,6 +29,7 @@ class percona::install_restore_scripts (
       mode    => '0700',
       owner   => 'root',
       group   => 'root',
+      require     => File["${percona_restore_dir}"]
     }
     file { '${percona_restore_dir}/deidentify-db.sql':
       ensure => present,
@@ -30,6 +38,7 @@ class percona::install_restore_scripts (
       mode    => '0700',
       owner   => 'root',
       group   => 'root',
+      require     => File["${percona_restore_dir}/percona-restore.sh"]
     }
     file { '${percona_restore_dir}/deidentify-db.sh':
       ensure => present,
@@ -38,5 +47,6 @@ class percona::install_restore_scripts (
       mode    => '0700',
       owner   => 'root',
       group   => 'root',
+      require     => File["${percona_restore_dir}/deidentify-db.sql"]
     }
 }
