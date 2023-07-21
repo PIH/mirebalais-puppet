@@ -49,10 +49,10 @@ echo "Starting Tomcat"
 
 if [ $RESTORE_STATUS -ne 0 ] ; then
   echo "Percona restore failed"
-  mail -s "Percona restore of haitihivtest failed" "${SYSADMIN_EMAIL}" < ${LOG_FILE}
+  mail -s "Percona restore of ${SITE_TO_RESTORE} failed" "${SYSADMIN_EMAIL}" < ${LOG_FILE}
 elif [ $DEIDENTIFY_STATUS -ne 0 ] ; then
   echo "Deidentification failed"
-  mail -s "Deidentification of haitihivtest failed" "${SYSADMIN_EMAIL}" < ${LOG_FILE}
+  mail -s "Deidentification of ${SITE_TO_RESTORE} failed" "${SYSADMIN_EMAIL}" < ${LOG_FILE}
 else
-  echo "Haiti HIV Test update successful"
+  echo "Restoration of ${SITE_TO_RESTORE} successful"
 fi
