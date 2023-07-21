@@ -22,5 +22,9 @@ class percona::setup_cron_to_refresh_openmrs_db (
           minute      => 50,
           require     => File["${percona_restore_dir}/restore-and-deidentify-openmrs-db.sh"]
         }
+        file { "/etc/logrotate.d/percona-restore-${site_name}":
+          ensure  => file,
+          content => template("percona/logrotate-percona-restore.erb")
+        }
     }
 }
