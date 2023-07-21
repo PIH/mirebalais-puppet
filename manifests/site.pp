@@ -486,6 +486,12 @@ node 'haitihivtest.pih-emr.org' {
   include openmrs
   include openmrs::initial_setup
 
+  include docker
+  include percona::install_restore_scripts
+  class { 'percona::setup_cron_to_refresh_openmrs_db':
+    site_name => 'haiti/haitihiv'
+  }
+
 }
 
 node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org'{

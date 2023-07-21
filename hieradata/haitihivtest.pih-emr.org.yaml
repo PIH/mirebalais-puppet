@@ -13,6 +13,7 @@ frontend_version: 1.4.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
+backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 
 mysql_bind_address: ENC[q/IrbhThPxSAsELZ1pA9fA==:FiTeRLnrYO171+KKiSA+oQ==:RHN4QXdNV3dzbVVxemY1c0hkNjk5UT09]
 mysql_innodb_buffer_pool_size: 3G
