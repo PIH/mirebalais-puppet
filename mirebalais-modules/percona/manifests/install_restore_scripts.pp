@@ -50,4 +50,13 @@ class percona::install_restore_scripts (
       group   => 'root',
       require     => File["${percona_restore_dir}/deidentify-db.sql"]
     }
+    file { '${percona_restore_dir}/restore-into-docker-container.sh':
+      ensure => present,
+      source => 'puppet:///modules/percona/restore-into-docker-container.sh',
+      path    => "${percona_restore_dir}/restore-into-docker-container.sh",
+      mode    => '0700',
+      owner   => 'root',
+      group   => 'root',
+      require     => File["${percona_restore_dir}/deidentify-db.sh"]
+    }
 }
