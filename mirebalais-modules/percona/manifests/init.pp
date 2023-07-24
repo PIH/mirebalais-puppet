@@ -43,7 +43,6 @@ class percona(
     require =>  File["/home/percona"]
   }
 
-
   mysql_user { "percona@localhost":
     ensure        => present,
     password_hash => mysql_password($mysql_root_password),

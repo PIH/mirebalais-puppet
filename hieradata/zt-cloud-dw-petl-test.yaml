@@ -2,6 +2,9 @@
 site_domain: petl-test.pih-emr.org
 server_timezone: America/New_York
 
+# Percona Restore
+backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
+
 # PETL
 petl: petl,petl-ces
 petl_site: zl-test,ces-test

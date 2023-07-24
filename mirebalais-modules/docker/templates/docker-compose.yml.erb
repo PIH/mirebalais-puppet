@@ -6,7 +6,7 @@ services:
     image: <%= @docker_mssql_image -%>
     restart: unless-stopped
     ports:
-      - "1433:1433"
+      - "<%= @docker_mssql_port %>:1433"
     environment:
       SA_PASSWORD: "<%= @docker_mssql_sa_password -%>"
       ACCEPT_EULA: "Y"
@@ -31,7 +31,7 @@ services:
               --binlog_format=ROW \
               --max_binlog_size=100M" <% end %>
     ports:
-      - "127.0.0.1:3356:3306"
+      - "<%= @docker_mysql_port %>:3306"
     environment:
       MYSQL_ROOT_PASSWORD: "<%= @docker_mysql_root_password -%>"
       TZ: <%= @server_timezone -%>

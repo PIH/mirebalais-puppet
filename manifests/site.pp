@@ -135,7 +135,7 @@ node 'hai-cloud-inf-omrshiv-report' {
 
 }
 
-node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
+node 'humci.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
@@ -162,6 +162,27 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
   include openmrs::atomfeed
 
+  include petl
+
+}
+
+node 'vagrant-test.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include docker
+  include percona::install_restore_scripts
+
+  include java
   include petl
 
 }
@@ -463,8 +484,6 @@ node 'ses-cor.pih-emr.org' {
 
 }
 
-
-
 node 'haitihivtest.pih-emr.org' {
 
   class { 'apt':
@@ -574,7 +593,7 @@ node 'zt-cloud-dw-petl-test' {
   class { 'apt':
     always_apt_update => true,
   }
-## the commented lines are one time installation (uncomment if changes are made)
+
   include security
   include mail
   include ntpdate
@@ -582,13 +601,11 @@ node 'zt-cloud-dw-petl-test' {
   include wget
   include unzip
 
+  include docker
+  include percona::install_restore_scripts
+
   include java
-  #include mysql_setup
-
-  #include percona
   include petl
-  #include petl::mysql
-
 }
 
 node 'malawi-dw.pih-emr.org' {

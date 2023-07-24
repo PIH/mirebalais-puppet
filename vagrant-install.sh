@@ -7,4 +7,4 @@ pushd /etc/puppet
 ./install.sh
 #./puppet-apply.sh site
 popd
-tail -f /var/lib/tomcat7/logs/catalina.out
+#tail -f /var/lib/tomcat7/logs/catalina.out
