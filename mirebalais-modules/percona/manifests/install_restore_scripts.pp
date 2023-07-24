@@ -1,12 +1,13 @@
 class percona::install_restore_scripts (
-    $percona_restore_dir               = decrypt(hiera('percona_restore_dir')),
-    $backup_password                   = decrypt(hiera('backup_db_password')),
+    $percona_home_dir                  = hiera('percona_restore_dir'),
+    $percona_restore_dir               = hiera('percona_restore_dir')),
+    $backup_password                   = decrypt(hiera('backup_db_password'),
     $mysql_root_password               = decrypt(hiera('mysql_root_password')),
     $az_url                            = decrypt(hiera('az_url')),
     $az_secret                         = decrypt(hiera('az_secret')),
     $tomcat_user                       = decrypt(hiera('tomcat')),
     $tomcat_home_dir                   = decrypt(hiera('tomcat_home_dir')),
-    $sysadmin_email                    = hiera('sysadmin_email')
+    $sysadmin_email                    = decrypt(hiera('sysadmin_email'))
   ) {
     file { '/root/.percona.env':
       ensure  => present,

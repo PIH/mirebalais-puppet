@@ -253,7 +253,7 @@ frontend_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?
 
 # percona restore
 percona_home_dir: "/home/percona"
-percona_restore_dir: "%{hiera('percona_home_dir')}/restore"
+percona_restore_dir: "${percona_home_dir}/restore"
 
 # TODO: Remove these as we go.  Below files are from pre-existing percona processes
 perconaHomeDir: "/home/percona"
