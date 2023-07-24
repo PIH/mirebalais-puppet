@@ -10,10 +10,12 @@ if [ -a ~/.percona.env ]; then
   source ~/.percona.env
 fi
 
-if [ -z "${PERCONA_RESTORE_DIR}" ] ]; then
+if [ -z "${PERCONA_RESTORE_DIR}" ]; then
   echo "You must have PERCONA_RESTORE_DIR variable defined to execute this script"
   exit 1
 fi
+
+INPUT_ARGUMENTS="$@"
 
 # Variables from input arguments
 SITE_TO_RESTORE=
@@ -26,8 +28,6 @@ case $i in
       shift # past argument=value
     ;;
     *)
-      echo "Unknown input argument specified"
-      exit 1
     ;;
 esac
 done
@@ -44,7 +44,7 @@ LOG_FILE="${LOG_DIR}/restore-log-${RESTORE_DATE}.log"
 mkdir -p ${LOG_DIR}
 exec > ${LOG_FILE} 2>&1
 
-/bin/bash ${PERCONA_RESTORE_DIR}/percona-restore.sh "$@"
+/bin/bash ${PERCONA_RESTORE_DIR}/percona-restore.sh ${INPUT_ARGUMENTS}
 if [ $? -eq 0 ]; then
   echo "Restoration of ${SITE_TO_RESTORE} successful"
 else
