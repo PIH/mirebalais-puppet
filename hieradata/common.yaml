@@ -252,7 +252,8 @@ frontend_repo: ''
 frontend_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('frontend_name')}&r=%{hiera('frontend_repo')}&p=zip&v=%{hiera('frontend_version')}
 
 # percona restore
-percona_restore_dir: "/home/percona/restore"
+percona_home_dir: "/home/percona"
+percona_restore_dir: "${percona_home_dir}/restore"
 
 # TODO: Remove these as we go.  Below files are from pre-existing percona processes
 perconaHomeDir: "/home/percona"

@@ -16,12 +16,19 @@ class percona::install_restore_scripts (
       group   => 'root',
       content => template('percona/percona.env.erb'),
     }
-    file { "${percona_restore_dir}":
+    file { "${percona_home_dir}":
       ensure  => directory,
       owner   => root,
       group   => root,
       mode    => '0755',
       require     => File["/root/.percona.env"]
+    }
+    file { "${percona_restore_dir}":
+      ensure  => directory,
+      owner   => root,
+      group   => root,
+      mode    => '0755',
+      require     => File["${percona_home_dir}"]
     }
     file { '${percona_restore_dir}/percona-restore.sh':
       ensure => present,
