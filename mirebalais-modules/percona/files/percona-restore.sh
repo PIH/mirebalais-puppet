@@ -233,11 +233,11 @@ fi
 
 if [ "${DEIDENTIFY}" == "true" ]; then
   echo "De-identifying the database"
-  if [ -z "${$MYSQL_DOCKER_CONTAINER}" ]; then
+  if [ -z "${MYSQL_DOCKER_CONTAINER}" ]; then
       echo "De-identifying the native MySQL installation"
       mysql -uroot -p${MYSQL_ROOT_PW} openmrs < ${PERCONA_RESTORE_DIR}/deidentify-db.sql
   else
-      echo "De-identifying dockerized MySQL installation, container: ${$MYSQL_DOCKER_CONTAINER}"
+      echo "De-identifying dockerized MySQL installation, container: ${MYSQL_DOCKER_CONTAINER}"
       docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -uroot -p${MYSQL_ROOT_PW} openmrs < ${PERCONA_RESTORE_DIR}/deidentify-db.sql
   fi
   if [ $? -eq 0 ]; then
@@ -269,16 +269,15 @@ if [ "${CREATE_PETL_USER}" == "true" ]; then
       if [ "${EXISTING_USERS}" -eq 0 ]; then
         echo "No user found, creating"
         docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -u root -p${MYSQL_ROOT_PW} -e "${CREATE_USER_SQL} ${GRANT_USER_SQL}"
+        if [ $? -eq 0 ]; then
+          echo "Create user successful"
+        else
+          echo "Create user failed, exiting"
+          exit 1
+        fi
       else
         echo "User already exists, not re-creating"
       fi
-  fi
-
-  if [ $? -eq 0 ]; then
-    echo "Create user successful"
-  else
-    echo "Create user failed, exiting"
-    exit 1
   fi
 
 fi
