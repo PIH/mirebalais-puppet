@@ -129,10 +129,13 @@ node 'hai-cloud-inf-omrshiv-report' {
   include java
   include mysql_setup
 
-  include percona
+  include docker
+
+  include percona::install_restore_scripts
+  include percona::setup_cron_to_refresh_report_dbs
+
   include petl
   include petl::mysql
-
 }
 
 node 'humci.pih-emr.org' {
@@ -179,11 +182,16 @@ node 'vagrant-test.pih-emr.org' {
   include wget
   include unzip
 
-  include docker
-  include percona::install_restore_scripts
-
   include java
+  include mysql_setup
+
+  include docker
+
+  include percona::install_restore_scripts
+  include percona::setup_cron_to_refresh_report_dbs
+
   include petl
+  include petl::mysql
 
 }
 

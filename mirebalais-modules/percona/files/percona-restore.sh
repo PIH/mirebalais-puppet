@@ -257,8 +257,8 @@ if [ "${CREATE_PETL_USER}" == "true" ]; then
   fi
 
   SELECT_USER_SQL="select count(*) from mysql.user where user = '${PETL_MYSQL_USER}' and host = '${PETL_MYSQL_USER_IP}';"
-  CREATE_USER_SQL="create user ${PETL_MYSQL_USER}'@'${PETL_MYSQL_USER_IP}' identified by '${PETL_MYSQL_PASSWORD}';";
-  GRANT_USER_SQL="grant all privileges on ${PETL_OPENMRS_DB}.* to ${PETL_MYSQL_USER}'@'${PETL_MYSQL_USER_IP}';"
+  CREATE_USER_SQL="create user '${PETL_MYSQL_USER}'@'${PETL_MYSQL_USER_IP}' identified by '${PETL_MYSQL_PASSWORD}';";
+  GRANT_USER_SQL="grant all privileges on ${PETL_OPENMRS_DB}.* to '${PETL_MYSQL_USER}'@'${PETL_MYSQL_USER_IP}';"
 
   if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
       echo "Creating PETL DB user is only currently supported in Docker, exiting"
