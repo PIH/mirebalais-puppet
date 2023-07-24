@@ -38,15 +38,6 @@ class percona::install_restore_scripts (
       mode    => '0755',
       require     => File["${percona_home_dir}"]
     }
-    file { '${percona_restore_dir}/percona-restore.sh':
-      ensure => present,
-      source => 'puppet:///modules/percona/percona-restore.sh',
-      path    => "${percona_restore_dir}/percona-restore.sh",
-      mode    => '0700',
-      owner   => 'root',
-      group   => 'root',
-      require     => File["${percona_restore_dir}"]
-    }
     file { '${percona_restore_dir}/deidentify-db.sql':
       ensure => present,
       source => 'puppet:///modules/percona/deidentify-db.sql',
@@ -54,33 +45,24 @@ class percona::install_restore_scripts (
       mode    => '0700',
       owner   => 'root',
       group   => 'root',
-      require     => File["${percona_restore_dir}/percona-restore.sh"]
+      require => File["${percona_restore_dir}"]
     }
-    file { '${percona_restore_dir}/deidentify-db.sh':
+    file { '${percona_restore_dir}/percona-restore.sh':
       ensure => present,
-      source => 'puppet:///modules/percona/deidentify-db.sh',
-      path    => "${percona_restore_dir}/deidentify-db.sh",
+      source => 'puppet:///modules/percona/percona-restore.sh',
+      path    => "${percona_restore_dir}/percona-restore.sh",
       mode    => '0700',
       owner   => 'root',
       group   => 'root',
       require     => File["${percona_restore_dir}/deidentify-db.sql"]
     }
-    file { '${percona_restore_dir}/create-petl-db-user.sh':
+    file { '${percona_restore_dir}/percona-restore-and-email.sh':
       ensure => present,
-      source => 'puppet:///modules/percona/create-petl-db-user.sh',
-      path    => "${percona_restore_dir}/create-petl-db-user.sh",
+      source => 'puppet:///modules/percona/percona-restore-and-email.sh',
+      path    => "${percona_restore_dir}/percona-restore-and-email.sh",
       mode    => '0700',
       owner   => 'root',
       group   => 'root',
-      require     => File["${percona_restore_dir}"]
-    }
-    file { '${percona_restore_dir}/restore-into-docker-container.sh':
-      ensure => present,
-      source => 'puppet:///modules/percona/restore-into-docker-container.sh',
-      path    => "${percona_restore_dir}/restore-into-docker-container.sh",
-      mode    => '0700',
-      owner   => 'root',
-      group   => 'root',
-      require     => [ File["${percona_restore_dir}/percona-restore.sh"], File["${percona_restore_dir}/deidentify-db.sh"], File["${percona_restore_dir}/create-petl-db-user.sh"] ]
+      require     => File["${percona_restore_dir}/percona-restore.sh"]
     }
 }

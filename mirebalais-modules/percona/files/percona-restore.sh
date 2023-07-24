@@ -16,14 +16,68 @@ if [ -z "${PERCONA_RESTORE_DIR}" ] || [ -z "${PERCONA_BACKUP_PW}" ] || [ -z "${A
 fi
 
 # Variables from input arguments
-SITE_TO_RESTORE="${1}"
-MYSQL_DOCKER_CONTAINER="${2}"
-MYSQL_DATA_DIR="${3}"
+SITE_TO_RESTORE=
+MYSQL_DOCKER_CONTAINER=
+MYSQL_PORT=
+MYSQL_DATA_DIR=
+DEIDENTIFY=false
+CREATE_PETL_USER=false
+RESTART_OPENMRS=false
+
+for i in "$@"
+do
+case $i in
+    --siteToRestore=*)
+      SITE_TO_RESTORE="${i#*=}"
+      shift # past argument=value
+    ;;
+    --mysqlDockerContainerName=*)
+      MYSQL_DOCKER_CONTAINER="${i#*=}"
+      shift # past argument=value
+    ;;
+    --mysqlDockerPort=*)
+      MYSQL_PORT="${i#*=}"
+      shift # past argument=value
+    ;;
+    --mysqlDockerDataDir=*)
+      MYSQL_DATA_DIR="${i#*=}"
+      shift # past argument=value
+    ;;
+    --deidentify=*)
+      DEIDENTIFY="${i#*=}"
+      shift # past argument=value
+    ;;
+    --createPetlUser=*)
+      CREATE_PETL_USER="${i#*=}"
+      shift # past argument=value
+    ;;
+    --restartOpenmrs=*)
+      RESTART_OPENMRS="${i#*=}"
+      shift # past argument=value
+    ;;
+    *)
+      echo "Unknown input argument specified"
+      exit 1
+    ;;
+esac
+done
 
 if [ -z "$SITE_TO_RESTORE" ]; then
-    echo "You must specify the site to restore as the 1st argument.  eg. haiti/hinche"
+    echo "You must specify the site to restore"
     exit 1
 fi
+
+BASE_DIR="${PERCONA_RESTORE_DIR}/${SITE_TO_RESTORE}"
+STATUS_DATA_DIR="${BASE_DIR}/status"
+DOWNLOAD_DIR="${BASE_DIR}/percona_downloads"
+DATA_DIR="${DOWNLOAD_DIR}/percona_mysql_data"
+
+# Setup working directories and logging
+mkdir -p ${STATUS_DATA_DIR}
+rm -fR ${DOWNLOAD_DIR}
+mkdir -p ${DOWNLOAD_DIR}
+mkdir -p ${DATA_DIR}
+
 echo "Starting restoration of MySQL from $SITE_TO_RESTORE"
 
 if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
@@ -31,26 +85,17 @@ if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
     MYSQL_DATA_DIR="/var/lib/mysql"
 else
     echo "Restoring into dockerized MySQL installation, container: $MYSQL_DOCKER_CONTAINER"
+    if [ -z ${MYSQL_DATA_DIR} ] || [ ${MYSQL_DATA_DIR} == '/' ]; then
+      MYSQL_DATA_DIR="${BASE_DIR}/mysql"
+      echo "No MySQL Data Directory specified, defaulting to ${MYSQL_DATA_DIR}"
+    else
+      echo "MySQL Data Directory specified: ${MYSQL_DATA_DIR}"
+    fi
+    if [ -z ${MYSQL_PORT} ]; then
+      echo "MySQL Port is required but has not been specified, exiting"
+      exit 1
+    fi
 fi
-
-if [ ! -d $MYSQL_DATA_DIR ] || [ -z ${MYSQL_DATA_DIR} ] || [ ${MYSQL_DATA_DIR} == '/' ]; then
-    echo "You must specify the MySQL data directory if you specify the MySQL Docker container.  This must exist."
-    exit 1
-fi
-echo "Restoring into MySQL data directory: $MYSQL_DATA_DIR"
-
-# Variables
-BASE_DIR="${PERCONA_RESTORE_DIR}/${SITE_TO_RESTORE}"
-STATUS_DATA_DIR="${BASE_DIR}/status"
-DOWNLOAD_DIR="${BASE_DIR}/percona_downloads"
-DATA_DIR="${DOWNLOAD_DIR}/percona_mysql_data"
-RESTORE_DATE=$(date '+%Y-%m-%d-%H-%M-%S')
-
-# Setup working directories
-mkdir -p ${STATUS_DATA_DIR}
-rm -fR ${DOWNLOAD_DIR}
-mkdir -p ${DOWNLOAD_DIR}
-mkdir -p ${DATA_DIR}
 
 copy_from_azure_percona() {
     azcopy copy "${AZ_URL}/${SITE_TO_RESTORE}/percona/${1}?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZ_SECRET}" "${DOWNLOAD_DIR}/" --recursive=true --check-md5 FailIfDifferent --from-to=BlobLocal --blob-type Detect;
@@ -110,13 +155,35 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+if [ "${RESTART_OPENMRS}" == "true" ]; then
+  echo "Stopping Tomcat"
+  /etc/init.d/${TOMCAT_USER} stop
+
+  echo "Removing configuration checksums and lib cache"
+  rm -rf ${TOMCAT_HOME_DIR}/.OpenMRS/.openmrs-lib-cache
+  rm -rf ${TOMCAT_HOME_DIR}/.OpenMRS/configuration_checksums
+fi
+
 echo "Stopping the existing MySQL instance"
 
 if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
     echo "Stopping native mysql"
     service mysql stop
 else
-    echo "Stopping MySQL container: $MYSQL_DOCKER_CONTAINER"
+    echo "Re-creating MySQL container: $MYSQL_DOCKER_CONTAINER"
+    docker stop $MYSQL_DOCKER_CONTAINER || true
+    docker rm $MYSQL_DOCKER_CONTAINER || true
+    docker run --name ${MYSQL_DOCKER_CONTAINER} \
+      -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PW} \
+      -v "${MYSQL_DATA_DIR}:/var/lib/mysql" \
+      -p "${MYSQL_PORT}:3306" \
+      -d mysql:5.6 \
+        --character-set-server=utf8 \
+        --collation-server=utf8_general_ci \
+        --max_allowed_packet=1G \
+        --innodb-buffer-pool-size=2G
+    sleep 10
+    echo "Stopping MySQL container"
     docker stop $MYSQL_DOCKER_CONTAINER || true
 fi
 
@@ -150,16 +217,73 @@ else
 fi
 
 if [ $? -eq 0 ]; then
-        echo "Backup restored successfully and all tables are correct"
+    echo "Backup restored successfully and all tables are correct"
 
-        # Once backup restored successfully, copy the latest MD5 and date files into the status directory and delete downloaded files
-        echo "Backup restoration successful, copying most recent backup date and md5 files into status directory"
-        cp ${DOWNLOAD_DIR}/percona.7z.date ${STATUS_DATA_DIR}/
-        cp ${DOWNLOAD_DIR}/percona.7z.md5 ${STATUS_DATA_DIR}/
-        rm -fR ${DOWNLOAD_DIR}
-        echo "Successfully completed"
+    # Once backup restored successfully, copy the latest MD5 and date files into the status directory and delete downloaded files
+    echo "Backup restoration successful, copying most recent backup date and md5 files into status directory"
+    cp ${DOWNLOAD_DIR}/percona.7z.date ${STATUS_DATA_DIR}/
+    cp ${DOWNLOAD_DIR}/percona.7z.md5 ${STATUS_DATA_DIR}/
+    rm -fR ${DOWNLOAD_DIR}
+    echo "Successfully completed"
 
 else
-        echo "Mysql check failed, exiting"
-        exit 1
+    echo "Mysql check failed, exiting"
+    exit 1
+fi
+
+if [ "${DEIDENTIFY}" == "true" ]; then
+  echo "De-identifying the database"
+  if [ -z "${$MYSQL_DOCKER_CONTAINER}" ]; then
+      echo "De-identifying the native MySQL installation"
+      mysql -uroot -p${MYSQL_ROOT_PW} openmrs < ${PERCONA_RESTORE_DIR}/deidentify-db.sql
+  else
+      echo "De-identifying dockerized MySQL installation, container: ${$MYSQL_DOCKER_CONTAINER}"
+      docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -uroot -p${MYSQL_ROOT_PW} openmrs < ${PERCONA_RESTORE_DIR}/deidentify-db.sql
+  fi
+  if [ $? -eq 0 ]; then
+      echo "De-identification successful"
+  else
+    echo "An error occurred during de-identification"
+    exit 1
+  fi
+fi
+
+if [ "${CREATE_PETL_USER}" == "true" ]; then
+  echo "Creating PETL user"
+
+  if [ -z "${PETL_MYSQL_USER}" ] || [ -z "${PETL_MYSQL_USER_IP}" ] || [ -z "${PETL_MYSQL_PASSWORD}" ] || [ -z "${PETL_OPENMRS_DB}" ]; then
+    echo "You must have PETL_MYSQL_USER, PETL_MYSQL_USER_IP, PETL_MYSQL_PASSWORD, PETL_OPENMRS_DB environment variables defined to create petl user"
+    exit 1
+  fi
+
+  SELECT_USER_SQL="select count(*) from mysql.user where user = '${PETL_MYSQL_USER}' and host = '${PETL_MYSQL_USER_IP}';"
+  CREATE_USER_SQL="create user ${PETL_MYSQL_USER}'@'${PETL_MYSQL_USER_IP}' identified by '${PETL_MYSQL_PASSWORD}';";
+  GRANT_USER_SQL="grant all privileges on ${PETL_OPENMRS_DB}.* to ${PETL_MYSQL_USER}'@'${PETL_MYSQL_USER_IP}';"
+
+  if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
+      echo "Creating PETL DB user is only currently supported in Docker, exiting"
+      exit 1
+  else
+      echo "Ensuring MySQL user ${PETL_MYSQL_USER}'@'${PETL_MYSQL_USER_IP}' in container ${MYSQL_DOCKER_CONTAINER}"
+      EXISTING_USERS=$(docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -u root -p${MYSQL_ROOT_PW} -N -e "${SELECT_USER_SQL}")
+      if [ "${EXISTING_USERS}" -eq 0 ]; then
+        echo "No user found, creating"
+        docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -u root -p${MYSQL_ROOT_PW} -e "${CREATE_USER_SQL} ${GRANT_USER_SQL}"
+      else
+        echo "User already exists, not re-creating"
+      fi
+  fi
+
+  if [ $? -eq 0 ]; then
+    echo "Create user successful"
+  else
+    echo "Create user failed, exiting"
+    exit 1
+  fi
+
+fi
+
+if [ "${RESTART_OPENMRS}" == "true" ]; then
+  echo "Starting Tomcat"
+  /etc/init.d/${TOMCAT_USER} start
 fi
