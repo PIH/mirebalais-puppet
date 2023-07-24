@@ -88,7 +88,7 @@ if [ "$BACKUP_MD5" = "$LAST_BACKUP_MD5" ]; then
 fi
 
 if [ "$BACKUP_DATE" = "$LAST_BACKUP_DATE" ]; then
-    echo "Current Backup MD5 matches previous backup MD5, skipping restoration"
+    echo "Current Backup date matches previous backup date, skipping restoration"
     exit 0
 fi
 
