@@ -147,6 +147,8 @@ class openmrs::pihemr (
       $config_repo = "releases"
     }
 
+    # https://repo1.maven.org/maven2/org/pih/openmrs/openmrs-config-pihsl/1.17.0/
+
     $config_url = "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}"
 
     # TODO can we change this so it only redownloads if needed?
@@ -154,7 +156,7 @@ class openmrs::pihemr (
       source      => "${config_url}",
       destination => "/tmp/${config_name}.zip",
       timeout     => 0,
-      verbose     => true,
+      verbose     => false,
       redownload => true,
     }
 
@@ -184,7 +186,7 @@ class openmrs::pihemr (
           source      => "${ocl_package_url}",
           destination => "${tomcat_home_dir}/.OpenMRS/configuration/ocl/PIH.zip",
           timeout     => 0,
-          verbose     => true,
+          verbose     => false,
           redownload  => true,
           require     => Exec["remove-existing-ocl-packages"]
         }
@@ -213,7 +215,7 @@ class openmrs::pihemr (
       source      => $frontend_url,
       destination => "/tmp/${frontend_name}.zip",
       timeout     => 0,
-      verbose     => true,
+      verbose     => false,
       redownload  => true,
     }
 

@@ -5,10 +5,11 @@ az_backup_folder_path: liberia/jjdossen
 az_activitylog_backup_folder_path: activitylog/liberia/jjdossen
 
 package_release: 'stable'
+package_version: '1.0.20230724200438-1'
 
 pih_config: liberia,liberia-harper,liberia-harper-jjdossen
 config_name: openmrs-config-pihliberia
-config_version: 1.5.0
+config_version: 1.6.0
 
 server_timezone: Africa/Monrovia
 
