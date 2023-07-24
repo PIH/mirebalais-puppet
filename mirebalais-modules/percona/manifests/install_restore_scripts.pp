@@ -7,8 +7,15 @@ class percona::install_restore_scripts (
     $az_secret                         = decrypt(hiera('az_secret')),
     $tomcat_user                       = decrypt(hiera('tomcat')),
     $tomcat_home_dir                   = decrypt(hiera('tomcat_home_dir')),
-    $sysadmin_email                    = decrypt(hiera('sysadmin_email'))
+    $sysadmin_email                    = decrypt(hiera('sysadmin_email')),
+    $petl_mysql_user                   = decrypt(hiera('petl_mysql_user')),
+    $petl_mysql_user_ip                = decrypt(hiera('petl_mysql_user_ip')),
+    $petl_mysql_password               = decrypt(hiera('petl_mysql_password')),
+    $openmrs_db                        = decrypt(hiera('openmrs_db')),
   ) {
+
+    include azcopy
+
     file { '/root/.percona.env':
       ensure  => present,
       path    => '/root/.percona.env',
@@ -58,6 +65,15 @@ class percona::install_restore_scripts (
       group   => 'root',
       require     => File["${percona_restore_dir}/deidentify-db.sql"]
     }
+    file { '${percona_restore_dir}/create-petl-db-user.sh':
+      ensure => present,
+      source => 'puppet:///modules/percona/create-petl-db-user.sh',
+      path    => "${percona_restore_dir}/create-petl-db-user.sh",
+      mode    => '0700',
+      owner   => 'root',
+      group   => 'root',
+      require     => File["${percona_restore_dir}"]
+    }
     file { '${percona_restore_dir}/restore-into-docker-container.sh':
       ensure => present,
       source => 'puppet:///modules/percona/restore-into-docker-container.sh',
@@ -65,6 +81,6 @@ class percona::install_restore_scripts (
       mode    => '0700',
       owner   => 'root',
       group   => 'root',
-      require     => File["${percona_restore_dir}/deidentify-db.sh"]
+      require     => [ File["${percona_restore_dir}/percona-restore.sh"], File["${percona_restore_dir}/deidentify-db.sh"], File["${percona_restore_dir}/create-petl-db-user.sh"] ]
     }
 }

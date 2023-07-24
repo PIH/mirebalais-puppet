@@ -135,7 +135,7 @@ node 'hai-cloud-inf-omrshiv-report' {
 
 }
 
-node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
+node 'humci.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
@@ -162,6 +162,27 @@ node 'humci.pih-emr.org', 'vagrant-test.pih-emr.org' {
 
   include openmrs::atomfeed
 
+  include petl
+
+}
+
+node 'vagrant-test.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+
+  include docker
+  include percona::install_restore_scripts
+
+  include java
   include petl
 
 }

@@ -22,6 +22,7 @@ class openmrs::backup (
   ){
 
   require openmrs
+  include azcopy
 
   database_user { "${backup_user}@localhost":
     ensure        => present,
@@ -51,28 +52,6 @@ class openmrs::backup (
     owner   => 'root',
     group   => 'root',
     content => template('openmrs/mysqlbackup.sh.erb'),
-  }
-
-  wget::fetch { 'azcopy-download':
-    source      => 'https://aka.ms/downloadazcopy-v10-linux',
-    destination => '/usr/local/azcopy.tar.gz',
-    timeout     => 0,
-    verbose     => false,
-  }
-
-  exec { 'azcopy-extract':
-    cwd     => '/usr/local',
-    command => 'tar -xf azcopy.tar.gz --strip-components=1',
-    require => [ Wget::Fetch['azcopy-download'] ],
-  }
-
-  file { '/usr/local/sbin/azcopy':
-    source  => '/usr/local/azcopy',
-    path    => '/usr/local/sbin/azcopy',
-    mode    => '0755',
-    owner   => 'root',
-    group   => 'root',
-    require => [ Exec['azcopy-extract'] ]
   }
 
   file { 'backupAzure.sh':

@@ -18,6 +18,7 @@ fi
 
 SITE_TO_RESTORE="${1}"
 DOCKER_PORT="${2}"
+
 if [ -z "$SITE_TO_RESTORE" ]; then
     echo "You must specify the site to restore as the 1st argument.  eg. haiti/haitihiv"
     exit 1
@@ -69,12 +70,17 @@ sleep 10
 
 echo "Restoring Database for ${SITE_TO_RESTORE}"
 /bin/bash ${PERCONA_RESTORE_DIR}/percona-restore.sh "${SITE_TO_RESTORE}" "${DOCKER_CONTAINER_NAME}" "${DOCKER_DATA_DIR}"
-
 RESTORE_STATUS=$?
+
 sleep 10
+
 echo "De-identifying Database"
-/bin/bash ${PERCONA_RESTORE_DIR}/deidentify-db.sh
+/bin/bash ${PERCONA_RESTORE_DIR}/deidentify-db.sh "${DOCKER_CONTAINER_NAME}"
 DEIDENTIFY_STATUS=$?
+
+echo "Creating Database User"
+/bin/bash ${PERCONA_RESTORE_DIR}/create-petl-db-user.sh "${DOCKER_CONTAINER_NAME}"
+CREATE_USER_STATUS=$?
 
 if [ $RESTORE_STATUS -ne 0 ] ; then
   echo "Percona restore failed"
@@ -82,6 +88,9 @@ if [ $RESTORE_STATUS -ne 0 ] ; then
 elif [ $DEIDENTIFY_STATUS -ne 0 ] ; then
   echo "Deidentification failed"
   mail -s "Deidentification of ${SITE_TO_RESTORE} failed" "${SYSADMIN_EMAIL}" < ${LOG_FILE}
+elif [ $CREATE_USER_STATUS -ne 0 ] ; then
+  echo "Creating user failed"
+  mail -s "Creating DB user for ${SITE_TO_RESTORE} failed" "${SYSADMIN_EMAIL}" < ${LOG_FILE}
 else
   echo "Restoration of ${SITE_TO_RESTORE} successful"
 fi
