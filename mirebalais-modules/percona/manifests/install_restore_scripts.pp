@@ -1,6 +1,6 @@
 class percona::install_restore_scripts (
     $percona_home_dir                  = hiera('percona_restore_dir'),
-    $percona_restore_dir               = hiera('percona_restore_dir')),
+    $percona_restore_dir               = hiera('percona_restore_dir'),
     $backup_password                   = decrypt(hiera('backup_db_password'),
     $mysql_root_password               = decrypt(hiera('mysql_root_password')),
     $az_url                            = decrypt(hiera('az_url')),
