@@ -33,7 +33,7 @@ else
     echo "Restoring into dockerized MySQL installation, container: $MYSQL_DOCKER_CONTAINER"
 fi
 
-if [ ! -d $MYSQL_DATA_DIR ]; then
+if [ ! -d $MYSQL_DATA_DIR ] || [ -z ${MYSQL_DATA_DIR} ]; then
     echo "You must specify the MySQL data directory if you specify the MySQL Docker container.  This must exist."
     exit 1
 fi
@@ -120,7 +120,7 @@ else
     docker stop $MYSQL_DOCKER_CONTAINER || true
 fi
 
-echo "Removing existing data directory contents"
+echo "Removing existing data directory contents at ${MYSQL_DATA_DIR}"
 rm -fr ${MYSQL_DATA_DIR}/*
 
 echo "Copying the percona backup contents into the MySQL data directory"
