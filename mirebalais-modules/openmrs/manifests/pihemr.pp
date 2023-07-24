@@ -154,7 +154,7 @@ class openmrs::pihemr (
       source      => "${config_url}",
       destination => "/tmp/${config_name}.zip",
       timeout     => 0,
-      verbose     => false,
+      verbose     => true,
       redownload => true,
     }
 
@@ -184,7 +184,7 @@ class openmrs::pihemr (
           source      => "${ocl_package_url}",
           destination => "${tomcat_home_dir}/.OpenMRS/configuration/ocl/PIH.zip",
           timeout     => 0,
-          verbose     => false,
+          verbose     => true,
           redownload  => true,
           require     => Exec["remove-existing-ocl-packages"]
         }
@@ -213,7 +213,7 @@ class openmrs::pihemr (
       source      => $frontend_url,
       destination => "/tmp/${frontend_name}.zip",
       timeout     => 0,
-      verbose     => false,
+      verbose     => true,
       redownload  => true,
     }
 
