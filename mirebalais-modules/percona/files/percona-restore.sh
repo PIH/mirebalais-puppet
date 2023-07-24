@@ -33,7 +33,7 @@ else
     echo "Restoring into dockerized MySQL installation, container: $MYSQL_DOCKER_CONTAINER"
 fi
 
-if [ ! -d $MYSQL_DATA_DIR ] || [ -z ${MYSQL_DATA_DIR} ]; then
+if [ ! -d $MYSQL_DATA_DIR ] || [ -z ${MYSQL_DATA_DIR} || [ ${MYSQL_DATA_DIR} == '/' ] ]; then
     echo "You must specify the MySQL data directory if you specify the MySQL Docker container.  This must exist."
     exit 1
 fi
