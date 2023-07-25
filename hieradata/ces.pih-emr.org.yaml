@@ -13,6 +13,9 @@ mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 session_timeout: 120
 
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
+
 #az copy
 az_backup_folder_path: mexico/ces-prod
 backup_file_prefix: ces-prod
