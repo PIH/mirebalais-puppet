@@ -1,5 +1,6 @@
 ---
 package_release: 'stable'
+package_version: '1.0.20230523205816-1'
 pih_config: mexico,mexico-matazano
 config_name: openmrs-config-ces
 config_version: 1.32.0
