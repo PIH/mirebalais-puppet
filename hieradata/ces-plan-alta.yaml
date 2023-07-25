@@ -1,5 +1,6 @@
 ---
 package_release: 'stable'
+package_version: '1.0.20230425132709-1'
 pih_config: mexico,mexico-plan-alta
 config_name: openmrs-config-ces
 config_version: 1.32.0
