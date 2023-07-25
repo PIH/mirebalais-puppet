@@ -21,7 +21,7 @@ class openmrs::backup (
     $sysadmin_email                   = hiera('sysadmin_email')
   ){
 
-  require openmrs
+  #require openmrs
   include azcopy
 
   database_user { "${backup_user}@localhost":
