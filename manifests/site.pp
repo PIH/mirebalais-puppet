@@ -538,6 +538,7 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org'{
   include mysql_setup
   include tomcat
   include apache2
+  include docker
 
   include openmrs
   #include openmrs::initial_setup
@@ -561,6 +562,7 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano',
   include java
   include mysql_setup
   include tomcat
+  include docker
 
   include openmrs
   #include openmrs::initial_setup
