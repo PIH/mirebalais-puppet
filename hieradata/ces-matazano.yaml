@@ -12,9 +12,6 @@ mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 tomcat_enable_http_8080: true
 session_timeout: 120
 
-openmrs_percona_backup_enabled: true
-openmrs_percona_install_mode: docker
-
 az_backup_folder_path: mexico/ces-matazano
 backup_file_prefix: ces-matazano
 backup_time: date +%Y%m%d
