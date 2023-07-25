@@ -107,6 +107,12 @@ class tomcat (
     notify  => Service[$tomcat]
   }
 
+  file { "/var/lib/${tomcat}/conf/context.xml":
+    ensure  => file,
+    source  => "puppet:///modules/tomcat/context.xml",
+    require => Package[$tomcat],
+    notify  => Service[$tomcat]
+  }
 
   user { $tomcat:
     ensure => 'present',
