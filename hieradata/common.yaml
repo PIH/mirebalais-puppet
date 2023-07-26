@@ -23,9 +23,7 @@ config_version: ""
 
 repo_url: ENC[guOgejmsDLkHjo2iCrV9MAWEt/Y9usi32Rs4qPepBu0=]
 pihemr_debian_repo_url: https://openmrs.jfrog.io/artifactory/deb-pih/
-pihemr_debian_machine_name: openmrs.jfrog.io
-pihemr_debian_login: pih
-pihemr_debian_password: ENC[pqqhHVt2BAlUcGWamqSe5X69ono1wv4rCalWWdAR0kE=:mmUumhygh7ys5S+uJdFXwA==:ZHZ3eHN1dndFU09BVlRaZEgvdWlCUT09]
+
 
 prod_dw_petl_sqlserver_host: foo
 prod_dw_petl_sqlserver_port: foo
