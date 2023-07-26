@@ -3,7 +3,7 @@
 restoreSite() {
     echo "Restoring site: ${1} into container ${2} using port ${3}"
     /bin/bash <%= @percona_restore_dir -%>/percona-restore-and-email.sh \
-        --siteToRestore="${1}" --mysqlDockerContainerName="${2}" --mysqlDockerPort="${3}" --deidentify="true" --createPetlUser="true"
+        --siteToRestore="${1}" --mysqlDockerContainerName="${2}" --mysqlDockerPort="${3}" --deidentify="false" --createPetlUser="true"
 }
 
 # Restore databases from each site into individual Docker containers exposed on different ports
