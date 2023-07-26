@@ -183,6 +183,7 @@ else
     docker run --name ${MYSQL_DOCKER_CONTAINER} \
       --restart always \
       -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PW} \
+      -e TZ=America/New_York \
       -v "${MYSQL_DATA_DIR}:/var/lib/mysql" \
       -p "${MYSQL_PORT}:3306" \
       -d mysql:5.6 \
