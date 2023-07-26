@@ -134,11 +134,13 @@ fi
 
 if [ "$BACKUP_MD5" = "$LAST_BACKUP_MD5" ]; then
     echoWithDate "Current Backup MD5 matches previous backup MD5, skipping restoration"
+    rm -fR ${DOWNLOAD_DIR}
     exit 0
 fi
 
 if [ "$BACKUP_DATE" = "$LAST_BACKUP_DATE" ]; then
     echoWithDate "Current Backup date matches previous backup date, skipping restoration"
+    rm -fR ${DOWNLOAD_DIR}
     exit 0
 fi
 
