@@ -9,7 +9,6 @@ class percona::install_restore_scripts (
     $tomcat_home_dir                   = decrypt(hiera('tomcat_home_dir')),
     $sysadmin_email                    = decrypt(hiera('sysadmin_email')),
     $petl_mysql_user                   = decrypt(hiera('petl_mysql_user')),
-    $petl_mysql_user_ip                = decrypt(hiera('petl_mysql_user_ip')),
     $petl_mysql_password               = decrypt(hiera('petl_mysql_password')),
     $openmrs_db                        = decrypt(hiera('openmrs_db')),
   ) {
