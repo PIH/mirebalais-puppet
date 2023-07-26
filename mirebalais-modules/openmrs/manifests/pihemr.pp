@@ -25,7 +25,12 @@ class openmrs::pihemr (
   # PIH EMR config
   $config_name     = hiera('config_name'),
   $config_version  = hiera('config_version'),
-  $pihemr_debian_repo_url        = hiera('pihemr_debian_repo_url'),
+
+  $pihemr_debian_repo_url         = hiera('pihemr_debian_repo_url'),
+  $pihemr_debian_machine_name     = hiera('pihemr_debian_machine_name'),
+  $pihemr_debian_login            = hiera('pihmer_debian_login'),
+  $pihemr_debian_password         = decrypt(hiera('pihemr_debian_password')),
+
   $ocl_package_url = hiera('ocl_package_url'),
 
   # Frontend
@@ -50,7 +55,13 @@ class openmrs::pihemr (
   $smtp_mailhub = decrypt(hiera('smtp_mailhub')),
 
 ) {
-
+  file { '/etc/apt/auth.conf':
+    ensure  => present,
+    content => template('openmrs/auth.conf.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644'
+  }
 
   apt::source { $package_name:
     ensure      => present,
@@ -58,6 +69,7 @@ class openmrs::pihemr (
     release     => $package_release,
     repos       => 'main',
     include_src => false,
+    require => File['/etc/apt/auth.conf'],
   }
 
 
