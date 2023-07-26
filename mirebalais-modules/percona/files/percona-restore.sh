@@ -179,6 +179,7 @@ else
     docker stop $MYSQL_DOCKER_CONTAINER || true
     docker rm $MYSQL_DOCKER_CONTAINER || true
     docker run --name ${MYSQL_DOCKER_CONTAINER} \
+      --restart always \
       -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PW} \
       -v "${MYSQL_DATA_DIR}:/var/lib/mysql" \
       -p "${MYSQL_PORT}:3306" \
