@@ -6,7 +6,7 @@ package_release: 'stable'
 package_version: '1.0.20230724200438-1'
 
 config_name: openmrs-config-pihliberia
-config_version: 1.6.0
+config_version: 1.7.0-SNAPSHOT
 
 #frontend_name: "openmrs-frontend-pihemr"
 #frontend_version: 1.5.0-SNAPSHOT
