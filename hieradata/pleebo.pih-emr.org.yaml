@@ -8,7 +8,7 @@ package_version: '1.0.20230724200438-1'
 
 pih_config: liberia,liberia-pleebo
 config_name: openmrs-config-pihliberia
-config_version: 1.6.0
+config_version: 1.7.0
 
 server_timezone: Africa/Monrovia
 
