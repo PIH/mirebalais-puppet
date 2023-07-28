@@ -4,10 +4,8 @@
 -- July 29, 2011
 -- Partners In Health
 
--- Remove all free text from observations
--- CHOOSE between deleting obs or nulling text
--- delete from obs where value_text is not null;
-update obs set value_text = 'Deidentified' where not value_text is NULL;
+-- De-identify all free text observation values except those used to point to OpenMRS metadata (eg. location)
+update obs set value_text = 'Deidentified' where value_text is not null and comments not like 'org.openmrs.%';
 
 -- Patient identifiers
 -- Remove validators and replace extermal id with internal id
