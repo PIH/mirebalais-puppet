@@ -198,7 +198,7 @@ class openmrs::pihemr (
 
   if ($frontend_name != "") {
 
-    maven { "/tmp/${frontend_name}.zip":
+    maven { "/tmp/${frontend_name}-${frontend_version}.zip":
       groupid => "${maven_frontend_group_id}",
       artifactid => "${frontend_name}",
       version => "${frontend_version}",
