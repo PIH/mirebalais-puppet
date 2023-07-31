@@ -39,6 +39,7 @@ node 'emr.hum.ht' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -74,6 +75,7 @@ node 'hai-hum-inf-humtest' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -99,6 +101,7 @@ node 'hai-cloud-inf-omrshiv' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -125,6 +128,7 @@ node 'hai-cloud-inf-omrshiv-report' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -150,6 +154,7 @@ node 'humci.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -181,6 +186,7 @@ node 'vagrant-test.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -208,6 +214,7 @@ node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -233,6 +240,7 @@ node 'hai-hum-inf-omrs-report' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -261,6 +269,7 @@ node 'inf-dakakind-omrs-test' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -283,6 +292,7 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -310,6 +320,7 @@ node 'thomonde.pih-emr.org', 'hinche.pih-emr.org', 'cercalasource.pih-emr.org', 
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -335,6 +346,7 @@ node 'zltraining.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -356,6 +368,7 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org', 'zt-sl-kgh-inf-omrs-prod' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -409,6 +422,7 @@ node 'ci.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -433,6 +447,7 @@ node 'ces-ci.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -458,6 +473,7 @@ node 'peru-ci.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -481,6 +497,7 @@ node 'ses-cor.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -505,6 +522,7 @@ node 'haitihivtest.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -534,6 +552,7 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org'{
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -558,6 +577,7 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano',
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -584,6 +604,7 @@ node 'pleebo-mirror.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -609,6 +630,7 @@ node 'zt-cloud-dw-petl-test' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include docker
   include percona::install_restore_scripts

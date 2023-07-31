@@ -5,7 +5,7 @@
 class openmrs::install_distribution_from_maven (
 
   $maven_download_repo      = hiera('maven_download_repo'),
-  $maven_download_repo_package_group_id = hiera('maven_download_repo_package_group_id'),
+  $maven_package_group_id = hiera('maven_package_group_id'),
   $package_name     = hiera('package_name'),
   $package_version  = hiera('package_version'),
 
@@ -18,7 +18,7 @@ class openmrs::install_distribution_from_maven (
 
   # dowload new distribution from maven repo
   maven { "/tmp/${package_name}-${package_version}.zip":
-    groupid => "${maven_download_repo_package_group_id}",
+    groupid => "${maven_package_group_id}",
     artifactid => "${package_name}",
     version => "${package_version}",
     ensure => latest,

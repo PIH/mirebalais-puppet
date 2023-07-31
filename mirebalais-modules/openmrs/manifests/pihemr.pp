@@ -51,8 +51,8 @@ class openmrs::pihemr (
 
   # Maven
   $maven_download_repo = hiera('maven_download_repo'),
-  $maven_download_repo_config_group_id = hiera('maven_download_repo_config_group_id'),
-  $maven_download_repo_frontend_group_id = hiera('maven_download_repo_frontend_group_id'),
+  $maven_config_group_id = hiera('maven_config_group_id'),
+  $maven_frontend_group_id = hiera('maven_frontend_group_id'),
 ) {
 
 
@@ -152,7 +152,7 @@ class openmrs::pihemr (
   if ($config_name != "") {
 
     maven { "/tmp/${config_name}-${config_version}.zip":
-      groupid => "${maven_download_repo_config_group_id}",
+      groupid => "${maven_config_group_id}",
       artifactid => "${config_name}",
       version => "${config_version}",
       ensure => latest,
@@ -203,7 +203,7 @@ class openmrs::pihemr (
   if ($frontend_name != "") {
 
     maven { "/tmp/${frontend_name}.zip":
-      groupid => "${maven_download_repo_frontend_group_id}",
+      groupid => "${maven_frontend_group_id}",
       artifactid => "${frontend_name}",
       version => "${frontend_version}",
       ensure => latest,

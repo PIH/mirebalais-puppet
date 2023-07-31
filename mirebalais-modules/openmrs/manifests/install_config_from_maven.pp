@@ -6,7 +6,7 @@ class openmrs::install_config_from_maven (
   $config_name     = hiera('config_name'),
   $config_version  = hiera('config_version'),
   $maven_download_repo      = hiera('maven_download_repo'),
-  $maven_download_repo_config_group_id = hiera('maven_download_repo_config_group_id')
+  $maven_config_group_id = hiera('maven_config_group_id')
 
 ) {
   ## for malawi, this is used to download the configuration file log4j
@@ -17,7 +17,7 @@ class openmrs::install_config_from_maven (
   }
 
   maven { "/tmp/${config_name}-${config_version}.zip":
-    groupid => "${maven_download_repo_config_group_id}",
+    groupid => "${maven_config_group_id}",
     artifactid => "${config_name}",
     version => "${config_version}",
     ensure => latest,

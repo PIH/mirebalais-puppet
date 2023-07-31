@@ -10,8 +10,8 @@ config_name: "%{hiera('package_name')}-config"
 config_version: "%{hiera('package_version')}"
 
 maven_download_repo: http://mavenrepo.openmrs.org/nexus/content/repositories/public
-maven_download_repo_config_group_id: org.openmrs.module
-maven_download_repo_package_group_id: org.openmrs.distro
+maven_config_group_id: org.openmrs.module
+maven_package_group_id: org.openmrs.distro
 
 # mysql
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
