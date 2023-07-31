@@ -13,7 +13,7 @@ package_name: pihemr
 package_release: 'unstable'
 package_version: '1.0.20230724200438-1'
 
-maven_download_repo: http://mavenrepo.openmrs.org/nexus/content/repositories/public
+maven_download_repo: https://s01.oss.sonatype.org/content/repositories/public
 maven_config_group_id: org.pih.openmrs
 maven_package_group_id: ''
 maven_frontend_group_id: org.pih.openmrs
