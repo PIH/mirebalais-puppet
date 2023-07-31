@@ -147,19 +147,8 @@ class openmrs::pihemr (
     command => "sed -i 's/<session-config>.*$/<session-config><session-timeout>${session_timeout}<\/session-timeout>/' ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml",
     onlyif => "test -f ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml"
   }
-  /*
 
   if ($config_name != "") {
-
-    if ('SNAPSHOT' in $config_version) {
-      $config_repo = "snapshots"
-    }
-    else {
-      $config_repo = "releases"
-    }
-
-    $config_url = "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}"
-  */
 
     maven { "/tmp/${config_name}-${config_version}.zip":
       groupid => "${maven_download_repo_config_group_id}",
