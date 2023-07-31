@@ -79,10 +79,7 @@ class openmrs::pihemr (
   }
 
   file { "${tomcat_home_dir}/.OpenMRS/staging":
-    ensure  => directory,
-    owner   => $tomcat,
-    group   => $tomcat,
-    mode    => '0644',
+    ensure  => absent,
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
 
