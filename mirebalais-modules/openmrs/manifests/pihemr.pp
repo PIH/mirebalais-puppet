@@ -210,7 +210,7 @@ class openmrs::pihemr (
 
     exec{'install-openmrs-frontend':
       command => "rm -rf /tmp/frontend && unzip -o /tmp/${frontend_name}-${frontend_version}.zip -d /tmp/frontend && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && cp -r /tmp/frontend/*/* /home/${tomcat}/.OpenMRS/frontend",
-      require => [ Maven["/tmp/${frontend_name}.zip"], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ]
+      require => [ Maven["/tmp/${frontend_name}-${frontend_version}.zip"], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ]
     }
 
     # hack to change webapp name in the frontend application after it has already been built into the deb
