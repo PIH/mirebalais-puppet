@@ -52,6 +52,7 @@ class openmrs::pihemr (
   # Maven
   $maven_download_repo = hiera('maven_download_repo'),
   $maven_download_repo_config_group_id = hiera('maven_download_repo_config_group_id'),
+  $maven_download_repo_frontend_group_id = hiera('maven_download_repo_frontend_group_id'),
 ) {
 
 
@@ -201,22 +202,14 @@ class openmrs::pihemr (
 
   if ($frontend_name != "") {
 
-    if ('SNAPSHOT' in $frontend_version) {
-      $frontend_repo = "snapshots"
-    }
-    else {
-      $frontend_repo = "releases"
-    }
-
-    $frontend_url = "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${frontend_name}&r=${frontend_repo}&p=zip&v=${frontend_version}"
-
-    # TODO can we change this so it only redownloads if needed?
-    wget::fetch { 'download-openmrs-frontend':
-      source      => $frontend_url,
-      destination => "/tmp/${frontend_name}.zip",
-      cache_dir   => '/var/cache/wget',
-      timeout     => 0,
-      verbose     => false
+    maven { "/tmp/${frontend_name}.zip":
+      groupid => "${maven_download_repo_frontend_group_id}",
+      artifactid => "${frontend_name}",
+      version => "${frontend_version}",
+      ensure => latest,
+      packaging => zip,
+      repos => "${maven_download_repo}",
+      require => [Package["$package_name"], Package['maven']],
     }
 
     exec{'install-openmrs-frontend':
