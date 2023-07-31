@@ -160,7 +160,6 @@ class openmrs::pihemr (
       source      => "${config_url}",
       destination => "/tmp/${config_name}.zip",
       cache_dir   => '/var/cache/wget',
-      cache_file   => "${config_name}.zip",
       timeout     => 0,
       verbose     => false,
     }
@@ -220,7 +219,6 @@ class openmrs::pihemr (
       source      => $frontend_url,
       destination => "/tmp/${frontend_name}.zip",
       cache_dir   => '/var/cache/wget',
-      cache_file   => "${frontend_name}.zip",
       timeout     => 0,
       verbose     => false
     }
