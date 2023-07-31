@@ -13,28 +13,33 @@ class openmrs::install_frontend(
 
   if ($frontend_name != "") {
 
-    exec { 'delete-old-openmrs-frontend-contents':
-      command => "rm -rf ${tomcat_home_dir}/.OpenMRS/frontend/*"
+    exec { 'delete-old-frontend-packages':
+      command => "rm -rf /tmp/frontend*"
     }
 
-    maven { "${tomcat_home_dir}/.OpenMRS/staging/${frontend_name}.zip":
+    exec { 'delete-old-openmrs-frontend-contents':
+      command => "rm -rf ${tomcat_home_dir}/.OpenMRS/frontend/*",
+      require     => Exec['delete-old-frontend-packages']
+    }
+
+    maven { "/tmp/${frontend_name}.zip":
       groupid => "${maven_frontend_group_id}",
       artifactid => "${frontend_name}",
       version => "${frontend_version}",
       ensure => latest,
       packaging => zip,
       repos => "${maven_download_repo}",
-      require     => [ Exec['delete-old-frontend-contents'], File[ "${tomcat_home_dir}/.OpenMRS/staging"] ]
+      require     => Exec['delete-old-frontend-packages']
     }
 
     exec { 'extract-openmrs-frontend':
-      command => "unzip -o ${tomcat_home_dir}/.OpenMRS/staging/${frontend_name}.zip -d /tmp/frontend",
-      require => [ Maven["${tomcat_home_dir}/.OpenMRS/staging/${frontend_name}.zip"], Package['unzip']]
+      command => "unzip -o /tmp/${frontend_name}.zip -d /tmp/frontend",
+      require => [ Maven["/tmp/${frontend_name}.zip"], Package['unzip']]
     }
 
     exec { 'move-openmrs-frontend-contents-to-config-dir':
       command => "mv /tmp/frontend/*/* ${tomcat_home_dir}/.OpenMRS/frontend",
-      require => [Exec['extract-openmrs-frontend'], Exec['delete-old-openmrs-frontend-contents']]
+      require => [Maven["/tmp/${frontend_name}.zip"], Exec['delete-old-openmrs-frontend-contents']]
     }
 
     exec { 'change-openmrs-frontend-owner-to-tomcat':

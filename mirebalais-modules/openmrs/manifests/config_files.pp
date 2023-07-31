@@ -37,15 +37,6 @@ class openmrs::config_files (
       group  => $tomcat,
     }
 
-    # where we stage the frontend and config files
-    file { "${tomcat_home_dir}/.OpenMRS/staging":
-      ensure  => directory,
-      owner   => $tomcat,
-      group   => $tomcat,
-      mode    => '0644',
-      require => File["${tomcat_home_dir}/.OpenMRS"]
-    }
-
     file { "${tomcat_home_dir}/.OpenMRS/modules":
       ensure  => directory,
       owner   => $tomcat,
