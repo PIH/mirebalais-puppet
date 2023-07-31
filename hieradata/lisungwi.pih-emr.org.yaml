@@ -5,6 +5,8 @@ server_timezone: Africa/Blantyre
 
 pih_malawi_distribution_version: 6.9.0-SNAPSHOT
 
+maven_download_repo: http://mavenrepo.openmrs.org/nexus/content/repositories/public
+
 # mysql
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
