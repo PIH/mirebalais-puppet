@@ -162,7 +162,7 @@ class openmrs::pihemr (
     }
 
     exec{'install-openmrs-configuration':
-      command => "rm -rf /tmp/configuration && unzip -o ${tomcat_home_dir}/.OpenMRS/staging/tmp/${config_name}-${config_version}.zip -d /tmp/configuration && rm -rf ${tomcat_home_dir}/.OpenMRS/configuration && mkdir ${tomcat_home_dir}/.OpenMRS/configuration && cp -r /tmp/configuration/* ${tomcat_home_dir}/.OpenMRS/configuration",
+      command => "rm -rf /tmp/configuration && unzip -o ${tomcat_home_dir}/.OpenMRS/staging/${config_name}-${config_version}.zip -d /tmp/configuration && rm -rf ${tomcat_home_dir}/.OpenMRS/configuration && mkdir ${tomcat_home_dir}/.OpenMRS/configuration && cp -r /tmp/configuration/* ${tomcat_home_dir}/.OpenMRS/configuration",
       require => [ Maven["${tomcat_home_dir}/.OpenMRS/staging/${config_name}-${config_version}.zip"], Package['unzip'], File["${tomcat_home_dir}/.OpenMRS"] ],
       notify => [ Exec['tomcat-restart'] ]
     }
