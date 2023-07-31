@@ -80,6 +80,10 @@ class openmrs::pihemr (
 
   file { "${tomcat_home_dir}/.OpenMRS/staging":
     ensure  => absent,
+    ensure  => directory,
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0644',
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
 
@@ -148,19 +152,19 @@ class openmrs::pihemr (
 
   if ($config_name != "") {
 
-    maven { "/tmp/${config_name}-${config_version}.zip":
+    maven { "${tomcat_home_dir}/.OpenMRS/staging/${config_name}-${config_version}.zip":
       groupid => "${maven_config_group_id}",
       artifactid => "${config_name}",
       version => "${config_version}",
       ensure => latest,
       packaging => zip,
       repos => "${maven_download_repo}",
-      require => [Package["$package_name"], Package['maven']],
+      require => [Package["$package_name"], Package['maven'], File["${tomcat_home_dir}/.OpenMRS/staging"]],
     }
 
     exec{'install-openmrs-configuration':
-      command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf ${tomcat_home_dir}/.OpenMRS/configuration && mkdir ${tomcat_home_dir}/.OpenMRS/configuration && cp -r /tmp/configuration/* ${tomcat_home_dir}/.OpenMRS/configuration",
-      require => [ Maven["/tmp/${config_name}-${config_version}.zip"], Package['unzip'], File["${tomcat_home_dir}/.OpenMRS"] ],
+      command => "rm -rf /tmp/configuration && unzip -o ${tomcat_home_dir}/.OpenMRS/staging/tmp/${config_name}-${config_version}.zip -d /tmp/configuration && rm -rf ${tomcat_home_dir}/.OpenMRS/configuration && mkdir ${tomcat_home_dir}/.OpenMRS/configuration && cp -r /tmp/configuration/* ${tomcat_home_dir}/.OpenMRS/configuration",
+      require => [ Maven["${tomcat_home_dir}/.OpenMRS/staging/${config_name}-${config_version}.zip"], Package['unzip'], File["${tomcat_home_dir}/.OpenMRS"] ],
       notify => [ Exec['tomcat-restart'] ]
     }
 
@@ -199,19 +203,19 @@ class openmrs::pihemr (
 
   if ($frontend_name != "") {
 
-    maven { "/tmp/${frontend_name}.zip":
+    maven { "${tomcat_home_dir}/.OpenMRS/staging/${frontend_name}.zip":
       groupid => "${maven_frontend_group_id}",
       artifactid => "${frontend_name}",
       version => "${frontend_version}",
       ensure => latest,
       packaging => zip,
       repos => "${maven_download_repo}",
-      require => [Package["$package_name"], Package['maven']],
+      require => [Package["$package_name"], Package['maven'], File["${tomcat_home_dir}/.OpenMRS/staging"]],
     }
 
     exec{'install-openmrs-frontend':
-      command => "rm -rf /tmp/frontend && unzip -o /tmp/${frontend_name}.zip -d /tmp/frontend && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && cp -r /tmp/frontend/*/* /home/${tomcat}/.OpenMRS/frontend",
-      require => [ Maven["/tmp/${frontend_name}.zip"], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ]
+      command => "rm -rf /tmp/frontend && unzip -o ${tomcat_home_dir}/.OpenMRS/staging/${frontend_name}-${frontend_version}.zip -d /tmp/frontend && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && cp -r /tmp/frontend/*/* /home/${tomcat}/.OpenMRS/frontend",
+      require => [ Maven["${tomcat_home_dir}/.OpenMRS/staging/${frontend_name}.zip"], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ]
     }
 
     # hack to change webapp name in the frontend application after it has already been built into the deb
