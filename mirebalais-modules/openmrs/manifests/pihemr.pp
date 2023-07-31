@@ -49,6 +49,9 @@ class openmrs::pihemr (
   $smtp_userpassword = decrypt(hiera('smtp_userpassword')),
   $smtp_mailhub = decrypt(hiera('smtp_mailhub')),
 
+  # Maven
+  $maven_download_repo = hiera('maven_download_repo'),
+  $maven_download_repo_config_group_id = hiera('maven_download_repo_config_group_id'),
 ) {
 
 
@@ -144,6 +147,7 @@ class openmrs::pihemr (
     command => "sed -i 's/<session-config>.*$/<session-config><session-timeout>${session_timeout}<\/session-timeout>/' ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml",
     onlyif => "test -f ${tomcat_webapp_dir}/${webapp_name}/WEB-INF/web.xml"
   }
+  /*
 
   if ($config_name != "") {
 
@@ -155,13 +159,16 @@ class openmrs::pihemr (
     }
 
     $config_url = "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}"
+  */
 
-    wget::fetch { 'download-openmrs-configuration':
-      source      => "${config_url}",
-      destination => "/tmp/${config_name}.zip",
-      cache_dir   => '/var/cache/wget',
-      timeout     => 0,
-      verbose     => false,
+    maven { "/tmp/${config_name}-${config_version}.zip":
+      groupid => "${maven_download_repo_config_group_id}",
+      artifactid => "${config_name}",
+      version => "${config_version}",
+      ensure => latest,
+      packaging => zip,
+      repos => "${maven_download_repo}",
+      require => [Exec['cleanup-downloaded-openmrs-config-dirs'], Package['maven']],
     }
 
     exec{'install-openmrs-configuration':
