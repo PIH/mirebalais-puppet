@@ -74,6 +74,13 @@ class openmrs::pihemr (
     mode    => '0644'
   }
 
+  file { "${tomcat_home_dir}/.OpenMRS/staging":
+    ensure  => directory,
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0644',
+    require => File["${tomcat_home_dir}/.OpenMRS"]
+  }
 
   file { "${tomcat_home_dir}/.OpenMRS/modules":
     ensure  => directory,
@@ -147,17 +154,15 @@ class openmrs::pihemr (
       $config_repo = "releases"
     }
 
-    # https://repo1.maven.org/maven2/org/pih/openmrs/openmrs-config-pihsl/1.17.0/
-
     $config_url = "https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=${config_name}&r=${config_repo}&p=zip&v=${config_version}"
 
-    # TODO can we change this so it only redownloads if needed?
     wget::fetch { 'download-openmrs-configuration':
       source      => "${config_url}",
       destination => "/tmp/${config_name}.zip",
+      cache_dir   => '/var/cache/wget',
+      cache_file   => "${config_name}.zip",
       timeout     => 0,
       verbose     => false,
-      redownload => true,
     }
 
     exec{'install-openmrs-configuration':
@@ -214,9 +219,10 @@ class openmrs::pihemr (
     wget::fetch { 'download-openmrs-frontend':
       source      => $frontend_url,
       destination => "/tmp/${frontend_name}.zip",
+      cache_dir   => '/var/cache/wget',
+      cache_file   => "${frontend_name}.zip",
       timeout     => 0,
-      verbose     => false,
-      redownload  => true,
+      verbose     => false
     }
 
     exec{'install-openmrs-frontend':
