@@ -157,12 +157,12 @@ class openmrs::pihemr (
       ensure => latest,
       packaging => zip,
       repos => "${maven_download_repo}",
-      require => [Exec['cleanup-downloaded-openmrs-config-dirs'], Package['maven']],
+      require => [Package["$package_name"], Package['maven']],
     }
 
     exec{'install-openmrs-configuration':
       command => "rm -rf /tmp/configuration && unzip -o /tmp/${config_name}.zip -d /tmp/configuration && rm -rf ${tomcat_home_dir}/.OpenMRS/configuration && mkdir ${tomcat_home_dir}/.OpenMRS/configuration && cp -r /tmp/configuration/* ${tomcat_home_dir}/.OpenMRS/configuration",
-      require => [ Wget::Fetch['download-openmrs-configuration'], Package['unzip'], File["${tomcat_home_dir}/.OpenMRS"] ],
+      require => [ Maven["/tmp/${config_name}-${config_version}.zip"], Package['unzip'], File["${tomcat_home_dir}/.OpenMRS"] ],
       notify => [ Exec['tomcat-restart'] ]
     }
 
