@@ -636,6 +636,9 @@ node 'zt-cloud-dw-petl-test' {
 
   include docker
   include percona::install_restore_scripts
+  class { 'percona::setup_cron_to_refresh_report_dbs':
+    reporting_system => 'petl-test'
+  }
 
   include java
   include petl
