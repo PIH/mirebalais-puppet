@@ -24,10 +24,6 @@ config_version: ""
 repo_url: ENC[guOgejmsDLkHjo2iCrV9MAWEt/Y9usi32Rs4qPepBu0=]
 pihemr_debian_repo_url: https://openmrs.jfrog.io/artifactory/deb-pih/
 
-
-prod_dw_petl_sqlserver_host: foo
-prod_dw_petl_sqlserver_port: foo
-
 mysql_server_id: 1
 mysql_root_password: foo
 mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]

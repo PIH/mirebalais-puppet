@@ -196,8 +196,29 @@ node 'vagrant-test.pih-emr.org' {
   include percona::install_restore_scripts
   include percona::setup_cron_to_refresh_report_dbs
 
-  include petl
-  include petl::mysql
+  class { 'petl::install':
+    petl => "petl",
+    petl_user => "petl",
+    petl_home_dir => "/opt/petl",
+    petl_site => "zl-test",
+    petl_config_name => "zl-etl",
+    petl_config_version => "1.8.0-SNAPSHOT",
+    petl_server_port => 9109,
+    petl_sqlserver_databaseName => "openmrs_haiti_warehouse",
+    petl_cron_time => "0 0 22 ? * *",
+  }
+
+  class { 'petl::install':
+    petl => "petl-ces",
+    petl_user => "petl-ces",
+    petl_home_dir => "/opt/petl-ces",
+    petl_site => "ces-test",
+    petl_config_name => "ces-etl",
+    petl_config_version => "1.8.0-SNAPSHOT",
+    petl_server_port => 9209,
+    petl_sqlserver_databaseName => "openmrs_ces_warehouse",
+    petl_cron_time => "",
+  }
 
 }
 
