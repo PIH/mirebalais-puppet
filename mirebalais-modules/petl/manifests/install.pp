@@ -14,7 +14,7 @@ class petl::install (
   $petl_mysql_user                 = decrypt(hiera("petl_mysql_user")),
   $petl_mysql_password             = decrypt(hiera("petl_mysql_password")),
   $petl_sqlserver_host             = decrypt(hiera("petl_sqlserver_host")),
-  $petl_sqlserver_port             = decrypt(hiera("petl_sqlserver_port")),
+  $petl_sqlserver_port             = hiera("petl_sqlserver_port"),
   $petl_sqlserver_databaseName     = hiera("petl_sqlserver_databaseName"),
   $petl_sqlserver_user             = decrypt(hiera("petl_sqlserver_user")),
   $petl_sqlserver_password         = decrypt(hiera("petl_sqlserver_password")),
