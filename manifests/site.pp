@@ -639,7 +639,7 @@ node 'zt-cloud-dw-petl-test' {
     reporting_system => 'petl-test'
   }
 
-  class { 'petl::install':
+  petl::install { 'install-petl-zl-etl':
     petl => "petl",
     petl_user => "petl",
     petl_home_dir => "/opt/petl",
@@ -651,7 +651,7 @@ node 'zt-cloud-dw-petl-test' {
     petl_cron_time => "0 0 22 ? * *",
   }
 
-  class { 'petl::install':
+  petl::install { 'install-petl-ces-etl':
     petl => "petl-ces",
     petl_user => "petl-ces",
     petl_home_dir => "/opt/petl-ces",
