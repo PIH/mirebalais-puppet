@@ -190,7 +190,7 @@ else
         --character-set-server=utf8 \
         --collation-server=utf8_general_ci \
         --max_allowed_packet=1G \
-        --innodb-buffer-pool-size=2G
+        --innodb-buffer-pool-size=256M
     sleep 10
     echoWithDate "Stopping MySQL container"
     docker stop $MYSQL_DOCKER_CONTAINER || true
