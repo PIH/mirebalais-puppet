@@ -18,8 +18,7 @@ petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
 # PETL SQL Server 2106
 petl_sqlserver_databaseName: imb_omrs_dw,openmrs_imb_warehouse
-petl_sqlserver_host: 10.160.20.93
-petl_sqlserver_port: 1433
+petl_sqlserver_host: "10.160.20.93"
 petl_sqlserver_user: ENC[v1pMAcFAh0ag0IlcLSYolQ==:WDaxbE1p9+iN7x8/aybOWA==:MWVZR2U5YlBXemlyVDNUVXdxSjB1dz09]
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
 

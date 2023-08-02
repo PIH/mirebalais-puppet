@@ -143,8 +143,8 @@ petl_mysql_user: foo
 petl_mysql_password: foo
 
 # PETL SQL Server
-petl_sqlserver_host: localhost
-petl_sqlserver_port: 1433
+petl_sqlserver_host: "localhost"
+petl_sqlserver_port: "1433"
 petl_sqlserver_databaseName: openmrs_extractions
 petl_sqlserver_user: foo
 petl_sqlserver_password: bar

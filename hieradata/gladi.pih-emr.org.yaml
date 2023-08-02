@@ -28,8 +28,7 @@ petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 petl_mysql_host: 10.160.16.24
 
 # PETL SQL Server 2016
-petl_sqlserver_host: 10.160.12.28
-petl_sqlserver_port: 1433
+petl_sqlserver_host: "10.160.12.28"
 petl_sqlserver_databaseName: openmrs_sl_warehouse
 petl_sqlserver_user: medinfoadmin
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]

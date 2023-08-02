@@ -21,8 +21,7 @@ petl_mysql_host_wellbody: 10.160.16.20
 
 # PETL SQL Server 2019
 petl_sqlserver_databaseName: sl_omrs_dw
-petl_sqlserver_host: 10.160.16.29
-petl_sqlserver_port: 1433
+petl_sqlserver_host: "10.160.16.29"
 petl_sqlserver_user: ENC[LRzfnyZBTUyq1LZ3uVSodQ==:MiyEkggJkKpMii5bGds7cg==:eVZQSXJxSDhnQlkwMTRoWHNuZXdlZz09]
 petl_sqlserver_password: ENC[abxBHcUehobP6Aid8J5ICg==:tHDwb3EtDzu+oXH88Xf9PQ==:dVBWQ2tmS212a0Z6KzVMdEF0MksrZz09]
 

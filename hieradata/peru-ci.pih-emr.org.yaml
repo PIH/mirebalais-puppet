@@ -18,8 +18,7 @@ mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 petl_mysql_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
 # PETL SQL Server 2014 Boston office
-petl_sqlserver_host: 10.160.12.28
-petl_sqlserver_port: 1433
+petl_sqlserver_host: "10.160.12.28"
 petl_sqlserver_databaseName: openmrs_peruci
 petl_sqlserver_user: medinfoadmin
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
