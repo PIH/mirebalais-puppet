@@ -7,6 +7,7 @@ petl: petl
 petl_version: "3.4.0"
 petl_site: ces-prod
 petl_home_dir: /opt/petl
+petl_server_port: 9110
 
 # PETL config
 petl_config_dir: "configurations"

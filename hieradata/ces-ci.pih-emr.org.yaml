@@ -20,6 +20,7 @@ mysql_sort_buffer_size: 2621440
 petl: "petl"
 petl_site: "ces-ci"
 petl_home_dir: "/opt/petl"
+petl_server_port: 9110
 
 # PETL config
 petl_config_name: ces-etl
