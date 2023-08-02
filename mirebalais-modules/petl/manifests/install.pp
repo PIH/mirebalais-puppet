@@ -1,5 +1,6 @@
 class petl::install (
   $petl                            = hiera("petl"),
+  $petl_user                       = hiera("petl_user"),
   $petl_home_dir                   = hiera("petl_home_dir"),
   $petl_site                       = hiera('petl_site'),
   $petl_version                    = hiera("petl_version"),
