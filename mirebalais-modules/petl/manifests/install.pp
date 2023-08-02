@@ -150,7 +150,7 @@ class petl::install (
 
     # If there is a cron time configured, this indicates that PETL should run automatically and will run jobs at the specified time
 
-    if (${petl_cron_time} != "") {
+    if ($petl_cron_time != "") {
         exec { "petl-startup-enable":
           command => "/usr/sbin/update-rc.d -f ${petl} defaults 81",
           user    => 'root',
