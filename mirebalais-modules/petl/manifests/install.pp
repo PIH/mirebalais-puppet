@@ -1,4 +1,4 @@
-class petl::install (
+define petl::install (
   $petl                            = hiera("petl"),
   $petl_user                       = hiera("petl_user"),
   $petl_home_dir                   = hiera("petl_home_dir"),
