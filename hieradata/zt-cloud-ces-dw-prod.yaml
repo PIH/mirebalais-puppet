@@ -7,6 +7,7 @@ petl: petl
 petl_version: "3.4.0"
 petl_site: ces-prod
 petl_home_dir: /opt/petl
+petl_server_port: 9110
 
 # PETL config
 petl_config_dir: "configurations"
@@ -21,8 +22,7 @@ petl_mysql_port: 3356
 
 # PETL SQL Server 2106
 petl_sqlserver_databaseName: ces_omrs_dw
-petl_sqlserver_host: 10.160.10.27
-petl_sqlserver_port: 1433
+petl_sqlserver_host: "10.160.10.27"
 petl_sqlserver_user: ENC[oZyLOf9hRltDRTDLuI/iDQ==:g4wkH88i5unyB9rwxJbIpg==:VWs5NHRwN2dJazllQjY5S1dFM3NWZz09]
 petl_sqlserver_password: ENC[F0sWjKoZadh47wFnQlmi4g==:a1lRgWXXyj1ogbATPFNMSQ==:TzlkM2x3eGp4T1VHN3Fvd3Z2RU9ydz09]
 

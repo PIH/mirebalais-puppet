@@ -192,12 +192,7 @@ node 'vagrant-test.pih-emr.org' {
   include mysql_setup
 
   include docker
-
-  include percona::install_restore_scripts
-  include percona::setup_cron_to_refresh_report_dbs
-
   include petl
-  include petl::mysql
 
 }
 
@@ -632,13 +627,40 @@ node 'zt-cloud-dw-petl-test' {
   include apt_upgrades
   include wget
   include unzip
+  include java
   include maven_setup
-
   include docker
+
   include percona::install_restore_scripts
 
-  include java
-  include petl
+  class { 'percona::setup_cron_to_refresh_report_dbs':
+    reporting_system => 'petl-test'
+  }
+
+  petl::install { 'install-petl-zl-etl':
+    petl => "petl",
+    petl_user => "petl",
+    petl_home_dir => "/opt/petl",
+    petl_site => "zl-test",
+    petl_config_name => "zl-etl",
+    petl_config_version => "1.8.0-SNAPSHOT",
+    petl_server_port => 9109,
+    petl_sqlserver_databaseName => "openmrs_haiti_warehouse",
+    petl_cron_time => "0 0 22 ? * *",
+  }
+
+  petl::install { 'install-petl-ces-etl':
+    petl => "petl-ces",
+    petl_user => "petl-ces",
+    petl_home_dir => "/opt/petl-ces",
+    petl_site => "ces-test",
+    petl_config_name => "ces-etl",
+    petl_config_version => "1.8.0-SNAPSHOT",
+    petl_server_port => 9110,
+    petl_sqlserver_databaseName => "openmrs_ces_warehouse",
+    petl_cron_time => "",
+  }
+
 }
 
 node 'malawi-dw.pih-emr.org' {

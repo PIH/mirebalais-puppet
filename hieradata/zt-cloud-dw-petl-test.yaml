@@ -5,31 +5,15 @@ server_timezone: America/New_York
 # Percona Restore
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 
-# PETL
-petl: petl,petl-ces
-petl_site: zl-test,ces-test
-petl_home_dir: /opt/petl,/opt/petl-ces
-
-# PETL config
-petl_config_dir: "configurations"
-petl_config_name: zl-etl,ces-etl
-petl_config_version: 1.8.0-SNAPSHOT,1.8.0-SNAPSHOT # These versions may change depending on the how often, a release is made
-
 # PETL MySQL
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
-# PETL SQL Server 2106
-petl_sqlserver_databaseName: openmrs_haiti_warehouse,openmrs_ces_warehouse
-petl_sqlserver_host: 10.160.12.28
-petl_sqlserver_port: 1433
+# PETL SQL Server
+petl_sqlserver_host: "10.160.12.28"
 petl_sqlserver_user: ENC[v1pMAcFAh0ag0IlcLSYolQ==:WDaxbE1p9+iN7x8/aybOWA==:MWVZR2U5YlBXemlyVDNUVXdxSjB1dz09]
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
-
-# PETL Crons
-petl_error_subject: "%{hiera('petl_site')} PETL Errors"
-petl_cron_time: "0 0 22 ? * *"
-petl_ces_cron_time: "0 0 3 ? * *"
 
 # PETL warehouse DB
 # This is used in malawi
@@ -37,21 +21,6 @@ petl_ces_cron_time: "0 0 3 ? * *"
 # ensure petl_warehouse_db is set to ""
 petl_warehouse_db: ""
 petl_mysql_user_ip: localhost
-
-mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-mysql_expire_logs_days: 1
-mysql_binary_logging: false
-mysql_net_read_timeout: 6000
-mysql_net_write_timeout: 6000
-mysql_wait_timeout: 2880000
-mysql_interactive_timeout: 2880000
-mysql_innodb_buffer_pool_size: 5G
-mysql_innodb_buffer_pool_instances: 5
-mysql_key_buffer_size: 2G
-mysql_sort_buffer_size: 2621440
-
-openmrs_db: openmrs
-openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
 # prometheus node exporter
 node_exporter_listen_ip: ENC[7UKw1KmRszr7v4wY2RxlqQ==:MOSRONq5aUBrTbB5pNHd+A==:Z0lZNG1HSXliZDBLS3cxZ2srY1NaUT09]
