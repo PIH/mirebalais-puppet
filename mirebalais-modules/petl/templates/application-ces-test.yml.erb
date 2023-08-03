@@ -1,5 +1,5 @@
 petl:
-  maxConcurrentJobs: 7
+  maxConcurrentJobs: 15
   homeDir: "/opt/petl-ces"
   datasourceDir: "/opt/petl-ces/configurations/datasources"
   jobDir: "/opt/petl-ces/configurations/jobs"
@@ -12,7 +12,7 @@ executeCron:
   refreshCesCiData: ""
 
 server:
-  port: "9110"
+  port: "<%= @petl_server_port -%>"
 
 logging:
   level:

@@ -20,6 +20,7 @@ mysql_sort_buffer_size: 2621440
 petl: "petl"
 petl_site: "ces-ci"
 petl_home_dir: "/opt/petl"
+petl_server_port: 9110
 
 # PETL config
 petl_config_name: ces-etl
@@ -29,11 +30,8 @@ petl_config_version: 1.8.0-SNAPSHOT
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
-
 # PETL SQL Server 2016
-petl_sqlserver_host: 10.160.12.28
-petl_sqlserver_port: 1433
-
+petl_sqlserver_host: "10.160.12.28"
 petl_sqlserver_databaseName: openmrs_ces_ci
 petl_sqlserver_user: medinfoadmin
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
