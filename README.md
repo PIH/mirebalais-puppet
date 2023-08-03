@@ -27,11 +27,14 @@ As root, create a Vagrant directory
 cd into this directory and create a VagrantFile with the contents of the VagrantFile in this repo (see above)
 vagrant up
 vagrant ssh
-sudo apt-get install openssh-server git
-sudo rm -rf /etc/puppet
-git clone https://github.com/PIH/mirebalais-puppet.git /etc/puppet
-cd /etc/puppet
-sudo ./install.sh (note that you have to have credentials to log into the amigo server)
+sudo su -
+cd /etc/mirebalais-puppet
+
+For the initial install, run:
+./vagrant-install.sh
+
+For subsequent updates, run:
+./vagrant-apply.sh
 ```
 
 ### Using bundler
