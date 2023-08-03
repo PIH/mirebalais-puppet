@@ -334,7 +334,7 @@ node 'thomonde.pih-emr.org', 'hinche.pih-emr.org', 'cercalasource.pih-emr.org', 
 
 }
 
-node 'zltraining.pih-emr.org' {
+node 'zltraining','zltraining.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
