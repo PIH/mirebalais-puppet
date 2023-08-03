@@ -160,7 +160,7 @@ define petl::install (
         exec { "${petl}-service-start":
           command => "service ${petl} start",
           user    => 'root',
-          require => Service["${petl}"],
+          require => File["/etc/init.d/${petl}"],
         }
     }
     else {
