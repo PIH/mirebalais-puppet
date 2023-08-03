@@ -170,7 +170,8 @@ node 'humci.pih-emr.org' {
 
   include openmrs::atomfeed
 
-  include petl
+  petl::install { 'install-petl':
+  }
 
 }
 
@@ -193,8 +194,8 @@ node 'vagrant-test.pih-emr.org' {
 
   include docker
 
-  include percona::install_restore_scripts
-  include percona::setup_cron_to_refresh_report_dbs
+  petl::install { 'install-petl':
+  }
 
 }
 
