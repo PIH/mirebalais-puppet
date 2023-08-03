@@ -170,8 +170,7 @@ node 'humci.pih-emr.org' {
 
   include openmrs::atomfeed
 
-  petl::install { 'install-petl':
-  }
+  include petl
 
 }
 
@@ -193,9 +192,7 @@ node 'vagrant-test.pih-emr.org' {
   include mysql_setup
 
   include docker
-
-  petl::install { 'install-petl':
-  }
+  include petl
 
 }
 
