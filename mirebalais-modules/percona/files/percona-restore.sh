@@ -28,6 +28,7 @@ MYSQL_DATA_DIR=
 DEIDENTIFY=false
 CREATE_PETL_USER=false
 RESTART_OPENMRS=false
+MYSQL_BUFFER_POOL_SIZE=128M
 
 for i in "$@"
 do
@@ -46,6 +47,10 @@ case $i in
     ;;
     --mysqlDockerDataDir=*)
       MYSQL_DATA_DIR="${i#*=}"
+      shift # past argument=value
+    ;;
+    --mysqlBufferPoolSize=*)
+      MYSQL_BUFFER_POOL_SIZE="${i#*=}"
       shift # past argument=value
     ;;
     --deidentify=*)
@@ -190,7 +195,7 @@ else
         --character-set-server=utf8 \
         --collation-server=utf8_general_ci \
         --max_allowed_packet=1G \
-        --innodb-buffer-pool-size=256M
+        --innodb-buffer-pool-size=${MYSQL_BUFFER_POOL_SIZE}
     sleep 10
     echoWithDate "Stopping MySQL container"
     docker stop $MYSQL_DOCKER_CONTAINER || true

@@ -1,19 +1,36 @@
 #!/bin/bash
 
+# Call this with country site port
+# Note, the 127.0.0.1 prefix on the port results in access being restricted to localhost
+# This allows the database user to be allowed access from '%' while still locking down access to the DB from outside
 restoreSite() {
-    echo "Restoring site: ${1} into container ${2} using port ${3}"
+    echo "Restoring from ${1}/${2} into container ${1}_${2}_mysql using port ${3}"
     /bin/bash <%= @percona_restore_dir -%>/percona-restore-and-email.sh \
-        --siteToRestore="${1}" --mysqlDockerContainerName="${2}" --mysqlDockerPort="${3}" --deidentify="true" --createPetlUser="true"
+        --siteToRestore="${1}/${2}" --mysqlDockerContainerName="${1}_${2}_mysql" --mysqlDockerPort="127.0.0.1:${3}" --deidentify="true" --createPetlUser="true"
 }
 
 # Restore databases from each site into individual Docker containers exposed on different ports
-# Note, the 127.0.0.1 prefix on the port results in access being restricted to localhost
-# This allows the database user to be allowed access from '%' while still locking down access to the DB from outside
 
-restoreSite haiti/cange haiti_cange_mysql 127.0.0.1:3310
-restoreSite haiti/hinche haiti_hinche_mysql 127.0.0.1:3311
-restoreSite haiti/hsn haiti_hsn_mysql 127.0.0.1:3312
-restoreSite haiti/lacolline haiti_lacolline_mysql 127.0.0.1:3313
-restoreSite haiti/thomonde haiti_thomonde_mysql 127.0.0.1:3314
-restoreSite haiti/haitihiv haiti_haitihiv_mysql 127.0.0.1:3315
-restoreSite haiti/mirebalais haiti_mirebalais_mysql 127.0.0.1:3316
+# Haiti
+
+restoreSite haiti cange 3310
+restoreSite haiti hinche 3311
+restoreSite haiti hsn 3312
+restoreSite haiti lacolline 3313
+restoreSite haiti thomonde 3314
+restoreSite haiti haitihiv 3315
+restoreSite haiti mirebalais 3316
+
+# Mexico
+
+restoreSite mexico ces-capitan 3410
+restoreSite mexico ces-honduras 3411
+restoreSite mexico ces-laguna 3412
+restoreSite mexico ces-letrero 3413
+restoreSite mexico ces-matazano 3414
+restoreSite mexico ces-plan-alta 3415
+restoreSite mexico ces-plan-baja 3416
+restoreSite mexico ces-prod 3417
+restoreSite mexico ces-reforma 3418
+restoreSite mexico ces-salvador 3419
+restoreSite mexico ces-soledad 3420
