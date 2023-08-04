@@ -658,7 +658,7 @@ node 'zt-cloud-dw-petl-test' {
     petl_config_version => "1.8.0-SNAPSHOT",
     petl_server_port => 9110,
     petl_sqlserver_databaseName => "openmrs_ces_warehouse",
-    petl_cron_time => "",
+    petl_cron_time => "0 0 4 ? * *",
   }
 
 }
