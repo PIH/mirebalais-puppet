@@ -32,7 +32,7 @@ petl_sqlserver_password: ENC[F0sWjKoZadh47wFnQlmi4g==:a1lRgWXXyj1ogbATPFNMSQ==:T
 
 # PETL Crons
 petl_error_subject: "CES Prod PETL Errors"
-petl_cron_time: "0 0 20 ? * *"
+petl_cron_time: "0 0 0 ? * *"
 
 # PETL warehouse DB
 # This is used in malawi

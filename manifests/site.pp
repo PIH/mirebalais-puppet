@@ -160,8 +160,8 @@ node 'zt-cloud-ces-dw-prod' {
   include percona::install_restore_scripts
   include percona::setup_cron_to_refresh_report_dbs
 
-  #include petl::java
-  #include petl
+  include petl::java
+  include petl
 }
 
 node 'humci.pih-emr.org' {
