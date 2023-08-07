@@ -125,7 +125,6 @@ define petl::install (
 
     service { "${petl}":
       ensure  => stopped,
-      enable  => true,
       require => File["/etc/init.d/${petl}"],
     }
 

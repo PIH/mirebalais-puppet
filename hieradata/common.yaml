@@ -131,7 +131,7 @@ petl_java_opts: ""
 
 # PETL Config
 petl_config_name: zl-etl
-petl_config_version: 1.8.0-SNAPSHOT
+petl_config_version: 1.9.0-SNAPSHOT
 petl_config_dir: "configurations"
 
 # PETL MySQL
