@@ -142,6 +142,28 @@ node 'hai-cloud-inf-omrshiv-report' {
   include petl::mysql
 }
 
+node 'zt-cloud-ces-dw-prod' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+  include maven_setup
+  include docker
+
+  include percona::install_restore_scripts
+  include percona::setup_cron_to_refresh_report_dbs
+
+  include petl::java
+  include petl
+}
+
 node 'humci.pih-emr.org' {
 
   class { 'apt':

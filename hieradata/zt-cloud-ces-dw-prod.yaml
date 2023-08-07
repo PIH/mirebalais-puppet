@@ -37,6 +37,7 @@ petl_cron_time: "0 0 20 ? * *"
 petl_warehouse_db: ""
 petl_mysql_user_ip: localhost
 
+backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 mysql_root_password: ENC[DI05Oc0rST80JWl7lTkQTA==:5xrqTCu7aGCsQ/sseVINkA==:V3BxR20wcnJWSlV2UldoZnl6UGM3UT09]
 mysql_expire_logs_days: 1
 mysql_binary_logging: false
