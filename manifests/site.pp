@@ -426,7 +426,6 @@ node 'ci.pih-emr.org' {
 
   include openmrs
   include openmrs::initial_setup
-  include openmrs::core_2_6_snapshot
 
 }
 
