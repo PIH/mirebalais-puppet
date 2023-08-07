@@ -249,6 +249,7 @@ frontend_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?
 # percona restore
 percona_home_dir: "/home/percona"
 percona_restore_dir: "/home/percona/restore"
+percona_mysql_root_password: "%{hiera('mysql_root_password')}"
 
 # TODO: Remove these as we go.  Below files are from pre-existing percona processes
 perconaHomeDir: "/home/percona"

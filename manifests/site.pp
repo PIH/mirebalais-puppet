@@ -142,6 +142,28 @@ node 'hai-cloud-inf-omrshiv-report' {
   include petl::mysql
 }
 
+node 'zt-cloud-ces-dw-prod' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+  include maven_setup
+  include docker
+
+  include percona::install_restore_scripts
+  include percona::setup_cron_to_refresh_report_dbs
+
+  include petl::java
+  include petl
+}
+
 node 'humci.pih-emr.org' {
 
   class { 'apt':
@@ -654,7 +676,7 @@ node 'zt-cloud-dw-petl-test' {
     petl_home_dir => "/opt/petl-ces",
     petl_site => "ces-test",
     petl_config_name => "ces-etl",
-    petl_config_version => "1.9.0-SNAPSHOT",
+    petl_config_version => "1.10.0-SNAPSHOT",
     petl_server_port => 9110,
     petl_sqlserver_databaseName => "openmrs_ces_warehouse",
     petl_cron_time => "0 0 4 ? * *",
