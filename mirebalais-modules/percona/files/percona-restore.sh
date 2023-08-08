@@ -237,6 +237,23 @@ else
     exit 1
 fi
 
+echoWithDate "Adding backup information to the database"
+BACKUP_DATE=$(cat ${STATUS_DATA_DIR}/percona.7z.date)
+CURRENT_DATE=$(date '+%Y-%m-%d-%H-%M-%S')
+BACKUP_DATE_SQL="insert into global_property (property, property_value, uuid) values ('percona_backup_date', '${BACKUP_DATE}', uuid());"
+RESTORE_DATE_SQL="insert into global_property (property, property_value, uuid) values ('percona_restore_date', '${CURRENT_DATE}', uuid());"
+if [ -z "${MYSQL_DOCKER_CONTAINER}" ]; then
+    mysql -uroot -p${MYSQL_ROOT_PW} -e "${BACKUP_DATE_SQL} ${RESTORE_DATE_SQL}" openmrs
+else
+    docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -u root -p${MYSQL_ROOT_PW} -e "${BACKUP_DATE_SQL} ${RESTORE_DATE_SQL}" openmrs
+fi
+if [ $? -eq 0 ]; then
+    echoWithDate "Backup information added successfully"
+else
+  echoWithDate "An error occurred while adding backup information to the database"
+  exit 1
+fi
+
 if [ "${DEIDENTIFY}" == "true" ]; then
   echoWithDate "De-identifying the database"
   if [ -z "${MYSQL_DOCKER_CONTAINER}" ]; then
