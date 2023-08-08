@@ -243,8 +243,6 @@ docker_user: ENC[h2rLm+7MduiV0n6kphuvHw==:fnzJi5CZcS03vAQDCjaF1Q==:Rmczclg4eVBLN
 #frontend
 frontend_name: ''
 frontend_version: ''
-frontend_repo: ''
-frontend_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('frontend_name')}&r=%{hiera('frontend_repo')}&p=zip&v=%{hiera('frontend_version')}
 
 # percona restore
 percona_home_dir: "/home/percona"
