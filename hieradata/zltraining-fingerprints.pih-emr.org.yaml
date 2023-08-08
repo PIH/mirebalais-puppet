@@ -2,7 +2,7 @@
 webapp_name: openmrs
 site_domain: zltraining.pih-emr.org
 
-pih_config: mirebalais,mirebalais-training
+pih_config: mirebalais,mirebalais-training,haiti-training
 config_name: openmrs-config-zl
 config_version: 1.45.0-SNAPSHOT
 
