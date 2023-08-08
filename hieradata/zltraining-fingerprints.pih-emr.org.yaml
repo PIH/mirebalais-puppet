@@ -20,6 +20,10 @@ openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 
+biometrics_enabled: true
+biometrics_webapp_name: biometrics
+biometrics_port: 9000
+
 mysql_server_id: 1
 mysql_innodb_buffer_pool_size: 3G
 mysql_innodb_buffer_pool_instances: 3
