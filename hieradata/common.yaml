@@ -170,6 +170,9 @@ biometrics_enabled: false
 biometrics_webapp_name: ''
 biometrics_port: 9009
 
+# csrfguard
+csrfguard_enabled: true
+
 # feature toggle settings
 insurance_collection: true
 radiology_contrast_studies: false
