@@ -238,7 +238,7 @@ else
 fi
 
 echoWithDate "Adding backup information to the database"
-BACKUP_DATE=$(cat ${STATUS_DATA_DIR}/percona.7z.date)
+BACKUP_DATE=$(cat ${DOWNLOAD_DIR}/percona.7z.date)
 CURRENT_DATE=$(date '+%Y-%m-%d-%H-%M-%S')
 BACKUP_DATE_SQL="insert into global_property (property, property_value, uuid) values ('percona_backup_date', '${BACKUP_DATE}', uuid());"
 RESTORE_DATE_SQL="insert into global_property (property, property_value, uuid) values ('percona_restore_date', '${CURRENT_DATE}', uuid());"
