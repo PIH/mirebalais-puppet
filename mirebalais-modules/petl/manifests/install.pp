@@ -148,30 +148,28 @@ define petl::install (
       require => [ Wget::Fetch["download-petl-config-dir for ${petl_site}"], Package['unzip'], Service["${petl}"]],
     }
 
-    # If there is a cron time configured, this indicates that PETL should run automatically and will run jobs at the specified time
-
-    if ($petl_cron_time != "") {
-        exec { "${petl}-startup-enable":
-          command => "/usr/sbin/update-rc.d -f ${petl} defaults 81",
-          user    => 'root',
-          require => File["/etc/init.d/${petl}"]
-        }
-        exec { "${petl}-service-start":
-          command => "service ${petl} start",
-          user    => 'root',
-          require => File["/etc/init.d/${petl}"],
-        }
-    }
-    else {
-        exec { 'remove ${petl} automatic startup files':
-            command => "rm -rf /etc/rc0.d/K01${petl} && rm -rf /etc/rc1.d/K01${petl} && rm -rf /etc/rc2.d/S03${petl} && rm -rf /etc/rc3.d/S03${petl} && rm -rf /etc/rc4.d/S03${petl} && rm -rf /etc/rc5.d/S03${petl} && rm -rf /etc/rc6.d/K01${petl}",
-            require => File["/etc/init.d/${petl}"]
-        }
-    }
-
     file { "/etc/logrotate.d/petl-${petl_site}":
         ensure  => file,
         content => template("petl/logrotate-${petl}.erb")
+    }
+
+    # Setup PETL to startup at boot and restart now
+
+    exec { 'remove ${petl} automatic startup files':
+        command => "rm -rf /etc/rc0.d/K01${petl} && rm -rf /etc/rc1.d/K01${petl} && rm -rf /etc/rc2.d/S03${petl} && rm -rf /etc/rc3.d/S03${petl} && rm -rf /etc/rc4.d/S03${petl} && rm -rf /etc/rc5.d/S03${petl} && rm -rf /etc/rc6.d/K01${petl}",
+        require => File["/etc/init.d/${petl}"]
+    }
+
+    exec { "${petl}-startup-enable":
+      command => "/usr/sbin/update-rc.d -f ${petl} defaults 81",
+      user    => 'root',
+      require => File["/etc/init.d/${petl}"]
+    }
+
+    exec { "${petl}-service-start":
+      command => "service ${petl} start",
+      user    => 'root',
+      require => File["/etc/init.d/${petl}"],
     }
 
 }
