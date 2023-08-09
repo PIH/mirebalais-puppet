@@ -41,14 +41,14 @@ datasources:
 
   openmrs:
     kgh:
-       host: "<%= @petl_mysql_host_kgh -%>"
+       host: "10.70.13.146"
        port: "<%= @petl_mysql_port -%>"
        databaseName: "<%= @petl_mysql_databaseName -%>"
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
     wellbody:
-       host: "<%= @petl_mysql_host_wellbody -%>"
+       host: "10.160.16.20"
        port: "<%= @petl_mysql_port -%>"
        databaseName: "<%= @petl_mysql_databaseName -%>"
        user: "${datasources.mysql.user}"

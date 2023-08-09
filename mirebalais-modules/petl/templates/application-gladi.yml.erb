@@ -40,15 +40,15 @@ datasources:
     options: "<%= @petl_mysql_options -%>"
 
   openmrs:
-    gladi:
-      host: "localhost"
+    kgh:
+      host: "10.160.16.24"
       port: "<%= @petl_mysql_port -%>"
       databaseName: "openmrs"
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
-    kgh_test:
-      host: "<%= @petl_mysql_host -%>"
+    wellbody:
+      host: "localhost"
       port: "<%= @petl_mysql_port -%>"
       databaseName: "openmrs"
       user: "${datasources.mysql.user}"
