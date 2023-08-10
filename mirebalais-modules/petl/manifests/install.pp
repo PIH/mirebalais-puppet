@@ -155,7 +155,7 @@ define petl::install (
 
     # Setup PETL to startup at boot and restart now
 
-    exec { 'remove ${petl} automatic startup files':
+    exec { "remove ${petl} automatic startup files":
         command => "rm -rf /etc/rc0.d/K01${petl} && rm -rf /etc/rc1.d/K01${petl} && rm -rf /etc/rc2.d/S03${petl} && rm -rf /etc/rc3.d/S03${petl} && rm -rf /etc/rc4.d/S03${petl} && rm -rf /etc/rc5.d/S03${petl} && rm -rf /etc/rc6.d/K01${petl}",
         require => File["/etc/init.d/${petl}"]
     }
