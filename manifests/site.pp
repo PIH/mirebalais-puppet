@@ -315,6 +315,7 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   include mysql_setup
   include apache2
   include tomcat
+  include docker
 
   include openmrs
   include openmrs::initial_setup
