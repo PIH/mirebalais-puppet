@@ -21,6 +21,7 @@ class openmrs::pihemr (
   $terms_and_conditions_enabled  = hiera('terms_and_conditions_enabled'),
   $session_timeout               = hiera('session_timeout'),
   $dbevent_enabled               = hiera('dbevent_enabled'),
+  $csrfguard_enabled             = hiera('csrfguard_enabled'),
 
   # PIH EMR config
   $config_name     = hiera('config_name'),
@@ -116,6 +117,15 @@ class openmrs::pihemr (
   file { "${tomcat_home_dir}/.OpenMRS/feature_toggles.properties":
     ensure  => present,
     content => template('openmrs/feature_toggles.properties.erb'),
+    owner   => $tomcat,
+    group   => $tomcat,
+    mode    => '0644',
+    require => File["${tomcat_home_dir}/.OpenMRS"]
+  }
+
+  file { "${tomcat_home_dir}/.OpenMRS/csrfguard.properties":
+    ensure  => present,
+    content => template('openmrs/csrfguard.properties.erb'),
     owner   => $tomcat,
     group   => $tomcat,
     mode    => '0644',

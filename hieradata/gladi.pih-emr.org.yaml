@@ -18,13 +18,12 @@ petl: "petl"
 petl_site: "gladi"
 petl_home_dir: "/opt/petl"
 petl_config_name: sl-etl
-petl_config_version: 1.1.0-SNAPSHOT
-petl_cron_time: ""
+petl_config_version: 1.2.0-SNAPSHOT
+petl_cron_time: "0 0 22 ? * *" # This server is on GMT, so run PETL at 2am EST/EDT
 
 # PETL MySQL
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
-petl_mysql_host: 10.160.16.24
 
 # PETL SQL Server 2016
 petl_sqlserver_host: "10.160.12.28"

@@ -1,9 +1,5 @@
 Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/', '/usr/local/bin/' ] }
 
-/* we comment out the "default" node so that we don't inadvertently install on a machine that doesn't have it's
-fully-qualifed-domain-name properly configured; when testing on a VM, you can uncomment this to test the install */
-
-/*
 node default {
 
   class { 'apt':
@@ -18,7 +14,6 @@ node default {
   include petl
 
 }
-*/
 
  node 'zt-imb-his-omrs-dw'{
 
