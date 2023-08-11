@@ -25,6 +25,9 @@ remote_db_user: backups
 remote_db_server: 10.160.18.22
 remote_backup_dir: liberia/jjdossen/db
 
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
+
 mysql_innodb_buffer_pool_size: 1G
 mysql_innodb_buffer_pool_instances: 1
 

@@ -24,6 +24,9 @@ remote_db_user: backups
 remote_db_server: 10.160.18.22
 remote_backup_dir: liberia/pleebo/db
 
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
+
 # Increasing this, to facilite database dump
 mysql_net_read_timeout: 3600
 mysql_net_write_timeout: 3600
