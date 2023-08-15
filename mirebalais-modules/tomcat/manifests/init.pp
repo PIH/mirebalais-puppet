@@ -15,13 +15,25 @@ class tomcat (
     ensure => purged
   }
 
-  # TODO: move old tomcat directory (and update permissions)!
   # TODO clean up ald tomcat directory and users
 
   user { 'tomcat':
     ensure => 'present',
     home   => "${tomcat_home_dir}",
     shell  => '/bin/sh',
+  }
+
+  exec { 'move-openmrs-home-directory-from-old-tomcat-home-directory-to-new-tomcat-home-directory':
+    command => "mv /home/tomcat7/.OpenMRS ${tomcat_home_dir}/.OpenMRS",
+    onlyif  => "test -d /home/tomcat7/.OpenMRS",
+    require => User['tomcat'],
+    notify => ['change-owner-of-openmrs-home-directory']
+  }
+
+  exec { 'change-owner-of-openmrs-home-directory':
+    command => "chown -R tomcat ${tomcat_home_dir}/.OpenMRS && chgrp -R tomcat ${tomcat_home_dir}/.OpenMRS",
+    require => Exec['move-openmrs-home-directory-from-old-tomcat-home-directory-to-new-tomcat-home-directory'],
+    refreshonly => true,
   }
 
   # install the proper version of tomcat via apt-get
