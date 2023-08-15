@@ -34,7 +34,7 @@ class tomcat (
   exec { 'move-openmrs-home-directory':
     command => "mv /home/tomcat7/.OpenMRS ${tomcat_home_dir}",
     onlyif  => "test -d /home/tomcat7/.OpenMRS",
-    require => file[$tomcat_home_dir],
+    require => File[$tomcat_home_dir],
     notify => Exec['change-home-directory-permissions']
   }
 
@@ -83,16 +83,12 @@ class tomcat (
     notify  => Service['tomcat9']
   }
 
-  # TODO: delete logging.properties if we remove this?
-  /*
   file { "/var/lib/tomcat9/conf/logging.properties":
     ensure  => file,
     source  => "puppet:///modules/tomcat/logging.properties",
     require => Package['tomcat9'],
     notify  => Service['tomcat9']
   }
-  */
-
 
   service { tomcat9:
     enable  => true,
