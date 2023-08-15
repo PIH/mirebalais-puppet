@@ -23,16 +23,24 @@ class tomcat (
     shell  => '/bin/sh',
   }
 
-  exec { 'move-openmrs-home-directory-from-old-tomcat-home-directory-to-new-tomcat-home-directory':
-    command => "mv /home/tomcat7/.OpenMRS ${tomcat_home_dir}/.OpenMRS",
-    onlyif  => "test -d /home/tomcat7/.OpenMRS",
-    require => User['tomcat'],
-    notify => ['change-owner-of-openmrs-home-directory']
+  file { $tomcat_home_dir:
+    ensure  => directory,
+    owner   => 'tomcat',
+    group   => 'tomcat',
+    mode    => '0755',
+    require => User['tomcat']
   }
 
-  exec { 'change-owner-of-openmrs-home-directory':
+  exec { 'move-openmrs-home-directory':
+    command => "mv /home/tomcat7/.OpenMRS ${tomcat_home_dir}",
+    onlyif  => "test -d /home/tomcat7/.OpenMRS",
+    require => file[$tomcat_home_dir],
+    notify => Exec['change-home-directory-permissions']
+  }
+
+  exec { 'change-home-directory-permissions':
     command => "chown -R tomcat ${tomcat_home_dir}/.OpenMRS && chgrp -R tomcat ${tomcat_home_dir}/.OpenMRS",
-    require => Exec['move-openmrs-home-directory-from-old-tomcat-home-directory-to-new-tomcat-home-directory'],
+    require => Exec['move-openmrs-home-directory'],
     refreshonly => true,
   }
 
@@ -85,14 +93,6 @@ class tomcat (
   }
   */
 
-
-  file { $tomcat_home_dir:
-    ensure  => directory,
-    owner   => 'tomcat',
-    group   => 'tomcat',
-    mode    => '0755',
-    require => Package['tomcat9']
-  }
 
   service { tomcat9:
     enable  => true,
