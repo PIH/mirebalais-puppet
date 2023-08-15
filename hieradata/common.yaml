@@ -50,9 +50,8 @@ backup_db_password: foo
 openmrs_percona_backup_enabled: false
 openmrs_percona_install_mode: ''
 backup_time: date +%Y%m%d-%H%M%S
-tomcat: tomcat7
-tomcat_home_dir: /home/tomcat7
-tomcat_webapp_dir: /var/lib/tomcat7/webapps
+tomcat_home_dir: /home/tomcat
+tomcat_webapp_dir: /var/lib/tomcat9/webapps
 tomcat_restart_nightly: false
 tomcat_enable_http_8080: false
 session_timeout: 30
@@ -219,7 +218,7 @@ terms_and_conditions_enabled: false
 ocl_package_url: ""
 
 # atomfeed
-openmrs_modules_dir: /home/tomcat7/.OpenMRS/modules
+openmrs_modules_dir: /home/tomcat/.OpenMRS/modules
 atomfeed_version: 1.0.13-SNAPSHOT
 atomfeed_repo_url: https://openmrs.jfrog.io/artifactory/snapshots
 

@@ -14,7 +14,7 @@ FILENAME='mirebalais_nightly_reporting_dump.sql.7z'
 FILENAME_DECOMPRESSED='mirebalais_nightly_reporting_dump.sql'
 
 # Stop tomcat
-service tomcat7 stop
+service tomcat9 stop
 
 # Unzip and unencrypt database, pipe to mysql and source
 # We don't pipe directly to mysql but instead save to outfile (y) because the production server will be trying to copy over a *new* version overnight and we don't want a conflict
@@ -23,7 +23,7 @@ mysql -u ${USER} -p${PASSWORD} ${DB} < ${DIR}/openmrs.sql 2>/home/reporting/logs
 rm ${DIR}/openmrs.sql
 
 # Restart tomcat
-service tomcat7 restart
+service tomcat9 restart
 
 # Update and run the pentaho pipeline
 cd /home/reporting/pih-pentaho

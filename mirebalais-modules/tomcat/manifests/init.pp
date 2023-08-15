@@ -1,5 +1,4 @@
 class tomcat (
-    $tomcat = hiera('tomcat'),
     $tomcat_home_dir = hiera('tomcat_home_dir'),
     $services_enable = hiera('services_enable'),
     $java_memory_parameters = hiera('java_memory_parameters'),
@@ -9,133 +8,93 @@ class tomcat (
     $enable_http_8080 = hiera('tomcat_enable_http_8080')
   ){
 
-  # TODO--remove these three purges after tomcat7 apt-get update has been installed on all servers
-  # make sure old versions instaled without apt-get have been removed
-  file { "/usr/local/apache-tomcat-6.0.36" :
-    ensure => absent,
-    recurse => true,
-    purge => true,
-    force => true,
+
+
+
+  package { 'tomcat7':
+    ensure => purged
   }
 
-  file { "/usr/local/apache-tomcat-7.0.62" :
-    ensure => absent,
-    recurse => true,
-    purge => true,
-    force => true,
-  }
+  # TODO: move old tomcat directory (and update permissions)!
+  # TODO clean up ald tomcat directory and users
 
-  file { "/usr/local/apache-tomcat-7.0.68" :
-    ensure => absent,
-    recurse => true,
-    purge => true,
-    force => true,
-  }
-
-  file { "/usr/local/$tomcat" :
-    ensure => absent,
-    recurse => true,
-    purge => true,
-    force => true,
-  }
-
-  # TODO--remove these three purges after tomcat7 apt-get update has been installed on all servers
-  # config files are removed, **but only when removing old tomcat**
-  exec { 'remove /etc/init.d/tomcat':
-    command     => "rm /etc/init.d/$tomcat",
-    subscribe   => [ File["/usr/local/apache-tomcat-6.0.36"], File["/usr/local/apache-tomcat-7.0.62"], File["/usr/local/apache-tomcat-7.0.68"]],
-    refreshonly => true,
-  }
-
-  exec { 'remove /etc/default/tomcat':
-    command     => "rm /etc/default/$tomcat",
-    subscribe   => [ File["/usr/local/apache-tomcat-6.0.36"], File["/usr/local/apache-tomcat-7.0.62"], File["/usr/local/apache-tomcat-7.0.68"]],
-    refreshonly => true,
-  }
-
-  exec { 'remove /etc/logrotate.d/tomcat':
-    command     => "rm /etc/logrotate.d/$tomcat",
-    subscribe   => [ File["/usr/local/apache-tomcat-6.0.36"], File["/usr/local/apache-tomcat-7.0.62"], File["/usr/local/apache-tomcat-7.0.68"]],
-    refreshonly => true,
-  }
-
-  # install the proper version of tomcat via apt-get
-  package { $tomcat :
-    ensure => installed,
-    require => [ User[$tomcat], File["/usr/local/apache-tomcat-6.0.36"], File["/usr/local/apache-tomcat-7.0.62"], File["/usr/local/apache-tomcat-7.0.68"],
-        Exec['remove /etc/init.d/tomcat'], Exec['remove /etc/default/tomcat'], Exec['remove /etc/logrotate.d/tomcat'], Package['openjdk-8-jdk']],
-    notify  => Service["$tomcat"]
-  }
-
-  # remove the "ROOT" webapp
-  file { "/var/lib/$tomcat/webapps/ROOT":
-    ensure  => absent,
-    recurse => true,
-    purge => true,
-    force => true,
-    require => Package[$tomcat]
-  }
-
-
-  file { "/etc/${tomcat}/server.xml":
-    ensure  => present,
-    owner   => $tomcat,
-    group   => $tomcat,
-    content => template('tomcat/server.xml.erb'),
-    require => [ Package[$tomcat], User[$tomcat] ],
-    notify  => Service[$tomcat]
-  }
-
-   file { "/etc/default/${tomcat}":
-    ensure  => file,
-    content => template("tomcat/default.erb"),
-    require => Package[$tomcat],
-    notify  => Service[$tomcat]
-  }
-
-  file { "/etc/logrotate.d/${tomcat}":
-    ensure  => file,
-    source  => "puppet:///modules/tomcat/logrotate",
-    require => Package[$tomcat],
-    notify  => Service[$tomcat]
-  }
-
-  file { "/var/lib/${tomcat}/conf/logging.properties":
-    ensure  => file,
-    source  => "puppet:///modules/tomcat/logging.properties",
-    require => Package[$tomcat],
-    notify  => Service[$tomcat]
-  }
-
-
-  user { $tomcat:
+  user { 'tomcat':
     ensure => 'present',
     home   => "${tomcat_home_dir}",
     shell  => '/bin/sh',
   }
 
-  file { $tomcat_home_dir:
-    ensure  => directory,
-    owner   => $tomcat,
-    group   => $tomcat,
-    mode    => '0755',
-    require => User[$tomcat]
+  # install the proper version of tomcat via apt-get
+  package { 'tomcat9' :
+    ensure => installed,
+    require => [ Package['openjdk-8-jdk'], Package['tomcat7'], User['tomcat']],
+    notify  => Service['tomcat9']
   }
 
-  # todo add a dependency on java being installed?
-  service { $tomcat:
+  # remove the "ROOT" webapp
+  file { "/var/lib/tomcat9/webapps/ROOT":
+    ensure  => absent,
+    recurse => true,
+    purge => true,
+    force => true,
+    require => Package['tomcat9']
+  }
+
+  file { "/etc/tomcat9/server.xml":
+    ensure  => present,
+    owner   => 'tomcat',
+    group   => 'tomcat',
+    content => template('tomcat/server.xml.erb'),
+    require => [ Package['tomcat9'] ],
+    notify  => Service['tomcat9']
+  }
+
+   file { "/etc/default/tomcat9":
+    ensure  => file,
+    content => template("tomcat/default.erb"),
+    require => Package['tomcat9'],
+    notify  => Service['tomcat9']
+  }
+
+  file { "/etc/logrotate.d/tomcat9":
+    ensure  => file,
+    source  => "puppet:///modules/tomcat/logrotate",
+
+    notify  => Service['tomcat9']
+  }
+
+  # TODO: delete logging.properties if we remove this?
+  /*
+  file { "/var/lib/tomcat9/conf/logging.properties":
+    ensure  => file,
+    source  => "puppet:///modules/tomcat/logging.properties",
+    require => Package['tomcat9'],
+    notify  => Service['tomcat9']
+  }
+  */
+
+
+  file { $tomcat_home_dir:
+    ensure  => directory,
+    owner   => 'tomcat',
+    group   => 'tomcat',
+    mode    => '0755',
+    require => Package['tomcat9']
+  }
+
+  service { tomcat9:
     enable  => true,
-    require => [ Package[$tomcat], Package['openjdk-8-jdk'], File["/etc/${tomcat}/server.xml"] ]
+    require => [ Package['tomcat9'], Package['openjdk-8-jdk'], File["/etc/tomcat9/server.xml"] ]
   }
 
   if $restart_nightly {
     cron { 'restart-tomcat':
       ensure  => present,
-      command => "service ${tomcat} restart > /dev/null",
+      command => "service tomcat9 restart > /dev/null",
       user    => 'root',
       hour    => 5,
       minute  => 00,
-      require => [ Service[$tomcat] ]
+      require => [ Service['tomcat9'] ]
     }
   }
   else {

@@ -17,7 +17,6 @@ class openmrs::config_files (
   $petl_openmrs_connection_url  = hiera("petl_openmrs_connection_url"),
 
   $package_name     = hiera('package_name'),
-  $tomcat          = hiera('tomcat'),
   $tomcat_home_dir = hiera('tomcat_home_dir'),
   $webapp_name     = hiera('webapp_name'),
 
@@ -33,36 +32,37 @@ class openmrs::config_files (
 
     file { "${tomcat_home_dir}/.OpenMRS":
       ensure => directory,
-      owner  => $tomcat,
-      group  => $tomcat,
+      owner  => 'tomcat',
+      group  => 'tomcat',
+      require => Package['tomcat9'],
     }
 
     file { "${tomcat_home_dir}/.OpenMRS/modules":
       ensure  => directory,
-      owner   => $tomcat,
-      group   => $tomcat,
+      owner   => 'tomcat',
+      group   => 'tomcat',
       mode    => '0644',
       require => File["${tomcat_home_dir}/.OpenMRS"]
     }
 
     file { "${tomcat_home_dir}/.OpenMRS/configuration":
       ensure  => directory,
-      owner   => $tomcat,
-      group   => $tomcat,
+      owner   => 'tomcat',
+      group   => 'tomcat',
       mode    => '0644',
       require => File["${tomcat_home_dir}/.OpenMRS"]
     }
 
-    file { "/home/${tomcat}/.OpenMRS/frontend":
+    file { "/home/tomcat/.OpenMRS/frontend":
       ensure => directory,
-      require => [  File["/home/${tomcat}/.OpenMRS"] ]
+      require => [  File["${tomcat_home_dir}/.OpenMRS"] ]
     }
 
     # needed for malawi
     file { "${tomcat_home_dir}/.OpenMRS/images":
       ensure  => directory,
-      owner   => $tomcat,
-      group   => $tomcat,
+      owner   => 'tomcat',
+      group   => 'tomcat',
       mode    => '0644',
       require => File["${tomcat_home_dir}/.OpenMRS"]
     }
@@ -70,8 +70,8 @@ class openmrs::config_files (
     # I think currently ocl is required for the pihemr only
     file { "${tomcat_home_dir}/.OpenMRS/configuration/ocl":
       ensure  => directory,
-      owner   => $tomcat,
-      group   => $tomcat,
+      owner   => 'tomcat',
+      group   => 'tomcat',
       mode    => '0644',
       require => File["${tomcat_home_dir}/.OpenMRS/configuration"]
     }
@@ -79,8 +79,8 @@ class openmrs::config_files (
     file { "${tomcat_home_dir}/.OpenMRS/${webapp_name}-runtime.properties":
       ensure  => present,
       content => template('openmrs/openmrs-malawi-runtime.properties.erb'),
-      owner   => $tomcat,
-      group   => $tomcat,
+      owner   => 'tomcat',
+      group   => 'tomcat',
       mode    => '0644',
       require => File["${tomcat_home_dir}/.OpenMRS"]
     }
@@ -90,8 +90,8 @@ class openmrs::config_files (
       file { "${tomcat_home_dir}/.OpenMRS/feature_toggles.properties":
         ensure  => present,
         content => template('openmrs/feature_toggles.properties.erb'),
-        owner   => $tomcat,
-        group   => $tomcat,
+        owner   => 'tomcat',
+        group   => 'tomcat',
         mode    => '0644',
         require => File["${tomcat_home_dir}/.OpenMRS"]
       }
@@ -103,8 +103,8 @@ class openmrs::config_files (
       file { "${tomcat_home_dir}/.OpenMRS/warehouse-connection.properties":
         ensure  => present,
         content => template('openmrs/warehouse-connection.properties.erb'),
-        owner   => $tomcat,
-        group   => $tomcat,
+        owner   => 'tomcat',
+        group   => 'tomcat',
         mode    => '0600',
         require => File["${tomcat_home_dir}/.OpenMRS"]
       }
@@ -113,8 +113,8 @@ class openmrs::config_files (
       file { "${tomcat_home_dir}/.OpenMRS/configuration/log4j2.xml":
         ensure  => present,
         source  => "/tmp/${config_name}-${config_version}/log4j2.xml",
-        owner   => $tomcat,
-        group   => $tomcat,
+        owner   => 'tomcat',
+        group   => 'tomcat',
         mode    => '0644',
         require => [File["${tomcat_home_dir}/.OpenMRS"], File["${tomcat_home_dir}/.OpenMRS/configuration"]]
       }
