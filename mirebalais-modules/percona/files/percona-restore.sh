@@ -169,7 +169,7 @@ fi
 
 if [ "${RESTART_OPENMRS}" == "true" ]; then
   echoWithDate "Stopping Tomcat"
-  service ${TOMCAT_VERSION} stop
+  service tomcat9 stop
 
   echoWithDate "Removing configuration checksums and lib cache"
   rm -rf ${TOMCAT_HOME_DIR}/.OpenMRS/.openmrs-lib-cache
@@ -319,5 +319,5 @@ fi
 
 if [ "${RESTART_OPENMRS}" == "true" ]; then
   echoWithDate "Starting Tomcat"
-  service ${TOMCAT_VERSION} start
+  service tomcat9 start
 fi

@@ -15,7 +15,7 @@ class tomcat (
     ensure => purged
   }
 
-  # TODO clean up ald tomcat directory and users
+  # TODO clean up old tomcat directory and user
 
   user { 'tomcat':
     ensure => 'present',

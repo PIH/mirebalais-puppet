@@ -5,7 +5,6 @@ class percona::install_restore_scripts (
     $percona_mysql_root_password       = decrypt(hiera('percona_mysql_root_password')),
     $az_url                            = decrypt(hiera('az_url')),
     $az_secret                         = decrypt(hiera('az_secret')),
-    $tomcat_version                    = hiera('tomcat_version'),
     $tomcat_home_dir                   = decrypt(hiera('tomcat_home_dir')),
     $sysadmin_email                    = decrypt(hiera('sysadmin_email')),
     $petl_mysql_user                   = decrypt(hiera('petl_mysql_user')),
