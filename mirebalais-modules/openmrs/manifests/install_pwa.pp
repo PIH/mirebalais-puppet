@@ -46,7 +46,7 @@ class openmrs::install_pwa (
     cwd     => "${tomcat_webapp_dir}",
     user    => 'tomcat',
     group   => 'tomcat',
-    require => [ [ Package['tomcat9'], Exec['extract-pwa-using-gunzip'] ],
+    require => [ Package['tomcat9'], Exec['extract-pwa-using-gunzip'] ],
   }
 
   # set owner to Tomcat
