@@ -53,7 +53,7 @@ class openmrs::config_files (
       require => File["${tomcat_home_dir}/.OpenMRS"]
     }
 
-    file { "/home/tomcat/.OpenMRS/frontend":
+    file { "${tomcat_home_dir}/.OpenMRS/frontend":
       ensure => directory,
       require => [  File["${tomcat_home_dir}/.OpenMRS"] ]
     }

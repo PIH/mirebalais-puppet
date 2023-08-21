@@ -39,7 +39,7 @@ class tomcat (
   }
 
   exec { 'change-home-directory-permissions':
-    command => "chown -R tomcat ${tomcat_home_dir}/.OpenMRS && chgrp -R tomcat ${tomcat_home_dir}/.OpenMRS",
+    command => "chown -R tomcat:tomcat ${tomcat_home_dir}/.OpenMRS",
     require => Exec['move-openmrs-home-directory'],
     refreshonly => true,
   }
