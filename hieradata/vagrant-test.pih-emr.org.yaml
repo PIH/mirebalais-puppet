@@ -1,40 +1,33 @@
 ---
 site_domain: vagrant-test.pih-emr.org
-server_timezone: America/New_York
 
-# PETL
-petl: petl
-petl_version: "3.4.0"
-petl_site: haiti-report
-petl_home_dir: /opt/petl
+#package_release: 'unstable'
+package_release: 'stable'
+package_version: '1.0.20230814180201-1'
 
-# PETL config
-petl_config_dir: "configurations"
-petl_config_name: zl-etl
-petl_config_version: 1.7.0
+pih_config: haiti,haiti-hsn,haiti-hsn-ci
+config_name: openmrs-config-zl
+config_version: 1.45.0-SNAPSHOT
+tomcat_enable_http_8080: true
+frontend_name: "openmrs-frontend-zl"
+frontend_version: 1.4.0-SNAPSHOT
 
-# PETL MySQL
-petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
-petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
-
-# PETL Crons
-petl_error_subject: "%{hiera('petl_site')} PETL Errors"
-petl_cron_time: "0 0 0 ? * *"
-
-mysql_server_id: 3
-mysql_master_ip:
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
-mysql_expire_logs_days: 1
-mysql_binary_logging: false
-mysql_net_read_timeout: 3600
-mysql_net_write_timeout: 3600
-mysql_wait_timeout: 2880000
-mysql_interactive_timeout: 2880000
-mysql_innodb_buffer_pool_size: 3G
-mysql_innodb_buffer_pool_instances: 8
-mysql_table_open_cache: 4500
+mysql_bind_address: ENC[q/IrbhThPxSAsELZ1pA9fA==:FiTeRLnrYO171+KKiSA+oQ==:RHN4QXdNV3dzbVVxemY1c0hkNjk5UT09]
+openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
-openmrs_db: openmrs
-openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
-replication_db_password: ENC[92IfbImaUmA3wqYSG5kWWwexEU8HqCrqQzSXAMKRPz0=]
+commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
+commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
+
+java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
+
+# prometheus node exporter
+node_exporter_listen_ip: ENC[W4Zbawrp9PVjxsi+6cvi1w==:4RMB2CoRCtKbJnnqSTy94g==:Q280M1lINmdhc3NmRUQySEFGM09LQT09
+node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
+
+az_backup_folder_path: 'test/vagrant-test'
+backup_file_prefix: vagrant-test
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
+
