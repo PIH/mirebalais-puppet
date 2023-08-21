@@ -2,13 +2,10 @@
 webapp_name: openmrs
 site_domain: ocltest.pih-emr.org
 
-pih_config: mirebalais,mirebalais-humci
-config_name: openmrs-config-zl
-config_version: 1.45.0-SNAPSHOT
+pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-gladi
+config_name: openmrs-config-pihsl
+config_version: 2.0.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
-
-# Indicates if a concept package should be downloaded from OCL rather than installing concepts from MDS
-ocl_package_url: "https://ocl-staging-s3.s3.amazonaws.com/PIH/PIH_1.0.0.20220213180245.zip"
