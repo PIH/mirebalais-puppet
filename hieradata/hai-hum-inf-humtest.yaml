@@ -1,11 +1,9 @@
 webapp_name: mirebalais
 site_domain: humtest-zt.pih-emr.org
 
-package_release: 'unstable'
-
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
-config_version: 1.44.0
+config_version: 1.46.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.4.0-SNAPSHOT

@@ -3,11 +3,11 @@ webapp_name: openmrs
 site_domain: belladere.pih-emr.org
 
 package_release: 'stable'
-package_version: '1.0.20230425132709-1'
+package_version: '1.0.20230807180329-1'
 
 pih_config: haiti,haiti-belladere
 config_name: openmrs-config-zl
-config_version: 1.44.0
+config_version: 1.45.0
 
 server_timezone: America/New_York
 
