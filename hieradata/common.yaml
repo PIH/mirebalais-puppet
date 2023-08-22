@@ -11,6 +11,7 @@ site_domain:
 
 package_name: pihemr
 package_release: 'unstable'
+package_version: ''
 
 maven_download_repo: https://s01.oss.sonatype.org/content/repositories/public
 maven_config_group_id: org.pih.openmrs
