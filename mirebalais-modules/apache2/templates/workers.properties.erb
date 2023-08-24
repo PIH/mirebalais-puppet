@@ -3,18 +3,18 @@ worker.list=<%= @worker_list %>
 worker.<%= @webapp_name %>.port=8009
 worker.<%= @webapp_name %>.host=127.0.0.1
 worker.<%= @webapp_name %>.type=ajp13
-worker.<%= @webapp_name %>.secret=secret
+worker.<%= @webapp_name %>.secret=<%= @tomcat_ajp_secret %>
 
 <% if @biometrics_enabled == true %>
 worker.<%= @biometrics_webapp_name %>.port=<%= @biometrics_port %>
 worker.<%= @biometrics_webapp_name %>.host=localhost
 worker.<%= @biometrics_webapp_name %>.type=ajp13
-worker.<%= @biometrics_webapp_name %>.secret=secret
+worker.<%= @biometrics_webapp_name %>.secret=<%= @tomcat_ajp_secret %>
 <% end %>
 
 <% if @pwa_enabled  == true %>
 worker.<%= @pwa_webapp_name %>.port=8009
 worker.<%= @pwa_webapp_name %>.host=localhost
 worker.<%= @pwa_webapp_name %>.type=ajp13
-worker.<%= @pwa_webapp_name %>.secret=secret
+worker.<%= @pwa_webapp_name %>.secret=<%= @tomcat_ajp_secret %>
 <% end %>

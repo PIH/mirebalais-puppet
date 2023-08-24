@@ -54,6 +54,7 @@ tomcat_home_dir: /home/tomcat
 tomcat_webapp_dir: /var/lib/tomcat9/webapps
 tomcat_restart_nightly: false
 tomcat_enable_http_8080: false
+tomcat_ajp_secret: ENC[6MoaTgZCIozP7wYEDGeF85kNptUQ+hfJk0a7fXlAHTw=:003d8bxdNhslHb/OWGWIjg==:ZUFtd0JaendEeVlNcjVRd1l0R1FXQT09]
 session_timeout: 30
 
 #

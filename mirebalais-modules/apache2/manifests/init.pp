@@ -23,6 +23,7 @@ class apache2 (
   $cert_cron_min = hiera('cert_cron_min'),
   $apache_cron_restart_hour = hiera('apache_cron_restart_hour'),
   $apache_cron_restart_min = hiera('apache_cron_restart_min'),
+  $tomcat_ajp_secret = decrypt(hiera('tomcat_ajp_secret'))
 ){
 
   include base_packages

@@ -5,7 +5,8 @@ class tomcat (
     $java_profiler = hiera('java_profiler'),
     $java_debug_parameters = hiera('java_debug_parameters'),
     $restart_nightly = hiera('tomcat_restart_nightly'),
-    $enable_http_8080 = hiera('tomcat_enable_http_8080')
+    $enable_http_8080 = hiera('tomcat_enable_http_8080'),
+    $tomcat_ajp_secret = decrypt(hiera('tomcat_ajp_secret')),
   ){
 
 
@@ -31,6 +32,7 @@ class tomcat (
     require => User['tomcat']
   }
 
+  exec { 'move-openmrs-home-directory':
   exec { 'move-openmrs-home-directory':
     command => "mv /home/tomcat7/.OpenMRS ${tomcat_home_dir}",
     onlyif  => "test -d /home/tomcat7/.OpenMRS",
