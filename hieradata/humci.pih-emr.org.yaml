@@ -7,7 +7,7 @@ package_version: '1.0.20230814180201-1'
 
 pih_config: mirebalais,mirebalais-humci
 config_name: openmrs-config-zl
-config_version: 1.45.0-SNAPSHOT
+config_version: 1.46.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.4.0-SNAPSHOT
