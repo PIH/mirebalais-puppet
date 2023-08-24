@@ -33,7 +33,6 @@ class tomcat (
   }
 
   exec { 'move-openmrs-home-directory':
-  exec { 'move-openmrs-home-directory':
     command => "mv /home/tomcat7/.OpenMRS ${tomcat_home_dir}",
     onlyif  => "test -d /home/tomcat7/.OpenMRS",
     require => File[$tomcat_home_dir],
