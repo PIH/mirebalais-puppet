@@ -26,6 +26,7 @@ class openmrs::config_files (
   $radiology_contrast_studies             = hiera('radiology_contrast_studies'),
   $appointmentscheduling_confidential     = hiera('appointmentscheduling_confidential'),
   $insurance_collection                   = hiera('insurance_collection'),
+  $htmlformentryui_simpleform_navbuttons  = hiera('htmlformentryui_simpleform_navbuttons'),
 
 )
   {

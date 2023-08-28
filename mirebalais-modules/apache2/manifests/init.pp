@@ -16,7 +16,7 @@ class apache2 (
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
   $sysadmin_email = hiera('sysadmin_email'),
-  $acne_dns_username = decrypt(hiera('acme_dns_username')),
+  $acme_dns_username = decrypt(hiera('acme_dns_username')),
   $acme_dns_password = decrypt(hiera('acme_dns_password')),
   $acme_dns_subdomain = decrypt(hiera('acme_dns_subdomain')),
   $acme_dns_base_url = decrypt(hiera('acme_dns_base_url')),
