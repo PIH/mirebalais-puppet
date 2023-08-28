@@ -190,9 +190,10 @@ class apache2 (
   }
 
   # remove old certbot cron job
-  cron { "renew certificates":
+  # TODO: we *do* want to remove this job, but doing so via Puppet is causing issues (possibly because it has been manually commented out?)
+/*  cron { "renew certificates":
     ensure  => absent,
-  }
+  }*/
 
   # allows other modules to trigger an apache restart
   # there's an annoying tight dependency here we should fix
