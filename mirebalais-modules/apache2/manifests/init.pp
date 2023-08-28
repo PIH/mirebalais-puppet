@@ -16,10 +16,10 @@ class apache2 (
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
   $sysadmin_email = hiera('sysadmin_email'),
-  $azure_dns_subscription_id = decrypt(hiera('azure_dns_subscription_id')),
-  $azure_dns_tenant_id = decrypt(hiera('azure_dns_tenant_id')),
-  $azure_dns_app_id = decrypt(hiera('azure_dns_app_id')),
-  $azure_dns_client_secret = decrypt(hiera('azure_dns_client_secret')),
+  $acne_dns_username = decrypt(hiera('acme_dns_username')),
+  $acme_dns_password = decrypt(hiera('acme_dns_password')),
+  $acme_dns_subdomain = decrypt(hiera('acme_dns_subdomain')),
+  $acme_dns_base_url = decrypt(hiera('acme_dns_base_url')),
   $cert_cron_hour = hiera('cert_cron_hour'),
   $cert_cron_min = hiera('cert_cron_min'),
   $apache_cron_restart_hour = hiera('apache_cron_restart_hour'),
@@ -132,7 +132,8 @@ class apache2 (
     owner   => "root",
     group   => "root",
     content => template('apache2/install-letsencrypt.sh.erb'),
-    require => File["/var/acme"]
+    require => File["/var/acme"],
+    notify => Exec['run install letsencrypt'],
   }
 
   exec { "download acme from the git repo":
@@ -140,12 +141,12 @@ class apache2 (
     require => File["/var/acme"]
   }
 
-  # the unless condition only allow this script to run once.
-  exec { "download and run install letsencrypt":
-    unless  => "/bin/ls -ap /var/acme | grep .acme.sh | grep -v grep",
+  # note refresh-only, this onle runs when the let encrypt script changes
+ /* exec { "run install letsencrypt":
     command => "/var/acme/install-letsencrypt.sh",
-    require =>  Exec['download acme from the git repo']
-  }
+    require =>  Exec['download acme from the git repo'],
+    refreshonly => true,
+  }*/
 
   cron { "renew certificates using acme user":
     ensure  => present,
@@ -179,6 +180,11 @@ class apache2 (
     ensure  => link,
     target  => '../sites-available/default-ssl.conf',
     require => [Package['apache2'], Exec['download acme from the git repo'], Exec["download and run install letsencrypt"]]
+  }
+
+  # remove old certbot cron job
+  cron { "renew certificates":
+    ensure  => absent,
   }
 
   # allows other modules to trigger an apache restart

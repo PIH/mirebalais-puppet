@@ -12,17 +12,13 @@ mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[q/IrbhThPxSAsELZ1pA9fA==:FiTeRLnrYO171+KKiSA+oQ==:RHN4QXdNV3dzbVVxemY1c0hkNjk5UT09]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
-pwa_enabled: true
-pwa_webapp_name: pwa
-pwa_filename: openmrs-pwa-pih-liberia.tar.gz
-
-# feature toggles
-htmlformentryui_simpleform_navbuttons: true
-
 # prometheus node exporter
 node_exporter_listen_ip: ENC[xGn1ZRsGGdvXN6SWGl+IKQ==:/WFV2V1/Bf77bO/e8Eisow==:UDJXRkduNzRpMmxkL0JPYmxKS2JFZz09]
 node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
 
 #java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 
-
+# Certificate parameters
+acme_dns_username: ENC[/p1EODT3c2kroUAPmjYoX03Ql5Bk1KNIrLRNJjB/WllXfwl1TrhAOooRYq1tCUnO:CxEImkgzdrX2JK3R7cW+fQ==:NWZkRTd6QnkyYkMzamF6V2VQbGhMUT09]
+acme_dns_password: ENC[HL9oUx2PCw7b0KErWHBtPFGo+dXKogSsJv+mr/QVD/VbR0O4y0xpBJhN2W73PzLG:rWRZts5+C4PIm0Ogh8E/8Q==:VDVja3BiSHhtcDBOdHVkOW9sWVJBQT09]
+acme_dns_subdomain: ENC[+oOSh7uNLdaydcf5E7LiYoclGvYV2muGJp/cFpGCamtuWuLjGl+chm40M0En10Rv:N2KaosdNZyPyJZbC1b/b8w==:TllmWkhWejFVZEdYWVBPUUl4dTBFZz09]

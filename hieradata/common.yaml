@@ -178,7 +178,6 @@ insurance_collection: true
 radiology_contrast_studies: false
 appointmentscheduling_confidential: false
 reportingui_ad_hoc_analysis: false
-htmlformentryui_simpleform_navbuttons: false
 
 # SSL certificates--use letencrypt by default
 ssl_cert_dir: "/etc/letsencrypt/live/%{hiera('site_domain')}"
@@ -187,10 +186,10 @@ ssl_chain_file: 'fullchain.pem'
 ssl_key_dir: "/etc/letsencrypt/live/%{hiera('site_domain')}"
 ssl_key_file: 'privkey.pem'
 ssl_use_letsencrypt: true
-azure_dns_subscription_id: ENC[roYSeZU0cSjB6+P6aOWEXYVgCL64D33EQcfUd7L80970icq7M7LFmvlOSyYPI3bm]
-azure_dns_tenant_id: ENC[5LWTjj76sYS2kxC4FktrecjxHpznSDVezymGgwlCzdNGmdymse5ihQOOKFpAwCJa]
-azure_dns_app_id: ENC[shiW8Zw+zKNZjwEojjsm0pzj3SOJGUpRJl7pMZ9FULbrxVKYi/nWrAmRAGifWya3]
-azure_dns_client_secret: ENC[f+Bvtjd7pyxAFpRgF3ZM8kzj5BfsQY3bZJ3jZrlebuPs5yF4zR69KWwP8l98Ut+5]
+acme_dns_username:
+acme_dns_password:
+acme_dns_subdomain:
+acme_dns_base_url: ENC[rYg4/PMrrwhCa5cSZw6EE7gn7+cIviLyRtCT6fRO5ZygHsgi7NjOtAHngMHhx+mrYvVGizigr1ubCB5Jfrz8bA==:6CmexDZ/415bsJemsFDxOA==:cFVra1lwMC9aLzVNeUlWOVVoSmhmdz09]
 cert_cron_hour: 01
 cert_cron_min: 00
 apache_cron_restart_hour: 01
