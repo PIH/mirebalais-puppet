@@ -171,7 +171,7 @@ class apache2 (
   file { '/etc/apache2/sites-available/default-ssl.conf':
     ensure => file,
     content => template('apache2/default-ssl.conf.erb'),
-    require => [Package['apache2'], Exec['download acme from the git repo'], Exec["download and run install letsencrypt"]],
+    require => [Package['apache2'], Exec['download acme from the git repo'] ], #, Exec["run install letsencrypt"]],
     notify => Service['apache2']
   }
 
