@@ -104,6 +104,11 @@ class apache2 (
     group   => "root"
   }
 
+  # clear out not ecc certs, can likely be removed after we upgrade to acme dns
+  file { "/var/acme/.acme.sh/$site_domain" :
+    ensure => absent,
+  }
+
   file { "/etc/letsencrypt" :
     ensure => directory,
     owner   => "root",
@@ -133,7 +138,7 @@ class apache2 (
     group   => "root",
     content => template('apache2/install-letsencrypt.sh.erb'),
     require => File["/var/acme"],
-#    notify => Exec['run install letsencrypt'],
+    notify => Exec['run install letsencrypt'],
   }
 
   exec { "download acme from the git repo":
@@ -142,11 +147,11 @@ class apache2 (
   }
 
   # note refresh-only, this onle runs when the let encrypt script changes
- /* exec { "run install letsencrypt":
+  exec { "run install letsencrypt":
     command => "/var/acme/install-letsencrypt.sh",
     require =>  Exec['download acme from the git repo'],
     refreshonly => true,
-  }*/
+  }
 
   cron { "renew certificates using acme user":
     ensure  => present,
