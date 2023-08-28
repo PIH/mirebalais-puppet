@@ -190,7 +190,7 @@ ssl_use_letsencrypt: true
 acme_dns_username:
 acme_dns_password:
 acme_dns_subdomain:
-acme_dns_base_url: ENC[rYg4/PMrrwhCa5cSZw6EE7gn7+cIviLyRtCT6fRO5ZygHsgi7NjOtAHngMHhx+mrYvVGizigr1ubCB5Jfrz8bA==:6CmexDZ/415bsJemsFDxOA==:cFVra1lwMC9aLzVNeUlWOVVoSmhmdz09]
+acme_dns_base_url: ENC[iJo35DujJ/nSRH0x71OKUD2jt3eCkOBsiaeoJ7Q+bf7D5oieC5tez0T/ACAUWAWShpDYLlihVN+rKZt74S+m2w==:YdtrYTKYhvlWeIEGhlIKYw==:WkYzVFlFQ2FQMDJBaFlYTUtZdnlRZz09]
 cert_cron_hour: 01
 cert_cron_min: 00
 apache_cron_restart_hour: 01
