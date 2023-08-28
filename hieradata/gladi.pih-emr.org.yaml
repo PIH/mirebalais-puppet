@@ -52,3 +52,8 @@ commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 # prometheus node exporter
 node_exporter_listen_ip: ENC[DpOyzX4ljn2i1eavdroeHg==:jI00GWpnBrsBEqq+jrTjHQ==:SHAxZHIxNWd2N3o2WFV0ZXZRdEo0UT09]
 node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
+
+# Certificate parameters
+acme_dns_username: ENC[dMqBwySDq3Jzx+QqGk/Ai+a8DD/i9t7raZzF8tjjsb3LloFNqgAJtCV5U8Jpx8VF:PAjn0dIpqsfVqTHpe9mLTg==:b3R4dlRvemR5ejZaaFhsQTIweGV5UT09]
+acme_dns_password: ENC[Z7SF5QO5B7YgKVjooh2mWT4GwnRFv7qfnFBWc4y7/O4Drf/BwTu4099hvOoD7VG2:Qx+4jXsmG/2wacEER3LDbQ==:R0tydUYybDZ5VlpWNndCb3RWQzNHQT09]
+acme_dns_subdomain: ENC[Dkf55zpprbfFQdSw4u34ZKQ6JclPwPSdfum2PdMitCbW3ulggZZ7ZXuu6bmeF84s:2+GVTlooETAzJUudn+5XfA==:RER5SElOVVJ6S3JyNEw1YjR2Nk8wdz09]

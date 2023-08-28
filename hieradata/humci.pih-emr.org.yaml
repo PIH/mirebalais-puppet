@@ -75,3 +75,10 @@ terms_and_conditions_enabled: true
 # prometheus node exporter
 node_exporter_listen_ip: ENC[r/6a4rPBdr93KPc/oekg4w==:CtezxOxc2hosGJNW2veL7Q==:RTZGR2xHSW8wa3dlYkFta3BBU0RPdz09]
 node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
+
+# Certificate parameters
+acme_dns_username: ENC[OPXNMJ2ZYN4QF8Rm1Ft8jjrml1N8mLcZltbyeCn/r6oStNvqPqRk4Tk+aRJRWWQd:/Z/ELxza3c9XZ5i2/TH8RQ==:R0dEMDAybUhoR1JYWlhyVExYZC9IQT09]
+acme_dns_password: ENC[sl1h80sO7V7kYeqdNmqGuRNaX7hDWpK5jMymL+VUUM+K7I2z0Dap0KEUVJcvD1Hp:Bg78gnpQHSpNvtUoymMB/Q==:L0xMR0FOYXA2eUxzM1VBa3pTL0o5QT09]
+acme_dns_subdomain: ENC[FHQqgBXdeD6W/Udww1TLY0lU0V0QJdn9ptBjdtzCzP4OybUYo6nUhfnQbtt9weeK:9U9xkjyhqLScpMoKeMQNzQ==:bVFGdnRCNWFxVnRNT1NuV2JIdTdSUT09]
+
+

@@ -69,3 +69,9 @@ pwa_config_version: 2.0.0-SNAPSHOT
 pwa_config_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('pwa_config_name')}&v=%{hiera('pwa_config_version')}&p=tar.gz&r=snapshots
 pwa_enabled: true
 pwa_webapp_name: workflow
+
+# Certificate parameters
+acme_dns_username: ENC[Go9x3MvYzNXmvKIEwcb3+Lgv4cnh33KsAdqxN6zGpAm9gTzJLpdmyJFqFsmcYfA8:8AFi66oAIBTqVNPZ0TIEpg==:d2UvdUQxdTRjeUVtRldmYnBrbHBUdz09]
+acme_dns_password: ENC[2Y8Nb1XYWhgon8zeo2S3HAWI4PmhvT7V1FiUWSQG8WU+iwMxbmTwLaTPUGAkJI3P:Mq9DF/9Ii5j0WaXNE/TNqA==:RmYwb3gyekRtQTE3SnBkSTVMWTRudz09]
+acme_dns_subdomain: ENC[wvhm0hO/AnzuYcG/MoVqROP8YSy7BWK+ZqbrP2vjuBTHu0Gdh1hbXEsWNZTsioa9:WAU1QAKQ7FzFPBDkvQHDoQ==:M1dXUG9LR0pUbUZYeklNZFptaGZKQT09]
+

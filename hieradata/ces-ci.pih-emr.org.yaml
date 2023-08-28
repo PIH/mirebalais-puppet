@@ -50,3 +50,9 @@ session_timeout: 120
 # prometheus node exporter
 node_exporter_listen_ip: ENC[pFJvoEZ7OqMTpVZuAQZ+4A==:vvx0YAku+/XovCo6c5MzAA==:cW5JNnl1SmhPM0hTWm5ZMW9VTG1CUT09]
 node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
+
+# Certificate parameters
+acme_dns_username: ENC[5wfOBuTQr7CxjYm43mB6nEU8nSbfOuO5C6yDLQCMsmwJL68e/Fww395QIuHb3OZO:deg1MmtICJrhPLMndgSY6g==:UXJDWUpJMjhNeXVLZnNYNHJqRkNWUT09]
+acme_dns_password: ENC[n+30LzjG2dDgBZtymvHNtt6gv+8BkNm05vokIljWrGkmP8abfbWbxAoyLkHVVZj4:WoYsiYF2xXQ7Y0gIAPLmtw==:MGpEVzdySzlsNGJncmdLU1RFcVdNZz09]
+acme_dns_subdomain: ENC[letNiAoIwFeJ7Hk/yy+e3hDY3eLFl45Nhz+K7YSN+Sb6ZXVfd/DljrLTp1nKugLZ:ppgYKtjxA2OrGA/6EVeD8A==:NzlXRkNXNVhKR3BETXNPRWw5aDU4dz09]
+

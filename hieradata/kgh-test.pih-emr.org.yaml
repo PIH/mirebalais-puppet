@@ -26,3 +26,8 @@ petl_mysql_user_ip: 10.160.16.25
 # prometheus node exporter
 node_exporter_listen_ip: ENC[1Q2GORtLtL3IidLfw4mxKA==:NHpGiVWrgq1fGTjoJ7ybIA==:UVp0cDBUd1NRc0QwaDQvQWhLWDBoZz09]
 node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
+
+# Certificate parameters
+acme_dns_username: ENC[eDJGAJVFaNYnX0qDJA6xqi4MwoEA+2Rh0FDMyEJBgxZfPSq7zsHfRqt8u08r/Zhy:2wAsuwqDSdvHqbN5cNAlqA==:WGtvRGhpVFBSUWpGQU9lZ1dKNDJMdz09]
+acme_dns_password: ENC[Tq5mufP257ZmSp/+EuXHpc2PgqaKHBOFCWifCIYRkiiBHNcPigtZKQbOsCmhM3I2:+JpuXAMeIkJjAauIkm5T3g==:ZU1XT3EzeWNYQ0xrUlcrcWtyN1Y3dz09]
+acme_dns_subdomain: ENC[quf4+cOEdNhyRvYzkWsJUdp+RRbNR3UVl7CZGMPxFeRK5gYWEFe/DYw6wEYdFkeC:/uztc6aFyodtzaXpKtz5GA==:L24rU2p3MW16TVRaREE3N0Q3cFNUUT09]
