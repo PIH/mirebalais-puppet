@@ -149,7 +149,7 @@ class apache2 (
   # note refresh-only, this onle runs when the let encrypt script changes
   exec { "run install letsencrypt":
     command => "/var/acme/install-letsencrypt.sh",
-    require =>  Exec['download acme from the git repo'],
+    require =>  [ Exec['download acme from the git repo'], File["/var/acme/.acme.sh/$site_domain"] ],
     refreshonly => true,
   }
 
