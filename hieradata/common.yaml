@@ -178,6 +178,7 @@ insurance_collection: true
 radiology_contrast_studies: false
 appointmentscheduling_confidential: false
 reportingui_ad_hoc_analysis: false
+htmlformentryui_simpleform_navbuttons: false
 
 # SSL certificates--use letencrypt by default
 ssl_cert_dir: "/etc/letsencrypt/live/%{hiera('site_domain')}"
