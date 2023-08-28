@@ -133,7 +133,7 @@ class apache2 (
     group   => "root",
     content => template('apache2/install-letsencrypt.sh.erb'),
     require => File["/var/acme"],
-    notify => Exec['run install letsencrypt'],
+#    notify => Exec['run install letsencrypt'],
   }
 
   exec { "download acme from the git repo":
