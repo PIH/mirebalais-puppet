@@ -107,6 +107,8 @@ class apache2 (
   # clear out not ecc certs, can likely be removed after we upgrade to acme dns
   file { "/var/acme/.acme.sh/$site_domain" :
     ensure => absent,
+    recurse => true,
+    force   => true,
   }
 
   file { "/etc/letsencrypt" :
