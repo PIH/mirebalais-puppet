@@ -104,7 +104,7 @@ class apache2 (
     group   => "root"
   }
 
-  # clear out not ecc certs, can likely be removed after we upgrade to acme dns
+  # clear out old non-ecc certs, can likely be removed after we upgrade to acme dns
   file { "/var/acme/.acme.sh/$site_domain" :
     ensure => absent,
     recurse => true,

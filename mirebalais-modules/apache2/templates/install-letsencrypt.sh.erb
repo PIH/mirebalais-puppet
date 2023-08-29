@@ -21,7 +21,7 @@ cd /var/acme
 export ACMEDNS_USERNAME='<%= @acme_dns_username %>'
 export ACMEDNS_PASSWORD='<%= @acme_dns_password %>'
 export ACMEDNS_SUBDOMAIN='<%= @acme_dns_subdomain %>'
-# note that the ".ong" appears not be a typo
+# note that typo in the decryption of the base url appears not be an actual typo
 export ACMEDNS_BASE_URL='<%= @acme_dns_base_url %>'
 
 .acme.sh/acme.sh --set-default-ca --server letsencrypt
