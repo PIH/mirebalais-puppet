@@ -186,7 +186,7 @@ class apache2 (
   file { '/etc/apache2/sites-enabled/default-ssl.conf':
     ensure  => link,
     target  => '../sites-available/default-ssl.conf',
-    require => [Package['apache2'], Exec['download acme from the git repo'], Exec['install letsencrypt']]
+    require => [Package['apache2'], Exec['download acme from the git repo'], Exec['run install letsencrypt']]
   }
 
   # remove old certbot cron job
