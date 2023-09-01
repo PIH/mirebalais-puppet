@@ -10,7 +10,6 @@ class openmrs::pihemr (
   $package_release               = hiera('package_release'),
   $package_version               = hiera('package_version'),
   $webapp_name                   = hiera('webapp_name'),
-  $tomcat                        = hiera('tomcat'),
   $tomcat_home_dir               = hiera('tomcat_home_dir'),
   $tomcat_webapp_dir             = hiera('tomcat_webapp_dir'),
   $junit_username                = hiera('junit_username'),
@@ -73,9 +72,10 @@ class openmrs::pihemr (
 
   file { "${tomcat_home_dir}/.OpenMRS":
     ensure  => directory,
-    owner   => $tomcat,
-    group   => $tomcat,
-    mode    => '0644'
+    owner   => 'tomcat',
+    group   => 'tomcat',
+    mode    => '0644',
+    require => Package['tomcat9']
   }
 
   file { "${tomcat_home_dir}/.OpenMRS/staging":
@@ -84,8 +84,8 @@ class openmrs::pihemr (
 
   file { "${tomcat_home_dir}/.OpenMRS/modules":
     ensure  => directory,
-    owner   => $tomcat,
-    group   => $tomcat,
+    owner   => 'tomcat',
+    group   => 'tomcat',
     mode    => '0644',
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
@@ -93,9 +93,9 @@ class openmrs::pihemr (
   # added this to handle reworking of application data directory in Core 2.x
   file { "${tomcat_home_dir}/.OpenMRS/${webapp_name}":
     ensure  => 'link',
-    owner   => $tomcat,
-    group   => $tomcat,
-    target  => "/home/${tomcat}/.OpenMRS"
+    owner   => 'tomcat',
+    group   => 'tomcat',
+    target  => "${tomcat_home_dir}/.OpenMRS"
   }
 
   # remove any hold on package (if it exists) (grep -c returns line count, so mimics true/false)
@@ -116,8 +116,8 @@ class openmrs::pihemr (
   file { "${tomcat_home_dir}/.OpenMRS/feature_toggles.properties":
     ensure  => present,
     content => template('openmrs/feature_toggles.properties.erb'),
-    owner   => $tomcat,
-    group   => $tomcat,
+    owner   => 'tomcat',
+    group   => 'tomcat',
     mode    => '0644',
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
@@ -125,8 +125,8 @@ class openmrs::pihemr (
   file { "${tomcat_home_dir}/.OpenMRS/csrfguard.properties":
     ensure  => present,
     content => template('openmrs/csrfguard.properties.erb'),
-    owner   => $tomcat,
-    group   => $tomcat,
+    owner   => 'tomcat',
+    group   => 'tomcat',
     mode    => '0644',
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
@@ -134,8 +134,8 @@ class openmrs::pihemr (
   file { "${tomcat_home_dir}/.OpenMRS/${webapp_name}-runtime.properties":
     ensure  => present,
     content => template('openmrs/openmrs-runtime.properties.erb'),
-    owner   => $tomcat,
-    group   => $tomcat,
+    owner   => 'tomcat',
+    group   => 'tomcat',
     mode    => '0600',
     require => File["${tomcat_home_dir}/.OpenMRS"]
   }
@@ -143,7 +143,7 @@ class openmrs::pihemr (
   package { $package_name:
     ensure  => $pihemr_version,
     install_options => [ '--allow-change-held-packages' ],
-    require => [ Package[$tomcat], Service[$tomcat], Service['mysqld'], Exec['package_unhold'],
+    require => [ Package['tomcat9'], Service['tomcat9'], Service['mysqld'], Exec['package_unhold'],
       File["${tomcat_home_dir}/.OpenMRS/${webapp_name}-runtime.properties"] ],
   }
 
@@ -163,7 +163,7 @@ class openmrs::pihemr (
       ensure => latest,
       packaging => zip,
       repos => "${maven_download_repo}",
-      require => [Package["$package_name"], Package['maven'], File["/home/${tomcat}/.OpenMRS"]],
+      require => [Package["$package_name"], Package['maven'], File["${tomcat_home_dir}/.OpenMRS"]],
     }
 
     exec{'install-openmrs-configuration':
@@ -187,8 +187,8 @@ class openmrs::pihemr (
     }
 
     exec{'install-openmrs-frontend':
-      command => "rm -rf /tmp/frontend && unzip -o /tmp/${frontend_name}-${frontend_version}.zip -d /tmp/frontend && rm -rf /home/${tomcat}/.OpenMRS/frontend && mkdir /home/${tomcat}/.OpenMRS/frontend && cp -r /tmp/frontend/*/* /home/${tomcat}/.OpenMRS/frontend",
-      require => [ Maven["/tmp/${frontend_name}-${frontend_version}.zip"], Package['unzip'], File["/home/${tomcat}/.OpenMRS"] ]
+      command => "rm -rf /tmp/frontend && unzip -o /tmp/${frontend_name}-${frontend_version}.zip -d /tmp/frontend && rm -rf ${tomcat_home_dir}/.OpenMRS/frontend && mkdir ${tomcat_home_dir}/.OpenMRS/frontend && cp -r /tmp/frontend/*/* ${tomcat_home_dir}/.OpenMRS/frontend",
+      require => [ Maven["/tmp/${frontend_name}-${frontend_version}.zip"], Package['unzip'], File["${tomcat_home_dir}/.OpenMRS"] ]
     }
 
     # hack to change webapp name in the frontend application after it has already been built into the deb
@@ -202,7 +202,7 @@ class openmrs::pihemr (
 
   if ($config_name != '' and $frontend_name != '') {
     exec{ 'link-configuration-into-frontend':
-      command => "ln -s ../configuration/frontend /home/${tomcat}/.OpenMRS/frontend/site",
+      command => "ln -s ../configuration/frontend ${tomcat_home_dir}/.OpenMRS/frontend/site",
       require => [ Exec['install-openmrs-frontend'], Exec['install-openmrs-configuration'] ]
     }
   }
@@ -225,7 +225,7 @@ class openmrs::pihemr (
     }
 
   exec { 'tomcat-restart':
-    command     => "service ${tomcat} restart",
+    command     => "service tomcat9 restart",
     user        => 'root',
     refreshonly => true
   }

@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH=/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 
-BASE_DIR=/home/<%= @tomcat %>/backups
+BASE_DIR=<%= @tomcat_home_dir %>/backups
 AZSECRET='<%= @az_secret %>'
 AZURL='<%= @az_url %>'
 AZBACKUPFOLDERPATH='<%= @az_backup_folder_path %>'

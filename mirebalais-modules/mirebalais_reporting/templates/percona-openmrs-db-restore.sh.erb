@@ -29,7 +29,7 @@ mkdir -p ${perconaReportDir}
 
 # stop tomcat and apache
 /usr/sbin/service apache2 stop
-/usr/sbin/service tomcat7 stop
+/usr/sbin/service tomcat9 stop
 
 ## removing old reporting dump file
 rm -rf ${perconaHomeDir}/reporting/*
@@ -130,7 +130,7 @@ fi
 
 /usr/sbin/service mysql stop
 
-rm -rf /home/tomcat7/.OpenMRS/configuration_checksums
+rm -rf /home/tomcat/.OpenMRS/configuration_checksums
 sleep 10
 
 jobEndDate=`date +%Y%m%d-%H%M%S`

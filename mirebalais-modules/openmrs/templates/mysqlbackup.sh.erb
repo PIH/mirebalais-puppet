@@ -14,7 +14,7 @@ export PATH=$PATH:${MYSQLDUMP_DIR}
 
 USER='<%= @backup_user %>'
 PASS='<%= @backup_password %>'
-DIR=/home/<%= @tomcat %>/backups
+DIR=<%= @tomcat_home_dir %>/backups
 PREFIX=<%= @backup_file_prefix %>
 MAIL_TO='<%= @sysadmin_email %>'
 
@@ -68,7 +68,7 @@ fi
 #####################################
 ## backup complex obs directory
 #####################################
-COMPLEX_OBS_DIR='/home/<%= @tomcat %>/.OpenMRS/complex_obs'
+COMPLEX_OBS_DIR='<%= @tomcat_home_dir %>/.OpenMRS/complex_obs'
 COMPLEX_OBS_BACKUP_DIR="${DIR}/sequences/complex_obs"
 COMPLEX_OBS_FILENAME=${PREFIX}_complex_obs_${MODIFIER}.7z
 

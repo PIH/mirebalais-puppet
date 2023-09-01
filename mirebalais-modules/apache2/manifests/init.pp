@@ -1,5 +1,4 @@
 class apache2 (
-  $tomcat = hiera('tomcat'),
   $services_ensure = hiera('services_ensure'),
   $services_enable = hiera('services_enable'),
   $site_domain = hiera('site_domain'),
@@ -24,6 +23,7 @@ class apache2 (
   $cert_cron_min = hiera('cert_cron_min'),
   $apache_cron_restart_hour = hiera('apache_cron_restart_hour'),
   $apache_cron_restart_min = hiera('apache_cron_restart_min'),
+  $tomcat_ajp_secret = decrypt(hiera('tomcat_ajp_secret'))
 ){
 
   include base_packages

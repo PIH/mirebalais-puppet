@@ -212,12 +212,17 @@ node 'vagrant-test.pih-emr.org' {
 
   include java
   include mysql_setup
+  include apache2
+  include tomcat
+
+  include openmrs
+  include openmrs::initial_setup
+  include openmrs::backup
 
   include docker
-  include petl
+  include percona
 
 }
-
 
 node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
 

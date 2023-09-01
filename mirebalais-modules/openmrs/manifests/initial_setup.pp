@@ -2,7 +2,6 @@ class openmrs::initial_setup(
   $openmrs_db = hiera('openmrs_db'),
   $openmrs_db_user = decrypt(hiera('openmrs_db_user')),
   $openmrs_db_password = decrypt(hiera('openmrs_db_password')),
-  $tomcat = hiera('tomcat'),
   $webapp_name = hiera('webapp_name'),
   $package_name = hiera('package_name')
 ) {
@@ -32,8 +31,7 @@ class openmrs::initial_setup(
     privileges => ['ALL'],
     table => '*.*',
     user => "root@localhost",
-    require => [Service['mysqld'],  Package[$package_name]],
-    notify  => Exec['set up base schema'];
+    require => [Service['mysqld'],  Package[$package_name]]
   }
 
   file { '/usr/local/liquibase.jar':
@@ -44,24 +42,25 @@ class openmrs::initial_setup(
   file { "/usr/local/table-exists.sh":
     ensure  => present,
     content => template('openmrs/table-exists.sh.erb'),
-    owner   => $tomcat,
-    group   => $tomcat,
+    owner   => 'tomcat',
+    group   => 'tomcat',
     mode    => '0700',
-    require => File["/usr/local/liquibase.jar"]
+    require => [ Package['tomcat9'], File["/usr/local/liquibase.jar"] ],
+    notify => Exec['set up base schema']
   }
 
   file { "/usr/local/table-has-data.sh":
     ensure  => present,
     content => template('openmrs/table-has-data.sh.erb'),
-    owner   => $tomcat,
-    group   => $tomcat,
+    owner   => 'tomcat',
+    group   => 'tomcat',
     mode    => '0700',
-    require => File["/usr/local/liquibase.jar"]
+    require => [ Package['tomcat9'], File["/usr/local/liquibase.jar"] ]
   }
 
   exec { 'set up base schema':
     cwd         =>  '/usr/local/',
-    command     => "java -Dliquibase.databaseChangeLogTableName=liquibasechangelog -Dliquibase.databaseChangeLogLockTableName=liquibasechangeloglock -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/var/lib/${tomcat}/webapps/${webapp_name}.war --url=jdbc:mysql://localhost:3306/${openmrs_db} --changeLogFile=liquibase-schema-only.xml --username=${openmrs_db_user} --password='${openmrs_db_password}' update",
+    command     => "java -Dliquibase.databaseChangeLogTableName=liquibasechangelog -Dliquibase.databaseChangeLogLockTableName=liquibasechangeloglock -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/var/lib/tomcat9/webapps/${webapp_name}.war --url=jdbc:mysql://localhost:3306/${openmrs_db} --changeLogFile=liquibase-schema-only.xml --username=${openmrs_db_user} --password='${openmrs_db_password}' update",
     user        => 'root',
     unless      => "/usr/local/table-exists.sh ${openmrs_db_user} '${openmrs_db_password}' ${openmrs_db} users",
     refreshonly => true,
@@ -72,20 +71,13 @@ class openmrs::initial_setup(
 
   exec { 'set up core data':
     cwd         =>  '/usr/local/',
-    command     => "java -Dliquibase.databaseChangeLogTableName=liquibasechangelog -Dliquibase.databaseChangeLogLockTableName=liquibasechangeloglock -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/var/lib/${tomcat}/webapps/${webapp_name}.war --url=jdbc:mysql://localhost:3306/${openmrs_db} --changeLogFile=liquibase-core-data.xml --username=${openmrs_db_user} --password='${openmrs_db_password}' update",
+    command     => "java -Dliquibase.databaseChangeLogTableName=liquibasechangelog -Dliquibase.databaseChangeLogLockTableName=liquibasechangeloglock -jar liquibase.jar --driver=com.mysql.jdbc.Driver --classpath=/var/lib/tomcat9/webapps/${webapp_name}.war --url=jdbc:mysql://localhost:3306/${openmrs_db} --changeLogFile=liquibase-core-data.xml --username=${openmrs_db_user} --password='${openmrs_db_password}' update",
     user        => 'root',
     unless      => "/usr/local/table-has-data.sh ${openmrs_db_user} '${openmrs_db_password}' ${openmrs_db} users",
     refreshonly => true,
     require     => [ File['/usr/local/liquibase.jar'], File['/usr/local/table-has-data.sh'], Package[$package_name] ],
     timeout     => 0,
     notify      => Exec['tomcat-restart']
-  }
-
-  # hack to let us remote the mirebalais metadata module from the build; can be removed after it has been removed from all servers
-  exec { 'make mirebalais metadata module not mandatory - error running this command can be ignored when provisioning new server':
-    command     => "mysql -u${openmrs_db_user} -p'${openmrs_db_password}' ${openmrs_db} -e 'update ${openmrs_db}.global_property set property_value=\"false\" where property=\"mirebalaismetadata.mandatory\"'",
-    user        => 'root',
-    require => Package[$package_name],
   }
 
 }
