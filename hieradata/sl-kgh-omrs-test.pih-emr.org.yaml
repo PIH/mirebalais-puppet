@@ -2,6 +2,7 @@
 site_domain: sl-kgh-omrs-test.pih-emr.org
 
 server_timezone: Africa/Freetown
+tomcat_enable_http_8080: true
 
 pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-gladi-demo
 config_name: openmrs-config-pihsl
