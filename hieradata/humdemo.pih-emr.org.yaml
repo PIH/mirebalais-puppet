@@ -22,5 +22,8 @@ commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 
 # feature toggle settings
 
-
+# Certificate parameters
+acme_dns_username: ENC[zmWdxvyttGjm48iMQC9M434ySoRgtdpZDnMS7We/QI8znOy+bXMFNXbwBu1RqQMV:RKvatFsQl64Zxb9gcQPasw==:K0F1RVExSGZ5K09ycHQ2THdabnRRdz09]
+acme_dns_password: ENC[0XAMuvhcBcTVW8HrMSTcdTnlir15dbj+bOy6+iaVUge7/kTHCy0tQb/3tyLPN+Eq:zlIRLEYhIvGfebF++T80ug==:TDJxdmpUUFJJS1Y1UU5vaHlwR2FsZz09]
+acme_dns_subdomain: ENC[x8CQg/DdG+4dMXMzWx6/AGtew8Djf+pZjf1/ro44sejfm/6zvgIwndPiOHZX1SOx:g/jLE3fCCqLwffl80aPUUA==:eWZETmZGM0hoTlY0RmlzdURmTFBZQT09]
 
