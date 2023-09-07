@@ -4,7 +4,7 @@ site_domain: neno-ci.pih-emr.org
 server_timezone: Africa/Blantyre
 
 package_name: pihmalawi
-package_version: 7.0.0-SNAPSHOT
+package_version: 7.0.0
 
 config_name: "%{hiera('package_name')}-config"
 config_version: "%{hiera('package_version')}"
