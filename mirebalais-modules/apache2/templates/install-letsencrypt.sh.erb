@@ -26,7 +26,8 @@ export ACMEDNS_BASE_URL='<%= @acme_dns_base_url %>'
 
 .acme.sh/acme.sh --set-default-ca --server letsencrypt
 .acme.sh/acme.sh --register-account -m emrsysadmin@pih.org
-.acme.sh/acme.sh --issue --dns dns_acmedns -d "$SITE_DOMAIN" --force
+# we use "dnssleep 1" to disable public DNS checks, see: https://github.com/acmesh-official/acme.sh/issues/3006
+.acme.sh/acme.sh --issue --dns dns_acmedns -d "$SITE_DOMAIN" --force --dnssleep 1
 .acme.sh/acme.sh --install-cert --domain "$SITE_DOMAIN" --cert-file /etc/letsencrypt/live/"$SITE_DOMAIN"/cert.pem --key-file /etc/letsencrypt/live/"$SITE_DOMAIN"/privkey.pem --fullchain-file /etc/letsencrypt/live/"$SITE_DOMAIN"/fullchain.pem --ca-file /etc/letsencrypt/live/"$SITE_DOMAIN"/chain.pem --reloadcmd "sudo /usr/sbin/service apache2 restart" --force
 
 
