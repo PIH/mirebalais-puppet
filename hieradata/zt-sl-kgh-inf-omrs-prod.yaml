@@ -27,7 +27,7 @@ mysql_net_write_timeout: 3600
 mysql_innodb_buffer_pool_size: 1G
 mysql_innodb_buffer_pool_instances: 1
 
-java_memory_parameters: '-Xmx4G -Xms4G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+java_memory_parameters: '-Xmx4G -Xms4G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'wel
 
 #az copy
 az_backup_folder_path: sierraleone-kgh
@@ -37,3 +37,9 @@ az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQ
 #commcare
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[P7VM5dPWbAehhNDOEYvoOw==:D9RiKNwZBmptDOWue9h84Q==:a0hmSERnZUp6azFoZklBODRiL2h4dz09]
+
+# Certificate parameters
+acme_dns_username: ENC[6PKmmd0a51b3p5msHf+jcc2KnAE0Q2u2dsC6WHbwvCEzI1/JYfzqu5OUGYV2jClW:aW0EQvI6zJDXtk/cfYeIPg==:YkFsQTJ1NFNlR1VqT1FONkVVSnVjdz09]
+acme_dns_password: ENC[8epIRDzx/wpDm1A5XrYtbn9xjdzAkkS4xuuJZ0Jmyv8TMh7hqCK4FZCTlc6NjSXM:x3RzRS3jkAAZ/MlQfzFyXA==:WTYxeTJkcHl5QVB5MWQ2blRvKy9mdz09]
+acme_dns_subdomain: ENC[5difZUTXBRpuk3I4vsyFggYtJElaFgFbJLYtk9JbjKVRr743nUahONdUxm2ROt6w:1xAnWZuY4lWJG5qQqfthxw==:Rnd5Y3E5bG5xK3RTbTNibEhTYmVudz09]
+

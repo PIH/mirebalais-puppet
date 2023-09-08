@@ -87,3 +87,10 @@ smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
 smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]
 smtp_mailhub: ENC[Br1+9DHXrCo7T8Ra8xGm6MeqOjJiIwzKABPhxe9/Lj0=]
 
+# Certificate parameters
+acme_dns_username: ENC[gQdA3dpGtwKGZpa4TRyHKfqBoJn7tloGdak4b0L46jS46aFVZ1WQ9MOj+99ykZkv:r7QY77760UlOwQ7I1crRIg==:YWIrcWpQUE5XTU01eHJXRTZFMllVZz09]
+acme_dns_password: ENC[qoAGDXnVyVKJA1mU3hJTXF/OJBdsxVxJAJ1rGc8wtsE+Pg5AXqjKHnFSkH/1OTPG:jW940KirW5MlgtDOoFSgZA==:VE5QRStxMnBQbTRXNnN1WDdPVHh2Zz09]
+acme_dns_subdomain: ENC[cnkv7TjMP6o+2enOrgP/ntsb3drVc3efFbjma+3AmrkNrkSPJ0s4a67wRgBR8SD6:J4UAxqeG68poZ+D5f1H+tA==:T0I1ZmlMd05mOWZNZ0Y0YVRZQ2ljdz09]
+
+
+

@@ -39,17 +39,15 @@ haiti_hiv_emr_link_url: ENC[jMR1nUXTdoo+vig9fDoG9v3HIPSMaeRjWFPxaT0D9ewoER7YfHla
 
 java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
-# Use our old godaddy cert until we've tested the letsencrypt one for a few months
-ssl_cert_dir: '/etc/ssl/certs'
-ssl_key_dir: '/etc/ssl/private'
-ssl_cert_file: '8ec70940872b4327.crt'
-ssl_chain_file: 'gd_bundle-g2-g1.crt'
-ssl_key_file: 'pih-emr.org.key'
-ssl_use_letsencrypt: false
-
 # feature toggles
 
 #az copy
 az_backup_folder_path: haiti/cange
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
+
+# Certificate parameters
+acme_dns_username: ENC[iWaP2o5pNdfE/y//j3CA8R2pF5UI1Ee1JLkY0Z2z3oaVMyGdXx4yMnalM3cR5HlN:/PCKhdOEmLzpKWhyHA2e/g==:MHgxQk1CNC9tanpqK1V3V1VHcFJkUT09]
+acme_dns_password: ENC[iD9cx7nKoMzMptbAcAaCfmjaleyOpzxk5aDvrflmDn5ik4g6PFxBIILnyJo0ZzyP:PvW+f3npSC0FdT/ZnHojKg==:T09TbzZkamJtM2tiTk02M1U0MVZPUT09]
+acme_dns_subdomain: ENC[W5B6POXBt5fcuCbnzenl+aL4V1bsG/Hef/v4rZ7hMxuReZ4Rh3HITSG3VwMD8pPD:dC5xN4i0d0I4x23lqWme8g==:M3ltNjNMT1VPeGN4RFZWY1dTRmhCQT09]
+
