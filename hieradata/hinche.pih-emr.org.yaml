@@ -49,3 +49,9 @@ az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUd
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
 # feature toggles
+
+# Certificate parameters
+acme_dns_username: ENC[IX7se1ksIZtTlVDVeTTQir9kcv/uTxWbTn3b6s5EJnv5otjqNxEziKrh69PQoQNG:S0GI0KPwL5d9rcMNKwtxHg==:WXNwdmh0Rm0xLzA1WjFRZ2k2TE55QT09]
+acme_dns_password: ENC[z5di+J0Hwhkrp6+BYUD0r4gmBFAvD8MoB39UtYwjvXUspnNo4ldaG6p4LOWvIBvw:ZDXzN3IUGdCfR3agoZTztQ==:SzA1ek9NeXQyUDRmMU56b1NwQTlTZz09]
+acme_dns_subdomain: ENC[5VynTBudi6wc9uF2aHu2pnU+3evz4kWE/1njLH+5lJmg/PWTLmBwf0HW7ON53h+I:OIsgZOjbeW5us1kbNiUG3A==:clEzTFRiZ0twOTZGakNXNldSYUUwZz09]
+

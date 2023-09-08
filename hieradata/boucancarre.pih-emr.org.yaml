@@ -44,8 +44,14 @@ az_backup_folder_path: haiti/boucancarre
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
-# mail
+
 # mail
 smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
 smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]
 smtp_mailhub: ENC[Br1+9DHXrCo7T8Ra8xGm6MeqOjJiIwzKABPhxe9/Lj0=]
+
+# Certificate parameters
+acme_dns_username: ENC[KxknvNewSburP/QxZcP+CjtmfIiLTWkBvTUpF4mywq+St9Ws3GpneZJjpt/BOljY:BbfAl9R3ITATzE30f6nOUg==:bXlOOHpHbUl5K3lWRGx4ZXBPbFpOdz09]
+acme_dns_password: ENC[TLZ9czE5lKqKXV9/Ivp53bAD6K+INwrIpofv/NAp2lzR60TjGrbnJV23xQeoNy9s:Cin1iFwSvK49SqExXRpl4A==:RStjOHM2dk5IZUwxTCtxUFpuRDdVdz09]
+acme_dns_subdomain: ENC[NGoVU93mwRC7i0gJsPma9O5EileXt3fROR8cqM3TrjgNlOFD2l1VTSZiSSVNMqJ0:fmwldwyX8Xzidv98Fit2kQ==:ZFRZMWZCTXViZXN2WEZTZHZET3Vndz09]
+

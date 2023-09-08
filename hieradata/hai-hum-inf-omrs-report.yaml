@@ -44,3 +44,9 @@ perconaReportDir: "/home/percona/reporting"
 minPerconaDirSize: 41200000
 
 java_memory_parameters: '-Xmx16G -Xms16G'
+
+# Certificate parameters
+acme_dns_username: ENC[kI2l7Ybo193nn4Qn3MpfYsPzQ1nuUetbf1cudDnm2wvwsWZcIy0n0jqurfM8tW76:2BhHTNDNJD2ROwYCV0fa5Q==:Z0VjODMxU0hNUW9PVnlkTVdTdE5CZz09]
+acme_dns_password: ENC[gd+5xl9KPD/Ldg17XdxZN2s7TqVt7VPnIZfAiqpimcG3lOIndXQSqTNoDT80YTo7:UrgzM4NM5fS+mIPPcNLE7g==:emdPeHJtcWxITHp3Rkwwd0krVzNMZz09]
+acme_dns_subdomain: ENC[WRvI5gC7Woa5tTCkxUKre/em8eECerVXj+/wGzErxq6sST6yyQCHC3tnb4Iy7R7r:7AOEtGmss7iViifm0/CR7A==:bWRPa0t6VkZKdzNsd3lKSUVPSUI2dz09]
+
