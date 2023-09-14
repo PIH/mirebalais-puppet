@@ -25,3 +25,7 @@ backup_time: date +%Y%m%d
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
+# Certificate parameters
+acme_dns_username: ENC[0zUHjsODJV3/laRwDdUAVl7mOn58bdC3JX4ZIzdH2FfP/hgZTe4vPBAZestMfH9p:1zqGq9XLYxaEaQM0IyVePw==:QlFiUW1NR0tRdWNDKzJGeWU4OTZVUT09]
+acme_dns_password: ENC[60uC+VlcP/5GDxj2+RxrfQCvfz74le8VAEWlOBl1ISjLeZFmGGHnmqk6efJ16vnq:hn37IQ6SZzgncHCPENzDsQ==:R0h5NVA5c0NzdkFyR1UxNnVoKy8xQT09]
+acme_dns_subdomain: ENC[nAhtERGqlBDre/joscSbbBAzyW47WIb5DM0hCeXPG+lp67uP0m6xOLKC3mrP0zoA:XBZK7wwJ0TUuCHttEUfxQw==:TjhIeFp3YTVKcjAwcVFnYWo4ZncwUT09]
