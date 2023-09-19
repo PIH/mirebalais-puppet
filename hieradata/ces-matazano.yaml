@@ -5,7 +5,7 @@ pih_config: mexico,mexico-matazano
 config_name: openmrs-config-ces
 config_version: 1.32.0
 
-server_timezone: America/Guatemala
+server_timezone: America/Mexico_City
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
 openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]

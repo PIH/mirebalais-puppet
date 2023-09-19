@@ -1,6 +1,6 @@
 ---
 site_domain: ces-ci.pih-emr.org
-server_timezone: America/Guatemala
+server_timezone: America/Mexico_City
 
 package_release: 'unstable'
 pih_config: mexico,mexico-production #,mexico-demo
