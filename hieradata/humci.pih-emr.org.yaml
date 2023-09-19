@@ -2,9 +2,6 @@
 webapp_name: mirebalais
 site_domain: humci.pih-emr.org
 
-package_release: 'stable'
-package_version: '1.0.20230814180201-1'
-
 pih_config: mirebalais,mirebalais-humci
 config_name: openmrs-config-zl
 config_version: 1.46.0-SNAPSHOT
