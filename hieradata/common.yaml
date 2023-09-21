@@ -131,7 +131,7 @@ petl_java_opts: ""
 
 # PETL Config
 petl_config_name: zl-etl
-petl_config_version: 1.9.0-SNAPSHOT
+petl_config_version: 1.10.0-SNAPSHOT
 petl_config_dir: "configurations"
 
 # PETL MySQL
@@ -200,6 +200,7 @@ apache_cron_restart_min: 03
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 az_backup_folder_path: ''
+az_backup_hour: '*/7'
 
 java_memory_parameters: '-Xmx2048m -Xms2048m'
 #-XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC
