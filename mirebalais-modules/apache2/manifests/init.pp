@@ -15,6 +15,7 @@ class apache2 (
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
   $sysadmin_email = hiera('sysadmin_email'),
+  $acme_user = decrypt(hiera('acme_user')),
   $acme_dns_username = decrypt(hiera('acme_dns_username')),
   $acme_dns_password = decrypt(hiera('acme_dns_password')),
   $acme_dns_subdomain = decrypt(hiera('acme_dns_subdomain')),
@@ -98,11 +99,18 @@ class apache2 (
     notify      => Service['apache2']
   }
 
-  file { "/var/acme":
-    ensure => directory,
-    owner   => "root",
-    group   => "root"
+  user { "$acme_user":
+    ensure     => 'present',
+    home       => "/var/$acme_user/",
+    shell      => '/sbin/nologin',
+    managehome => false,
   }
+
+  file { "/var/$acme_user":
+      ensure => directory,
+      owner   => '$acme_user',
+      group   => '$acme_user',
+    }
 
   # clear out old non-ecc certs, can likely be removed after we upgrade to acme dns
   file { "/var/acme/.acme.sh/$site_domain" :
@@ -113,21 +121,21 @@ class apache2 (
 
   file { "/etc/letsencrypt" :
     ensure => directory,
-    owner   => "root",
-    group   => "root"
+    owner   => "$acme_user",
+    group   => "$acme_user",
   }
 
   file { "/etc/letsencrypt/live" :
     ensure => directory,
-    owner   => "root",
-    group   => "root",
+    owner   => "$acme_user",
+    group   => "$acme_user",
     require => File["/etc/letsencrypt"]
   }
 
   file { "/etc/letsencrypt/live/$site_domain" :
     ensure => directory,
-    owner   => "root",
-    group   => "root",
+    owner   => "$acme_user",
+    group   => "$acme_user",
     mode    => '0710',
     require => File["/etc/letsencrypt/live"]
   }
@@ -136,16 +144,16 @@ class apache2 (
     ensure  => present,
     path    => "/var/acme/install-letsencrypt.sh",
     mode    => '0700',
-    owner   => "root",
-    group   => "root",
+    owner   => '$acme_user',
+    group   => '$acme_user',
     content => template('apache2/install-letsencrypt.sh.erb'),
-    require => File["/var/acme"],
+    require => File["/var/$acme_user"],
     notify => Exec['run install letsencrypt'],
   }
 
   exec { "download acme from the git repo":
     command => "rm -rf /var/acme/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/acme/acme.sh",
-    require => File["/var/acme"]
+    require => File["/var/$acme_user"]
   }
 
   # note refresh-only, this onle runs when the let encrypt script changes
@@ -162,7 +170,7 @@ class apache2 (
     hour    => "$cert_cron_hour",
     minute  => "$cert_cron_min",
     environment => "MAILTO=$sysadmin_email",
-    require => File["/var/acme"]
+    require => File["/var/$acme_user"]
   }
 
   cron { "restart apache2":
