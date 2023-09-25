@@ -104,19 +104,22 @@ class apache2 (
     home       => "/var/$acme_user/",
     shell      => '/bin/bash',
     managehome => false,
+
   }
 
   file { "/var/$acme_user":
-      ensure => directory,
-      owner   => '$acme_user',
-      group   => '$acme_user',
+    ensure => directory,
+    owner   => "$acme_user",
+    group   => "$acme_user",
+    require => User["$acme_user"]
     }
 
   # clear out old non-ecc certs, can likely be removed after we upgrade to acme dns
-  file { "/var/acme/.acme.sh/$site_domain" :
+  file { "/var/$acme_user/.acme.sh/$site_domain" :
     ensure => absent,
     recurse => true,
     force   => true,
+    require => File["/var/$acme_user"]
   }
 
   file { "/etc/letsencrypt" :
@@ -144,8 +147,8 @@ class apache2 (
     ensure  => present,
     path    => "/var/acme/install-letsencrypt.sh",
     mode    => '0700',
-    owner   => '$acme_user',
-    group   => '$acme_user',
+    owner   => "$acme_user",
+    group   => "$acme_user",
     content => template('apache2/install-letsencrypt.sh.erb'),
     require => File["/var/$acme_user"],
     notify => Exec['run install letsencrypt'],
@@ -158,14 +161,14 @@ class apache2 (
 
   # note refresh-only, this onle runs when the let encrypt script changes
   exec { "run install letsencrypt":
-    command => "/var/acme/install-letsencrypt.sh",
-    require =>  [ Exec['download acme from the git repo'], File["/var/acme/.acme.sh/$site_domain"] ],
+    command => "/var/$acme_user/install-letsencrypt.sh",
+    require =>  [ Exec['download acme from the git repo'], File["/var/$acme_user/.acme.sh/$site_domain"] ],
     refreshonly => true,
   }
 
   cron { "renew certificates using acme user":
     ensure  => present,
-    command => "'/var/acme/.acme.sh'/acme.sh --cron --home '/var/acme/.acme.sh' > /dev/null",
+    command => "'/var/$acme_user/.acme.sh'/acme.sh --cron --home '/var/$acme_user/.acme.sh' > /dev/null",
     user    => "root",
     hour    => "$cert_cron_hour",
     minute  => "$cert_cron_min",
