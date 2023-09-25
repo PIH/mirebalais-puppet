@@ -102,7 +102,7 @@ class apache2 (
   user { "$acme_user":
     ensure     => 'present',
     home       => "/var/$acme_user/",
-    shell      => '/sbin/nologin',
+    shell      => '/bin/bash',
     managehome => false,
   }
 
