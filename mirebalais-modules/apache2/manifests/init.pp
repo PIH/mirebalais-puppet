@@ -155,9 +155,7 @@ class apache2 (
   }
 
   exec { "download acme from the git repo":
-    command => "rm -rf /var/$acme_user/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/$acme_user/acme.sh",
-    owner   => "$acme_user",
-    group   => "$acme_user",
+    command => "rm -rf /var/$acme_user/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/$acme_user/acme.sh && chown -R $acme_user:$acme_user /var/$acme_user/acme.sh",
     require => File["/var/$acme_user"]
   }
 
