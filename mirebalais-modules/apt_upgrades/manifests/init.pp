@@ -1,5 +1,5 @@
 class apt_upgrades(
-    $sysadmin_email = hiera('sysadmin_email')
+    $sysadmin_email = decrypt(hiera('sysadmin_email'))
 ) {
 
 	class { 'apt::unattended_upgrades' :

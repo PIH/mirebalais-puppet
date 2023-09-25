@@ -72,7 +72,7 @@ remote_db_user: foo
 remote_db_server: foo
 remote_backup_dir: foo
 
-sysadmin_email: emrsysadmin@pih.org
+sysadmin_email: ENC[l4VepVXtEvKsk+K+qhAL1K+c995NxX7uRGtFIUb5qV0=:6wlaJ/P+clVATRzNAtZqAw==:WmszcktKVS9ncVB4eHBIVjQ3TlJ5QT09]
 
 smtp_username: ENC[LhaBIAFkVOz/j+iAUzdIcZ4q8tHNzhyA+xMWx9zUkqI=:lbnhfiuIeHS4VMdI8DMV+A==:WjhNUkM0Q1FuVk05WFhUeGowVTE2dz09]
 smtp_userpassword: ENC[VP7yvNiPEkclvmqxRxMc/MvEyAMcBG3ugJEwthDU0+0=:bZZy9YRqN4FEUJViJBIIpQ==:RjFzQW9qc2xVSU96cWNyOVQ2MUZUUT09]
