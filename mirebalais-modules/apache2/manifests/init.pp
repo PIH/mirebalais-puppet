@@ -14,7 +14,7 @@ class apache2 (
   $biometrics_port = hiera('biometrics_port'),
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
-  $sysadmin_email = hiera('sysadmin_email'),
+  $sysadmin_email = decrypt(hiera('sysadmin_email')),
   $acme_user = decrypt(hiera('acme_user')),
   $acme_dns_username = decrypt(hiera('acme_dns_username')),
   $acme_dns_password = decrypt(hiera('acme_dns_password')),
@@ -169,7 +169,7 @@ class apache2 (
   cron { "renew certificates using acme user":
     ensure  => present,
     command => "'/var/$acme_user/.acme.sh'/acme.sh --cron --home '/var/$acme_user/.acme.sh' > /dev/null",
-    user    => 'root',
+    user    => "$acme_user",
     hour    => "$cert_cron_hour",
     minute  => "$cert_cron_min",
     environment => "MAILTO=$sysadmin_email",
