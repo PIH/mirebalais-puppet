@@ -145,7 +145,7 @@ class apache2 (
 
   file { "install-letsencrypt.sh":
     ensure  => present,
-    path    => "/var/acme/install-letsencrypt.sh",
+    path    => "/var/$acme_user/install-letsencrypt.sh",
     mode    => '0700',
     owner   => "$acme_user",
     group   => "$acme_user",
@@ -155,7 +155,7 @@ class apache2 (
   }
 
   exec { "download acme from the git repo":
-    command => "rm -rf /var/acme/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/acme/acme.sh",
+    command => "rm -rf /var/$acme_user/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/$acme_user/acme.sh",
     require => File["/var/$acme_user"]
   }
 
