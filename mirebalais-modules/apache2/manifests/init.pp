@@ -169,7 +169,7 @@ class apache2 (
   cron { "renew certificates using acme user":
     ensure  => present,
     command => "'/var/$acme_user/.acme.sh'/acme.sh --cron --home '/var/$acme_user/.acme.sh' > /dev/null",
-    user    => "$acme_user",
+    user    => 'root',
     hour    => "$cert_cron_hour",
     minute  => "$cert_cron_min",
     environment => "MAILTO=$sysadmin_email",
