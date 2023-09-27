@@ -30,5 +30,8 @@ export ACMEDNS_BASE_URL='<%= @acme_dns_base_url %>'
 .acme.sh/acme.sh --issue --dns dns_acmedns -d "$SITE_DOMAIN" --force --dnssleep 1
 .acme.sh/acme.sh --install-cert --domain "$SITE_DOMAIN" --cert-file /etc/letsencrypt/live/"$SITE_DOMAIN"/cert.pem --key-file /etc/letsencrypt/live/"$SITE_DOMAIN"/privkey.pem --fullchain-file /etc/letsencrypt/live/"$SITE_DOMAIN"/fullchain.pem --ca-file /etc/letsencrypt/live/"$SITE_DOMAIN"/chain.pem --reloadcmd "sudo /usr/sbin/service apache2 restart" --force
 
+# ensure /etc/letsencrypt/live/$SITE_DOMAIN has the right owner
+chown -R <%= @acme_user %>:<%= @acme_user %>  /etc/letsencrypt/live/$SITE_DOMAIN
+
 # we rely on our own cron job to renew the certificate
 .acme.sh/acme.sh --uninstall-cronjob --force

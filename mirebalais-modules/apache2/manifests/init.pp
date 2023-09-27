@@ -102,7 +102,7 @@ class apache2 (
   user { "$acme_user":
     ensure     => 'present',
     home       => "/var/$acme_user/",
-    shell      => '/bin/bash',
+    shell      => '/usr/sbin/nologin',
     managehome => false,
 
   }
@@ -113,6 +113,13 @@ class apache2 (
     group   => "$acme_user",
     require => User["$acme_user"]
     }
+
+  # Edit your sudoers file to allow the acme user to reload (not restart) nginx
+  file_line { 'acme_sudo':
+    path  => '/etc/sudoers',
+    line  => 'acme ALL=(ALL) NOPASSWD: /bin/systemctl reload apache2.service',
+    match => '^acme',
+  }
 
   # clear out old non-ecc certs, can likely be removed after we upgrade to acme dns
   file { "/var/$acme_user/.acme.sh/$site_domain" :
@@ -174,7 +181,7 @@ class apache2 (
 
   cron { "cron renew certificates using acme user":
     ensure  => present,
-    command => "'/var/$acme_user/.acme.sh'/acme.sh --cron --home '/var/$acme_user/.acme.sh' > /dev/null",
+    command => "'/var/$acme_user/.acme.sh'/acme.sh --force --cron --home '/var/$acme_user/.acme.sh' > /dev/null",
     user    => "$acme_user",
     hour    => "$cert_cron_hour",
     minute  => "$cert_cron_min",
