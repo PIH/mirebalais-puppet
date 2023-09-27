@@ -166,7 +166,13 @@ class apache2 (
     refreshonly => true,
   }
 
+  # Ensure cron is absent for root
   cron { "renew certificates using acme user":
+    ensure  => absent,
+    user    => 'root'
+  }
+
+  cron { "cron renew certificates using acme user":
     ensure  => present,
     command => "'/var/$acme_user/.acme.sh'/acme.sh --cron --home '/var/$acme_user/.acme.sh' > /dev/null",
     user    => "$acme_user",
@@ -183,7 +189,7 @@ class apache2 (
     hour    => "$apache_cron_restart_hour",
     minute  => "$apache_cron_restart_min",
     environment => "MAILTO=$sysadmin_email",
-    require => Cron["renew certificates using acme user"]
+    require => Cron["cron renew certificates using acme user"]
   }
 
   file { '/etc/apache2/sites-available/default-ssl.conf':
