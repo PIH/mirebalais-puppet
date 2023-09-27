@@ -114,11 +114,12 @@ class apache2 (
     require => User["$acme_user"]
     }
 
-  # Edit your sudoers file to allow the acme user to reload (not restart) nginx
-  file_line { 'acme_sudo':
+  # Edit your sudoers file to allow the acme user to reload (not restart) apache2
+  file_line { "$acme_user sudo":
     path  => '/etc/sudoers',
-    line  => 'acme ALL=(ALL) NOPASSWD: /bin/systemctl reload apache2.service',
-    match => '^acme',
+    line  => "$acme_user ALL=(ALL) NOPASSWD: /bin/systemctl reload apache2.service",
+    match => "^$acme_user",
+    require => User["$acme_user"]
   }
 
   # clear out old non-ecc certs, can likely be removed after we upgrade to acme dns
