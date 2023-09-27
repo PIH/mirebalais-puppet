@@ -72,7 +72,7 @@ remote_db_user: foo
 remote_db_server: foo
 remote_backup_dir: foo
 
-sysadmin_email: emrsysadmin@pih.org
+sysadmin_email: ENC[l4VepVXtEvKsk+K+qhAL1K+c995NxX7uRGtFIUb5qV0=:6wlaJ/P+clVATRzNAtZqAw==:WmszcktKVS9ncVB4eHBIVjQ3TlJ5QT09]
 
 smtp_username: ENC[LhaBIAFkVOz/j+iAUzdIcZ4q8tHNzhyA+xMWx9zUkqI=:lbnhfiuIeHS4VMdI8DMV+A==:WjhNUkM0Q1FuVk05WFhUeGowVTE2dz09]
 smtp_userpassword: ENC[VP7yvNiPEkclvmqxRxMc/MvEyAMcBG3ugJEwthDU0+0=:bZZy9YRqN4FEUJViJBIIpQ==:RjFzQW9qc2xVSU96cWNyOVQ2MUZUUT09]
@@ -187,6 +187,7 @@ ssl_chain_file: 'fullchain.pem'
 ssl_key_dir: "/etc/letsencrypt/live/%{hiera('site_domain')}"
 ssl_key_file: 'privkey.pem'
 ssl_use_letsencrypt: true
+acme_user: ENC[2tXA1UMPe7zSGFq27HtWPg==:3FFCUm2Ldb+3E5OuuQeecg==:RXhzZHhCSDZYWGdHdGJCSnFYK282UT09]
 acme_dns_username:
 acme_dns_password:
 acme_dns_subdomain:
@@ -200,7 +201,6 @@ apache_cron_restart_min: 03
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 az_backup_folder_path: ''
-#az_backup_hour: '*/7'
 
 java_memory_parameters: '-Xmx2048m -Xms2048m'
 #-XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC

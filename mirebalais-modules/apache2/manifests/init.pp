@@ -14,7 +14,8 @@ class apache2 (
   $biometrics_port = hiera('biometrics_port'),
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
-  $sysadmin_email = hiera('sysadmin_email'),
+  $sysadmin_email = decrypt(hiera('sysadmin_email')),
+  $acme_user = decrypt(hiera('acme_user')),
   $acme_dns_username = decrypt(hiera('acme_dns_username')),
   $acme_dns_password = decrypt(hiera('acme_dns_password')),
   $acme_dns_subdomain = decrypt(hiera('acme_dns_subdomain')),
@@ -98,71 +99,87 @@ class apache2 (
     notify      => Service['apache2']
   }
 
-  file { "/var/acme":
-    ensure => directory,
-    owner   => "root",
-    group   => "root"
+  user { "$acme_user":
+    ensure     => 'present',
+    home       => "/var/$acme_user/",
+    shell      => '/bin/bash',
+    managehome => false,
+
   }
 
+  file { "/var/$acme_user":
+    ensure => directory,
+    owner   => "$acme_user",
+    group   => "$acme_user",
+    require => User["$acme_user"]
+    }
+
   # clear out old non-ecc certs, can likely be removed after we upgrade to acme dns
-  file { "/var/acme/.acme.sh/$site_domain" :
+  file { "/var/$acme_user/.acme.sh/$site_domain" :
     ensure => absent,
     recurse => true,
     force   => true,
+    require => File["/var/$acme_user"]
   }
 
   file { "/etc/letsencrypt" :
     ensure => directory,
-    owner   => "root",
-    group   => "root"
+    owner   => "$acme_user",
+    group   => "$acme_user",
   }
 
   file { "/etc/letsencrypt/live" :
     ensure => directory,
-    owner   => "root",
-    group   => "root",
+    owner   => "$acme_user",
+    group   => "$acme_user",
     require => File["/etc/letsencrypt"]
   }
 
   file { "/etc/letsencrypt/live/$site_domain" :
     ensure => directory,
-    owner   => "root",
-    group   => "root",
+    owner   => "$acme_user",
+    group   => "$acme_user",
     mode    => '0710',
     require => File["/etc/letsencrypt/live"]
   }
 
   file { "install-letsencrypt.sh":
     ensure  => present,
-    path    => "/var/acme/install-letsencrypt.sh",
+    path    => "/var/$acme_user/install-letsencrypt.sh",
     mode    => '0700',
-    owner   => "root",
-    group   => "root",
+    owner   => "$acme_user",
+    group   => "$acme_user",
     content => template('apache2/install-letsencrypt.sh.erb'),
-    require => File["/var/acme"],
+    require => File["/var/$acme_user"],
     notify => Exec['run install letsencrypt'],
   }
 
   exec { "download acme from the git repo":
-    command => "rm -rf /var/acme/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/acme/acme.sh",
-    require => File["/var/acme"]
+    command => "rm -rf /var/$acme_user/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/$acme_user/acme.sh && chown -R $acme_user:$acme_user /var/$acme_user/acme.sh",
+    require => File["/var/$acme_user"]
   }
 
   # note refresh-only, this onle runs when the let encrypt script changes
   exec { "run install letsencrypt":
-    command => "/var/acme/install-letsencrypt.sh",
-    require =>  [ Exec['download acme from the git repo'], File["/var/acme/.acme.sh/$site_domain"] ],
+    command => "/var/$acme_user/install-letsencrypt.sh",
+    require =>  [ Exec['download acme from the git repo'], File["/var/$acme_user/.acme.sh/$site_domain"] ],
     refreshonly => true,
   }
 
+  # Ensure cron is absent for root
   cron { "renew certificates using acme user":
+    ensure  => absent,
+    user    => 'root'
+  }
+
+  cron { "cron renew certificates using acme user":
     ensure  => present,
-    command => "'/var/acme/.acme.sh'/acme.sh --cron --home '/var/acme/.acme.sh' > /dev/null",
-    user    => "root",
+    command => "'/var/$acme_user/.acme.sh'/acme.sh --cron --home '/var/$acme_user/.acme.sh' > /dev/null",
+    user    => "$acme_user",
     hour    => "$cert_cron_hour",
     minute  => "$cert_cron_min",
     environment => "MAILTO=$sysadmin_email",
-    require => File["/var/acme"]
+    require => File["/var/$acme_user"]
   }
 
   cron { "restart apache2":
@@ -172,7 +189,7 @@ class apache2 (
     hour    => "$apache_cron_restart_hour",
     minute  => "$apache_cron_restart_min",
     environment => "MAILTO=$sysadmin_email",
-    require => Cron["renew certificates using acme user"]
+    require => Cron["cron renew certificates using acme user"]
   }
 
   file { '/etc/apache2/sites-available/default-ssl.conf':
