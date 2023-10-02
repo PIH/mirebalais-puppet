@@ -12,7 +12,7 @@ petl_server_port: 9110
 # PETL config
 petl_config_dir: "configurations"
 petl_config_name: sl-etl
-petl_config_version: 1.2.0
+petl_config_version: 1.3.0
 
 # PETL MySQL
 petl_mysql_user: ENC[IBlRIdqGjvycAUCjkG64Ww==:MxZnmS3BIAHsjnyijQn8uA==:ZzQ3amRESUh3V3hhUDlJbkpha0xzQT09]
