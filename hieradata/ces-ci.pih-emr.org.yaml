@@ -2,10 +2,11 @@
 site_domain: ces-ci.pih-emr.org
 server_timezone: America/Mexico_City
 
-package_release: 'unstable'
+package_release: 'stable'
+package_version: '1.0.20231012151839-1'
 pih_config: mexico,mexico-production #,mexico-demo
 config_name: openmrs-config-ces
-config_version: 1.34.0-SNAPSHOT
+config_version: 1.34.0
 
 #frontend_name: "openmrs-frontend-pihemr"
 #frontend_version: 1.5.0-SNAPSHOT
