@@ -4,7 +4,10 @@ server_timezone: Africa/Freetown
 
 pih_config: sierraLeone,sierraLeone-kgh,sierraLeone-kgh-test
 config_name: openmrs-config-pihsl
-config_version: 1.19.0-SNAPSHOT
+config_version: 1.18.0
+
+package_release: 'stable'
+package_version: '1.0.20231012151839-1'
 
 frontend_name: "openmrs-frontend-pihemr"
 frontend_version: 1.5.0-SNAPSHOT
