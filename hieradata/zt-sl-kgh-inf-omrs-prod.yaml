@@ -9,6 +9,9 @@ server_timezone: Africa/Freetown
 package_release: 'stable'
 package_version: '1.0.20231012151839-1'
 
+frontend_name: "openmrs-frontend-pihemr"
+frontend_version: 1.6.0
+
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[q/IrbhThPxSAsELZ1pA9fA==:FiTeRLnrYO171+KKiSA+oQ==:RHN4QXdNV3dzbVVxemY1c0hkNjk5UT09]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
