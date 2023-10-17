@@ -7,6 +7,7 @@ config_version: 1.17.0
 
 server_timezone: Africa/Freetown
 package_release: 'stable'
+package_version: '1.0.20230523205816-1'
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[q/IrbhThPxSAsELZ1pA9fA==:FiTeRLnrYO171+KKiSA+oQ==:RHN4QXdNV3dzbVVxemY1c0hkNjk5UT09]
