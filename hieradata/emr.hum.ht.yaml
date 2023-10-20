@@ -67,14 +67,6 @@ haiti_hiv_emr_link_url: ENC[jMR1nUXTdoo+vig9fDoG9v3HIPSMaeRjWFPxaT0D9ewoER7YfHla
 # feature toggle settings
 insurance_collection: false
 
-# SSL certificates--use letencrypt by default
-ssl_cert_dir: "/var/acme/.acme.sh/%{hiera('site_domain')}"
-ssl_cert_file: "%{hiera('site_domain')}.cer"
-ssl_chain_file: 'fullchain.cer'
-ssl_key_dir: "/var/acme/.acme.sh/%{hiera('site_domain')}"
-ssl_key_file: "%{hiera('site_domain')}.key"
-
-
 java_memory_parameters: '-Xmx26G -Xms26G -XX:PermSize=512m -XX:MaxPermSize=1024m -XX:NewSize=1G -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
 # disk cleanup
