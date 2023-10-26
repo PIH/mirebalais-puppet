@@ -182,7 +182,7 @@ htmlformentryui_simpleform_navbuttons: false
 
 # SSL certificates--use letencrypt by default
 ssl_cert_dir: "/etc/letsencrypt/live/%{hiera('site_domain')}"
-ssl_cert_file: 'fullchain.pem'
+ssl_cert_file: 'cert.pem'
 ssl_chain_file: 'fullchain.pem'
 ssl_key_dir: "/etc/letsencrypt/live/%{hiera('site_domain')}"
 ssl_key_file: 'privkey.pem'
