@@ -68,7 +68,7 @@ class openmrs::backup (
 
   cron { 'backup-az':
     ensure  => present,
-    command => '/usr/bin/flock -n /home/tomcat/backups/cron.backupAzure.lock /usr/local/sbin/backupAzure.sh',
+    command => '/usr/bin/flock -n /home/tomcat7/backups/cron.backupAzure.lock /usr/local/sbin/backupAzure.sh',
     user    => 'root',
     hour    => '*/7',
     minute  => 20,
