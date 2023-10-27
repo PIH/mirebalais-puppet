@@ -7,6 +7,8 @@ class openmrs::backup (
     $az_secret                        = decrypt(hiera('az_secret')),
     $az_url                           = decrypt(hiera('az_url')),
     $az_backup_folder_path            = hiera('az_backup_folder_path'),
+    $azcopy_concurrency_value         = hiera('azcopy_concurrency_value'),
+    $azcopy_concurrency_files         = hiera('azcopy_concurrency_files'),
     $remote_db_user                   = hiera('remote_db_user'),
     $remote_db_server                 = hiera('remote_db_server'),
     $remote_backup_dir                = hiera('remote_backup_dir'),
@@ -66,7 +68,7 @@ class openmrs::backup (
 
   cron { 'backup-az':
     ensure  => present,
-    command => 'sh /usr/local/sbin/backupAzure.sh',
+    command => '/usr/bin/flock -n /home/tomcat/backups/cron.backupAzure.lock /usr/local/sbin/backupAzure.sh',
     user    => 'root',
     hour    => '*/7',
     minute  => 20,
