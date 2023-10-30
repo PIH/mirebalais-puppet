@@ -1,6 +1,6 @@
 ---
 package_release: 'stable'
-package_version: '1.0.20231018132249-1'
+package_version: '1.0.20231030134849-1'
 
 pih_config: mexico,mexico-honduras
 config_name: openmrs-config-ces
