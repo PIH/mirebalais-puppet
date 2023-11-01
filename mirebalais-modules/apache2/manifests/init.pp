@@ -181,7 +181,7 @@ class apache2 (
   # note refresh-only, this only runs when the install-cert script changes (see notify on install-cert.sh)
   exec { "run install certs":
     command => "sudo -H -u acme bash -c /var/$acme_user/install-certs.sh",
-    require =>  [ Exec['download acme from the git repo'], File["/var/$acme_user/.acme.sh/$site_domain"] ],
+    require =>  [ Exec['install acme.sh tool'], File["/var/$acme_user/.acme.sh/$site_domain"] ],
     refreshonly => true,
   }
 
