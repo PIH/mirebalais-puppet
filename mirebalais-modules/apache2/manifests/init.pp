@@ -200,13 +200,13 @@ class apache2 (
     path    => "/var/$acme_user/install-letsencrypt.sh"
   }
 
-  # CLEANUP: remove any cron installed on root
+  # CLEANUP: remove any cron installed on root stored under the name "renew certificates using acme user"
   cron { "renew certificates using acme user":
     ensure  => absent,
     user    => 'root'
   }
 
-  # CLEANUP: remove manually set up cron (we will now rely on the one set up by the acme.sh install)
+  # CLEANUP: remove manually set up cron for acme user stored under the name "cron renew certificates using acme user" (we will now rely on the one set up by the acme.sh install)
   cron { "cron renew certificates using acme user":
     ensure  => absent,
     user    => "$acme_user",
