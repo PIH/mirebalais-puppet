@@ -174,6 +174,7 @@ class apache2 (
   # note: refresh-only, so this only runs when the install cert script changes
   exec { "install acme.sh tool":
     command => "sudo -H -u acme bash -c 'wget -O -  https://raw.githubusercontent.com/acmesh-official/acme.sh/$acme_version/acme.sh | sh -s -- --install-online -m  emrsysadmin@pih.org --home /var/acme'",
+    cwd => "/var/$acme_user",
     require => [ File["/var/$acme_user"], File["/var/$acme_user/acme.sh"], User["$acme_user"] ],
     refreshonly => true,
   }
@@ -181,6 +182,7 @@ class apache2 (
   # note refresh-only, this only runs when the install-cert script changes (see notify on install-cert.sh)
   exec { "run install certs":
     command => "sudo -H -u acme bash -c /var/$acme_user/install-certs.sh",
+    cwd => "/var/$acme_user",
     require =>  [ Exec['install acme.sh tool'], File["/var/$acme_user/.acme.sh/$site_domain"] ],
     refreshonly => true,
   }
