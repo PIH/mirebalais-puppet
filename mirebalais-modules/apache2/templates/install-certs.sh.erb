@@ -4,6 +4,8 @@
 
 set -x
 
+# a bit of hack/trick... this does nothing, but assures that each time we upgrade acme_version this script changes,
+# and any changes to this script trigger a re-install of acme.sh (see apache/init.pp), so this triggers a acme.sh reinstall on a version change
 echo "using acme version <%= @acme_version %>"
 
 SITE_DOMAIN='<%= @site_domain %>'
@@ -27,5 +29,3 @@ export ACMEDNS_BASE_URL='<%= @acme_dns_base_url %>'
 /var/acme/acme.sh  --install-cert --domain "$SITE_DOMAIN" --cert-file /etc/letsencrypt/live/"$SITE_DOMAIN"/cert.pem --key-file /etc/letsencrypt/live/"$SITE_DOMAIN"/privkey.pem --fullchain-file /etc/letsencrypt/live/"$SITE_DOMAIN"/fullchain.pem --ca-file /etc/letsencrypt/live/"$SITE_DOMAIN"/chain.pem --reloadcmd "sudo /bin/systemctl reload apache2.service" --force
 
 
-
-# test
