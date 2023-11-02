@@ -10,7 +10,6 @@ echo "using acme version <%= @acme_version %>"
 
 SITE_DOMAIN='<%= @site_domain %>'
 
-export ACME_HOME_DIR='/var/<%= @acme_user %>'
 export SITE_DOMAIN='<%= @site_domain %>'
 export ACMEDNS_USERNAME='<%= @acme_dns_username %>'
 export ACMEDNS_PASSWORD='<%= @acme_dns_password %>'
@@ -24,8 +23,8 @@ export ACMEDNS_BASE_URL='<%= @acme_dns_base_url %>'
 # register our account
 /var/acme/acme.sh --register-account -m <%= @sysadmin_email %>
 # issue certs (we use "dnssleep 1" to disable public DNS checks, see: https://github.com/acmesh-official/acme.sh/issues/3006)
-/var/acme/acme.sh  --issue --dns dns_acmedns -d "$SITE_DOMAIN" --force --dnssleep 1
+/var/acme/acme.sh  --issue --dns dns_acmedns -d "$SITE_DOMAIN" --force --dnssleep 1 --home /var/acme
 # install certs in the appropriate directory
-/var/acme/acme.sh  --install-cert --domain "$SITE_DOMAIN" --cert-file /etc/letsencrypt/live/"$SITE_DOMAIN"/cert.pem --key-file /etc/letsencrypt/live/"$SITE_DOMAIN"/privkey.pem --fullchain-file /etc/letsencrypt/live/"$SITE_DOMAIN"/fullchain.pem --ca-file /etc/letsencrypt/live/"$SITE_DOMAIN"/chain.pem --reloadcmd "sudo /bin/systemctl reload apache2.service" --force
+/var/acme/acme.sh  --install-cert --domain "$SITE_DOMAIN" --cert-file /etc/letsencrypt/live/"$SITE_DOMAIN"/cert.pem --key-file /etc/letsencrypt/live/"$SITE_DOMAIN"/privkey.pem --fullchain-file /etc/letsencrypt/live/"$SITE_DOMAIN"/fullchain.pem --ca-file /etc/letsencrypt/live/"$SITE_DOMAIN"/chain.pem --reloadcmd "sudo /bin/systemctl reload apache2.service" --force --home /var/acme
 
 
