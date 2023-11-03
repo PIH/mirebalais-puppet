@@ -15,6 +15,7 @@ class apache2 (
   $pwa_enabled = hiera('pwa_enabled'),
   $pwa_webapp_name = hiera('pwa_webapp_name'),
   $sysadmin_email = decrypt(hiera('sysadmin_email')),
+  $acme_version = hiera('acme_version'),
   $acme_user = decrypt(hiera('acme_user')),
   $acme_dns_username = decrypt(hiera('acme_dns_username')),
   $acme_dns_password = decrypt(hiera('acme_dns_password')),
@@ -99,6 +100,7 @@ class apache2 (
     notify      => Service['apache2']
   }
 
+  # create user for acme.sh
   user { "$acme_user":
     ensure     => 'present',
     home       => "/var/$acme_user/",
@@ -107,6 +109,7 @@ class apache2 (
 
   }
 
+  # create home directory for acme.sh user
   file { "/var/$acme_user":
     ensure => directory,
     owner   => "$acme_user",
@@ -114,7 +117,7 @@ class apache2 (
     require => User["$acme_user"]
     }
 
-  # Edit your sudoers file to allow the acme user to reload (not restart) apache2
+  # edit sudoers file to allow the acme user to reload (not restart) apache2
   file_line { "$acme_user sudo":
     path  => '/etc/sudoers',
     line  => "$acme_user ALL=(ALL) NOPASSWD: /bin/systemctl reload apache2.service",
@@ -130,16 +133,19 @@ class apache2 (
     require => File["/var/$acme_user"]
   }
 
+  # create all the directories where we install the acme scripts
   file { "/etc/letsencrypt" :
     ensure => directory,
     owner   => "$acme_user",
     group   => "$acme_user",
+    recurse => true,
   }
 
   file { "/etc/letsencrypt/live" :
     ensure => directory,
     owner   => "$acme_user",
     group   => "$acme_user",
+    recurse => true,
     require => File["/etc/letsencrypt"]
   }
 
@@ -148,46 +154,63 @@ class apache2 (
     owner   => "$acme_user",
     group   => "$acme_user",
     mode    => '0710',
+    recurse => true,
     require => File["/etc/letsencrypt/live"]
   }
 
-  file { "install-letsencrypt.sh":
+  # install install-certs.sh
+  file { "install-certs.sh":
     ensure  => present,
-    path    => "/var/$acme_user/install-letsencrypt.sh",
+    path    => "/var/$acme_user/install-certs.sh",
     mode    => '0700',
     owner   => "$acme_user",
     group   => "$acme_user",
-    content => template('apache2/install-letsencrypt.sh.erb'),
+    content => template('apache2/install-certs.sh.erb'),
     require => File["/var/$acme_user"],
-    notify => Exec['run install letsencrypt'],
+    notify => [ Exec['run install certs'], Exec['install acme.sh tool'] ],
   }
 
-  exec { "download acme from the git repo":
-    command => "rm -rf /var/$acme_user/acme.sh && git clone https://github.com/acmesh-official/acme.sh.git /var/$acme_user/acme.sh && chown -R $acme_user:$acme_user /var/$acme_user/acme.sh",
-    require => File["/var/$acme_user"]
+  # install acme
+  # note: refresh-only, so this only runs when the install cert script changes (see notify above)
+  exec { "install acme.sh tool":
+    command => "sudo -H -u acme bash -c 'wget -O -  https://raw.githubusercontent.com/acmesh-official/acme.sh/$acme_version/acme.sh | sh -s -- --install-online -m  emrsysadmin@pih.org --home /var/acme'",
+    cwd => "/var/$acme_user",
+    require => [ File["/var/$acme_user"], File["/var/$acme_user/acme.sh"], User["$acme_user"] ],
+    refreshonly => true,
   }
-
-  # note refresh-only, this onle runs when the let encrypt script changes
-  exec { "run install letsencrypt":
-    command => "/var/$acme_user/install-letsencrypt.sh",
-    require =>  [ Exec['download acme from the git repo'], File["/var/$acme_user/.acme.sh/$site_domain"] ],
+  # run script to install the scripts
+  # note refresh-only, this only runs when the install-cert script changes (see notify on install-cert.sh)
+  exec { "run install certs":
+    command => "sudo -H -u acme bash -c /var/$acme_user/install-certs.sh",
+    cwd => "/var/$acme_user",
+    require =>  [ Exec['install acme.sh tool'], File["/var/$acme_user/.acme.sh/$site_domain"] ],
     refreshonly => true,
   }
 
-  # Ensure cron is absent for root
+  # CLEANUP: remove old git clone install of acme
+  file { "/var/$acme_user/acme.sh" :
+    ensure => absent,
+    recurse => true,
+    force   => true
+  }
+
+  # CLEANUP: remove old install-letscript script (renaming to install-certs.sh)
+  file { "install-letsencrypt.sh":
+    ensure  => absent,
+    path    => "/var/$acme_user/install-letsencrypt.sh"
+  }
+
+  # CLEANUP: remove any cron installed on root stored under the name "renew certificates using acme user"
   cron { "renew certificates using acme user":
     ensure  => absent,
     user    => 'root'
   }
 
+  # CLEANUP: remove manually set up cron for acme user stored under the name "cron renew certificates using acme user" (we will now rely on the one set up by the acme.sh install)
   cron { "cron renew certificates using acme user":
-    ensure  => present,
-    command => "'/var/$acme_user/.acme.sh'/acme.sh --force --cron --home '/var/$acme_user/.acme.sh' > /dev/null",
+    ensure  => absent,
     user    => "$acme_user",
-    hour    => "$cert_cron_hour",
-    minute  => "$cert_cron_min",
-    environment => "MAILTO=$sysadmin_email",
-    require => File["/var/$acme_user"]
+    require => User["$acme_user"]
   }
 
   cron { "restart apache2":
@@ -197,13 +220,12 @@ class apache2 (
     hour    => "$apache_cron_restart_hour",
     minute  => "$apache_cron_restart_min",
     environment => "MAILTO=$sysadmin_email",
-    require => Cron["cron renew certificates using acme user"]
   }
 
   file { '/etc/apache2/sites-available/default-ssl.conf':
     ensure => file,
     content => template('apache2/default-ssl.conf.erb'),
-    require => [Package['apache2'], Exec['download acme from the git repo'] , Exec['run install letsencrypt']],
+    require => [Package['apache2'], Exec['run install certs']],
     notify => Service['apache2']
   }
 
@@ -211,7 +233,7 @@ class apache2 (
   file { '/etc/apache2/sites-enabled/default-ssl.conf':
     ensure  => link,
     target  => '../sites-available/default-ssl.conf',
-    require => [Package['apache2'], Exec['download acme from the git repo'], Exec['run install letsencrypt']]
+    require => [Package['apache2'],  Exec['run install certs']]
   }
 
   # remove old certbot cron job

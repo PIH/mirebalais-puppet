@@ -187,6 +187,7 @@ ssl_chain_file: 'fullchain.pem'
 ssl_key_dir: "/etc/letsencrypt/live/%{hiera('site_domain')}"
 ssl_key_file: 'privkey.pem'
 ssl_use_letsencrypt: true
+acme_version: 3.0.7
 acme_user: ENC[2tXA1UMPe7zSGFq27HtWPg==:3FFCUm2Ldb+3E5OuuQeecg==:RXhzZHhCSDZYWGdHdGJCSnFYK282UT09]
 acme_dns_username:
 acme_dns_password:
