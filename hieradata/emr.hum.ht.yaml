@@ -1,7 +1,7 @@
 webapp_name: mirebalais
 
 package_release: 'stable'
-package_version: '1.0.20230807180329-1'
+package_version: '1.0.20231003130507-1'
 
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl

@@ -15,13 +15,7 @@ class mirebalais_reporting::production_setup (
   }
 
   cron { 'mirebalais-percona-backup':
-    ensure  => present,
-    command => '/home/percona/scripts/mirebalais-percona-backup.sh >/dev/null 2>&1',
-    user    => 'root',
-    hour    => 21,
-    minute  => 00,
-    environment => "MAILTO=$sysadmin_email",
-    require => [ File['mirebalais-percona-backup.sh'] ]
+    ensure  => absent
   }
 
   # this has been added to the end of the backup script
@@ -30,13 +24,6 @@ class mirebalais_reporting::production_setup (
   }
 
   cron { 'mirebalais-percona-transfer-to-humtest-weekly':
-    ensure  => present,
-    command => 'scp -v -r /home/percona/backups/openmrs root@192.168.1.18:/home/reporting/percona/backups > /home/percona/logs/scp_humtest.log 2>&1',
-    user    => 'root',
-    weekday => 6,
-    hour    => 0,
-    minute  => 5,
-    environment => "MAILTO=$sysadmin_email",
-    require => [ File['mirebalais-percona-backup.sh'] ]
+    ensure => absent
   }
 }
