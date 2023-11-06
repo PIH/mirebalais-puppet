@@ -17,6 +17,7 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
 
 backup_file_prefix: haitihiv
+backup_hour: 18
 
 mysql_innodb_buffer_pool_size: 3G
 mysql_innodb_buffer_pool_instances: 8
