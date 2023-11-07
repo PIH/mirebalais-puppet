@@ -7,12 +7,12 @@ BASE_DIR=<%= @tomcat_home_dir %>/backups
 AZSECRET='<%= @az_secret %>'
 AZURL='<%= @az_url %>'
 AZBACKUPFOLDERPATH='<%= @az_backup_folder_path %>'
-DAY=$(date +"%d")
+DATE=$(date +"%Y%m%d")
 
 if [ ! -z "$AZBACKUPFOLDERPATH" ]; then
 
   mkdir -p ${BASE_DIR}/logs
-  log_file=${BASE_DIR}/logs/azcopy.logs
+  log_file=${BASE_DIR}/logs/azcopy-${DATE}.log
 
   echo $(date +%F-time-%T) >> $log_file
 
