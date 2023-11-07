@@ -64,8 +64,12 @@ openmrs_warfile_temp_location: ''
 # For both Azure & Amigo backups
 backup_file_prefix: foo
 backup_hour: 1
+backup_minute: 30
 backup_delete_older_than_x_days: 15
 archive_hour: 3
+archive_minute: 30
+azure_backup_hour: "*"
+azure_backup_minute: "*/15"
 
 # For Amigo backups only
 remote_db_user: foo

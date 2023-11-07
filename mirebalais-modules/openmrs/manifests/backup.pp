@@ -15,8 +15,12 @@ class openmrs::backup (
     $tomcat_home_dir                  = hiera('tomcat_home_dir'),
     $backup_file_prefix               = hiera('backup_file_prefix'),
     $backup_hour                      = hiera('backup_hour'),
+    $backup_minute                    = hiera('backup_minute'),
     $backup_delete_older_than_x_days  = hiera('backup_delete_older_than_x_days'),
     $archive_hour                     = hiera('archive_hour'),
+    $archive_minute                   = hiera('archive_minute'),
+    $azure_backup_hour                = hiera('azure_backup_hour'),
+    $azure_backup_minute              = hiera('azure_backup_minute'),
     $activitylog_enabled              = hiera('activitylog_enabled'),
     $terms_and_conditions_enabled     = hiera('terms_and_conditions_enabled'),
     $az_activitylog_backup_folder_path  = hiera('az_activitylog_backup_folder_path'),
@@ -43,7 +47,7 @@ class openmrs::backup (
     command => '/usr/local/sbin/mysqlbackup.sh',
     user    => 'root',
     hour    => "${backup_hour}",
-    minute  => 30,
+    minute  => "${backup_minute}",
     require => [ File['mysqlbackup.sh'], Package['p7zip-full'] ]
   }
 
@@ -70,17 +74,17 @@ class openmrs::backup (
     ensure  => present,
     command => '/usr/bin/flock -n /home/tomcat/backups/cron.backupAzure.lock /usr/local/sbin/backupAzure.sh',
     user    => 'root',
-    hour    => '*/7',
-    minute  => 20,
+    hour    => "${azure_backup_hour}",
+    minute  => "${azure_backup_minute}",
     require => File['backupAzure.sh']
   }
 
   cron { 'mysql-archive':
     ensure  => present,
     command => '/usr/local/sbin/mysqlarchive.sh',
-    user     => 'root',
-    minute => 30,
-    hour => "${archive_hour}",
+    user    => 'root',
+    hour    => "${archive_hour}",
+    minute  => "${archive_minute}",
     require => [ File['mysqlarchive.sh'] ]
   }
 
