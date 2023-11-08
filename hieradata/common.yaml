@@ -123,7 +123,7 @@ dbevent_enabled: true
 
 # PETL
 petl: "petl"
-petl_version: "3.5.0-SNAPSHOT"
+petl_version: "3.6.0-SNAPSHOT"
 petl_site: ""
 petl_user: "petl"
 petl_home_dir: "/opt/petl"

@@ -4,7 +4,7 @@ server_timezone: America/New_York
 
 # PETL
 petl: petl
-petl_version: "3.4.0"
+petl_version: "3.5.0"
 petl_site: haiti-report
 petl_home_dir: /opt/petl
 

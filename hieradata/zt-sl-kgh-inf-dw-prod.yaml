@@ -4,7 +4,7 @@ server_timezone: Africa/Freetown
 
 # PETL
 petl: petl
-petl_version: "3.4.0"
+petl_version: "3.5.0"
 petl_site: sl-prod
 petl_home_dir: /opt/petl
 petl_server_port: 9110
