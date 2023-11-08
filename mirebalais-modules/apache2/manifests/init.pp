@@ -175,7 +175,7 @@ class apache2 (
   exec { "install acme.sh tool":
     command => "sudo -H -u acme bash -c 'wget -O -  https://raw.githubusercontent.com/acmesh-official/acme.sh/$acme_version/acme.sh | sh -s -- --install-online -m  emrsysadmin@pih.org --home /var/acme'",
     cwd => "/var/$acme_user",
-    require => [ File["/var/$acme_user"], File["/var/$acme_user/acme.sh"], User["$acme_user"] ],
+    require => [ File["/var/$acme_user"], User["$acme_user"] ],
     refreshonly => true,
   }
   # run script to install the scripts
@@ -183,7 +183,7 @@ class apache2 (
   exec { "run install certs":
     command => "sudo -H -u acme bash -c /var/$acme_user/install-certs.sh",
     cwd => "/var/$acme_user",
-    require =>  [ Exec['install acme.sh tool'], File["/var/$acme_user/.acme.sh/$site_domain"] ],
+    require =>  [ Exec['install acme.sh tool'], File["/etc/letsencrypt/live/$site_domain"] ],
     refreshonly => true,
   }
 
