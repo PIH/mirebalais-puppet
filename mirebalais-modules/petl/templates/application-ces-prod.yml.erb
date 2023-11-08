@@ -47,6 +47,7 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+       containerName: "mexico_ces-prod_mysql"
     planBaja:
        host: "localhost"
        port: "3416"
@@ -54,6 +55,7 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+       containerName: "mexico_ces-plan-baja_mysql"
     planAlta:
        host: "localhost"
        port: "3415"
@@ -61,6 +63,7 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+       containerName: "mexico_ces-plan-alta_mysql"
     salvador:
        host: "localhost"
        port: "3419"
@@ -68,6 +71,7 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+       containerName: "mexico_ces-salvador_mysql"
     reforma:
       host: "localhost"
       port: "3418"
@@ -75,6 +79,7 @@ datasources:
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
+      containerName: "mexico_ces-reforma_mysql"
     soledad:
        host: "localhost"
        port: "3420"
@@ -82,6 +87,7 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+       containerName: "mexico_ces-soledad_mysql"
     honduras:
        host: "localhost"
        port: "3411"
@@ -89,6 +95,7 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+       containerName: "mexico_ces-honduras_mysql"
     capitan:
        host: "localhost"
        port: "3410"
@@ -96,6 +103,7 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+       containerName: "mexico_ces-capitan_mysql"
     laguna:
        host: "localhost"
        port: "3412"
@@ -103,6 +111,7 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+       containerName: "mexico_ces-laguna_mysql"
     matazano:
        host: "localhost"
        port: "3414"
@@ -110,6 +119,7 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+       containerName: "mexico_ces-matazano_mysql"
     letrero:
        host: "localhost"
        port: "3413"
@@ -117,6 +127,7 @@ datasources:
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
+       containerName: "mexico_ces-letrero_mysql"
 
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"

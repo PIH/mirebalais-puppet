@@ -47,6 +47,7 @@ datasources:
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
+      containerName: "haiti_cange_mysql"
     hinche:
       host: "localhost"
       port: "3311"
@@ -54,6 +55,7 @@ datasources:
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
+      containerName: "haiti_hinche_mysql"
     saint_marc_hsn:
       host: "localhost"
       port: "3312"
@@ -61,6 +63,7 @@ datasources:
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
+      containerName: "haiti_hsn_mysql"
     lacolline:
       host: "localhost"
       port: "3313"
@@ -68,6 +71,7 @@ datasources:
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
+      containerName: "haiti_lacolline_mysql"
     thomonde:
       host: "localhost"
       port: "3314"
@@ -75,6 +79,31 @@ datasources:
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
+      containerName: "haiti_thomonde_mysql"
+    belladere:
+      host: "localhost"
+      port: "3317"
+      databaseName: "openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+      containerName: "haiti_belladere_mysql"
+    boucancarre:
+      host: "localhost"
+      port: "3318"
+      databaseName: "openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+      containerName: "haiti_boucancarre_mysql"
+    cercalasource:
+      host: "localhost"
+      port: "3319"
+      databaseName: "openmrs"
+      user: "${datasources.mysql.user}"
+      password: "${datasources.mysql.password}"
+      options: "${datasources.mysql.options}"
+      containerName: "haiti_cercalasource_mysql"
     mirebalais:
       host: "localhost"
       port: "3316"
@@ -82,6 +111,7 @@ datasources:
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
+      containerName: "haiti_mirebalais_mysql"
     hiv:
       host: "localhost"
       port: "3315"
@@ -89,6 +119,7 @@ datasources:
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
+      containerName: "haiti_haitihiv_mysql"
 
   warehouse:
        host: "<%= @petl_sqlserver_host -%>"

@@ -7,14 +7,18 @@ BASE_DIR=<%= @tomcat_home_dir %>/backups
 AZSECRET='<%= @az_secret %>'
 AZURL='<%= @az_url %>'
 AZBACKUPFOLDERPATH='<%= @az_backup_folder_path %>'
-DAY=$(date +"%d")
+DATE=$(date +"%Y%m%d")
 
 if [ ! -z "$AZBACKUPFOLDERPATH" ]; then
 
   mkdir -p ${BASE_DIR}/logs
-  log_file=${BASE_DIR}/logs/azcopy.logs
+  log_file=${BASE_DIR}/logs/azcopy-${DATE}.log
 
   echo $(date +%F-time-%T) >> $log_file
+
+  if [ -d "${BASE_DIR}/percona" ]; then
+    azcopy sync "${BASE_DIR}/percona/"  "${AZURL}/${AZBACKUPFOLDERPATH}/percona/?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZSECRET}" --recursive=true --delete-destination=false >> $log_file
+  fi
 
   if [ -d "${BASE_DIR}/sequences" ]; then
     azcopy sync "${BASE_DIR}/sequences/"  "${AZURL}/${AZBACKUPFOLDERPATH}/sequences/?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZSECRET}" --recursive=true --delete-destination=false >> $log_file
@@ -22,10 +26,6 @@ if [ ! -z "$AZBACKUPFOLDERPATH" ]; then
 
   if [ -d "${BASE_DIR}/archive" ]; then
     azcopy sync "${BASE_DIR}/archive/"  "${AZURL}/${AZBACKUPFOLDERPATH}/archive/?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZSECRET}" --recursive=true --delete-destination=false >> $log_file
-  fi
-
-  if [ -d "${BASE_DIR}/percona" ]; then
-    azcopy sync "${BASE_DIR}/percona/"  "${AZURL}/${AZBACKUPFOLDERPATH}/percona/?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZSECRET}" --recursive=true --delete-destination=false >> $log_file
   fi
 
 fi
