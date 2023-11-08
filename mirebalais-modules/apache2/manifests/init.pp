@@ -125,8 +125,8 @@ class apache2 (
     require => User["$acme_user"]
   }
 
-  # clear out old non-ecc certs, can likely be removed after we upgrade to acme dns
-  file { "/var/$acme_user/.acme.sh/$site_domain" :
+  # clear out old install directory
+  file { "/var/$acme_user/.acme.sh" :
     ensure => absent,
     recurse => true,
     force   => true,
@@ -185,13 +185,6 @@ class apache2 (
     cwd => "/var/$acme_user",
     require =>  [ Exec['install acme.sh tool'], File["/var/$acme_user/.acme.sh/$site_domain"] ],
     refreshonly => true,
-  }
-
-  # CLEANUP: remove old git clone install of acme
-  file { "/var/$acme_user/acme.sh" :
-    ensure => absent,
-    recurse => true,
-    force   => true
   }
 
   # CLEANUP: remove old install-letscript script (renaming to install-certs.sh)

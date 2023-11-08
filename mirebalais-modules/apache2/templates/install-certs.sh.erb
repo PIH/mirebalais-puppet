@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Note that this script is intended to be run as the acme user
 
 set -x
@@ -26,5 +27,6 @@ export ACMEDNS_BASE_URL='<%= @acme_dns_base_url %>'
 /var/acme/acme.sh  --issue --dns dns_acmedns -d "$SITE_DOMAIN" --force --dnssleep 1 --home /var/acme
 # install certs in the appropriate directory
 /var/acme/acme.sh  --install-cert --domain "$SITE_DOMAIN" --cert-file /etc/letsencrypt/live/"$SITE_DOMAIN"/cert.pem --key-file /etc/letsencrypt/live/"$SITE_DOMAIN"/privkey.pem --fullchain-file /etc/letsencrypt/live/"$SITE_DOMAIN"/fullchain.pem --ca-file /etc/letsencrypt/live/"$SITE_DOMAIN"/chain.pem --reloadcmd "sudo /bin/systemctl reload apache2.service" --force --home /var/acme
+
 
 
