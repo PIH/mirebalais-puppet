@@ -421,6 +421,7 @@ node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-
   include wget
   include unzip
   include maven_setup
+  include docker
 
   include java
   include mysql_setup
@@ -470,6 +471,7 @@ node 'ces-ci.pih-emr.org' {
   include wget
   include unzip
   include maven_setup
+  include docker
 
   include java
   include mysql_setup
