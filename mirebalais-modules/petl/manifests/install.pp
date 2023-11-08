@@ -27,7 +27,7 @@ define petl::install (
     user { "${petl}":
         ensure => "present",
         home   => "${petl_home_dir}",
-        groups => "docker"
+        groups => "docker",
         shell  => "/bin/bash"
     }
 
