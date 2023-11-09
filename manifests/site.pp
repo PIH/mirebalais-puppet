@@ -592,7 +592,7 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org'{
 # note that we have two "ces-laguna" because for some reason the laguna fqdn is "ces-laguna.lan" (from some googling, .lan a suffx to a FQDN that may be added by routers)
 # we don't need to create a "ces-laguna.lan.yml", because the hiera falls back to the regular hostbame if it can't find a match for the fqdn, see hiera.yaml
 node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-laguna.lan', 'ces-letrero', 'ces-matazano', 'ces-monterrey',
-    'ces-plan-baja', 'ces-plan-alta', 'ces-reforma', 'ces-salvador', 'ces-soledad' {
+    'ces-plan-baja', 'ces-plan-alta', 'ces-reforma', 'ces-salvador', 'ces-salvador.lan', 'ces-soledad' {
 
   class { 'apt':
     always_apt_update => true,
