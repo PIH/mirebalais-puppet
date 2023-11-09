@@ -8,7 +8,7 @@ petl_site: "apzu"
 petl_home_dir: "/opt/petl"
 petl_server_port: 9110
 
-petl_version: 3.4.0
+petl_version: 3.5.0
 # PETL Config
 petl_config_name: "apzu-etl"
 petl_config_version: 1.0.1
