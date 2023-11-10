@@ -255,6 +255,11 @@ frontend_version: ''
 percona_home_dir: "/home/percona"
 percona_restore_dir: "/home/percona/restore"
 percona_mysql_root_password: "%{hiera('mysql_root_password')}"
+percona_backup_ssh_host: ""
+percona_backup_ssh_user: ""
+percona_backup_dir: "%{hiera('tomcat_home_dir')}/backups/percona"
+percona_restore_deidentify: true
+percona_restore_preserve_tables: ""
 
 # TODO: Remove these as we go.  Below files are from pre-existing percona processes
 perconaHomeDir: "/home/percona"
