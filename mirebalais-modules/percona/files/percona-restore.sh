@@ -246,7 +246,7 @@ if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
     echoWithDate "Changing permissions of data directory"
     chown -R mysql:mysql ${MYSQL_DATA_DIR}
     echoWithDate "Starting native mysql"
-    /etc/init.d/mysql start
+    service mysql start
     sleep 10
     echoWithDate "Running mysql check"
     /usr/bin/mysqlcheck --auto-repair --check --all-databases -ubackup -p${PERCONA_BACKUP_PW}
