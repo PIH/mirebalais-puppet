@@ -38,6 +38,10 @@ azure_dns_client_secret: ENC[Illfbs4LPZrUvdg3f/WH7cKUcUI+E9zbWzeGoFG2pOIJxa/0MNi
 ssl_use_letsencrypt: true
 
 # percona
+percona_backup_ssh_host: ENC[VKmwSEj3WCNEjcnNQBeQIg==:NAR/sYclXEaaeKUd6/7yrg==:QWFxNFpNQVd5Q1lTcmZkRTdBaDV4Zz09]
+percona_backup_ssh_user: ENC[pnwHYEYAq2x0JFHldmkV0Q==:9aPqYHHDt0R4NrRfTFkaFQ==:dUVOU213UVJYMm9UQVFuNEpIWCtMdz09]
+percona_restore_preserve_tables: "reporting_report_request"
+
 perconaSite: HUM Reporting
 perconaLogFile: "/home/percona/logs/percona-db-restore.log"
 perconaReportDir: "/home/percona/reporting"

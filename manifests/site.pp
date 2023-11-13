@@ -50,8 +50,6 @@ node 'emr.hum.ht' {
   include openmrs
   include openmrs::initial_setup
 
-  #include percona
-
   include mirth
 #  include mirth::channel_setup
 
@@ -59,8 +57,6 @@ node 'emr.hum.ht' {
   include logging
 
   include openmrs::backup
-  include mirebalais_reporting::production_setup
-
 }
 
 node 'hai-hum-inf-humtest' {
@@ -270,14 +266,13 @@ node 'hai-hum-inf-omrs-report' {
   include tomcat
 
   include openmrs
-  #include openmrs::initial_setup
 
-  #include percona
-
-  #include monitoring
-  #include logging
-
-  include mirebalais_reporting::reporting_setup
+  include docker
+  include percona::install_restore_scripts
+  class { 'percona::setup_cron_to_refresh_openmrs_db':
+    site_name => 'haiti/mirebalais',
+    percona_restore_deidentify => false
+  }
 }
 
 node 'inf-dakakind-omrs-test' {

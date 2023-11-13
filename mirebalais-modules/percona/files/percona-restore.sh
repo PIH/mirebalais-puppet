@@ -15,9 +15,16 @@ if [ -a ~/.percona.env ]; then
   source ~/.percona.env
 fi
 
-if [ -z "${PERCONA_RESTORE_DIR}" ] || [ -z "${PERCONA_BACKUP_PW}" ] || [ -z "${AZ_URL}" ] || [ -z "${AZ_SECRET}" ]; then
-  echoWithDate "You must have PERCONA_RESTORE_DIR, PERCONA_BACKUP_PW, AZ_URL, and AZ_SECRET environment variables defined to execute this script"
+if [ -z "${PERCONA_RESTORE_DIR}" ] || [ -z "${PERCONA_BACKUP_PW}" ]; then
+  echoWithDate "You must have PERCONA_RESTORE_DIR and PERCONA_BACKUP_PW defined to execute this script"
   exit 1
+fi
+
+if [ -z "${BACKUP_SSH_HOST}" ] || [ -z "${BACKUP_SSH_USER}" ] || [ -z "${BACKUP_SSH_DIR}" ]; then
+  if [ -z "${AZ_URL}" ] || [ -z "${AZ_SECRET}" ]; then
+    echoWithDate "You must have either BACKUP_SSH_HOST and BACKUP_SSH_USER and BACKUP_SSH_DIR or AZ_URL and AZ_SECRET environment variables defined to execute this script"
+    exit 1
+  fi
 fi
 
 # Variables from input arguments
@@ -25,9 +32,11 @@ SITE_TO_RESTORE=
 MYSQL_DOCKER_CONTAINER=
 MYSQL_PORT=
 MYSQL_DATA_DIR=
+CHECK_TABLES=false
 DEIDENTIFY=false
 CREATE_PETL_USER=false
 RESTART_OPENMRS=false
+PRESERVE_TABLES=
 MYSQL_BUFFER_POOL_SIZE=128M
 
 for i in "$@"
@@ -57,12 +66,20 @@ case $i in
       DEIDENTIFY="${i#*=}"
       shift # past argument=value
     ;;
+    --checkTables=*)
+      CHECK_TABLES="${i#*=}"
+      shift # past argument=value
+    ;;
     --createPetlUser=*)
       CREATE_PETL_USER="${i#*=}"
       shift # past argument=value
     ;;
     --restartOpenmrs=*)
       RESTART_OPENMRS="${i#*=}"
+      shift # past argument=value
+    ;;
+    --preserveTables=*)
+      PRESERVE_TABLES="${i#*=}"
       shift # past argument=value
     ;;
     *)
@@ -81,6 +98,7 @@ BASE_DIR="${PERCONA_RESTORE_DIR}/${SITE_TO_RESTORE}"
 STATUS_DATA_DIR="${BASE_DIR}/status"
 DOWNLOAD_DIR="${BASE_DIR}/percona_downloads"
 DATA_DIR="${DOWNLOAD_DIR}/percona_mysql_data"
+PRESERVE_TABLES_SQL_FILE="${DOWNLOAD_DIR}/tablesToPreserve.sql"
 
 # Setup working directories and logging
 mkdir -p ${STATUS_DATA_DIR}
@@ -107,20 +125,26 @@ else
     fi
 fi
 
-copy_from_azure_percona() {
+retrieve_backup_artifact() {
+  if [ -z "${BACKUP_SSH_HOST}" ] || [ -z "${BACKUP_SSH_USER}" ] || [ -z "${BACKUP_SSH_DIR}" ]; then
+    echoWithDate "Retreiving ${1} from Azure"
     azcopy copy "${AZ_URL}/${SITE_TO_RESTORE}/percona/${1}?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZ_SECRET}" "${DOWNLOAD_DIR}/" --recursive=true --check-md5 FailIfDifferent --from-to=BlobLocal --blob-type Detect;
+  else
+    echoWithDate "Retreiving ${1} from ${BACKUP_SSH_HOST}"
+    scp -v -r ${BACKUP_SSH_USER}@${BACKUP_SSH_HOST}:${BACKUP_SSH_DIR}/* ${DOWNLOAD_DIR}/
+  fi
 }
 
-# Download backup files from Azure and compare to previously downloaded and restored files, and ensure backup is complete
+# Download backup files and compare to previously downloaded and restored files, and ensure backup is complete
 
-copy_from_azure_percona "percona.7z.md5"
+retrieve_backup_artifact "percona.7z.md5"
 if [ ! -f ${DOWNLOAD_DIR}/percona.7z.md5 ]; then
     echoWithDate "Missing percona.7z.md5, exiting"
     exit 1
 fi
 BACKUP_MD5=$(cat ${DOWNLOAD_DIR}/percona.7z.md5)
 
-copy_from_azure_percona "percona.7z.date"
+retrieve_backup_artifact "percona.7z.date"
 if [ ! -f ${DOWNLOAD_DIR}/percona.7z.date ]; then
     echoWithDate "Missing percona.7z.date, exiting"
     exit 1
@@ -150,7 +174,7 @@ if [ "$BACKUP_DATE" = "$LAST_BACKUP_DATE" ]; then
 fi
 
 echoWithDate "Current backup does not match previous backup, downloading and restoring new backup"
-copy_from_azure_percona "percona.7z"
+retrieve_backup_artifact "percona.7z"
 
 DOWNLOADED_MD5=($(md5sum ${DOWNLOAD_DIR}/percona.7z))
 if [ "$DOWNLOADED_MD5" != "$BACKUP_MD5" ]; then
@@ -174,6 +198,17 @@ if [ "${RESTART_OPENMRS}" == "true" ]; then
   echoWithDate "Removing configuration checksums and lib cache"
   rm -rf ${TOMCAT_HOME_DIR}/.OpenMRS/.openmrs-lib-cache
   rm -rf ${TOMCAT_HOME_DIR}/.OpenMRS/configuration_checksums
+fi
+
+if [ -z "$PRESERVE_TABLES" ]; then
+  echoWithDate "No tables configured to preserve"
+else
+  echoWithDate "Dumping existing contents of ${PRESERVE_TABLES}"
+  if [ -z "${MYSQL_DOCKER_CONTAINER}" ]; then
+      mysqldump -uroot -p${MYSQL_ROOT_PW} --no-create-info --skip-triggers --extended-insert --lock-tables --quick openmrs ${PRESERVE_TABLES} > ${PRESERVE_TABLES_SQL_FILE}
+  else
+      docker exec -i ${MYSQL_DOCKER_CONTAINER} mysqldump -uroot -p${MYSQL_ROOT_PW} --no-create-info --skip-triggers --extended-insert --lock-tables --quick openmrs ${PRESERVE_TABLES} > ${PRESERVE_TABLES_SQL_FILE}
+  fi
 fi
 
 echoWithDate "Stopping the existing MySQL instance"
@@ -216,25 +251,30 @@ if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
     echoWithDate "Changing permissions of data directory"
     chown -R mysql:mysql ${MYSQL_DATA_DIR}
     echoWithDate "Starting native mysql"
-    /etc/init.d/mysql start
-    sleep 10
-    echoWithDate "Running mysql check"
-    /usr/bin/mysqlcheck --auto-repair --check --all-databases -ubackup -p${PERCONA_BACKUP_PW}
+    service mysql start
 else
     echoWithDate "Changing permissions of data directory"
     chown -R 999:999 ${MYSQL_DATA_DIR}
     echoWithDate "Starting MySQL container: $MYSQL_DOCKER_CONTAINER"
     docker start $MYSQL_DOCKER_CONTAINER
-    sleep 10
-    echoWithDate "Running mysql check"
-    docker exec -i $MYSQL_DOCKER_CONTAINER sh -c "/usr/bin/mysqlcheck --auto-repair --check --all-databases -ubackup -p'${PERCONA_BACKUP_PW}'"
 fi
 
-if [ $? -eq 0 ]; then
-    echoWithDate "Backup restored successfully and all tables are correct"
-else
-    echoWithDate "Mysql check failed, exiting"
-    exit 1
+echoWithDate "Backup restored"
+sleep 10
+
+if [ "${CHECK_TABLES}" == "true" ]; then
+  echoWithDate "Running mysql check"
+  if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
+    /usr/bin/mysqlcheck --auto-repair --quick --check --all-databases -ubackup -p${PERCONA_BACKUP_PW}
+  else
+    docker exec -i $MYSQL_DOCKER_CONTAINER sh -c "/usr/bin/mysqlcheck --auto-repair --quick --check --all-databases -ubackup -p'${PERCONA_BACKUP_PW}'"
+  fi
+  if [ $? -eq 0 ]; then
+      echoWithDate "Mysql check succeeded"
+  else
+      echoWithDate "Mysql check failed, exiting"
+      exit 1
+  fi
 fi
 
 echoWithDate "Adding backup information to the database"
@@ -252,6 +292,25 @@ if [ $? -eq 0 ]; then
 else
   echoWithDate "An error occurred while adding backup information to the database"
   exit 1
+fi
+
+if [ -f "${PRESERVE_TABLES_SQL_FILE}" ]; then
+  echoWithDate "Restoring previously dumped contents of ${PRESERVE_TABLES}"
+  if [ -z "${MYSQL_DOCKER_CONTAINER}" ]; then
+    for TABLE_NAME in ${PRESERVE_TABLES}; do
+        echo "Deleting from ${TABLE_NAME}"
+        mysql -u root -p${MYSQL_ROOT_PW} openmrs -e "delete from ${TABLE_NAME};"
+    done
+    mysql -uroot -p${MYSQL_ROOT_PW} openmrs < ${PRESERVE_TABLES_SQL_FILE}
+  else
+    for TABLE_NAME in ${PRESERVE_TABLES}; do
+        echo "Deleting from ${TABLE_NAME}"
+        docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -u root -p${MYSQL_ROOT_PW} openmrs -e "delete from ${TABLE_NAME};"
+    done
+    docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -uroot -p${MYSQL_ROOT_PW} openmrs < ${PRESERVE_TABLES_SQL_FILE}
+  fi
+else
+  echoWithDate "No tables configured to preserve"
 fi
 
 if [ "${DEIDENTIFY}" == "true" ]; then
