@@ -299,7 +299,7 @@ if [ -f "${PRESERVE_TABLES_SQL_FILE}" ]; then
   if [ -z "${MYSQL_DOCKER_CONTAINER}" ]; then
     for TABLE_NAME in ${PRESERVE_TABLES}; do
         echo "Deleting from ${TABLE_NAME}"
-        mysql -u root -p${MYSQL_ROOT_PW} openmrs -e "delete * from ${TABLE_NAME};"
+        mysql -u root -p${MYSQL_ROOT_PW} openmrs -e "delete from ${TABLE_NAME};"
     done
     mysql -uroot -p${MYSQL_ROOT_PW} openmrs < ${PRESERVE_TABLES_SQL_FILE}
   else
