@@ -10,7 +10,7 @@ class percona::setup_cron_to_refresh_openmrs_db (
     if ($site_name != '') {
         cron { 'restore-and-deidentify-openmrs-db':
           ensure      => present,
-          command     => "${percona_restore_dir}/percona-restore-and-email.sh --siteToRestore=${site_name} --deidentify=${percona_restore_deidentify} --preserveTables="${percona_restore_preserve_tables}" --restartOpenmrs=true",
+          command     => "${percona_restore_dir}/percona-restore-and-email.sh --siteToRestore=${site_name} --deidentify=${percona_restore_deidentify} --preserveTables=\"${percona_restore_preserve_tables}\" --restartOpenmrs=true",
           environment => "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin",
           user        => 'root',
           hour        => 19,
