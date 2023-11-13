@@ -252,28 +252,29 @@ if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
     chown -R mysql:mysql ${MYSQL_DATA_DIR}
     echoWithDate "Starting native mysql"
     service mysql start
-    sleep 10
-    if [ "${CHECK_TABLES}" == "true" ]; then
-      echoWithDate "Running mysql check"
-      /usr/bin/mysqlcheck --auto-repair --quick --check --all-databases -ubackup -p${PERCONA_BACKUP_PW}
-    fi
 else
     echoWithDate "Changing permissions of data directory"
     chown -R 999:999 ${MYSQL_DATA_DIR}
     echoWithDate "Starting MySQL container: $MYSQL_DOCKER_CONTAINER"
     docker start $MYSQL_DOCKER_CONTAINER
-    sleep 10
-    if [ "${CHECK_TABLES}" == "true" ]; then
-      echoWithDate "Running mysql check"
-      docker exec -i $MYSQL_DOCKER_CONTAINER sh -c "/usr/bin/mysqlcheck --auto-repair --quick --check --all-databases -ubackup -p'${PERCONA_BACKUP_PW}'"
-    fi
 fi
 
-if [ $? -eq 0 ]; then
-    echoWithDate "Backup restored successfully and all tables are correct"
-else
-    echoWithDate "Mysql check failed, exiting"
-    exit 1
+echoWithDate "Backup restored"
+sleep 10
+
+if [ "${CHECK_TABLES}" == "true" ]; then
+  echoWithDate "Running mysql check"
+  if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
+    /usr/bin/mysqlcheck --auto-repair --quick --check --all-databases -ubackup -p${PERCONA_BACKUP_PW}
+  else
+    docker exec -i $MYSQL_DOCKER_CONTAINER sh -c "/usr/bin/mysqlcheck --auto-repair --quick --check --all-databases -ubackup -p'${PERCONA_BACKUP_PW}'"
+  fi
+  if [ $? -eq 0 ]; then
+      echoWithDate "Mysql check succeeded"
+  else
+      echoWithDate "Mysql check failed, exiting"
+      exit 1
+  fi
 fi
 
 echoWithDate "Adding backup information to the database"
@@ -306,7 +307,7 @@ else
   else
     for TABLE_NAME in ${PRESERVE_TABLES}; do
         echo "Deleting from ${TABLE_NAME}"
-        docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -u root -p${MYSQL_ROOT_PW} openmrs -e "delete * from ${TABLE_NAME};"
+        docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -u root -p${MYSQL_ROOT_PW} openmrs -e "delete from ${TABLE_NAME};"
     done
     docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -uroot -p${MYSQL_ROOT_PW} openmrs < ${PRESERVE_TABLES_SQL_FILE}
   fi
