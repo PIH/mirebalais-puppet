@@ -294,9 +294,7 @@ else
   exit 1
 fi
 
-if [ -z "$PRESERVE_TABLES" ]; then
-  echoWithDate "No tables configured to preserve"
-else
+if [ -f "${PRESERVE_TABLES_SQL_FILE}" ]; then
   echoWithDate "Restoring previously dumped contents of ${PRESERVE_TABLES}"
   if [ -z "${MYSQL_DOCKER_CONTAINER}" ]; then
     for TABLE_NAME in ${PRESERVE_TABLES}; do
@@ -311,6 +309,8 @@ else
     done
     docker exec -i ${MYSQL_DOCKER_CONTAINER} mysql -uroot -p${MYSQL_ROOT_PW} openmrs < ${PRESERVE_TABLES_SQL_FILE}
   fi
+else
+  echoWithDate "No tables configured to preserve"
 fi
 
 if [ "${DEIDENTIFY}" == "true" ]; then
