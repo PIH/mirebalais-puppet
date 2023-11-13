@@ -32,6 +32,7 @@ SITE_TO_RESTORE=
 MYSQL_DOCKER_CONTAINER=
 MYSQL_PORT=
 MYSQL_DATA_DIR=
+CHECK_TABLES=false
 DEIDENTIFY=false
 CREATE_PETL_USER=false
 RESTART_OPENMRS=false
@@ -63,6 +64,10 @@ case $i in
     ;;
     --deidentify=*)
       DEIDENTIFY="${i#*=}"
+      shift # past argument=value
+    ;;
+    --checkTables=*)
+      CHECK_TABLES="${i#*=}"
       shift # past argument=value
     ;;
     --createPetlUser=*)
@@ -248,16 +253,20 @@ if [ -z "$MYSQL_DOCKER_CONTAINER" ]; then
     echoWithDate "Starting native mysql"
     service mysql start
     sleep 10
-    echoWithDate "Running mysql check"
-    /usr/bin/mysqlcheck --auto-repair --quick --check --all-databases -ubackup -p${PERCONA_BACKUP_PW}
+    if [ "${CHECK_TABLES}" == "true" ]; then
+      echoWithDate "Running mysql check"
+      /usr/bin/mysqlcheck --auto-repair --quick --check --all-databases -ubackup -p${PERCONA_BACKUP_PW}
+    fi
 else
     echoWithDate "Changing permissions of data directory"
     chown -R 999:999 ${MYSQL_DATA_DIR}
     echoWithDate "Starting MySQL container: $MYSQL_DOCKER_CONTAINER"
     docker start $MYSQL_DOCKER_CONTAINER
     sleep 10
-    echoWithDate "Running mysql check"
-    docker exec -i $MYSQL_DOCKER_CONTAINER sh -c "/usr/bin/mysqlcheck --auto-repair --quick --check --all-databases -ubackup -p'${PERCONA_BACKUP_PW}'"
+    if [ "${CHECK_TABLES}" == "true" ]; then
+      echoWithDate "Running mysql check"
+      docker exec -i $MYSQL_DOCKER_CONTAINER sh -c "/usr/bin/mysqlcheck --auto-repair --quick --check --all-databases -ubackup -p'${PERCONA_BACKUP_PW}'"
+    fi
 fi
 
 if [ $? -eq 0 ]; then
