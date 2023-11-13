@@ -1,7 +1,7 @@
 class percona::setup_cron_to_refresh_openmrs_db (
     $percona_restore_dir               = decrypt(hiera('percona_restore_dir')),
     $percona_restore_deidentify        = hiera('percona_restore_deidentify'),
-    $percona_restore_preserve_tables   = hiera('percona_restore_preserve_tables')
+    $percona_restore_preserve_tables   = hiera('percona_restore_preserve_tables').
     $site_name                         = ''
   ) {
 
