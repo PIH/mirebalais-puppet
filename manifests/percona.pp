@@ -1,12 +1,10 @@
 Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/', '/usr/local/bin/' ] }
 
-node default {
-
-  class { 'apt':
-    always_apt_update => true,
+node 'hai-hum-inf-omrs-report' {
+  include docker
+  include percona::install_restore_scripts
+  class { 'percona::setup_cron_to_refresh_openmrs_db':
+    site_name => 'haiti/mirebalais',
+    percona_restore_deidentify => false
   }
-
-  include wget
-  include mysql_setup
-  include percona
 }
