@@ -1,5 +1,11 @@
 [client]
-user=root
-host=localhost
-password=<%= @root_password %>
-socket=/var/run/mysqld/mysqld.sock
+user     = root
+host     = localhost
+password = <%= @root_password %>
+socket   = /var/run/mysqld/mysqld.sock
+[mysql_upgrade]
+user     = root
+host     = localhost
+password = <%= @root_password %>
+socket   = /var/run/mysqld/mysqld.sock
+basedir  = /usr

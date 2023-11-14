@@ -149,11 +149,20 @@ class mysql_setup (
     require => [ File['/etc/mysql/my.cnf'], Service[mysqld], Exec['configure-timezone']],
   }
 
+  file { "/etc/mysql/debian.cnf":
+    path        => "/etc/mysql/debian.cnf",
+    content     => template('mysql_setup/my.cnf.pass.erb'),
+    owner       => 'root',
+    group       => 'root',
+    mode        => '0600',
+    require     => Service[mysqld]
+  }
+
   # restart mysql
   exec { 'mysql-restart':
     command     => "service mysql restart",
     user        => 'root',
-    require     =>  [Service[mysqld], Exec['configure-timezone'], Exec['add-timezone-if-not-exist']]
+    require     =>  [Service[mysqld], Exec['configure-timezone'], Exec['add-timezone-if-not-exist'], File['/etc/mysql/debian.cnf']]
   }
   
 }
