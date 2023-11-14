@@ -19,7 +19,7 @@ class tomcat (
   # TODO clean up old tomcat directory and user
 
   user { 'tomcat':
-    ensure => 'present',>>>>>>> master
+    ensure => 'present',
     home   => "${tomcat_home_dir}",
     shell  => '/bin/sh',
   }
