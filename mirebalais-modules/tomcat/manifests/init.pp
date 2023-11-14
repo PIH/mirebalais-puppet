@@ -19,7 +19,7 @@ class tomcat (
   # TODO clean up old tomcat directory and user
 
   user { 'tomcat':
-    ensure => 'present',
+    ensure => 'present',>>>>>>> master
     home   => "${tomcat_home_dir}",
     shell  => '/bin/sh',
   }
@@ -87,6 +87,13 @@ class tomcat (
   file { "/var/lib/tomcat9/conf/logging.properties":
     ensure  => file,
     source  => "puppet:///modules/tomcat/logging.properties",
+    require => Package['tomcat9'],
+    notify  => Service['tomcat9']
+  }
+  
+   file { "/var/lib/tomcat9/conf/context.xml":
+    ensure  => file,
+    source  => "puppet:///modules/tomcat/context.xml",
     require => Package['tomcat9'],
     notify  => Service['tomcat9']
   }
