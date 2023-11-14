@@ -1,8 +1,3 @@
--- Remove all identifiers from patients
--- This script is used by OpenMRS 1.6, but should also work on OpenMRS 1.9
--- Ellen Ball
--- July 29, 2011
--- Partners In Health
 
 -- De-identify all free text observation values except those used to point to OpenMRS metadata (eg. location)
 update obs set value_text = 'Deidentified' where value_text is not null and comments not like 'org.openmrs.%';
@@ -10,7 +5,7 @@ update obs set value_text = 'Deidentified' where value_text is not null and comm
 -- Patient identifiers
 -- Remove validators and replace extermal id with internal id
 update patient_identifier_type set validator = '';
-update patient_identifier set identifier = patient_identifier_id;
+update patient_identifier set identifier = concat(left(global_property_value('pihcore.site',''), 3), patient_identifier_id);
 
 -- Mother's name
 -- TBD:  check person_attribute_type_id for mother's name
