@@ -128,7 +128,7 @@ fi
 retrieve_backup_artifact() {
   if [ -z "${BACKUP_SSH_HOST}" ] || [ -z "${BACKUP_SSH_USER}" ] || [ -z "${BACKUP_SSH_DIR}" ]; then
     echoWithDate "Retreiving ${1} from Azure"
-    azcopy copy "${AZ_URL}/${SITE_TO_RESTORE}/percona/${1}?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZ_SECRET}" "${DOWNLOAD_DIR}/" --recursive=true --check-md5 FailIfDifferent --from-to=BlobLocal --blob-type Detect;
+    azcopy copy "${AZ_URL}/${SITE_TO_RESTORE}/percona/${1}?${AZ_SECRET}" "${DOWNLOAD_DIR}/" --recursive=true --check-md5 FailIfDifferent --from-to=BlobLocal --blob-type Detect;
   else
     echoWithDate "Retreiving ${1} from ${BACKUP_SSH_HOST}"
     scp -v -r ${BACKUP_SSH_USER}@${BACKUP_SSH_HOST}:${BACKUP_SSH_DIR}/* ${DOWNLOAD_DIR}/

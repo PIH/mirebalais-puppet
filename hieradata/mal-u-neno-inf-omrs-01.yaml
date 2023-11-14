@@ -35,8 +35,6 @@ archive_hour: 3
 
 # backup to azure
 az_backup_folder_path: malawi/neno
-az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
-az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
 # petl for reports
 petl_site: "apzu-upperneno-reports"
