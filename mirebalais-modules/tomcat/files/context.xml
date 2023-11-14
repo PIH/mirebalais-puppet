@@ -20,6 +20,9 @@
 
     <!-- Default set of monitored resources -->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+
 
     <!-- Comment this out to allow session persistence across Tomcat restarts -->
     <Manager pathname="" />
