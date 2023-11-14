@@ -1,11 +1,11 @@
 ---
-webapp_name: mirebalais
-site_domain: emrtest.hum.ht
+webapp_name: openmrs
+site_domain: zltraining.pih-emr.org
 
 package_release: 'stable'
 package_version: '1.0.20230807180329-1'
 
-pih_config: mirebalais,mirebalais-training
+pih_config: mirebalais,mirebalais-training,haiti-training
 config_name: openmrs-config-zl
 config_version: 1.45.0
 
@@ -20,6 +20,23 @@ openmrs_db_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 
+biometrics_enabled: true
+biometrics_webapp_name: biometrics
+biometrics_port: 9000
+
+# csrfguard
+csrfguard_enabled: false
+
+mysql_server_id: 1
+mysql_innodb_buffer_pool_size: 3G
+mysql_innodb_buffer_pool_instances: 3
+
+remote_db_user: backups
+remote_backup_dir: haiti/zltraining/db
+
+backup_file_prefix: zltraining
+backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
+
 #letsencrypt
 azure_dns_subscription_id: ENC[roYSeZU0cSjB6+P6aOWEXYVgCL64D33EQcfUd7L80970icq7M7LFmvlOSyYPI3bm]
 azure_dns_tenant_id: ENC[5LWTjj76sYS2kxC4FktrecjxHpznSDVezymGgwlCzdNGmdymse5ihQOOKFpAwCJa]
@@ -32,13 +49,4 @@ radiology_contrast_studies: true
 
 ssl_use_letsencrypt: true
 
-java_memory_parameters: '-Xmx2048m -Xms2048m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
-
-smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
-smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]
-
-# Certificate parameters
-acme_dns_username: ENC[/2eN7Xdczp3qBMiOqxQoR8J8jS0sJagZkWDEdP39l/sTXE0bDv9K8/NdIrBSMPWC:PM2dkvCN5ijZdJJQh7nq0w==:M1AxdjBSQktCVHhHN3l0MVd1b2hmUT09]
-acme_dns_password: ENC[uwXBH8evVQ64un+KIxfmQoayS+YPscSAFvW6cBRnbVC6b9JMuWFDAHY/Ay4aCx2Z:ncXSC5xiMSbhA0+hMfZB0Q==:K3FTTFlQYXhFVHNEM0tEVzlUUWFUdz09]
-acme_dns_subdomain: ENC[UBgMRMmcNXSuf0YX1Ez19SO62rBWl/y8obMTiQlbvGZIxiZ2i8UrBUegjDlYg3sg:DKzKpoSenkF2sdLm32pk+A==:dkVZV002bWJuSGRxdldGZm9pT0lWZz09]
-
+java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'

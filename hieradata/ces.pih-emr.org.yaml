@@ -1,9 +1,11 @@
 ---
 package_release: 'stable'
+package_version: '1.0.20231030134849-1'
+
 site_domain: ces.pih-emr.org
 pih_config: mexico,mexico-production
 config_name: openmrs-config-ces
-config_version: 1.32.0
+config_version: 1.36.0
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
@@ -13,6 +15,9 @@ mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5000'
 session_timeout: 120
 
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
+
 #az copy
 az_backup_folder_path: mexico/ces-prod
 backup_file_prefix: ces-prod
@@ -21,3 +26,7 @@ backup_time: date +%Y%m%d
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
+# Certificate parameters
+acme_dns_username: ENC[0zUHjsODJV3/laRwDdUAVl7mOn58bdC3JX4ZIzdH2FfP/hgZTe4vPBAZestMfH9p:1zqGq9XLYxaEaQM0IyVePw==:QlFiUW1NR0tRdWNDKzJGeWU4OTZVUT09]
+acme_dns_password: ENC[60uC+VlcP/5GDxj2+RxrfQCvfz74le8VAEWlOBl1ISjLeZFmGGHnmqk6efJ16vnq:hn37IQ6SZzgncHCPENzDsQ==:R0h5NVA5c0NzdkFyR1UxNnVoKy8xQT09]
+acme_dns_subdomain: ENC[nAhtERGqlBDre/joscSbbBAzyW47WIb5DM0hCeXPG+lp67uP0m6xOLKC3mrP0zoA:XBZK7wwJ0TUuCHttEUfxQw==:TjhIeFp3YTVKcjAwcVFnYWo4ZncwUT09]

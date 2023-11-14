@@ -39,6 +39,7 @@ node 'emr.hum.ht' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -49,8 +50,6 @@ node 'emr.hum.ht' {
   include openmrs
   include openmrs::initial_setup
 
-  #include percona
-
   include mirth
 #  include mirth::channel_setup
 
@@ -58,8 +57,6 @@ node 'emr.hum.ht' {
   include logging
 
   include openmrs::backup
-  include mirebalais_reporting::production_setup
-
 }
 
 node 'hai-hum-inf-humtest' {
@@ -74,6 +71,7 @@ node 'hai-hum-inf-humtest' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -99,6 +97,7 @@ node 'hai-cloud-inf-omrshiv' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -125,6 +124,7 @@ node 'hai-cloud-inf-omrshiv-report' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -136,6 +136,28 @@ node 'hai-cloud-inf-omrshiv-report' {
 
   include petl
   include petl::mysql
+}
+
+node 'zt-cloud-ces-dw-prod' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+  include maven_setup
+  include docker
+
+  include percona::install_restore_scripts
+  include percona::setup_cron_to_refresh_report_dbs
+
+  include petl::java
+  include petl
 }
 
 node 'humci.pih-emr.org' {
@@ -150,6 +172,7 @@ node 'humci.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -181,20 +204,21 @@ node 'vagrant-test.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
+  include apache2
+  include tomcat
+
+  include openmrs
+  include openmrs::initial_setup
+  include openmrs::backup
 
   include docker
-
-  include percona::install_restore_scripts
-  include percona::setup_cron_to_refresh_report_dbs
-
-  include petl
-  include petl::mysql
+  include percona
 
 }
-
 
 node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
 
@@ -208,6 +232,7 @@ node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -233,6 +258,7 @@ node 'hai-hum-inf-omrs-report' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -240,14 +266,13 @@ node 'hai-hum-inf-omrs-report' {
   include tomcat
 
   include openmrs
-  #include openmrs::initial_setup
 
-  #include percona
-
-  #include monitoring
-  #include logging
-
-  include mirebalais_reporting::reporting_setup
+  include docker
+  include percona::install_restore_scripts
+  class { 'percona::setup_cron_to_refresh_openmrs_db':
+    site_name => 'haiti/mirebalais',
+    percona_restore_deidentify => false
+  }
 }
 
 node 'inf-dakakind-omrs-test' {
@@ -261,6 +286,7 @@ node 'inf-dakakind-omrs-test' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -283,11 +309,13 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
   include apache2
   include tomcat
+  include docker
 
   include openmrs
   include openmrs::initial_setup
@@ -310,6 +338,7 @@ node 'thomonde.pih-emr.org', 'hinche.pih-emr.org', 'cercalasource.pih-emr.org', 
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -323,7 +352,7 @@ node 'thomonde.pih-emr.org', 'hinche.pih-emr.org', 'cercalasource.pih-emr.org', 
 
 }
 
-node 'zltraining.pih-emr.org' {
+node 'zltraining-fingerprints.pih-emr.org','zltraining.pih-emr.org' {
 
   class { 'apt':
     always_apt_update => true,
@@ -335,6 +364,7 @@ node 'zltraining.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -356,6 +386,7 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org', 'zt-sl-kgh-inf-omrs-prod' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -384,6 +415,8 @@ node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
+  include docker
 
   include java
   include mysql_setup
@@ -408,6 +441,7 @@ node 'ci.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -416,7 +450,6 @@ node 'ci.pih-emr.org' {
 
   include openmrs
   include openmrs::initial_setup
-  include openmrs::core_2_6_snapshot
 
 }
 
@@ -432,6 +465,8 @@ node 'ces-ci.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
+  include docker
 
   include java
   include mysql_setup
@@ -457,6 +492,7 @@ node 'peru-ci.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -480,6 +516,7 @@ node 'ses-cor.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -504,6 +541,7 @@ node 'haitihivtest.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -533,19 +571,23 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org'{
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
   include tomcat
   include apache2
+  include docker
 
   include openmrs
   #include openmrs::initial_setup
   include openmrs::backup
 }
 
-node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano', 'ces-monterrey',
-    'ces-plan-baja', 'ces-plan-alta', 'ces-reforma', 'ces-salvador', 'ces-soledad' {
+# note that we have two "ces-laguna" because for some reason the laguna fqdn is "ces-laguna.lan" (from some googling, .lan a suffx to a FQDN that may be added by routers)
+# we don't need to create a "ces-laguna.lan.yml", because the hiera falls back to the regular hostbame if it can't find a match for the fqdn, see hiera.yaml
+node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-laguna.lan', 'ces-letrero', 'ces-matazano', 'ces-monterrey',
+    'ces-plan-baja', 'ces-plan-alta', 'ces-reforma', 'ces-salvador', 'ces-salvador.lan', 'ces-soledad' {
 
   class { 'apt':
     always_apt_update => true,
@@ -557,10 +599,12 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-letrero', 'ces-matazano',
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
   include tomcat
+  include docker
 
   include openmrs
   #include openmrs::initial_setup
@@ -583,6 +627,7 @@ node 'pleebo-mirror.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
+  include maven_setup
 
   include java
   include mysql_setup
@@ -608,12 +653,40 @@ node 'zt-cloud-dw-petl-test' {
   include apt_upgrades
   include wget
   include unzip
-
+  include java
+  include maven_setup
   include docker
+
   include percona::install_restore_scripts
 
-  include java
-  include petl
+  class { 'percona::setup_cron_to_refresh_report_dbs':
+    reporting_system => 'petl-test'
+  }
+
+  petl::install { 'install-petl-zl-etl':
+    petl => "petl",
+    petl_user => "petl",
+    petl_home_dir => "/opt/petl",
+    petl_site => "zl-test",
+    petl_config_name => "zl-etl",
+    petl_config_version => "1.10.0-SNAPSHOT",
+    petl_server_port => 9109,
+    petl_sqlserver_databaseName => "openmrs_haiti_warehouse",
+    petl_cron_time => "0 0 22 ? * *",
+  }
+
+  petl::install { 'install-petl-ces-etl':
+    petl => "petl-ces",
+    petl_user => "petl-ces",
+    petl_home_dir => "/opt/petl-ces",
+    petl_site => "ces-test",
+    petl_config_name => "ces-etl",
+    petl_config_version => "1.12.0-SNAPSHOT",
+    petl_server_port => 9110,
+    petl_sqlserver_databaseName => "openmrs_ces_warehouse",
+    petl_cron_time => "0 0 4 ? * *",
+  }
+
 }
 
 node 'malawi-dw.pih-emr.org' {

@@ -3,11 +3,11 @@ webapp_name: openmrs
 site_domain: hsn.pih-emr.org
 
 package_release: 'stable'
-package_version: '1.0.20230425132709-1'
+package_version: '1.0.20230807180329-1'
 
 pih_config: haiti,haiti-hsn
 config_name: openmrs-config-zl
-config_version: 1.44.0
+config_version: 1.45.0
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.3.0
@@ -53,3 +53,8 @@ az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQ
 smtp_username: ENC[M8A6hilrpxIxWt/a0PZQZTk8d0Y5GhZ3iGRDqDwV0uk=]
 smtp_userpassword: ENC[YL8mq1iK6kSm0EjQfiyc0Q==]
 smtp_mailhub: ENC[Br1+9DHXrCo7T8Ra8xGm6MeqOjJiIwzKABPhxe9/Lj0=]
+
+# Certificate parameters
+acme_dns_username: ENC[6lFHcaomQdG6B+7xbNWYWH3GhgyeBz1qLN2VyAolyfLF8DePLA7PBKoU5C7siryc:Yket/GQTfI9URc88RGP6pQ==:WG1LNUpUYnBOR3JvNG9PMTVhVWI1dz09]
+acme_dns_password: ENC[OXETmgW+d3OMAZ8oD44GYqmyyVp/xSJrqHR1n2u4OHv/c3spRqkP7rK+eBpW0hqa:YCQGmdTIB2qXDiHXPWguWg==:QkxhQjBha282YUlvNlJJL0xTby8rZz09]
+acme_dns_subdomain: ENC[yhDVG/q76JtOGxAohXHbM08rXeA2a32p0XcOHXxUhZGbBcaV4SGDlsGFiuWx7qqy:i4uiPuNYo+AuH0FVjfW6UA==:aFYxTGtoMzBSbUtKckh1YzVFUW5BUT09]

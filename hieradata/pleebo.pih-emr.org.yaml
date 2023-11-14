@@ -8,7 +8,7 @@ package_version: '1.0.20230724200438-1'
 
 pih_config: liberia,liberia-pleebo
 config_name: openmrs-config-pihliberia
-config_version: 1.6.0
+config_version: 1.7.0
 
 server_timezone: Africa/Monrovia
 
@@ -24,6 +24,9 @@ remote_db_user: backups
 remote_db_server: 10.160.18.22
 remote_backup_dir: liberia/pleebo/db
 
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
+
 # Increasing this, to facilite database dump
 mysql_net_read_timeout: 3600
 mysql_net_write_timeout: 3600
@@ -34,3 +37,8 @@ mysql_innodb_buffer_pool_size: 1G
 mysql_innodb_buffer_pool_instances: 1
 
 java_memory_parameters: '-Xmx4G -Xms4G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+
+# Certificate parameters
+acme_dns_username: ENC[8eh/ve3t5ziG4n/+xzX9loLvpKNp8NJ2f3N3Wahp6faD4OyS2h6WFfiT11BbhMy4:HO5iB26MtQlZEGlPYfVwZg==:RTNMbHpyT1VoOWlRczVDenZPd0JtQT09]
+acme_dns_password: ENC[EvXaynKgIWCcCKxrbM8QFjAKw3ZZfxGmWiDcgyn6T+nVRsNB2ksPQzvYLrHk4329:vloJKQBr3B/3T0NMat5niw==:WmtEZGQvVEFTK3FxSXlxTGsyMEV5UT09]
+acme_dns_subdomain: ENC[Zy3hYlcS6ajxgWO9iIf9FA377yua7x1dGok++3FI+7BILujYbgXSTNXCCET2Vdke:sjCUZYyK2AThWOMPJRt84A==:UEpNUko5YnNSYVZIR1VFRGtnNUtkdz09]

@@ -3,13 +3,20 @@
 restoreSite() {
     echo "Restoring site: ${1} into container ${2} using port ${3}"
     /bin/bash <%= @percona_restore_dir -%>/percona-restore-and-email.sh \
-        --siteToRestore="${1}" --mysqlDockerContainerName="${2}" --mysqlDockerPort="${3}" --deidentify="true" --createPetlUser="true"
+        --siteToRestore="${1}" --mysqlDockerContainerName="${2}" --mysqlDockerPort="${3}" --deidentify="false" --createPetlUser="true"
 }
 
-# restoreSite haiti/cange haiti_cange_mysql 3310
-# restoreSite haiti/hinche haiti_hinche_mysql 3311
-# restoreSite haiti/hsn haiti_hsn_mysql 3312
-# restoreSite haiti/lacolline haiti_lacolline_mysql 3313
-# restoreSite haiti/thomonde haiti_thomonde_mysql 3314
-# restoreSite haiti/haitihiv haiti_haitihiv_mysql 3315
-# restoreSite haiti/mirebalais haiti_mirebalais_mysql 3316
+# Restore databases from each site into individual Docker containers exposed on different ports
+# Note, the 127.0.0.1 prefix on the port results in access being restricted to localhost
+# This allows the database user to be allowed access from '%' while still locking down access to the DB from outside
+
+restoreSite haiti/cange haiti_cange_mysql 127.0.0.1:3310
+restoreSite haiti/hinche haiti_hinche_mysql 127.0.0.1:3311
+restoreSite haiti/hsn haiti_hsn_mysql 127.0.0.1:3312
+restoreSite haiti/lacolline haiti_lacolline_mysql 127.0.0.1:3313
+restoreSite haiti/thomonde haiti_thomonde_mysql 127.0.0.1:3314
+restoreSite haiti/belladere haiti_belladere_mysql 127.0.0.1:3317
+restoreSite haiti/boucancarre haiti_boucancarre_mysql 127.0.0.1:3318
+restoreSite haiti/cercalasource haiti_cercalasource_mysql 127.0.0.1:3319
+restoreSite haiti/haitihiv haiti_haitihiv_mysql 127.0.0.1:3315
+restoreSite haiti/mirebalais haiti_mirebalais_mysql 127.0.0.1:3316

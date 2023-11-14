@@ -2,7 +2,6 @@ class openmrs::install_configuration (
 
   $openmrs_modules_temp_location = hiera('openmrs_modules_temp_location'),
   $openmrs_warfile_temp_location = hiera('openmrs_warfile_temp_location'),
-  $tomcat                        = hiera('tomcat'),
   $tomcat_home_dir               = hiera('tomcat_home_dir'),
   $tomcat_webapp_dir             = hiera('tomcat_webapp_dir'),
   $webapp_name                   = hiera('webapp_name')
@@ -32,7 +31,7 @@ class openmrs::install_configuration (
   }
 
   exec { 'ensure-modules-dir-have-tomcat-user-as-owner':
-    command  => "chown -R $tomcat:$tomcat ${tomcat_home_dir}/.OpenMRS/modules",
+    command  => "chown -R tomcat:tomcat ${tomcat_home_dir}/.OpenMRS/modules",
     path    => ['/bin', '/usr/bin'],
     require => Exec['move-modules-to-openmrs-modules-dir'],
     notify => [ Exec['tomcat-restart'] ]
@@ -45,7 +44,7 @@ class openmrs::install_configuration (
   }
 
   exec { 'ensure-war-file-has-tomcat-user-as-owner':
-    command  => "chown -R $tomcat:$tomcat $tomcat_webapp_dir",
+    command  => "chown -R tomcat:tomcat $tomcat_webapp_dir",
     path    => ['/bin', '/usr/bin'],
     require => Exec['move-war-file-to-tomcat-webapp-dir'],
     notify => [ Exec['tomcat-restart'] ]

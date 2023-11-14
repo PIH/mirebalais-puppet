@@ -1,13 +1,14 @@
 petl:
+  maxConcurrentJobs: 15
   homeDir: "/opt/petl"
   datasourceDir: "/opt/petl/configurations/datasources"
   jobDir: "/opt/petl/configurations/jobs"
   startup:
     jobs:
       - "create-partitions.yml"
-      - "refresh-ci-warehouse.yml"
 
 executeCron:
+  refreshOpenmrsData: ""
   refreshCiDW: "<%= @petl_cron_time -%>"
 
 server:
@@ -36,18 +37,18 @@ datasources:
   mysql:
     user: "<%= @petl_mysql_user -%>"
     password: "<%= @petl_mysql_password -%>"
-    options: " <%= @petl_mysql_options -%>"
+    options: "<%= @petl_mysql_options -%>"
 
   openmrs:
-    gladi:
-      host: "localhost"
+    kgh:
+      host: "10.160.16.24"
       port: "<%= @petl_mysql_port -%>"
       databaseName: "openmrs"
       user: "${datasources.mysql.user}"
       password: "${datasources.mysql.password}"
       options: "${datasources.mysql.options}"
-    kgh_test:
-      host: "<%= @petl_mysql_host -%>"
+    wellbody:
+      host: "localhost"
       port: "<%= @petl_mysql_port -%>"
       databaseName: "openmrs"
       user: "${datasources.mysql.user}"

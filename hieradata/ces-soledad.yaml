@@ -1,16 +1,21 @@
 ---
 package_release: 'stable'
+package_version: '1.0.20231030134849-1'
+
 pih_config: mexico,mexico-soledad
 config_name: openmrs-config-ces
-config_version: 1.32.0
+config_version: 1.36.0
 
-server_timezone: America/Guatemala
+server_timezone: America/Mexico_City
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
 openmrs_db_password: ENC[3RqMvut63WqWc8IDs/GOnQ==]
 mirth_password: ENC[rtk/p1SzQjT3zkMJx7DJ0g==]
 tomcat_enable_http_8080: true
 session_timeout: 120
+
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
 
 az_backup_folder_path: mexico/ces-soledad
 backup_file_prefix: ces-soledad

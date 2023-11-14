@@ -9,7 +9,7 @@ package_version: '1.0.20230724200438-1'
 
 pih_config: liberia,liberia-harper,liberia-harper-jjdossen
 config_name: openmrs-config-pihliberia
-config_version: 1.6.0
+config_version: 1.7.0
 
 server_timezone: Africa/Monrovia
 
@@ -25,6 +25,9 @@ remote_db_user: backups
 remote_db_server: 10.160.18.22
 remote_backup_dir: liberia/jjdossen/db
 
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
+
 mysql_innodb_buffer_pool_size: 1G
 mysql_innodb_buffer_pool_instances: 1
 
@@ -33,3 +36,8 @@ mysql_net_read_timeout: 3600
 mysql_net_write_timeout: 3600
 
 java_memory_parameters: '-Xmx4G -Xms4G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+
+acme_dns_username: ENC[pBHwYbIuUREuot6nnRFzy2blBpm/mMNWlqyafSP1jU6CjkDqYe1w+hIV/jeFE3LE:ttmvSMsD5YpjmkmIH4GhIQ==:dlJ1Njh6RXF2cExlZGF2dGJwbTFqZz09]
+acme_dns_password: ENC[T5sxhtUOHhr94atC5AD4MLhqOLzdvhEAvqZQi10fvZQ/eZ211n+ea9+LDqsWK9RG:ulBhZdWAl8TR8Fr+mEhi4g==:OFpxazI3bHFXY3pra0RJV2ZyT2U0dz09]
+acme_dns_subdomain: ENC[kjCFJWOJP7InAEm11x/T3yT6Gn6qHAhVWe57zXSxRg7s5SUBT7lv5l31xiGoo76w:mKzE0Q2+t9tmuBWv1tDbnA==:K3I2eUxjWUplKzM0bFRTQUZmYitoQT09]
+

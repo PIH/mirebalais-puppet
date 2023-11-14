@@ -1,5 +1,4 @@
 class java (
-  $tomcat = hiera('tomcat')
 ){
 
   file { '/etc/environment':

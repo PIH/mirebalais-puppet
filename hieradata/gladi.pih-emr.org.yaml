@@ -4,32 +4,31 @@ server_timezone: Africa/Freetown
 
 pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-gladi
 config_name: openmrs-config-pihsl
-config_version: 1.18.0-SNAPSHOT
+config_version: 1.22.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-pihemr"
-frontend_version: 1.5.0-SNAPSHOT
-frontend_repo: snapshots
+frontend_version: 1.7.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 mysql_bind_address: ENC[q/IrbhThPxSAsELZ1pA9fA==:FiTeRLnrYO171+KKiSA+oQ==:RHN4QXdNV3dzbVVxemY1c0hkNjk5UT09]
+
+
 
 # PETL
 petl: "petl"
 petl_site: "gladi"
 petl_home_dir: "/opt/petl"
 petl_config_name: sl-etl
-petl_config_version: 1.1.0-SNAPSHOT
-petl_cron_time: ""
+petl_config_version: 1.4.0-SNAPSHOT
+petl_cron_time: "0 0 22 ? * *" # This server is on GMT, so run PETL at 2am EST/EDT
 
 # PETL MySQL
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
-petl_mysql_host: 10.160.16.24
 
 # PETL SQL Server 2016
-petl_sqlserver_host: 10.160.12.28
-petl_sqlserver_port: 1433
+petl_sqlserver_host: "10.160.12.28"
 petl_sqlserver_databaseName: openmrs_sl_warehouse
 petl_sqlserver_user: medinfoadmin
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
@@ -55,3 +54,8 @@ commcare_password: ENC[oopC1qrFD+BLd4VsLbMgRQ==]
 # prometheus node exporter
 node_exporter_listen_ip: ENC[DpOyzX4ljn2i1eavdroeHg==:jI00GWpnBrsBEqq+jrTjHQ==:SHAxZHIxNWd2N3o2WFV0ZXZRdEo0UT09]
 node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
+
+# Certificate parameters
+acme_dns_username: ENC[dMqBwySDq3Jzx+QqGk/Ai+a8DD/i9t7raZzF8tjjsb3LloFNqgAJtCV5U8Jpx8VF:PAjn0dIpqsfVqTHpe9mLTg==:b3R4dlRvemR5ejZaaFhsQTIweGV5UT09]
+acme_dns_password: ENC[Z7SF5QO5B7YgKVjooh2mWT4GwnRFv7qfnFBWc4y7/O4Drf/BwTu4099hvOoD7VG2:Qx+4jXsmG/2wacEER3LDbQ==:R0tydUYybDZ5VlpWNndCb3RWQzNHQT09]
+acme_dns_subdomain: ENC[Dkf55zpprbfFQdSw4u34ZKQ6JclPwPSdfum2PdMitCbW3ulggZZ7ZXuu6bmeF84s:2+GVTlooETAzJUudn+5XfA==:RER5SElOVVJ6S3JyNEw1YjR2Nk8wdz09]

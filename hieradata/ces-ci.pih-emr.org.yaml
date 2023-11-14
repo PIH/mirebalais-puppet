@@ -1,14 +1,15 @@
 ---
 site_domain: ces-ci.pih-emr.org
-server_timezone: America/Guatemala
-
-package_release: 'stable' #'unstable'
+server_timezone: America/Mexico_City
 pih_config: mexico,mexico-production #,mexico-demo
 config_name: openmrs-config-ces
-config_version: 1.32.0
+config_version: 1.36.0
 
-frontend_name: "openmrs-frontend-pihemr"
-frontend_version: 1.5.0-SNAPSHOT
+package_release: 'stable'
+package_version: '1.0.20231030134849-1'
+
+#frontend_name: "openmrs-frontend-pihemr"
+#frontend_version: 1.5.0-SNAPSHOT
 
 openmrs_db: openmrs
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
@@ -20,20 +21,18 @@ mysql_sort_buffer_size: 2621440
 petl: "petl"
 petl_site: "ces-ci"
 petl_home_dir: "/opt/petl"
+petl_server_port: 9110
 
 # PETL config
 petl_config_name: ces-etl
-petl_config_version: 1.8.0-SNAPSHOT
+petl_config_version: 1.12.0-SNAPSHOT
 
 # PETL MySQL
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
-
 # PETL SQL Server 2016
-petl_sqlserver_host: 10.160.12.28
-petl_sqlserver_port: 1433
-
+petl_sqlserver_host: "10.160.12.28"
 petl_sqlserver_databaseName: openmrs_ces_ci
 petl_sqlserver_user: medinfoadmin
 petl_sqlserver_password: ENC[0vOkNHPP0Waw+EwDMx9R/A==]
@@ -52,3 +51,9 @@ session_timeout: 120
 # prometheus node exporter
 node_exporter_listen_ip: ENC[pFJvoEZ7OqMTpVZuAQZ+4A==:vvx0YAku+/XovCo6c5MzAA==:cW5JNnl1SmhPM0hTWm5ZMW9VTG1CUT09]
 node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
+
+# Certificate parameters
+acme_dns_username: ENC[5wfOBuTQr7CxjYm43mB6nEU8nSbfOuO5C6yDLQCMsmwJL68e/Fww395QIuHb3OZO:deg1MmtICJrhPLMndgSY6g==:UXJDWUpJMjhNeXVLZnNYNHJqRkNWUT09]
+acme_dns_password: ENC[n+30LzjG2dDgBZtymvHNtt6gv+8BkNm05vokIljWrGkmP8abfbWbxAoyLkHVVZj4:WoYsiYF2xXQ7Y0gIAPLmtw==:MGpEVzdySzlsNGJncmdLU1RFcVdNZz09]
+acme_dns_subdomain: ENC[letNiAoIwFeJ7Hk/yy+e3hDY3eLFl45Nhz+K7YSN+Sb6ZXVfd/DljrLTp1nKugLZ:ppgYKtjxA2OrGA/6EVeD8A==:NzlXRkNXNVhKR3BETXNPRWw5aDU4dz09]
+

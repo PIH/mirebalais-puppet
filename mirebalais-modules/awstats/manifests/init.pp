@@ -1,6 +1,6 @@
 class awstats(
       $site_domain = hiera('site_domain')
-      $sysadmin_email = hiera('sysadmin_email')
+      $sysadmin_email = decrypt(hiera('sysadmin_email'))
 ) {
 
     package { 'awstats':

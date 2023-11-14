@@ -8,7 +8,7 @@ petl_site: "apzu"
 petl_home_dir: "/opt/petl"
 petl_server_port: 9110
 
-petl_version: 3.4.0
+petl_version: 3.5.0
 # PETL Config
 petl_config_name: "apzu-etl"
 petl_config_version: 1.5.0-SNAPSHOT
@@ -19,8 +19,7 @@ petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLM
 petl_mysql_password: ENC[spcYc6R/l+JkjPm5P//qw0LVQCdrD8zEfIEZr/AJ4rU=]
 
 # PETL Sql Service
-petl_sqlserver_host: 10.160.22.17
-petl_sqlserver_port: 1433
+petl_sqlserver_host: "10.160.22.17"
 petl_sqlserver_user: ENC[5ChP50972ydOmVvG8h/FMQ==:R6hlTaSylcFEt9+3cXVQaQ==:WWY4STRXNXpCWjNDZkRPZ0FqbUFvZz09]
 petl_sqlserver_password: ENC[jp5eYCvDQs0jL/wK7Z02Bg==:pVi7ty2nGUKiVMf6Z0lL6Q==:K3MrZGpGTk5kSDMyc2VMTjZsb0Zadz09]
 petl_sqlserver_databaseName: "openmrs_reporting"

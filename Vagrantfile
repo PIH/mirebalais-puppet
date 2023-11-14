@@ -13,10 +13,11 @@ Vagrant.configure("2") do |config|
    config.vm.provider "virtualbox" do |vb|
      vb.memory = "6096"
    end
-  #
+
+  config.vm.synced_folder "/home/mgoodrich/development/openmrs/puppet", "/etc/mirebalais-puppet"
    config.vm.provision "shell", inline: "hostnamectl set-hostname vagrant-test.pih-emr.org"
    config.vm.provision "shell", inline: "apt-get -y update"
    config.vm.provision "shell", inline: "apt-get -y upgrade"
    config.vm.provision "shell", inline: "apt-get install -y git"
-   config.vm.provision "shell", inline: "git clone https://github.com/PIH/mirebalais-puppet.git /etc/puppet"
+  #config.vm.provision "shell", inline: "git clone https://github.com/PIH/mirebalais-puppet.git /etc/puppet"
 end

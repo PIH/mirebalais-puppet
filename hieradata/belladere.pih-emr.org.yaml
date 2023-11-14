@@ -3,11 +3,11 @@ webapp_name: openmrs
 site_domain: belladere.pih-emr.org
 
 package_release: 'stable'
-package_version: '1.0.20230425132709-1'
+package_version: '1.0.20230807180329-1'
 
 pih_config: haiti,haiti-belladere
 config_name: openmrs-config-zl
-config_version: 1.44.0
+config_version: 1.45.0
 
 server_timezone: America/New_York
 
@@ -43,3 +43,8 @@ java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -X
 az_backup_folder_path: haiti/belladere
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
+
+# Certificate parameters
+acme_dns_username: ENC[zoCgAivqljiaYGCTN52LiJBjMPuDyUAIZvlfqFPWtKhDpv7SepeUZXIqemG13TRq:kxUi/8HCedBItrJbwZvBjw==:ekNqaTQzOWloZGJlclVNb1oxNlBvZz09]
+acme_dns_password: ENC[X6j1/UHhSUYv+HDWHm7TG2W4AQOs69cFTmNCwJzYQ+ZYgzPF1utRNTyivAvCm0tX:E465b/tCcMLHBTZA0a482w==:dUMvNUw4TVAybUg5MUEwdy9MWktNUT09]
+acme_dns_subdomain: ENC[E0nsOyFIpiH9O2+hcfzbTs0ra0YHXenPQw3+vo7CECtghaoT03S+uXRRVnurYbtO:y7+FcPnHVY/aJvXOhQgwAw==:U290ZFRTV2hPSmFNSmw4dXFidWlTQT09]

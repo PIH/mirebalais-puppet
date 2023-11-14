@@ -3,7 +3,7 @@
 # Backup cleanup and archiving script
 # 
 
-DIR=/home/<%= @tomcat %>/backups
+DIR=<%= @tomcat_home_dir %>/backups
 PREFIX='<%= @backup_file_prefix %>'
 BACKUP_RETAIN_DAYS='<%= @backup_delete_older_than_x_days %>'
 

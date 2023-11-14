@@ -1,5 +1,5 @@
 petl:
-  maxConcurrentJobs: 7
+  maxConcurrentJobs: 15
   homeDir: "/opt/petl"
   datasourceDir: "/opt/petl/configurations/datasources"
   jobDir: "/opt/petl/configurations/jobs"
@@ -9,10 +9,10 @@ petl:
 
 executeCron:
   refreshOpenmrsData: "<%= @petl_cron_time -%>"
-  refreshCesCiData: ""
+  refreshCiDW: ""
 
 server:
-  port: "9110"
+  port: "<%= @petl_server_port -%>"
 
 logging:
   level:
@@ -37,18 +37,18 @@ datasources:
   mysql:
     user: "<%= @petl_mysql_user -%>"
     password: "<%= @petl_mysql_password -%>"
-    options: " <%= @petl_mysql_options -%>"
+    options: "<%= @petl_mysql_options -%>"
 
   openmrs:
     kgh:
-       host: "<%= @petl_mysql_host_kgh -%>"
+       host: "10.160.16.22"
        port: "<%= @petl_mysql_port -%>"
        databaseName: "<%= @petl_mysql_databaseName -%>"
        user: "${datasources.mysql.user}"
        password: "${datasources.mysql.password}"
        options: "${datasources.mysql.options}"
     wellbody:
-       host: "<%= @petl_mysql_host_wellbody -%>"
+       host: "10.160.16.20"
        port: "<%= @petl_mysql_port -%>"
        databaseName: "<%= @petl_mysql_databaseName -%>"
        user: "${datasources.mysql.user}"

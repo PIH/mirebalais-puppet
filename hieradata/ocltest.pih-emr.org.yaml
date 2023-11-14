@@ -2,13 +2,15 @@
 webapp_name: openmrs
 site_domain: ocltest.pih-emr.org
 
-pih_config: mirebalais,mirebalais-humci
-config_name: openmrs-config-zl
-config_version: 1.45.0-SNAPSHOT
+pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-gladi
+config_name: openmrs-config-pihsl
+config_version: 2.0.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 
-# Indicates if a concept package should be downloaded from OCL rather than installing concepts from MDS
-ocl_package_url: "https://ocl-staging-s3.s3.amazonaws.com/PIH/PIH_1.0.0.20220213180245.zip"
+# Certificate parameters
+acme_dns_username: ENC[cDwQIV0+FgeOG2SLF2MxKrGyBAsz+Febb2wZaYaxsHLJPLRdYiLqHNG5bcm7+GY8:0KrPmzEnTtTn83k9OFxjjg==:cEVSdmFyZ3EzMkw5N3I3bjNwM3g3dz09]
+acme_dns_password: ENC[2gWMQhqPOctm05ds+4GAJA8djXzCGlDF5IZErkZf68HtDgfZPl74TeqaatR9LZo0:51Jo6cKYzJ4BvPp6VbJJqw==:NUpUUGs1Kzh6cDQzZDZaRm5ROGl4dz09]
+acme_dns_subdomain: ENC[euEFSbbH8mrpcO+AdzKhWRvkYBNRlMVTty5yG++4sWvxg5s8LxknaKgUKJOtx43n:6B8bcb7CgBXb2jDfH4ae+A==:YXBXdFA0TldQWFh0bW1IYW5HRkVDQT09]

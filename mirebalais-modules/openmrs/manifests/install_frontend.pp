@@ -5,7 +5,6 @@ class openmrs::install_frontend(
 
   $maven_frontend_group_id = hiera('maven_frontend_group_id'),
 
-  $tomcat           = hiera('tomcat'),
   $tomcat_home_dir  = hiera('tomcat_home_dir'),
   $webapp_name      = hiera('webapp_name')
 
@@ -43,7 +42,7 @@ class openmrs::install_frontend(
     }
 
     exec { 'change-openmrs-frontend-owner-to-tomcat':
-      command => "chown -R ${tomcat}:${tomcat} ${tomcat_home_dir}/.OpenMRS/frontend",
+      command => "chown -R tomcat:tomcat ${tomcat_home_dir}/.OpenMRS/frontend",
       require => Exec['move-openmrs-frontend-contents-to-config-dir']
     }
 

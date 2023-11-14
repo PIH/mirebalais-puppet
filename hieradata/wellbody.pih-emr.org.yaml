@@ -1,12 +1,16 @@
 ---
 site_domain: wellbody.pih-emr.org
+server_timezone: Africa/Freetown
 
 pih_config: sierraLeone,sierraLeone-wellbody
 config_name: openmrs-config-pihsl
-config_version: 1.17.0
+config_version: 1.21.0
 
-server_timezone: Africa/Freetown
 package_release: 'stable'
+package_version: '1.0.20231018132249-1'
+
+frontend_name: "openmrs-frontend-pihemr"
+frontend_version: 1.6.0
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[q/IrbhThPxSAsELZ1pA9fA==:FiTeRLnrYO171+KKiSA+oQ==:RHN4QXdNV3dzbVVxemY1c0hkNjk5UT09]
@@ -37,3 +41,9 @@ az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQ
 #commcare
 commcare_user: ENC[FFLNzFzFzTbi+gwnHOigAW0LjvcW6Ri7k521HfI0EOw=]
 commcare_password: ENC[P7VM5dPWbAehhNDOEYvoOw==:D9RiKNwZBmptDOWue9h84Q==:a0hmSERnZUp6azFoZklBODRiL2h4dz09]
+
+# Certificate parameters
+acme_dns_username: ENC[hbmvTgef8SD32cleKG5eDA/6ndadWuMvlNsLiefFNAanYdkL6TqQMu2IZzYcnKHr:RXBD+76C/837tuoi6TRmng==:VGlMdzJWYnZpcHg0cmFCZTRWY1pGdz09]
+acme_dns_password: ENC[CEDs33cEZhPZ13Bv7uf2W1ZZ02p4Ua7ClOUXcH386+JzIQT5jERGQAwG2hZWVGFv:RGeuZt41ZrNXTOGBLdtUWw==:RWthR25QcnRvUVFKZitPdnZ5dnRZQT09]
+acme_dns_subdomain: ENC[fRuzD/OlZrFwQC5qQi4OtarowdHyApkKe2VSaGASTFh7ZvY3HoOOkqBjjjEO7cp/:+ByE4AxWq04ge5igw7DXEw==:TUoxYW1hdk5IMWkwWEZzeitHci9qQT09]
+

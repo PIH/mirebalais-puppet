@@ -10,8 +10,8 @@ config_name: "%{hiera('package_name')}-config"
 config_version: "%{hiera('package_version')}"
 
 maven_download_repo: http://mavenrepo.openmrs.org/nexus/content/repositories/public
-maven_download_repo_config_group_id: org.openmrs.module
-maven_download_repo_package_group_id: org.openmrs.distro
+maven_config_group_id: org.openmrs.module
+maven_package_group_id: org.openmrs.distro
 
 # mysql
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
@@ -69,3 +69,8 @@ pwa_config_version: 2.0.0-SNAPSHOT
 pwa_config_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('pwa_config_name')}&v=%{hiera('pwa_config_version')}&p=tar.gz&r=snapshots
 pwa_enabled: true
 pwa_webapp_name: workflow
+
+# Certificate parameters
+acme_dns_username: ENC[Es2OvHVHjLe2me3PjNKSavgZnxnTqPVETvZ/7GU3ly0uR+oW1BeEAB2RTc4QjtmR:3f/4dMtT/qfj+IxF5u0LHA==:WW5US2kzdm8vcGg5TllrQ0pnTlNFdz09]
+acme_dns_password: ENC[kc20BOIvE6x/x2sGHOO7r5BNtMeNO1bHZpR3VM6ysNgrhYOdKqakOqHZjtDbenJg:I+6ozNN2eo0u2jRbWQrmUg==:eXVXQkpOblpaRXY0a0REV2U4K0p0UT09]
+acme_dns_subdomain: ENC[+cn1AMOjUMSnisV0HklqExkSkMXRfkJdZHw7NmS5X0NYzbb7vR+4Z77YpFJd61Z6:8JEvJE/dd7C+JNhSwdDOrA==:cU9WRmFqKy9ETHIxc0M4dTJjaG1NZz09]

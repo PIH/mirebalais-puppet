@@ -7,15 +7,15 @@ ntp_server_3: 2.ubuntu.pool.ntp.org
 ntp_server_4: 3.ubuntu.pool.ntp.org
 
 pih_config: default
-site_domain: foo.org
+site_domain:
 
 package_name: pihemr
 package_release: 'unstable'
-package_version: '1.0.20230724200438-1'
+package_version: ''
 
-maven_download_repo: http://mavenrepo.openmrs.org/nexus/content/repositories/public
-maven_download_repo_config_group_id: ''
-maven_download_repo_package_group_id: ''
+maven_download_repo: https://s01.oss.sonatype.org/content/repositories/public
+maven_config_group_id: org.pih.openmrs
+maven_package_group_id: ''
 maven_frontend_group_id: org.pih.openmrs
 
 config_name: ""
@@ -23,10 +23,6 @@ config_version: ""
 
 repo_url: ENC[guOgejmsDLkHjo2iCrV9MAWEt/Y9usi32Rs4qPepBu0=]
 pihemr_debian_repo_url: https://openmrs.jfrog.io/artifactory/deb-pih/
-
-
-prod_dw_petl_sqlserver_host: foo
-prod_dw_petl_sqlserver_port: foo
 
 mysql_server_id: 1
 mysql_root_password: foo
@@ -54,11 +50,11 @@ backup_db_password: foo
 openmrs_percona_backup_enabled: false
 openmrs_percona_install_mode: ''
 backup_time: date +%Y%m%d-%H%M%S
-tomcat: tomcat7
-tomcat_home_dir: /home/tomcat7
-tomcat_webapp_dir: /var/lib/tomcat7/webapps
+tomcat_home_dir: /home/tomcat
+tomcat_webapp_dir: /var/lib/tomcat9/webapps
 tomcat_restart_nightly: false
 tomcat_enable_http_8080: false
+tomcat_ajp_secret: ENC[6MoaTgZCIozP7wYEDGeF85kNptUQ+hfJk0a7fXlAHTw=:003d8bxdNhslHb/OWGWIjg==:ZUFtd0JaendEeVlNcjVRd1l0R1FXQT09]
 session_timeout: 30
 
 #
@@ -68,15 +64,19 @@ openmrs_warfile_temp_location: ''
 # For both Azure & Amigo backups
 backup_file_prefix: foo
 backup_hour: 1
+backup_minute: 30
 backup_delete_older_than_x_days: 15
 archive_hour: 3
+archive_minute: 30
+azure_backup_hour: "*"
+azure_backup_minute: "*/15"
 
 # For Amigo backups only
 remote_db_user: foo
 remote_db_server: foo
 remote_backup_dir: foo
 
-sysadmin_email: emrsysadmin@pih.org
+sysadmin_email: ENC[l4VepVXtEvKsk+K+qhAL1K+c995NxX7uRGtFIUb5qV0=:6wlaJ/P+clVATRzNAtZqAw==:WmszcktKVS9ncVB4eHBIVjQ3TlJ5QT09]
 
 smtp_username: ENC[LhaBIAFkVOz/j+iAUzdIcZ4q8tHNzhyA+xMWx9zUkqI=:lbnhfiuIeHS4VMdI8DMV+A==:WjhNUkM0Q1FuVk05WFhUeGowVTE2dz09]
 smtp_userpassword: ENC[VP7yvNiPEkclvmqxRxMc/MvEyAMcBG3ugJEwthDU0+0=:bZZy9YRqN4FEUJViJBIIpQ==:RjFzQW9qc2xVSU96cWNyOVQ2MUZUUT09]
@@ -123,7 +123,7 @@ dbevent_enabled: true
 
 # PETL
 petl: "petl"
-petl_version: "3.5.0-SNAPSHOT"
+petl_version: "3.6.0-SNAPSHOT"
 petl_site: ""
 petl_user: "petl"
 petl_home_dir: "/opt/petl"
@@ -135,7 +135,7 @@ petl_java_opts: ""
 
 # PETL Config
 petl_config_name: zl-etl
-petl_config_version: 1.8.0-SNAPSHOT
+petl_config_version: 1.10.0-SNAPSHOT
 petl_config_dir: "configurations"
 
 # PETL MySQL
@@ -147,8 +147,8 @@ petl_mysql_user: foo
 petl_mysql_password: foo
 
 # PETL SQL Server
-petl_sqlserver_host: localhost
-petl_sqlserver_port: 1433
+petl_sqlserver_host: "localhost"
+petl_sqlserver_port: "1433"
 petl_sqlserver_databaseName: openmrs_extractions
 petl_sqlserver_user: foo
 petl_sqlserver_password: bar
@@ -161,7 +161,6 @@ petl_mysql_user_ip: localhost
 petl_error_subject: "%{hiera('petl_site')} PETL Errors"
 petl_check_errors_cron_hour: '*/6'
 petl_cron_time: "0 0 5 ? * *"
-petl_ces_cron_time: ""
 
 # PETL database for Apzu
 install_petl_warehouse_db: false
@@ -175,6 +174,9 @@ biometrics_enabled: false
 biometrics_webapp_name: ''
 biometrics_port: 9009
 
+# csrfguard
+csrfguard_enabled: true
+
 # feature toggle settings
 insurance_collection: true
 radiology_contrast_studies: false
@@ -184,15 +186,17 @@ htmlformentryui_simpleform_navbuttons: false
 
 # SSL certificates--use letencrypt by default
 ssl_cert_dir: "/etc/letsencrypt/live/%{hiera('site_domain')}"
-ssl_cert_file: 'fullchain.pem'
+ssl_cert_file: 'cert.pem'
 ssl_chain_file: 'fullchain.pem'
 ssl_key_dir: "/etc/letsencrypt/live/%{hiera('site_domain')}"
 ssl_key_file: 'privkey.pem'
 ssl_use_letsencrypt: true
-azure_dns_subscription_id: ENC[roYSeZU0cSjB6+P6aOWEXYVgCL64D33EQcfUd7L80970icq7M7LFmvlOSyYPI3bm]
-azure_dns_tenant_id: ENC[5LWTjj76sYS2kxC4FktrecjxHpznSDVezymGgwlCzdNGmdymse5ihQOOKFpAwCJa]
-azure_dns_app_id: ENC[shiW8Zw+zKNZjwEojjsm0pzj3SOJGUpRJl7pMZ9FULbrxVKYi/nWrAmRAGifWya3]
-azure_dns_client_secret: ENC[f+Bvtjd7pyxAFpRgF3ZM8kzj5BfsQY3bZJ3jZrlebuPs5yF4zR69KWwP8l98Ut+5]
+acme_version: 3.0.7
+acme_user: ENC[2tXA1UMPe7zSGFq27HtWPg==:3FFCUm2Ldb+3E5OuuQeecg==:RXhzZHhCSDZYWGdHdGJCSnFYK282UT09]
+acme_dns_username:
+acme_dns_password:
+acme_dns_subdomain:
+acme_dns_base_url: ENC[iJo35DujJ/nSRH0x71OKUD2jt3eCkOBsiaeoJ7Q+bf7D5oieC5tez0T/ACAUWAWShpDYLlihVN+rKZt74S+m2w==:YdtrYTKYhvlWeIEGhlIKYw==:WkYzVFlFQ2FQMDJBaFlYTUtZdnlRZz09]
 cert_cron_hour: 01
 cert_cron_min: 00
 apache_cron_restart_hour: 01
@@ -202,6 +206,8 @@ apache_cron_restart_min: 03
 az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
 az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 az_backup_folder_path: ''
+azcopy_concurrency_value: 16  # default to making 16 concurrent network PUT requests when backing up
+azcopy_concurrency_files: 1   # default to backing up one file at a time
 
 java_memory_parameters: '-Xmx2048m -Xms2048m'
 #-XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC
@@ -216,12 +222,8 @@ az_activitylog_backup_folder_path: ""
 # Enforce acceptance of terms and conditions for usage
 terms_and_conditions_enabled: false
 
-# Indicates if a concept package should be downloaded from OCL rather than installing concepts from MDS
-# This should be empty for all servers except ocltest
-ocl_package_url: ""
-
 # atomfeed
-openmrs_modules_dir: /home/tomcat7/.OpenMRS/modules
+openmrs_modules_dir: /home/tomcat/.OpenMRS/modules
 atomfeed_version: 1.0.13-SNAPSHOT
 atomfeed_repo_url: https://openmrs.jfrog.io/artifactory/snapshots
 
@@ -248,12 +250,16 @@ docker_user: ENC[h2rLm+7MduiV0n6kphuvHw==:fnzJi5CZcS03vAQDCjaF1Q==:Rmczclg4eVBLN
 #frontend
 frontend_name: ''
 frontend_version: ''
-frontend_repo: ''
-frontend_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('frontend_name')}&r=%{hiera('frontend_repo')}&p=zip&v=%{hiera('frontend_version')}
 
 # percona restore
 percona_home_dir: "/home/percona"
 percona_restore_dir: "/home/percona/restore"
+percona_mysql_root_password: "%{hiera('mysql_root_password')}"
+percona_backup_ssh_host: ""
+percona_backup_ssh_user: ""
+percona_backup_dir: "%{hiera('tomcat_home_dir')}/backups/percona"
+percona_restore_deidentify: true
+percona_restore_preserve_tables: ""
 
 # TODO: Remove these as we go.  Below files are from pre-existing percona processes
 perconaHomeDir: "/home/percona"

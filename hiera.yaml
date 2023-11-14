@@ -1,3 +1,14 @@
+# fqdn = fully qualified domain name
+# hostname = hostname
+# to see what these resolve to on a machine that has factor installed (which the Puppet install should install) you can run:
+# facter fqdn
+# facter hostname
+#
+# this should give you the actual names that Puppet will use to look up the hiera data
+# see: https://unix.stackexchange.com/questions/138165/determine-fqdn-when-hostname-doesnt-give-it
+#
+# so basically, it first looks for a file in the format {fqdn}.yaml, then {hostname}.yaml, then common.yaml
+
 ---
 :backends:
   - yaml
@@ -6,5 +17,4 @@
 :hierarchy:
   - '%{::fqdn}'
   - '%{::hostname}'
-  - 'env_%{::environment}'
   - common

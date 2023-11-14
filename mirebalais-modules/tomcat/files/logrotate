@@ -1,4 +1,4 @@
-/var/lib/tomcat7/logs/catalina.out  {
+/var/lib/tomcat9/logs/catalina.out  {
   daily
   rotate 7
   size 10M
@@ -6,13 +6,13 @@
   compress
   postrotate
     # reset ownership to comply with directory's permissions
-    chown tomcat7.tomcat7 /var/lib/tomcat7/logs/catalina.out.*
+    chown tomcat.tomcat /var/lib/tomcat9/logs/catalina.out.*
   endscript
   notifempty
   missingok
 }
 
-/var/lib/tomcat7/logs/*.log {
+/var/lib/tomcat9/logs/*.log {
   daily
   rotate 7
   notifempty
@@ -20,7 +20,7 @@
   maxage 7
 }
 
-/home/tomcat7/.OpeMRS/openmrs.log {
+/home/tomcat9/.OpeMRS/openmrs.log {
   daily
   rotate 7
   notifempty
@@ -28,7 +28,7 @@
   maxage 7
 }
 
-/home/tomcat7/.OpeMRS/initializer.log {
+/home/tomcat9/.OpeMRS/initializer.log {
   daily
   rotate 7
   notifempty

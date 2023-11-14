@@ -5,6 +5,8 @@ server_timezone: Africa/Blantyre
 
 pih_malawi_distribution_version: 6.9.0-SNAPSHOT
 
+maven_download_repo: http://mavenrepo.openmrs.org/nexus/content/repositories/public
+
 # mysql
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
@@ -36,3 +38,8 @@ petl_mysql_user_ip: localhost
 petl_openmrs_connection_url: jdbc:mysql://localhost:3306/%{hiera('petl_warehouse_db')}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8
 
 java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
+
+# Certificate parameters
+acme_dns_username: ENC[OuzSWUAv9DDVxsK6dNIEGDXVIcRwnPmkHpMY8XtCpw88ebj2zmdv8TGRZ3YJJKhI:IRior1IXeCt/jFLWiunRyA==:VEFEbW5pZEkvSkJjd1ZhZzVwRWZOdz09]
+acme_dns_password: ENC[2nahq84JAr+oGvHrfmvlGp/FpY95nvD5y3sDR0XMYzWDZhSTFUkuN7B3/0UtXonG:0dcue6ktfGFYXP5gkpArsA==:U29reWxKUFpxUndzRGpoRVYvMG51QT09]
+acme_dns_subdomain: ENC[2kcVTRcM4j6/7qGWe4u3fCNZv7owAwJZ0xPtHTqjj8dtZ1A4efY1a0ZuEO/dJImK:bO2ViRWk0RU9whgykGvnUA==:YUNRR2JGSXpzMXdlZmIxaHU1NytTUT09]

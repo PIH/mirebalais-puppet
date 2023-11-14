@@ -3,7 +3,7 @@ site_domain: ci.pih-emr.org
 
 pih_config: haiti,haiti-hsn,haiti-hsn-ci
 config_name: openmrs-config-zl
-config_version: 1.45.0-SNAPSHOT
+config_version: 1.46.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.4.0-SNAPSHOT
@@ -20,3 +20,9 @@ java_debug_parameters: '-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y
 # prometheus node exporter
 node_exporter_listen_ip: ENC[W4Zbawrp9PVjxsi+6cvi1w==:4RMB2CoRCtKbJnnqSTy94g==:Q280M1lINmdhc3NmRUQySEFGM09LQT09
 node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==:YVo3akhqQkpObEZ1clZLd1BrblRQQT09]
+
+# Certificate parameters
+acme_dns_username: ENC[pNB4/QNRF2586jEiHR2+bBYRwIBKwy/HJp8A/bczCfBsjuNeUkeoqQBaN5j0GxfF:Vz4mt9f4hi/BWV55KFkH5Q==:WHlzZ0RUNGU0WUxtV0I1bHU3eWwvdz09]
+acme_dns_password: ENC[xU+cOEL0tq1jGK+bqchfclETtba3Sd3F7p17adsXXWNvZeHENSXPMNE5MqMz8GWS:cTHrwKt9Y17YPRQxwIl3SA==:RHVSempYT3N5SnZUOVFjWkgrZk1wUT09]
+acme_dns_subdomain: ENC[wZ0hhfcoZHSB0qsDWtitJx3lketjU0fy3rA1Pc/Lx8ohBrJnxMUYdhCGkaTlEKo3:gUtGXBlOFlWMhAjR4eitpA==:aWRVa2NFeHlxWFBGYTZWSDBRdTJUUT09]
+
