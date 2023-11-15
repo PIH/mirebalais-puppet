@@ -34,7 +34,7 @@ class tomcat (
 
   exec { 'move-openmrs-home-directory':
     command => "mv /home/tomcat7/.OpenMRS ${tomcat_home_dir}",
-    onlyif  => "test -d /home/tomcat7/.OpenMRS",
+    onlyif  => "test -d /home/tomcat7/.OpenMRS && test ! -d /home/tomcat/.OpenMRS",
     require => File[$tomcat_home_dir],
     notify => Exec['change-home-directory-permissions']
   }
