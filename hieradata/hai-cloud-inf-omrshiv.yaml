@@ -44,8 +44,6 @@ openmrs_percona_backup_enabled: true
 openmrs_percona_install_mode: 'docker'
 
 az_backup_folder_path: haiti/haitihiv
-az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
-az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
 # Certificate parameters
 acme_dns_username: ENC[AzLB5ZHfYoCo7/isvg32jQU5mLU3leWKsdC05sb9gbZGK9Sws0pyXnEF++ZEJydG:kQVa+TePlzOheyt7k+1pyw==:WDFrUkxHVVFubHZiNkZ0ODVpRWJuUT09]

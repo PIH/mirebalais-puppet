@@ -38,8 +38,6 @@ mirth_password: ENC[xTn2ILoq1ik8jxllAn7pHz5qD+0apCTmRRtCZRMcjfk=]
 
 az_backup_folder_path: haiti/mirebalais
 az_activitylog_backup_folder_path: activitylog/zl/mirebalais
-az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
-az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 percona_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 
 #letencrypt

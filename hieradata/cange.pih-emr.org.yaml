@@ -43,8 +43,6 @@ java_memory_parameters: '-Xmx8G -Xms8G -XX:PermSize=256m -XX:MaxPermSize=512m -X
 
 #az copy
 az_backup_folder_path: haiti/cange
-az_secret: ENC[1oQfg4Gi51CDU3XTOIkHatJn2W+vAxx1Juj/wYnVwyRtEFk7hm7XAkA0CbKlsUcUdED4rBiSDIYAlTiO3aBryg==]
-az_url: ENC[6NweILo1Eq7pKNo88HD1o/fyAWOijtE/7o3Pn+pd8tJ9q2Z1PerwvhtXMsVi2nl37EjQL96k8gApwQCE+nKnaw==]
 
 # Certificate parameters
 acme_dns_username: ENC[iWaP2o5pNdfE/y//j3CA8R2pF5UI1Ee1JLkY0Z2z3oaVMyGdXx4yMnalM3cR5HlN:/PCKhdOEmLzpKWhyHA2e/g==:MHgxQk1CNC9tanpqK1V3V1VHcFJkUT09]
