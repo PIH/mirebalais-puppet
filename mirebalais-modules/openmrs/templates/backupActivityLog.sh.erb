@@ -30,7 +30,7 @@ fi
 
 ## if the zip is successful, backup to azure
 if [ $? -eq 0 ]; then
-  azcopy sync "${targetActivityLogDir}" "${AZURL}/${AZACTIVITYLOGBACKUPFOLDERPATH}?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2025-03-29T22:00:00Z&st=2020-03-30T13:00:00Z&spr=https&sig=${AZSECRET}" --recursive=true --delete-destination=false >> ${logFile}
+  azcopy sync "${targetActivityLogDir}" "${AZURL}/${AZACTIVITYLOGBACKUPFOLDERPATH}?${AZSECRET}" --recursive=true --delete-destination=false >> ${logFile}
 fi
 
 # remove the ${targetActivityLogDir} after it is backed up
