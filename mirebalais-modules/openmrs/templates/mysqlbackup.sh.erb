@@ -5,6 +5,10 @@
 # this script does not check if packages 7za is
 # installed. Ensure that 7za is installed
 #
+echoWithDate() {
+  CURRENT_DATE=$(date '+%Y-%m-%d-%H-%M-%S')
+  echo "${CURRENT_DATE}: ${1}"
+}
 
 #############################################
 # For Pleebo and other environments which can't locate this command
@@ -39,29 +43,31 @@ mkdir -p ${LOGDIR}
 # set up logging to file
 exec > ${LOGFILE} 2>&1
 
+echoWithDate "Starting backup"
+
 # Dump database, encrypt and compress
 if [ $? -eq 0 ]; then
-    echo "backing up database and compressing started at `date`"
+    echoWithDate "Executing mysqldump and compressing with 7zip"
     mysqldump -u${USER} -p${PASS} --opt --flush-logs --single-transaction openmrs 2>/dev/null | 7za a -p${PASS} -siy -t7z ${DIR}/sequences/${FILENAME} -mx9 2>&1 >/dev/null
 fi
 
 if [ $? -eq 0 ]; then
-    echo "backup was a success"
+    echoWithDate "mysqldump and 7zip completed successfully"
 
     ### check if backed up db size is not empty
     if ! [ -s "${DIR}/sequences/${FILENAME}" ];
     then
-        >&2 echo "mysql backup DB dump file empty\n"
+        >&2 echoWithDate "error: mysqldump is empty\n"
         ERRORS_DURING_BACKUP=1
     else
-        echo "Size for compressed DB: $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
+        echoWithDate "Size for compressed DB: $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
         # link the current to the latest dump
         rm -f ${DIR}/current/${CURRENT_FILENAME}
         ln -s ${DIR}/sequences/${FILENAME} ${DIR}/current/${CURRENT_FILENAME}
     fi
 
 else
-    echo "There was a problem during backup"
+    echoWithDate "error: an error occurred during mysqldump and 7zip backup"
     ERRORS_DURING_BACKUP=1
 fi
 
@@ -76,15 +82,15 @@ COMPLEX_OBS_FILENAME=${PREFIX}_complex_obs_${MODIFIER}.7z
 if ! [ -s "${COMPLEX_OBS_DIR}" ];
 then
         # note we exit here as a success since some sites don't have complex_obs dir
-        echo "complex_obs dir is empty"
-        echo "Size for compressed DB dir $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
-        echo "Success, backups without compressing complex_obs ended at `date`"
+        echoWithDate "complex_obs dir is empty"
+        echoWithDate "Size for compressed DB dir $(/usr/bin/du -hs ${DIR}/sequences/${FILENAME})"
+        echoWithDate "Success, backups without compressing complex_obs ended at `date`"
 
 else
-        echo "complex_obs dir empty not empty, copying it to sequences dir"
+        echoWithDate "complex_obs dir empty not empty, copying it to sequences dir"
         cp -r ${COMPLEX_OBS_DIR} ${DIR}/sequences
 
-        echo "compressing complex_obs dir."
+        echoWithDate "compressing complex_obs dir."
         ## should figure out how to do this incrementally
         ## /dev/null may affect the command after, figure out the best way for this
         cd ${DIR}/sequences
@@ -94,7 +100,7 @@ else
         if [ $? -eq 0 ]; then
             rm -rf ${COMPLEX_OBS_BACKUP_DIR}
         else
-            echo "Error compressing complex_obs dir"
+            echoWithDate "Error compressing complex_obs dir"
             ERRORS_DURING_BACKUP=1
         fi
 fi
@@ -111,26 +117,25 @@ PERCONA_INSTALL_MODE='<%= @openmrs_percona_install_mode %>'
 if [ "$PERCONA_BACKUP_ENABLED" == "true" ]; then
 
     PERCONA_BACKUP_STATUS=1
-    PERCONA_BACKUP_DATE=$(date '+%Y-%m-%d-%H-%M-%S')
-    echo "Percona Backup configured.  Using percona install mode: $PERCONA_INSTALL_MODE on $PERCONA_BACKUP_DATE"
+    echoWithDate "Percona Backup configured.  Using percona install mode: $PERCONA_INSTALL_MODE"
 
     # The PERCONA_DATA_DIR is where the MySQL data directory is backed up and prepared
     PERCONA_DATA_DIR=${DIR}/percona_data_dir
     rm -rf ${PERCONA_DATA_DIR}/
-    echo "Removed any existing directory at: ${PERCONA_DATA_DIR}"
+    echoWithDate "Removed any existing directory at: ${PERCONA_DATA_DIR}"
 
     # The PERCONA_ARCHIVE_DIR is where the PERCONA_DATA_DIR is zipped and metadata files are created
     PERCONA_ARCHIVE_DIR=${DIR}/percona_archive_dir
     rm -rf ${PERCONA_ARCHIVE_DIR}/
     mkdir -p ${PERCONA_ARCHIVE_DIR}
-    echo "Recreated: ${PERCONA_ARCHIVE_DIR}"
+    echoWithDate "Recreated: ${PERCONA_ARCHIVE_DIR}"
 
     # The PERCONA_BACKUP_DIR is where successfully completed backups are copied for upload
     PERCONA_BACKUP_DIR=${DIR}/percona
     mkdir -p ${PERCONA_BACKUP_DIR}
-    echo "Ensured: ${PERCONA_BACKUP_DIR}"
+    echoWithDate "Ensured: ${PERCONA_BACKUP_DIR}"
 
-    echo "Executing Percona Backup"
+    echoWithDate "Executing Percona Backup"
     if [ "$PERCONA_INSTALL_MODE" == "docker" ]; then
         docker run --name percona --rm \
           -v /var/lib/mysql:/var/lib/mysql -v /run/mysqld:/run/mysqld -v ${PERCONA_DATA_DIR}:/opt/backup \
@@ -141,7 +146,7 @@ if [ "$PERCONA_BACKUP_ENABLED" == "true" ]; then
     fi
 
     if [ $? -eq 0 ]; then
-        echo "Percona backup succeeded, now preparing"
+        echoWithDate "Percona backup succeeded, now preparing"
         if [ "$PERCONA_INSTALL_MODE" == "docker" ]; then
             docker run --name percona --rm -v $PERCONA_DATA_DIR:/opt/backup partnersinhealth/percona-0.1-4 innobackupex --apply-log  /opt/backup
         else
@@ -150,50 +155,52 @@ if [ "$PERCONA_BACKUP_ENABLED" == "true" ]; then
 
         if [ $? -eq 0 ]; then
             PERCONA_BACKUP_STATUS=0
-            echo "Percona prepare succeeded"
+            echoWithDate "Percona prepare succeeded"
         else
-            echo "Percona prepare failed"
+            echoWithDate "Percona prepare failed"
         fi
     else
-        echo "Percona backup failed"
+        echoWithDate "Percona backup failed"
     fi
+
+    PERCONA_BACKUP_DATE=$(date '+%Y-%m-%d-%H-%M-%S')
 
     if [ $PERCONA_BACKUP_STATUS -eq 0 ]; then
 
-        echo "Creating 7z archive of Percona backup"
+        echoWithDate "Creating 7z archive of Percona backup"
         7za a ${PERCONA_ARCHIVE_DIR}/percona.7z -p${PASS} -y -w${PERCONA_DATA_DIR} ${PERCONA_DATA_DIR}/*
 
         if [ $? -eq 0 ]; then
-            echo "Archive created successfully"
-            echo "Creating checksum file"
+            echoWithDate "Archive created successfully"
+            echoWithDate "Creating checksum file"
             PERCONA_ARCHIVE_MD5=($(md5sum ${PERCONA_ARCHIVE_DIR}/percona.7z))
-            echo $PERCONA_ARCHIVE_MD5 > ${PERCONA_ARCHIVE_DIR}/percona.7z.md5
+            echoWithDate $PERCONA_ARCHIVE_MD5 > ${PERCONA_ARCHIVE_DIR}/percona.7z.md5
             if [ $? -ne 0 ]; then
                 PERCONA_BACKUP_STATUS=1
-                echo "Creating checksum failed"
+                echoWithDate "Creating checksum failed"
             fi
-            echo "Creating date file"
-            echo "$PERCONA_BACKUP_DATE" > ${PERCONA_ARCHIVE_DIR}/percona.7z.date
+            echoWithDate "Creating date file"
+            echoWithDate "$PERCONA_BACKUP_DATE" > ${PERCONA_ARCHIVE_DIR}/percona.7z.date
             if [ $? -ne 0 ]; then
                 PERCONA_BACKUP_STATUS=1
-                echo "Creating date file failed"
+                echoWithDate "Creating date file failed"
             fi
         else
             PERCONA_BACKUP_STATUS=1
-            echo "Archive creation failed"
+            echoWithDate "Archive creation failed"
         fi
 
         if [ $PERCONA_BACKUP_STATUS -eq 0 ]; then
-            echo "Backup and archive successful, replacing latest files for backup"
+            echoWithDate "Backup and archive successful, replacing latest files for backup"
             rm -fR ${PERCONA_BACKUP_DIR}/*
             mv ${PERCONA_ARCHIVE_DIR}/* ${PERCONA_BACKUP_DIR}
             if [ $? -eq 0 ]; then
-                echo "Backup moved successfully, removing directories"
+                echoWithDate "Backup moved successfully, removing directories"
                 rm -rf ${PERCONA_DATA_DIR}/
                 rm -rf ${PERCONA_ARCHIVE_DIR}/
             else
                 PERCONA_BACKUP_STATUS=1
-                echo "Backup move failed"
+                echoWithDate "Backup move failed"
             fi
         fi
     fi
@@ -202,11 +209,11 @@ if [ "$PERCONA_BACKUP_ENABLED" == "true" ]; then
         ERRORS_DURING_BACKUP=1
     fi
 else
-    echo "Percona Backup not configured"
+    echoWithDate "Percona Backup not configured"
 fi
 
 if [ $ERRORS_DURING_BACKUP -eq 0 ]; then
-    echo "Success, backups ended at `date`"
+    echoWithDate "Success, backups ended at `date`"
     if [ ! -z "$MAIL_TO" ]; then
         mail -s "${PREFIX}: backup is successful" "${MAIL_TO}" < ${LOGFILE}
     fi
