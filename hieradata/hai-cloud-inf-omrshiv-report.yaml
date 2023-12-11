@@ -11,7 +11,7 @@ petl_home_dir: /opt/petl
 # PETL config
 petl_config_dir: "configurations"
 petl_config_name: zl-etl
-petl_config_version: 1.9.0
+petl_config_version: 1.10.0
 
 # PETL MySQL
 petl_mysql_user: ENC[+DF7mUCIuCRoWd2GgG8mvQ==:FFIYj69sx/ENFvq6fnQ18A==:K1hGYTFLMGJoLzBJTDdUQnl1VjFsQT09]
