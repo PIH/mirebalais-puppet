@@ -3,7 +3,7 @@ site_domain: humtest-zt.pih-emr.org
 
 pih_config: mirebalais,mirebalais-production
 config_name: openmrs-config-zl
-config_version: 1.47.0-SNAPSHOT
+config_version: 1.48.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
 frontend_version: 1.4.0-SNAPSHOT
