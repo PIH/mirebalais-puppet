@@ -1,12 +1,15 @@
 ---
 site_domain: ci.pih-emr.org
 
+package_release: 'stable'
+package_version: '1.0.20231219232604-1'
+
 pih_config: haiti,haiti-thomonde,haiti-ci
 config_name: openmrs-config-zl
-config_version: 1.48.0-SNAPSHOT
+config_version: 1.48.0
 
 frontend_name: "openmrs-frontend-zl"
-frontend_version: 1.4.0-SNAPSHOT
+frontend_version: 1.3.0
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[q/IrbhThPxSAsELZ1pA9fA==:FiTeRLnrYO171+KKiSA+oQ==:RHN4QXdNV3dzbVVxemY1c0hkNjk5UT09]
