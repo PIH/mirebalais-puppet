@@ -2,7 +2,7 @@
 site_domain: ci.pih-emr.org
 
 package_release: 'stable'
-package_version: '1.0.20231219232604-1'
+package_version: '1.0.20231221180659-1'
 
 pih_config: haiti,haiti-thomonde,haiti-ci
 config_name: openmrs-config-zl
