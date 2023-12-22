@@ -173,7 +173,7 @@ class apache2 (
   # install acme
   # note: refresh-only, so this only runs when the install cert script changes (see notify above)
   exec { "install acme.sh tool":
-    command => "rm -rf /var/acme/acme.sh || sudo -H -u acme bash -c 'wget -O -  https://raw.githubusercontent.com/acmesh-official/acme.sh/$acme_version/acme.sh | sh -s -- --install-online -m  emrsysadmin@pih.org --home /var/acme'",
+    command => "rm -rf /var/acme/acme.sh && sudo -H -u acme bash -c 'wget -O -  https://raw.githubusercontent.com/acmesh-official/acme.sh/$acme_version/acme.sh | sh -s -- --install-online -m  emrsysadmin@pih.org --home /var/acme'",
     cwd => "/var/$acme_user",
     require => [ File["/var/$acme_user"], User["$acme_user"] ],
     refreshonly => true,
