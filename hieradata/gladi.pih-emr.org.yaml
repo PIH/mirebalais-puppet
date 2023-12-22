@@ -20,7 +20,7 @@ petl: "petl"
 petl_site: "gladi"
 petl_home_dir: "/opt/petl"
 petl_config_name: sl-etl
-petl_config_version: 1.6.0-SNAPSHOT
+petl_config_version: 1.7.0-SNAPSHOT
 petl_cron_time: "0 0 22 ? * *" # This server is on GMT, so run PETL at 2am EST/EDT
 
 # PETL MySQL
