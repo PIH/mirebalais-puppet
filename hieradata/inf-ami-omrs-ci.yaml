@@ -3,7 +3,6 @@ site_domain: ami.pih-emr.org
 
 pih_config: haiti-mentalhealth
 config_name: openmrs-config-zl
-
 config_version: 1.49.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-zl"
