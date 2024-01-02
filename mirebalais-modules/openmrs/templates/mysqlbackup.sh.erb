@@ -180,7 +180,7 @@ if [ "$PERCONA_BACKUP_ENABLED" == "true" ]; then
                 echoWithDate "Creating checksum failed"
             fi
             echoWithDate "Creating date file"
-            echoWithDate "$PERCONA_BACKUP_DATE" > ${PERCONA_ARCHIVE_DIR}/percona.7z.date
+            echo "$PERCONA_BACKUP_DATE" > ${PERCONA_ARCHIVE_DIR}/percona.7z.date
             if [ $? -ne 0 ]; then
                 PERCONA_BACKUP_STATUS=1
                 echoWithDate "Creating date file failed"
