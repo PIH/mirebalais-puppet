@@ -1,11 +1,51 @@
+DELIMITER #
+
+DROP FUNCTION IF EXISTS luhn_check_digit
+#
+CREATE FUNCTION luhn_check_digit(_undecoratedIdentifier varchar(20), _baseChars varchar(50)) returns CHAR DETERMINISTIC
+BEGIN
+    declare _factor, _sum, _mod, _i, _j, _codePoint, _addend, _remainder, _checkCodePoint int;
+    declare _inputChars varchar(20);
+    set _factor = 2;
+    set _sum = 0;
+    set _mod = length(_baseChars);
+    set _inputChars = upper(trim(_undecoratedIdentifier));
+    set _i = length(_inputChars) - 1;
+    while _i >= 0 do
+            set _codePoint = -1;
+            set _j = 0;
+            while _j < _mod do
+                    if substring(_baseChars, _j+1, 1) = substring(_inputChars, _i+1, 1) then
+                        set _codePoint = _j;
+                    end if;
+                    set _j = _j + 1;
+                end while;
+            set _addend = _factor * _codepoint;
+            set _factor = if(_factor = 2, 1, 2);
+            set _addend = floor(_addend / _mod) + (_addend % _mod);
+            set _sum = _sum + _addend;
+            set _i = _i - 1;
+        end while;
+    set _remainder = _sum % _mod;
+    set _checkCodePoint = _mod - _remainder;
+    set _checkCodePoint = _checkCodePoint % _mod;
+    return substring(_baseChars, _checkCodePoint+1, 1);
+END
+#
+
+DELIMITER ;
 
 -- De-identify all free text observation values except those used to point to OpenMRS metadata (eg. location)
 update obs set value_text = 'Deidentified' where value_text is not null and comments not like 'org.openmrs.%';
 
 -- Patient identifiers
--- Remove validators and replace extermal id with internal id
-update patient_identifier_type set validator = '';
 update patient_identifier set identifier = concat(left(global_property_value('pihcore.site',''), 3), patient_identifier_id);
+update patient_identifier pi
+    inner join patient_identifier_type pit on pi.identifier_type = pit.patient_identifier_type_id
+set
+    pi.identifier = concat(pi.identifier, luhn_check_digit(pi.identifier, '0123456789ACDEFGHJKLMNPRTUVWXY'))
+where
+    pit.validator = 'org.openmrs.module.idgen.validator.LuhnMod30IdentifierValidator';
 
 -- Mother's name
 -- TBD:  check person_attribute_type_id for mother's name
