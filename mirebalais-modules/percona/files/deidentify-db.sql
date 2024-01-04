@@ -39,7 +39,16 @@ DELIMITER ;
 update obs set value_text = 'Deidentified' where value_text is not null and comments not like 'org.openmrs.%';
 
 -- Patient identifiers
-update patient_identifier set identifier = concat(left(global_property_value('pihcore.site',''), 3), patient_identifier_id);
+
+set @identifierPrefix = trim(upper(left(global_property_value('pihcore.site',''), 3)));
+set @identifierPrefix = replace(@identifierPrefix, 'B', '8');
+set @identifierPrefix = replace(@identifierPrefix, 'I', '1');
+set @identifierPrefix = replace(@identifierPrefix, 'O', '0');
+set @identifierPrefix = replace(@identifierPrefix, 'Q', '4');
+set @identifierPrefix = replace(@identifierPrefix, 'S', '5');
+set @identifierPrefix = replace(@identifierPrefix, 'Z', '2');
+
+update patient_identifier set identifier = concat(@identifierPrefix, patient_identifier_id);
 update patient_identifier pi
     inner join patient_identifier_type pit on pi.identifier_type = pit.patient_identifier_type_id
 set
