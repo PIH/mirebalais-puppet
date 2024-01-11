@@ -2,7 +2,7 @@
 site_domain: gladi.pih-emr.org
 server_timezone: Africa/Freetown
 
-pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-gladi
+pih_config: sierraLeone,sierraLeone-wellbody
 config_name: openmrs-config-pihsl
 config_version: 1.22.0-SNAPSHOT
 
