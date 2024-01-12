@@ -2,7 +2,7 @@
 site_domain: kgh-test.pih-emr.org
 server_timezone: Africa/Freetown
 
-pih_config: sierraLeone,sierraLeone-kgh,sierraLeone-kgh-test
+pih_config: sierraLeone,sierraLeone-kgh
 config_name: openmrs-config-pihsl
 config_version: 1.22.0-SNAPSHOT
 
