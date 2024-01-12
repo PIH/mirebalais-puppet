@@ -4,10 +4,10 @@ server_timezone: Africa/Freetown
 
 pih_config: sierraLeone,sierraLeone-wellbody
 config_name: openmrs-config-pihsl
-config_version: 1.21.0
+config_version: 1.22.0
 
 package_release: 'stable'
-package_version: '1.0.20231018132249-1'
+package_version: '1.0.20240108232528-1'
 
 frontend_name: "openmrs-frontend-pihemr"
 frontend_version: 1.6.0
