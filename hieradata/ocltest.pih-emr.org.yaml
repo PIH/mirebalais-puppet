@@ -2,9 +2,12 @@
 webapp_name: openmrs
 site_domain: ocltest.pih-emr.org
 
-pih_config: sierraLeone,sierraLeone-wellbody,sierraLeone-wellbody-gladi
-config_name: openmrs-config-pihsl
-config_version: 2.0.0-SNAPSHOT
+pih_config: mirebalais,mirebalais-ocl
+config_name: openmrs-config-zl
+config_version: 1.50.0-SNAPSHOT
+
+frontend_name: "openmrs-frontend-zl"
+frontend_version: 1.4.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
