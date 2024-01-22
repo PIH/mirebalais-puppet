@@ -77,6 +77,13 @@ class tomcat (
     notify  => Service['tomcat9']
   }
 
+  file { "/lib/systemd/system/tomcat9.service":
+    ensure  => file,
+    source  => "puppet:///modules/tomcat/tomcat9.service",
+    require => Package['tomcat9'],
+    notify  => Service['tomcat9']
+  }
+
   file { "/etc/logrotate.d/tomcat9":
     ensure  => file,
     source  => "puppet:///modules/tomcat/logrotate",
