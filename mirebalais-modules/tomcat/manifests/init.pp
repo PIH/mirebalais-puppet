@@ -84,6 +84,12 @@ class tomcat (
     notify  => Service['tomcat9']
   }
 
+  exec { "reload systemd daemon":
+    command => "systemctl daemon-reload",
+    require => File['/lib/systemd/system/tomcat9.service'],
+    refreshonly => true,
+  }
+
   file { "/etc/logrotate.d/tomcat9":
     ensure  => file,
     source  => "puppet:///modules/tomcat/logrotate",
