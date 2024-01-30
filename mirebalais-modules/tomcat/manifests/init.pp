@@ -81,7 +81,7 @@ class tomcat (
     ensure  => file,
     source  => "puppet:///modules/tomcat/tomcat9.service",
     require => Package['tomcat9'],
-    notify  => Service['tomcat9']
+    notify  => [ Service['tomcat9'], Exec['reload systemd daemon'] ]
   }
 
   exec { "reload systemd daemon":
