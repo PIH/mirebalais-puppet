@@ -204,19 +204,8 @@ node 'vagrant-test.pih-emr.org' {
   include apt_upgrades
   include wget
   include unzip
-  include maven_setup
-
-  include java
-  include mysql_setup
-  include apache2
-  include tomcat
-
-  include openmrs
-  include openmrs::initial_setup
-  include openmrs::backup
-
   include docker
-  include percona
+  include commcare_sync
 
 }
 
@@ -756,4 +745,21 @@ node 'neno-ci.pih-emr.org'  {
   include tomcat
 
   include openmrs
+}
+
+node 'ccsync.pih-emr.org' {
+
+  class { 'apt':
+    always_apt_update => true,
+  }
+
+  include security
+  include mail
+  include ntpdate
+  include apt_upgrades
+  include wget
+  include unzip
+  include docker
+  include commcare_sync
+
 }
