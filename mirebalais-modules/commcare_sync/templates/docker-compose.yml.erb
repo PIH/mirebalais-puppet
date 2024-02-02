@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    # persist data beyond lifetime of container
+    volumes:
+      - <%= @commcare_sync_postgres_data_dir %>:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=commcare_sync
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=<%= @commcare_sync_postgres_password %>
+  redis:
+    image: redis
+    # persistent storage
+    command: redis-server --appendonly yes
+    volumes:
+      - <%= @commcare_sync_redis_data_dir %>:/data
+  web:
+    build:
+      context: <%= @commcare_sync_code_dir %>
+      dockerfile: Dockerfile.dev
+    command: python manage.py runserver 0.0.0.0:8000 --insecure
+    volumes:
+      - <%= @commcare_sync_code_dir %>:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=localsettings
+    depends_on:
+      - db
+      - redis
+  celery:
+    build:
+      context: <%= @commcare_sync_code_dir %>
+      dockerfile: Dockerfile.dev
+    command: celery -A commcare_sync worker -l INFO -B
+    volumes:
+      - <%= @commcare_sync_code_dir %>:/code
+    environment:
+      - DJANGO_SETTINGS_MODULE=localsettings
+    depends_on:
+      - db
+      - redis

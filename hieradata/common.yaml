@@ -286,3 +286,6 @@ node_exporter_listen_port: 9999
 
 # old os version
 ubuntu_14: false
+
+commcare_sync_postgres_password: ENC[phH05S0XjWIUvHrhKqQ8oA==:7eItoCIQlYpa8e8mVakVoQ==:akRGSE1xK0dDU0gyZDl6SGhYNkJBZz09]
+commcare_sync_secret_key: ENC[rvng4vmiP0FEIC4sRe1WeZ/OTyEEvJnr+fR+hV5idGIaPsGxX1IWin38rShzn5LS:W2D2n3oTW8DEY3pt/nd/zg==:MXVKa1hmcXpwWmgyQlZlUGs3OVYxdz09]

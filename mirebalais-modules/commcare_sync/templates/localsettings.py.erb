@@ -1,0 +1,22 @@
+from commcare_sync.settings import *  # noqa
+
+SECRET_KEY = '<%= @commcare_sync_secret_key %>'
+
+DEBUG = False
+
+ALLOWED_HOSTS = ['*']
+
+ACCOUNT_ADAPTER = 'apps.users.account_adapter.EmailAsUsernameAdapter'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'commcare_sync',
+        'USER': 'postgres',
+        'PASSWORD': '<%= @commcare_sync_postgres_password %>',
+        'HOST': 'db',
+        'PORT': '5432',
+    }
+}
+
+ADMINS = [('PIH', '<%= @sysadmin_email %>')]
