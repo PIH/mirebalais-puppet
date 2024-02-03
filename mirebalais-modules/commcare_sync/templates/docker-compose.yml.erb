@@ -27,6 +27,9 @@ services:
       - "8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=localsettings
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_EMAIL=<%= @sysadmin_email %>
+      - DJANGO_SUPERUSER_PASSWORD=<%= @commcare_sync_admin_password %>
     depends_on:
       - db
       - redis

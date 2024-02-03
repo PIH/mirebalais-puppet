@@ -19,4 +19,7 @@ docker-compose up -d
 echoWithDate "Executing migrations"
 docker-compose exec -T web python manage.py migrate
 
+echoWithDate "Creating admin user"
+docker-compose exec -T web python manage.py createsuperuser --noinput
+
 echoWithDate "CommCare Sync Setup Completed"

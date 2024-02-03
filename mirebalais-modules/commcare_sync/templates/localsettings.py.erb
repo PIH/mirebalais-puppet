@@ -6,7 +6,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-ACCOUNT_ADAPTER = 'apps.users.account_adapter.EmailAsUsernameAdapter'
+ACCOUNT_ADAPTER = 'apps.users.account_adapter.NoNewUsersAccountAdapter'
 
 DATABASES = {
     'default': {

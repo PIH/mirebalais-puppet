@@ -6,6 +6,7 @@ class commcare_sync(
   $commcare_sync_data_dir = "${$dockerdata_dir}/${commcare_sync_app_name}",
   $commcare_sync_postgres_data_dir = "${commcare_sync_data_dir}/postgres",
   $commcare_sync_redis_data_dir = "${commcare_sync_data_dir}/redis",
+  $commcare_sync_admin_password = decrypt(hiera('commcare_sync_admin_password')),
   $commcare_sync_postgres_password = decrypt(hiera('commcare_sync_postgres_password')),
   $commcare_sync_secret_key = decrypt(hiera('commcare_sync_secret_key')),
   $commcare_sync_code_dir = "${commcare_sync_app_dir}/code",
