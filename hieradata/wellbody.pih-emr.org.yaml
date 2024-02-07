@@ -22,6 +22,9 @@ backup_file_prefix: wellbody
 backup_hour: 1
 archive_hour: 3
 
+openmrs_percona_backup_enabled: true
+openmrs_percona_install_mode: docker
+
 # Increasing this, to facilite database dump
 mysql_net_read_timeout: 3600
 mysql_net_write_timeout: 3600

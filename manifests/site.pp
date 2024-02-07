@@ -376,6 +376,7 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org', 'zt-sl-kgh-inf-omrs-prod' {
   include wget
   include unzip
   include maven_setup
+  include docker
 
   include java
   include mysql_setup
