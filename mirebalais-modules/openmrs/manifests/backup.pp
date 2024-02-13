@@ -10,8 +10,8 @@ class openmrs::backup (
     $azcopy_concurrency_value         = hiera('azcopy_concurrency_value'),
     $azcopy_concurrency_files         = hiera('azcopy_concurrency_files'),
     $remote_db_user                   = hiera('remote_db_user'),
-    $remote_db_server                 = hiera('remote_db_server'),
-    $remote_backup_dir                = hiera('remote_backup_dir'),
+    $remote_db_server                 = hiera('remote_db_server'),  # TODO is still used?
+    $remote_backup_dir                = hiera('remote_backup_dir'),  # TODO is still used?
     $tomcat_home_dir                  = hiera('tomcat_home_dir'),
     $backup_file_prefix               = hiera('backup_file_prefix'),
     $backup_hour                      = hiera('backup_hour'),
