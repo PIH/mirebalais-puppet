@@ -4,13 +4,10 @@ server_timezone: Africa/Freetown
 
 pih_config: sierraLeone,sierraLeone-kgh,sierraLeone-kgh
 config_name: openmrs-config-pihsl
-config_version: 1.24.0
-
-package_release: 'stable'
-package_version: '1.0.20240213160112-1'
+config_version: 1.25.0-SNAPSHOT
 
 frontend_name: "openmrs-frontend-pihemr"
-frontend_version: 1.6.0
+frontend_version: 1.7.0-SNAPSHOT
 
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
 openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
