@@ -174,7 +174,7 @@ if [ "$PERCONA_BACKUP_ENABLED" == "true" ]; then
             echoWithDate "Archive created successfully"
             echoWithDate "Creating checksum file"
             PERCONA_ARCHIVE_MD5=($(md5sum ${PERCONA_ARCHIVE_DIR}/percona.7z))
-            echoWithDate $PERCONA_ARCHIVE_MD5 > ${PERCONA_ARCHIVE_DIR}/percona.7z.md5
+            echo $PERCONA_ARCHIVE_MD5 > ${PERCONA_ARCHIVE_DIR}/percona.7z.md5
             if [ $? -ne 0 ]; then
                 PERCONA_BACKUP_STATUS=1
                 echoWithDate "Creating checksum failed"
