@@ -1,7 +1,7 @@
 ---
 site_domain: ces-ci.pih-emr.org
 server_timezone: America/Mexico_City
-pih_config: mexico,mexico-production #,mexico-demo
+pih_config: mexico,mexico-production,mexico-demo
 config_name: openmrs-config-ces
 config_version: 1.37.0-SNAPSHOT
 
