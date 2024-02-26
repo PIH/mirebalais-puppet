@@ -177,7 +177,7 @@ echoWithDate "Current backup does not match previous backup, downloading and res
 retrieve_backup_artifact "percona.7z"
 
 DOWNLOADED_MD5=($(md5sum ${DOWNLOAD_DIR}/percona.7z))
-if [[ "$BACKUP_MD5" != *"$DOWNLOADED_MD5"* ]];
+if [[ "$BACKUP_MD5" != *"$DOWNLOADED_MD5"* ]]; then
     echoWithDate "Percona MD5 file MD5 of $DOWNLOADED_MD5 does not match the MD5 of the percona.7z backup of $BACKUP_MD5, exiting"
     exit 1
 fi
