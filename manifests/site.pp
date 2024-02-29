@@ -13,7 +13,7 @@ fully-qualifed-domain-name properly configured; when testing on a VM, you can un
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
 
@@ -36,7 +36,7 @@ node 'emr.hum.ht' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -68,7 +68,7 @@ node 'hai-hum-inf-humtest' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -94,7 +94,7 @@ node 'hai-cloud-inf-omrshiv' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -121,7 +121,7 @@ node 'hai-cloud-inf-omrshiv-report' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -147,7 +147,7 @@ node 'zt-cloud-ces-dw-prod' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -169,7 +169,7 @@ node 'humci.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -201,7 +201,7 @@ node 'vagrant-test.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include docker
@@ -218,7 +218,7 @@ node 'emrtest.hum.ht', 'humdemo.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -244,7 +244,7 @@ node 'hai-hum-inf-omrs-report' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -272,7 +272,7 @@ node 'inf-dakakind-omrs-test' {
 
   include security
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -295,7 +295,7 @@ node 'pleebo.pih-emr.org', 'jjdossen.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -324,7 +324,7 @@ node 'thomonde.pih-emr.org', 'hinche.pih-emr.org', 'cercalasource.pih-emr.org', 
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -350,7 +350,7 @@ node 'zltraining-fingerprints.pih-emr.org','zltraining.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -372,7 +372,7 @@ node 'wellbody.pih-emr.org', 'kgh.pih-emr.org', 'zt-sl-kgh-inf-omrs-prod' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -401,7 +401,7 @@ node 'kouka.pih-emr.org', 'gladi.pih-emr.org', 'inf-ami-omrs-ci', 'kgh-test.pih-
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -427,7 +427,7 @@ node 'ci.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -451,7 +451,7 @@ node 'ces-ci.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -478,7 +478,7 @@ node 'peru-ci.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -502,7 +502,7 @@ node 'ses-cor.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -527,7 +527,7 @@ node 'haitihivtest.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -557,7 +557,7 @@ node 'ces.pih-emr.org', 'ces-capitan.pih-emr.org'{
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -585,7 +585,7 @@ node 'ces-capitan', 'ces-honduras', 'ces-laguna', 'ces-laguna.lan', 'ces-letrero
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -613,7 +613,7 @@ node 'pleebo-mirror.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -639,7 +639,7 @@ node 'zt-cloud-dw-petl-test' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include java
@@ -687,7 +687,7 @@ node 'malawi-dw.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
 
@@ -707,7 +707,7 @@ node 'neno.pih-emr.org', 'lisungwi.pih-emr.org', 'mal-u-neno-inf-omrs-01'  {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -734,7 +734,7 @@ node 'neno-ci.pih-emr.org'  {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include maven_setup
@@ -756,7 +756,7 @@ node 'ccsync.pih-emr.org' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
   include docker

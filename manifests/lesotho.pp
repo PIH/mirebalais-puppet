@@ -9,7 +9,7 @@ node default {
   include security
   include mailx
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   #include monitoring
 
