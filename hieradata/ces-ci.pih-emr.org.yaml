@@ -56,3 +56,5 @@ acme_dns_username: ENC[5wfOBuTQr7CxjYm43mB6nEU8nSbfOuO5C6yDLQCMsmwJL68e/Fww395QI
 acme_dns_password: ENC[n+30LzjG2dDgBZtymvHNtt6gv+8BkNm05vokIljWrGkmP8abfbWbxAoyLkHVVZj4:WoYsiYF2xXQ7Y0gIAPLmtw==:MGpEVzdySzlsNGJncmdLU1RFcVdNZz09]
 acme_dns_subdomain: ENC[letNiAoIwFeJ7Hk/yy+e3hDY3eLFl45Nhz+K7YSN+Sb6ZXVfd/DljrLTp1nKugLZ:ppgYKtjxA2OrGA/6EVeD8A==:NzlXRkNXNVhKR3BETXNPRWw5aDU4dz09]
 
+# maintenance jobs
+maintenance_reclaim_disk_space_hour: 00

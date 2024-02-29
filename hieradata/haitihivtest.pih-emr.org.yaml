@@ -38,3 +38,6 @@ node_exporter_listen_port: ENC[ipNBW+/MwR7PYO+yKkJcMg==:1QWjMLMdbU9/OfXRFTempg==
 acme_dns_username: ENC[6HtNOCF0IpB+MXzlZJVlyrYDs4pW05AzsS+C+/zquP+tXwYWOQzTZUtiHr4N0gon:/qICTfNMtdjeJ0nXNKL8WA==:N2ZqdXByVkpCNnVmSnk5WW9Fak4rQT09]
 acme_dns_password: ENC[K1l0tNs/AkFIYcnENCMvPfMy6lwzpcsVXLi9TFA/FemCXpJzKLn1ufI8U0hn1WfA:zffBhDfBvmILbXk4YoLYJg==:RXpmbUE1S3BRMnRmT1Byc1hXZWx2Zz09]
 acme_dns_subdomain: ENC[yLNIpSZtmFEmPZ0GmX5/t0CUGwMb1uf/jZb8Hju3wfqR52l2tSqNoY8lP1pPATMW:dpBTvFpnsxwSu8DPNvgbxQ==:VzNscWFhdGhZdXBUNjY5c0pvTjhGdz09]
+
+# maintenance jobs
+maintenance_reclaim_disk_space_hour: 00

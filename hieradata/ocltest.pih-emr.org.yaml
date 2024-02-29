@@ -17,3 +17,6 @@ openmrs_db_password: ENC[BNK3oX/1a+ta7Lal9jVd1A==]
 acme_dns_username: ENC[cDwQIV0+FgeOG2SLF2MxKrGyBAsz+Febb2wZaYaxsHLJPLRdYiLqHNG5bcm7+GY8:0KrPmzEnTtTn83k9OFxjjg==:cEVSdmFyZ3EzMkw5N3I3bjNwM3g3dz09]
 acme_dns_password: ENC[2gWMQhqPOctm05ds+4GAJA8djXzCGlDF5IZErkZf68HtDgfZPl74TeqaatR9LZo0:51Jo6cKYzJ4BvPp6VbJJqw==:NUpUUGs1Kzh6cDQzZDZaRm5ROGl4dz09]
 acme_dns_subdomain: ENC[euEFSbbH8mrpcO+AdzKhWRvkYBNRlMVTty5yG++4sWvxg5s8LxknaKgUKJOtx43n:6B8bcb7CgBXb2jDfH4ae+A==:YXBXdFA0TldQWFh0bW1IYW5HRkVDQT09]
+
+# maintenance jobs
+maintenance_reclaim_disk_space_hour: 00
