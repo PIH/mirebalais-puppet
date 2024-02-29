@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # Script to facilitate cleaning up disk space
+# Note: care must be taken before running this script on Production servers as we may have PIH EMR debian packages intentionally staged before install
 
 # Output current disk space
 df -h
