@@ -9,7 +9,7 @@ node 'default' {
   include security
   include mail
   include ntpdate
-  include apt_upgrades
+  include maintenance
   include wget
   include unzip
 
