@@ -29,7 +29,7 @@ class maintenance (
     if ($maintenance_reclaim_disk_space_hour != '') {
         cron { 'reclaim-disk-space':
           ensure      => present,
-          command     => "/root/reclaim-disk-space.sh",
+          command     => "/root/reclaim-disk-space.sh 2>&1 | /usr/bin/logger -t RECLAIM_DISK_SPACE",
           environment => "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin",
           user        => 'root',
           hour        => $maintenance_reclaim_disk_space_hour,
