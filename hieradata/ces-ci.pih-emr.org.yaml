@@ -1,12 +1,10 @@
 ---
 site_domain: ces-ci.pih-emr.org
 server_timezone: America/Mexico_City
-package_release: 'stable'
-package_version: '1.0.20240228191100-1'
 
 pih_config: mexico,mexico-production,mexico-demo
 config_name: openmrs-config-ces
-config_version: 1.37.0
+config_version: 1.38.0-SNAPSHOT
 
 openmrs_db: openmrs
 mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
