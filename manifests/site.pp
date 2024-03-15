@@ -658,7 +658,7 @@ node 'zt-cloud-dw-petl-test' {
     petl_home_dir => "/opt/petl",
     petl_site => "zl-test",
     petl_config_name => "zl-etl",
-    petl_config_version => "1.11.0-SNAPSHOT",
+    petl_config_version => "1.12.0-SNAPSHOT",
     petl_server_port => 9109,
     petl_sqlserver_databaseName => "openmrs_haiti_warehouse",
     petl_cron_time => "0 0 22 ? * *",
