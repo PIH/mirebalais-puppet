@@ -1,0 +1,76 @@
+## this is a VMWare instance on Upper Neno that would eventually become the new Lisungwi production EMR
+---
+webapp_name: openmrs
+site_domain: lisungwi.pih-emr.org
+server_timezone: Africa/Blantyre
+
+package_name: pihmalawi
+package_version: 7.1.0-SNAPSHOT
+
+config_name: "%{hiera('package_name')}-config"
+config_version: "%{hiera('package_version')}"
+
+maven_download_repo: http://mavenrepo.openmrs.org/nexus/content/repositories/public
+maven_config_group_id: org.openmrs.module
+maven_package_group_id: org.openmrs.distro
+
+# mysql
+mysql_root_password: ENC[oWqIfmn/ER4CYIvjJSpIzQ==]
+mysql_bind_address: ENC[w63cm1CP/cpnvJPc6tWnYQ==:KRYftjrab5SC2AsLx1i4fQ==:ZnZnTVNwcGcyTStqNEdUdisweDZNZz09]
+mysql_innodb_buffer_pool_size: 2G
+mysql_innodb_buffer_pool_instances: 2
+
+## openmrs
+openmrs_db_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
+openmrs_auto_update_database: false
+openmrs_modules_temp_location: "/tmp/%{hiera('package_name')}-%{hiera('package_version')}/openmrs_modules"
+openmrs_warfile_temp_location: "/tmp/%{hiera('package_name')}-%{hiera('package_version')}/openmrs_webapps"
+
+
+## backups
+backup_db_user: backup
+backup_db_password: ENC[vkWTaGabrix4EDOVYyoePsJhGlRZxdNy6y8QZ8r2H5I=]
+backup_file_prefix: lisungwi-ci
+backup_hour: 1
+archive_hour: 3
+
+# backup to azure
+az_backup_folder_path: malawi/lisungwi-ci
+
+# petl for reports
+petl_site: "apzu-upperneno-reports"
+petl_config_name: "apzu-etl"
+petl_config_version: 1.0.0-SNAPSHOT
+
+petl_home_dir: "/opt/petl"
+
+petl_mysql_user: openmrs
+petl_mysql_password: ENC[KRcDfL2JdEKxQDu0AApgyw==:meYKezknkAPa+t+96MbPOQ==:bnZETlpweTNZSzl5WXZjS3VDQithZz09]
+
+petl_cron_time: "0 0 2 ? * *"
+petl_server_port: 8181
+
+# PETL database for Apzu upper neno
+install_petl_warehouse_db: true
+petl_warehouse_db: openmrs_warehouse
+petl_mysql_user_ip: localhost
+petl_openmrs_connection_url: jdbc:mysql://localhost:3306/%{hiera('petl_warehouse_db')}?autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8
+
+java_memory_parameters: '-Xmx8092m -Xms8092m'
+
+# frontend
+frontend_name: "openmrs-frontend-pihemr"
+frontend_version: 1.5.0-SNAPSHOT
+
+#ic3
+pwa_config_name: pwa-apzu-ic3
+pwa_config_version: 2.0.0-SNAPSHOT
+pwa_config_url: https://s01.oss.sonatype.org/service/local/artifact/maven/content?g=org.pih.openmrs&a=%{hiera('pwa_config_name')}&v=%{hiera('pwa_config_version')}&p=tar.gz&r=snapshots
+pwa_enabled: true
+pwa_webapp_name: workflow
+
+
+# Certificate parameters
+acme_dns_username: ENC[OuzSWUAv9DDVxsK6dNIEGDXVIcRwnPmkHpMY8XtCpw88ebj2zmdv8TGRZ3YJJKhI:IRior1IXeCt/jFLWiunRyA==:VEFEbW5pZEkvSkJjd1ZhZzVwRWZOdz09]
+acme_dns_password: ENC[2nahq84JAr+oGvHrfmvlGp/FpY95nvD5y3sDR0XMYzWDZhSTFUkuN7B3/0UtXonG:0dcue6ktfGFYXP5gkpArsA==:U29reWxKUFpxUndzRGpoRVYvMG51QT09]
+acme_dns_subdomain: ENC[2kcVTRcM4j6/7qGWe4u3fCNZv7owAwJZ0xPtHTqjj8dtZ1A4efY1a0ZuEO/dJImK:bO2ViRWk0RU9whgykGvnUA==:YUNRR2JGSXpzMXdlZmIxaHU1NytTUT09]
