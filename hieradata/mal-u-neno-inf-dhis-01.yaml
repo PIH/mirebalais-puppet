@@ -60,7 +60,7 @@ java_memory_parameters: '-Xmx8092m -Xms8092m'
 
 # frontend
 frontend_name: "openmrs-frontend-pihemr"
-frontend_version: 1.5.0-SNAPSHOT
+frontend_version: 1.6.0
 
 #ic3
 pwa_config_name: pwa-apzu-ic3
