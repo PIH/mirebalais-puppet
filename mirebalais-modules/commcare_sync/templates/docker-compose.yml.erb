@@ -17,12 +17,10 @@ services:
     volumes:
       - <%= @commcare_sync_redis_data_dir %>:/data
   web:
-    build:
-      context: <%= @commcare_sync_code_dir %>
-      dockerfile: Dockerfile.dev
+    image: partnersinhealth/commcare-sync
     command: python manage.py runserver 0.0.0.0:8000 --insecure
     volumes:
-      - <%= @commcare_sync_code_dir %>:/code
+      - <%= @commcare_sync_app_dir %>/localsettings.py:/code/localsettings.py
     ports:
       - "8000:8000"
     environment:
@@ -34,12 +32,8 @@ services:
       - db
       - redis
   celery:
-    build:
-      context: <%= @commcare_sync_code_dir %>
-      dockerfile: Dockerfile.dev
+    image: partnersinhealth/commcare-sync
     command: celery -A commcare_sync worker -l INFO -B
-    volumes:
-      - <%= @commcare_sync_code_dir %>:/code
     environment:
       - DJANGO_SETTINGS_MODULE=localsettings
     depends_on:
