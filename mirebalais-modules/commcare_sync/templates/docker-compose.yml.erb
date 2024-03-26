@@ -34,6 +34,8 @@ services:
   celery:
     image: partnersinhealth/commcare-sync
     command: celery -A commcare_sync worker -l INFO -B
+    volumes:
+      - <%= @commcare_sync_app_dir %>/localsettings.py:/code/localsettings.py
     environment:
       - DJANGO_SETTINGS_MODULE=localsettings
     depends_on:
