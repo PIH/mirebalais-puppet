@@ -21,6 +21,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000 --insecure
     volumes:
       - <%= @commcare_sync_app_dir %>/localsettings.py:/code/localsettings.py
+      - <%= @commcare_sync_media_dir %>:/code/media
     ports:
       - "8000:8000"
     environment:
@@ -36,6 +37,7 @@ services:
     command: celery -A commcare_sync worker -l INFO -B
     volumes:
       - <%= @commcare_sync_app_dir %>/localsettings.py:/code/localsettings.py
+      - <%= @commcare_sync_media_dir %>:/code/media
     environment:
       - DJANGO_SETTINGS_MODULE=localsettings
     depends_on:

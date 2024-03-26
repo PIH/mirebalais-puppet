@@ -5,6 +5,7 @@ class commcare_sync(
   $dockerdata_dir = "/dockerdata",
   $commcare_sync_data_dir = "${$dockerdata_dir}/${commcare_sync_app_name}",
   $commcare_sync_postgres_data_dir = "${commcare_sync_data_dir}/postgres",
+  $commcare_sync_media_dir = "${commcare_sync_data_dir}/media",
   $commcare_sync_redis_data_dir = "${commcare_sync_data_dir}/redis",
   $commcare_sync_admin_password = decrypt(hiera('commcare_sync_admin_password')),
   $commcare_sync_postgres_password = decrypt(hiera('commcare_sync_postgres_password')),
@@ -36,6 +37,12 @@ class commcare_sync(
     }
 
     file { "${commcare_sync_postgres_data_dir}":
+        ensure  => directory,
+        mode    => "0600",
+        require => File["${commcare_sync_data_dir}"]
+    }
+
+    file { "${commcare_sync_media_dir}":
         ensure  => directory,
         mode    => "0600",
         require => File["${commcare_sync_data_dir}"]
